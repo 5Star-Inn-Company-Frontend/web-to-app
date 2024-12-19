@@ -14,7 +14,7 @@ const Authprompt = ({ action }: AuthPromptProps) => {
                 navigate("/auth/signup")
                 break
             case "signup":
-                navigate("auth/signin")
+                navigate("/auth/signin")
                 break
             case "reset":
                 navigate("/auth/signin")
@@ -35,13 +35,13 @@ const Authprompt = ({ action }: AuthPromptProps) => {
             )}
             {action === "signup" && (
                 <>
-                    <Text value="Already have an account" style="text-primary10 text-sm" />
+                    <Text value="Already have an account?" style="text-primary10 text-sm" />
                     <Text value="Login" style="font-bold text-sm cursor-pointer" clickFunc={handleNavigation} />
                 </>
             )}
             {action === "reset" && (
                 <>
-                    <Text value="Remember details" style="text-primary10 text-sm" />
+                    <Text value="Remember details?" style="text-primary10 text-sm" />
                     <Text value="Login" style="font-bold text-sm cursor-pointer" clickFunc={handleNavigation} />
                 </>
             )}
