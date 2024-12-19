@@ -23,9 +23,20 @@ module.exports = {
         'xs': "300px",
         'sm':"320px",
       },
+      fontFamily: {
+        lato: "Lato, serif"
+      },
       colors: {
         gray1: "#CCCCCC",
         deepgray: "#F2F2F2",
+        primary10: "#515151",
+        primary20: "#CCCCCC",
+        primary30: "#D0D0D0",
+        primary40: "#999999",
+        primary50: "#8A8A8A",
+        primary60: "#666666",
+        primary80: "#333333",
+        primary100: "#000000",
         lightgreen: "#B1DDA8",
         lightgreen1: "#3DAB25",
         border: "hsl(var(--border))",

@@ -60,8 +60,6 @@ const App: React.FC = () => {
               path="/app/members"
               element={
                 <Member
-                  email={credentials.email}
-                  password={credentials.password}
                 />
               }
             />

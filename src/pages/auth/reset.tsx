@@ -1,5 +1,6 @@
-import {ResetPasswordForm} from "@/components/customui/auth/resetpassword"
-import { AuthLayout } from "@/components/customui/auth/layout"
+import { AuthLayout } from "@/components/auth/layout"
+import { ResetPasswordForm } from "@/components/auth/resetpassword"
+
 export const ResetPage =()=>{
     return(
         <AuthLayout

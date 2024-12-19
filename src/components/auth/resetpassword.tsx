@@ -2,19 +2,19 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { Button } from "../../ui/button";
+import { Button } from "../ui/button";
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from "../../ui/form"
+} from "../ui/form"
 import {useState } from "react";
 import { ReloadIcon } from "@radix-ui/react-icons";
-import { IconInput } from "../../global/iconinput";
-import { Text } from "../../global/text";
-import { ResetPasswordformSchema } from "../../../lib/schema";
+import { IconInput } from "../global/iconinput";
+import { Text } from "../global/text";
+import { ResetPasswordformSchema } from "../../lib/schema";
 import { useNavigate } from "react-router-dom";
 import { Bounce, toast, ToastContainer } from "react-toastify";
 

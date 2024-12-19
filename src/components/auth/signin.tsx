@@ -1,24 +1,25 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { Button } from "../../ui/button";
+import { Button } from "../ui/button";
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
-} from "../../ui/form";
+} from "../ui/form";
 import { useState } from "react";
 import { ReloadIcon } from "@radix-ui/react-icons";
-import { IconInput } from "../../global/iconinput";
-import { Text } from "../../global/text";
-import { SigninformSchema } from "../../../lib/schema";
+import { IconInput } from "../global/iconinput";
+import { Text } from "../global/text";
+import { SigninformSchema } from "../../lib/schema";
 import { useNavigate } from "react-router-dom";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAuth } from "@/AuthContext";
+import Partnership from "./partnership";
+import Authprompt from "./authprompt";
 
 // Define the type for the SignIn props
 interface SignInProps {
@@ -107,44 +108,27 @@ export const SigninForm: React.FC<SignInProps> = ({ onLogin }) => {
   }
 
   return (
-    <div className="flex flex-col my-2">
+    <div className="flex flex-col my-2 font-lato ">
       <Text
-        style="text-xl font-semibold mb-4 text-center"
-        value="WELCOME BACK EXCLUSIVE MEMBERS"
+        style="text-xl font-lato font-bold leading-[140%] text-primary60 text-center"
+        value="WELCOME BACK BECOME AN"
       />
       <Text
-        style="text-md font-light mb-8 text-center"
-        value="LOGIN TO CONTINUE"
+        style="text-xl font-lato font-bold leading-[140%] text-primary60 mb-4 text-center"
+        value="EXCLUSIVE MEMBERS"
       />
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
           <FormField
             control={form.control}
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
                 <FormControl>
                   <IconInput
-                    icon={
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="w-4 h-4"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
-                        />
-                      </svg>
-                    }
                     type="email"
                     category="formInput"
-                    placeHolder="email"
+                    placeHolder="Email"
                     field={field}
                   />
                 </FormControl>
@@ -157,28 +141,11 @@ export const SigninForm: React.FC<SignInProps> = ({ onLogin }) => {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
                 <FormControl>
                   <IconInput
-                    icon={
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="w-4 h-4"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
-                        />
-                      </svg>
-                    }
                     type="password"
                     category="formInput"
-                    placeHolder="password"
+                    placeHolder="Password"
                     field={field}
                   />
                 </FormControl>
@@ -186,27 +153,13 @@ export const SigninForm: React.FC<SignInProps> = ({ onLogin }) => {
               </FormItem>
             )}
           />
-          <Text
-            style="text-sm text-grey font-light mb-4 text-start"
-            value={
-              <h6>
-                {" "}
-                Forget Password?{" "}
-                <span className="hover:underline cursor-pointer hover:font-medium">
-                  Reset here
-                </span>
-              </h6>
-            }
-            clickFunc={() => navigate("/auth/password_reset")}
-          />
+          
           <div
-            className="flex justify-end items-end bg-[#24243E] rounded-md mt-4"
-            style={{ marginTop: "1rem" }}
-          >
+            className="flex justify-end items-end bg-[#24243E] rounded-md mt-4">
             {isLoading ? (
               <Button
                 disabled
-                className="w-full text-white bg-[#24243E] p-[0.5rem]"
+                className="w-full h-12 text-white bg-[#24243E] p-[0.5rem]"
               >
                 <ReloadIcon className="mr-2 h-4 w-4 animate-spin text-white" />
                 Please wait...
@@ -214,20 +167,17 @@ export const SigninForm: React.FC<SignInProps> = ({ onLogin }) => {
             ) : (
               <Button
                 type="submit"
-                className="w-full text-white bg-[#24243E] p-[0.5rem]"
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  padding: "0px 30px",
-                }}
+                className="w-full text-base flex justify-center text-white font-bold h-12 bg-[#24243E] p-[0.5rem]"
               >
-                Proceed to my Account{" "}
-                <i className="fa-solid fa-arrow-right"></i>
+                Proceed to my Account
               </Button>
             )}
             <ToastContainer transition={Bounce} draggable />
           </div>
+          <Authprompt action="signin"/>
         </form>
+
+        <Partnership/>
       </Form>
     </div>
   );

@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 import { useNavigate } from "react-router-dom"
-import { Button } from "../../ui/button"
+import { Button } from "../ui/button"
 import {
   Form,
   FormControl,
@@ -10,12 +10,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../../ui/form"
+} from "../ui/form"
 import {useState } from "react";
 import { ReloadIcon } from "@radix-ui/react-icons"
-import { IconInput } from "../../global/iconinput"
-import { Text } from "../../global/text"
-import { RegisterformSchema } from "../../../lib/schema"
+import { IconInput } from "../global/iconinput"
+import { Text } from "../global/text"
+import { RegisterformSchema } from "../../lib/schema"
 import { Bounce, ToastContainer, toast } from 'react-toastify'; 
 import "react-toastify/dist/ReactToastify.css";
 

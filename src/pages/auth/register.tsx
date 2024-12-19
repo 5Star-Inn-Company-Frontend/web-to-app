@@ -1,5 +1,6 @@
-import {SignupForm} from "@/components/customui/auth/register"
-import { AuthLayout } from "@/components/customui/auth/layout"
+import { AuthLayout } from "@/components/auth/layout"
+import { SignupForm } from "@/components/auth/register"
+
 export const SignupPage =()=>{
     return(
         <AuthLayout

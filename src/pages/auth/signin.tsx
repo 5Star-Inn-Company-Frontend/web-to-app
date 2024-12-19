@@ -1,5 +1,5 @@
-import { SigninForm } from "@/components/customui/auth/signin";
-import { AuthLayout } from "@/components/customui/auth/layout";
+import { AuthLayout } from "@/components/auth/layout";
+import { SigninForm } from "@/components/auth/signin";
 import { useState } from "react";
 
 
