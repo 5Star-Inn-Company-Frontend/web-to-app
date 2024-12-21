@@ -16,7 +16,7 @@ interface SearchBarProps {
     };
   
     return (
-      <div className={`max-w-md flex  items-center gap-2 border border-gray1 rounded-[10px] px-3 py-4 ${classname}`}>
+      <div className={`max-w-md flex items-center gap-2 border border-gray1 rounded-[10px] px-3 ${classname}`}>
         <SearchIcon />
         <input
           type="text"

@@ -25,13 +25,14 @@ import { Plan } from "./components/plan/Plan";
 import { useState } from "react";
 import { AuthProvider } from "./AuthContext";
 import PrivateRoute from "./PrivateRoute";
+import { AuthLayout } from "./components/auth/layout";
 
 const App: React.FC = () => {
-  const [credentials, setCredentials] = useState({ email: "", password: "" });
+  // const [credentials, setCredentials] = useState({ email: "", password: "" });
 
-  const handleLogin = (email: string, password: string) => {
-    setCredentials({ email, password });
-  };
+  // const handleLogin = (email: string, password: string) => {
+  //   setCredentials({ email, password });
+  // };
 
   return (
     <AuthProvider>
@@ -56,13 +57,7 @@ const App: React.FC = () => {
 
           <Route path="app">
             <Route path="/app/settings" element={<Settings />} />
-            <Route
-              path="/app/members"
-              element={
-                <Member
-                />
-              }
-            />
+            <Route path="/app/members" element={<Member/>}/>
             <Route
               path="/app/overview"
               element={
@@ -118,10 +113,10 @@ const App: React.FC = () => {
             <Route path="/app/:action/app_plan" element={<Plan />} />
             <Route path="/app/:action/app_access" element={<AppAccessPage />} />
           </Route>
-          <Route path="auth">
-            <Route path="/auth/signin" element={<SigninPage />} />
-            <Route path="/auth/signup" element={<SignupPage />} />
-            <Route path="/auth/password_reset" element={<ResetPage />} />
+          <Route path="auth" element={<AuthLayout/>}>
+            <Route path="signin" element={<SigninPage />} />
+            <Route path="signup" element={<SignupPage />} />
+            <Route path="password_reset" element={<ResetPage />} />
           </Route>
         </Routes>
       </Router>

@@ -23,7 +23,7 @@ export function Navbar() {
         />
       </div>
 
-      <div className="flex gap-[0.5rem] items-center bg-[grey] p-3 rounded-md">
+      <div className="flex gap-[0.5rem] items-center bg-[grey] p-2 rounded-md">
         <span>
           <NavigationMenu>
             <NavigationMenuList>

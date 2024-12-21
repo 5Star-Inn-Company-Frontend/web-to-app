@@ -98,13 +98,13 @@ export function SidebarNavigation() {
                   <div className="backDiv">
                     <p>BACKGROUND COLOR</p>
                     <p className="background">
-                      <span></span> #FFFFFF
+                      {/* <span></span> #FFFFFF */}
                     </p>
                   </div>
                   <div className="textDiv">
                     <p>TEXT COLOR</p>
                     <p className="text">
-                      <span></span> #0E0D08
+                      {/* <span></span> #0E0D08 */}
                     </p>
                   </div>
                 </div>

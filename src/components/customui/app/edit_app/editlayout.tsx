@@ -14,7 +14,7 @@ export const EditLayout = ({ children }: { children: React.ReactNode }) => {
       <div className="grid lg:grid-cols-4 grid-cols-1 w-full">
         <div className="lg:col-span-3 col-span-1 md:p-[2rem] p-[0.5rem] bg-[#F2F2F2]">
           <div className="flex justify-between flex-wrap sm:col  pb-4 px-2" style={{display: "flex",  }}>
-            <div className="flex gap-2 text-lg items-center text-lg font-semibold">
+            <div className="flex gap-2 items-center text-lg font-semibold">
               <div className=" w-[3rem] h-[3rem] relative">
                 <img
                   src="/brand_icon.png"

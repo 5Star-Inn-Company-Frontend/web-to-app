@@ -1,10 +1,6 @@
-import React from "react";
+import { Outlet } from "react-router-dom";
 
-export const AuthLayout = ({
-    children,
-}: {
-    children: React.ReactNode,
-}) => {
+export const AuthLayout = () => {
     return (
         <div className="grid grid-cols-2 gap-x-10 max-w-[1344px] mx-auto py-8">
             <div className="">
@@ -14,7 +10,7 @@ export const AuthLayout = ({
                     </div>
 
                     <div className="h-[55%]">
-                        {children}
+                        <Outlet/>
                     </div>
 
                     <div className="foote flex justify-between font-base font-lato text-primary50" >
