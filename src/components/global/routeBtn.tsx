@@ -29,7 +29,7 @@ export const RouteBtn = ({
         <Text
           style={`${
             pathname === `/dashboard${route}` ? 'text-[#064e3b]' : 'text-black'
-          } text-xl`}
+          } text-lg`}
           value={name}
         />
       </Link>

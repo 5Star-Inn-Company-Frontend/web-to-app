@@ -1,5 +1,5 @@
+import { Text } from "@/components/global/text"
 import { useNavigate } from "react-router-dom"
-import { Text } from "../global/text"
 
 interface AuthPromptProps {
     action: "signin" | "signup" | "reset"

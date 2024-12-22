@@ -1,4 +1,4 @@
-import { Navbar } from "@/components/navbar/Navbar";
+import { Navbar } from "@/components/layouts/dashboardlayouts/Navbar";
 import "./member.scss";
 import { Sidebar } from "@/components/sidebar/Sidebar";
 import * as React from "react";

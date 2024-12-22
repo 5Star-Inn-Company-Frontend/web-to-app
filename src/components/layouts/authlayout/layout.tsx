@@ -6,7 +6,7 @@ export const AuthLayout = () => {
             <div className="">
                 <div className="w-[60%] h-full mx-auto flex flex-col justify-between">
                     <div>
-                        <img src="/logo.svg" alt="" />
+                        <img src="/logo.svg" alt="" className="w-[35%]"/>
                     </div>
 
                     <div className="h-[55%]">

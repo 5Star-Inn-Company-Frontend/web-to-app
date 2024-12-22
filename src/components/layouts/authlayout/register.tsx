@@ -2,24 +2,17 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 import { useNavigate } from "react-router-dom"
-import { Button } from "../ui/button"
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "../ui/form"
 import { useState } from "react";
 import { ReloadIcon } from "@radix-ui/react-icons"
-import { IconInput } from "../global/iconinput"
-import { Text } from "../global/text"
-import { RegisterformSchema } from "../../lib/schema"
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import Authprompt from "./authprompt"
 import Partnership from "./partnership"
+import { Button } from "@/components/ui/button"
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { RegisterformSchema } from "@/lib/schema";
+import { Text } from "@/components/global/text";
+import { IconInput } from "@/components/global/iconinput";
 
 export function SignupForm() {
 

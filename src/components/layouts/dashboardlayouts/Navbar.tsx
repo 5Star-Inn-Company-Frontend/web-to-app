@@ -1,4 +1,4 @@
-import './navbar.scss';
+// import './navbar.scss';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -6,15 +6,15 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   NavigationMenuItem,
-} from '../ui/navigation-menu';
+} from '../../ui/navigation-menu';
 import { useNavigate } from 'react-router-dom';
 
 export function Navbar() {
   const navigate = useNavigate();
 
   return (
-    <div className="navbar">
-      <div className="logo">
+    <div className="bg-black w-full flex justify-between items-center py-3 px-[3.125rem]">
+      <div className="w-[100px] h-[50px]">
         <img
           src="/logo.png"
           alt=""

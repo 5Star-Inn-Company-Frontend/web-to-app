@@ -3,7 +3,7 @@ import { SearchBar } from "@/components/global/searchInput";
 import { useState } from "react";
 import logo from "@/components/images/Frame 14.png"
 import { useNavigate } from "react-router-dom";
-import DashBoardLayout from "@/components/customui/main_dashboard/dashboard-layout";
+import DashBoardLayout from "@/components/layouts/dashboardlayouts/dashboardlayout";
 import SelectDropdown from "@/components/global/selectdropdown";
 
 export const DashboardHome = () => {
@@ -81,7 +81,7 @@ export const DashboardHome = () => {
   ];
 
   return (
-    <DashBoardLayout>
+    <>
       <div className="menu lg:hidden xl:hidden md:block sm:block mb-3 ">
         <a className="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop"><i className="fa-solid fa-bars text-2xl" ></i></a>
         <div className="offcanvas offcanvas-start pl-3 " tabIndex={-1} id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
@@ -116,7 +116,7 @@ export const DashboardHome = () => {
         <SearchBar
           searchTerm={searchTerm}
           onSearch={setSearchTerm}
-          classname="mb-4 h-[50px]"
+          classname="mb-4"
         />
         <div className="flex justify-between items-center gap-x-5 max-w-sm">
           <SelectDropdown selectedValue={licenseSelectedValue} onChange={handleLicenseChange} options={licenseOptions} placeholder="License Type" />
@@ -129,6 +129,6 @@ export const DashboardHome = () => {
           ))}
         </div>
       </div>
-    </DashBoardLayout>
+    </>
   );
 };

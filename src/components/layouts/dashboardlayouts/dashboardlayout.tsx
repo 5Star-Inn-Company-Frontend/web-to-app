@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
-import { Navbar } from '@/components/navbar/Navbar';
+import { Navbar } from '@/components/layouts/dashboardlayouts/Navbar';
 import Sidebar from './sidebar';
+import { Outlet } from 'react-router-dom';
 
 // export const DashBoardLayout = ({
 //   children,
@@ -34,14 +35,7 @@ import Sidebar from './sidebar';
 //   );
 // };
 
-
-
-interface DashBoardLayoutProps {
-  children: ReactNode
-}
-
-
-const DashBoardLayout = ({ children }: DashBoardLayoutProps) => {
+const DashBoardLayout = () => {
   
   return (
     <div>
@@ -52,7 +46,7 @@ const DashBoardLayout = ({ children }: DashBoardLayoutProps) => {
         {/* Main Content */}
         <div className="flex-1 overflow-y-auto p-6 no-scrollbar rounded-r-md bg-white">
           <div className="space-y-6">
-            {children}
+            <Outlet/>
           </div>
         </div>
       </div>

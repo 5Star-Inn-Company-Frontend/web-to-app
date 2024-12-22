@@ -1,4 +1,3 @@
-import { SearchIcon } from "../icons/SearchIcon";
 
 interface SearchBarProps {
     onSearch: (searchTerm: string) => void;
@@ -16,14 +15,14 @@ interface SearchBarProps {
     };
   
     return (
-      <div className={`max-w-md flex items-center gap-2 border border-gray1 rounded-[10px] px-3 ${classname}`}>
-        <SearchIcon />
+      <div className={`max-w-md flex items-center gap-2 border border-primary20  rounded-[10px] px-3 ${classname}`}>
+        <img src="/search.svg" alt="search icon" />
         <input
           type="text"
           placeholder="Search for an app"
           value={searchTerm}
           onChange={handleSearch}
-          className=" w-full  outline-none placeholder:text-sm text-gray1 text-base"
+          className=" w-full  outline-none placeholder:text-sm text-primary80 text-base h-[3.125rem]"
         />
       </div>
     );

@@ -1,4 +1,4 @@
-import { Navbar } from "../navbar/Navbar";
+import { Navbar } from "../layouts/dashboardlayouts/Navbar";
 import { Sidebar } from "../sidebar/Sidebar";
 import "./settings.scss";
 

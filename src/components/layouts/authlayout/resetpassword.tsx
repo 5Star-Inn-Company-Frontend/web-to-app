@@ -1,93 +1,77 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-
-import { Button } from "../ui/button";
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormMessage,
-} from "../ui/form"
 import { useState } from "react";
 import { ReloadIcon } from "@radix-ui/react-icons";
-import { IconInput } from "../global/iconinput";
-import { Text } from "../global/text";
-import { ResetPasswordformSchema } from "../../lib/schema";
 import { useNavigate } from "react-router-dom";
 import { Bounce, toast, ToastContainer } from "react-toastify";
 import Authprompt from "./authprompt";
 import Partnership from "./partnership";
+import { ResetPasswordformSchema } from "@/lib/schema";
+import { Text } from "@/components/global/text";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { IconInput } from "@/components/global/iconinput";
+import { Button } from "@/components/ui/button";
 
 export function ResetPasswordForm() {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const form = useForm<z.infer<typeof ResetPasswordformSchema>>({
         resolver: zodResolver(ResetPasswordformSchema),
-        defaultValues: {
-            email: ""
-        },
-    })
+        defaultValues: { email: "" },
+    });
 
     const navigate = useNavigate();
 
     async function onSubmit(values: z.infer<typeof ResetPasswordformSchema>) {
-        // console.log(values)
-        const {
-            email
-        } = values;
+        const { email } = values;
+        const userEmail = { email };
 
-        let userEmail = { email };
-        setIsLoading(true)
+        setIsLoading(true);
 
-        //fetch API 
         try {
-            let response = await fetch("https://web2app.prisca.5starcompany.com.ng/api/forgot-password", {
-                method: "POST",
-                headers: {
-                    "Accept": "application/json",
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(userEmail)
-            });
+            const response = await fetch(
+                "https://web2app.prisca.5starcompany.com.ng/api/forgot-password",
+                {
+                    method: "POST",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(userEmail),
+                }
+            );
 
-            //log response error
             if (!response.ok) {
-                throw new Error('Unprocessablee content!');
+                throw new Error("Unprocessable content!");
             }
-            else if (response.ok) {
-                response = await response.json()
-                console.log('Response: ', response);
-                localStorage.setItem("user-info", JSON.stringify(response))
 
-                //navigate to signin pg after successful reset
-                setTimeout(() => navigate('/auth/signin'), 2000); //delayed to allow toast display
+            const data = await response.json();
+            console.log("Response: ", data);
+            localStorage.setItem("user-info", JSON.stringify(data));
 
-                toast.success("Password reset link sent to your email!", {
-                    position: "bottom-right",
-                    draggable: true
-                })
-            }
+            setTimeout(() => navigate("/auth/signin"), 2000);
+
+            toast.success("Password reset link sent to your email!", {
+                position: "bottom-right",
+                draggable: true,
+            });
         } catch (error) {
-            console.error("error:", error);
+            console.error("Error:", error);
             toast.error("No user with that email address.", {
                 position: "bottom-right",
-                draggable: true
-            })
+                draggable: true,
+            });
         } finally {
             setIsLoading(false);
         }
-
     }
 
     return (
         <div className="flex flex-col my-5">
-
             <Text
                 style="text-xl font-lato font-bold leading-[140%] mb-4 text-primary60 text-center"
                 value="FORGET PASSWORD"
             />
-
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
                     <FormField
@@ -107,9 +91,7 @@ export function ResetPasswordForm() {
                             </FormItem>
                         )}
                     />
-
-                    <div
-                        className="flex justify-end items-end bg-[#24243E] rounded-md mt-4">
+                    <div className="flex justify-end items-end bg-[#24243E] rounded-md mt-4">
                         {isLoading ? (
                             <Button
                                 disabled
@@ -126,12 +108,12 @@ export function ResetPasswordForm() {
                                 Forget Password
                             </Button>
                         )}
-                        <ToastContainer transition={Bounce} draggable />
                     </div>
-                    <Authprompt action="reset" />
                 </form>
+                <ToastContainer transition={Bounce} draggable />
+                <Authprompt action="reset" />
                 <Partnership />
             </Form>
         </div>
-    )
+    );
 }

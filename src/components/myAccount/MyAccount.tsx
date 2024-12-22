@@ -1,4 +1,4 @@
-import { Navbar } from "../navbar/Navbar";
+import { Navbar } from "../layouts/dashboardlayouts/Navbar";
 import "./myAccount.scss";
 import * as React from 'react';
 import Popover from '@mui/material/Popover';

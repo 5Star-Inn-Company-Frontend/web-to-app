@@ -1,4 +1,4 @@
-import { ResetPasswordForm } from "@/components/auth/resetpassword"
+import { ResetPasswordForm } from "@/components/layouts/authlayout/resetpassword"
 
 export const ResetPage =()=>{
     return(

@@ -1,25 +1,19 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { Button } from "../ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "../ui/form";
 import { useState } from "react";
 import { ReloadIcon } from "@radix-ui/react-icons";
-import { IconInput } from "../global/iconinput";
-import { Text } from "../global/text";
-import { SigninformSchema } from "../../lib/schema";
 import { useNavigate } from "react-router-dom";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAuth } from "@/AuthContext";
 import Partnership from "./partnership";
 import Authprompt from "./authprompt";
+import { SigninformSchema } from "@/lib/schema";
+import { Text } from "@/components/global/text";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { IconInput } from "@/components/global/iconinput";
+import { Button } from "@/components/ui/button";
 
 // Define the type for the SignIn props
 interface SignInProps {

@@ -29,6 +29,7 @@ module.exports = {
       colors: {
         gray1: "#CCCCCC",
         deepgray: "#F2F2F2",
+        pinkred: "#D47979",
         primary10: "#515151",
         primary20: "#CCCCCC",
         primary30: "#D0D0D0",
