@@ -1,4 +1,3 @@
-import { Navbar } from "../layouts/dashboardlayouts/Navbar";
 import "./myAccount.scss";
 import * as React from 'react';
 import Popover from '@mui/material/Popover';
@@ -7,6 +6,7 @@ import Button from '@mui/material/Button';
 import Backdrop from '@mui/material/Backdrop';
 import { useLocation, useNavigate } from "react-router-dom";
 import {motion } from "framer-motion";
+import { Navbar } from "@/components/Navbar";
 
 
 const backdropVariant = {

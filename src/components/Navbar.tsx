@@ -6,7 +6,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   NavigationMenuItem,
-} from '../../ui/navigation-menu';
+} from '@/components/ui/navigation-menu';
 import { useNavigate } from 'react-router-dom';
 
 export function Navbar() {

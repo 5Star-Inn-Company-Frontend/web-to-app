@@ -1,5 +1,7 @@
 // TableComponent.tsx
 
+import { Fragment } from "react/jsx-runtime";
+
 type User = {
   fullName: string;
   email: string;
@@ -33,20 +35,20 @@ const Table: React.FC<TableProps> = ({ users }) => {
         </thead>
         <tbody>
           {users.map((user, index) => (
-            <>
-            <tr key={index} className="bg-deepgray">
+            <Fragment key={index}>
+            <tr className="bg-deepgray mb-2">
               <td className="px-4 py-4 text-xs flex items-center">
-                <div className="w-8 h-8 bg-pinkred text-white rounded-full flex items-center justify-center mr-3">
+                <span className="w-8 h-8 bg-pinkred text-white rounded-full flex items-center justify-center mr-3">
                   {getUserInitials(user.fullName)}
-                </div>
+                </span>
                 {user.fullName}
               </td>
-              <td className="px-4 py-4 text-xs">{user.email}</td>
+              <td className="px-4 py-4 text-xs mb-2">{user.email}</td>
               <td className="px-4 py-4 text-xs">{user.role}</td>
               <td className="px-4 py-4 text-xs">{user.appAccess}</td>
             </tr>
-            <div className="h-2"></div>
-            </>
+            <tr className="h-2"></tr>
+            </Fragment>
           ))}
         </tbody>
       </table>

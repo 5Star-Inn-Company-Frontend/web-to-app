@@ -13,6 +13,7 @@ body{
   max-width: 1540px;
   margin: 0 auto;
   background: #EEF0F3;
+  font-family: 'Inter', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif;
 }
 .navWidth{
   width:26.5rem!important;
@@ -30,7 +31,6 @@ input[type=file]{
 }
 @layer base {
   :root {
-    font-family:Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 

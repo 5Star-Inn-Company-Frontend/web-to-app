@@ -3,7 +3,7 @@ import { SearchBar } from "@/components/global/searchInput";
 import { useState } from "react";
 import logo from "@/components/images/Frame 14.png"
 import { useNavigate } from "react-router-dom";
-import DashBoardLayout from "@/components/layouts/dashboardlayouts/dashboardlayout";
+import DashBoardLayout from "@/layouts/AppDashboardlayout";
 import SelectDropdown from "@/components/global/selectdropdown";
 
 export const DashboardHome = () => {

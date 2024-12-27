@@ -1,4 +1,4 @@
-import { SigninForm } from "@/components/layouts/authlayout/signin";
+import { SigninForm } from "@/features/auth/signin";
 import { useState } from "react";
 
 

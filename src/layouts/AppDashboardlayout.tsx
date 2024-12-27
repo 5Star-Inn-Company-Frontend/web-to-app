@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
-import { Navbar } from '@/components/layouts/dashboardlayouts/Navbar';
-import Sidebar from './sidebar';
+
+import { Navbar } from '@/components/Navbar';
+import Sidebar from '@/features/maindashboard/sidebar';
 import { Outlet } from 'react-router-dom';
 
 // export const DashBoardLayout = ({

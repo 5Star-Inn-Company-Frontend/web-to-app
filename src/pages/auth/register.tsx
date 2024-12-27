@@ -1,4 +1,4 @@
-import { SignupForm } from "@/components/layouts/authlayout/register"
+import { SignupForm } from "@/features/auth/register"
 
 export const SignupPage = () => {
     return (

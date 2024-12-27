@@ -1,4 +1,3 @@
-import { Navbar } from "@/components/layouts/dashboardlayouts/Navbar";
 import "./member.scss";
 import { Sidebar } from "@/components/sidebar/Sidebar";
 import * as React from "react";
@@ -11,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Button } from "../../ui/button";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import LinearIndeterminate from "@/components/global/LinearProgress";
+import { Navbar } from "@/components/Navbar";
 
 const backdropVariant = {
   hidden: {

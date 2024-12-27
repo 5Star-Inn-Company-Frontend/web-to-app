@@ -23,9 +23,9 @@ import { CreateAppOverview } from "./components/CreateAppOverview/CreateAppOverv
 import { Plan } from "./components/plan/Plan";
 import { AuthProvider } from "./AuthContext";
 import PrivateRoute from "./PrivateRoute";
-import { AuthLayout } from "./components/layouts/authlayout/layout";
-import DashBoardLayout from "./components/layouts/dashboardlayouts/dashboardlayout";
+import DashBoardLayout from "./layouts/AppDashboardlayout";
 import Members from "./pages/members";
+import { AuthLayout } from "./layouts/authLayout";
 
 
 const App: React.FC = () => {

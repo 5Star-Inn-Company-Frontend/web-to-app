@@ -1,4 +1,4 @@
-import { Navbar } from "../layouts/dashboardlayouts/Navbar";
+import { Navbar } from "@/components/Navbar";
 import { Sidebar } from "../sidebar/Sidebar";
 import "./settings.scss";
 
