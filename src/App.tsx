@@ -59,7 +59,8 @@ const App: React.FC = () => {
           {/* Members Route */}
           <Route path="members">
             <Route
-              path="myaccount" element={<PrivateRoute><MyAccount /></PrivateRoute>} />
+              // path="myaccount" element={<PrivateRoute><MyAccount /></PrivateRoute>} />
+              path="myaccount" element={<MyAccount />} />
           </Route>
 
 
