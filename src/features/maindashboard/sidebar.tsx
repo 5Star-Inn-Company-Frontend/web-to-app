@@ -11,21 +11,21 @@ const Routes = [
     },
     {
         name: "Members",
-        route: "/members",
+        route: "members",
         icon: (
             "users-icon.png"
         ),
     },
     {
         name: "Settings",
-        route: "/settings",
+        route: "settings",
         icon: (
             "settings-icon.png"
         ),
     },
     {
         name: "Create New app",
-        route: `/overview`,
+        route: `overview`,
         icon: (
             "create-icon.png"
         ),

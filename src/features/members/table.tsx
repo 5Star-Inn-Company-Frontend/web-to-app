@@ -1,5 +1,6 @@
 // TableComponent.tsx
 
+import { useNavigate } from "react-router-dom";
 import { Fragment } from "react/jsx-runtime";
 
 type User = {
@@ -14,6 +15,7 @@ type TableProps = {
 };
 
 const Table: React.FC<TableProps> = ({ users }) => {
+
   const getUserInitials = (name: string) => {
     const initials = name
       .split(' ')
@@ -21,6 +23,8 @@ const Table: React.FC<TableProps> = ({ users }) => {
       .join('');
     return initials;
   };
+
+  const navigate = useNavigate()
 
   return (
     <div className="overflow-x-auto">
@@ -36,18 +40,24 @@ const Table: React.FC<TableProps> = ({ users }) => {
         <tbody>
           {users.map((user, index) => (
             <Fragment key={index}>
-            <tr className="bg-deepgray mb-2">
-              <td className="px-4 py-4 text-xs flex items-center">
-                <span className="w-8 h-8 bg-pinkred text-white rounded-full flex items-center justify-center mr-3">
-                  {getUserInitials(user.fullName)}
-                </span>
-                {user.fullName}
-              </td>
-              <td className="px-4 py-4 text-xs mb-2">{user.email}</td>
-              <td className="px-4 py-4 text-xs">{user.role}</td>
-              <td className="px-4 py-4 text-xs">{user.appAccess}</td>
-            </tr>
-            <tr className="h-2"></tr>
+              <tr className="bg-deepgray mb-2">
+                <td className="px-4 py-4 text-xs flex items-center">
+                  <span className="w-8 h-8 bg-pinkred text-white rounded-full flex items-center justify-center mr-3">
+                    {getUserInitials(user.fullName)}
+                  </span>
+                  {user.fullName}
+                </td>
+                <td className="px-4 py-4 text-xs mb-2">{user.email}</td>
+                <td className="px-4 py-4 text-xs">{user.role}</td>
+                <td className="px-4 py-4 text-xs flex justify-between items-center">
+                  {user.appAccess}
+                  <button onClick={() => navigate("/members/account")}>
+                    <img src="/chevron-right.svg" alt="" />
+                  </button>
+                </td>
+
+              </tr>
+              <tr className="h-2"></tr>
             </Fragment>
           ))}
         </tbody>

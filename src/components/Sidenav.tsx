@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { RouteBtn } from "../../global/routeBtn";
 import { Text } from "@/components/global/text";
 import { AiOutlineDoubleRight } from "react-icons/ai";
+import { RouteBtn } from "./global/routeBtn";
 
 export const SideNav = ({ style}: { style?: string }) => {
   // const action = "create";
