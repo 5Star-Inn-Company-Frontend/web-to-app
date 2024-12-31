@@ -1,9 +1,13 @@
 import * as React from 'react';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
-// import Button from '@mui/material/Button';
 
-export default function BasicPopover() {
+
+interface BasicPopoverProps {
+    handleDeleteApp: () => void;
+}
+
+export default function BasicPopover({handleDeleteApp}: BasicPopoverProps) {
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
   
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -37,7 +41,7 @@ export default function BasicPopover() {
           <Typography sx={{ p: 1 }}><p style={{fontWeight:"400", fontSize:"11px",display:"flex", alignItems:"center", gap:"5px", cursor:"pointer"}}><i className="fa-solid fa-copy"></i> Import from Existing App</p></Typography>
           <Typography sx={{ p: 1 }}><p style={{fontWeight:"400", fontSize:"11px",display:"flex", alignItems:"center", gap:"5px", cursor:"pointer"}}><i className="fa-solid fa-user-gear"></i> Manage App Access</p></Typography>
           <Typography sx={{ p: 1 }}><p style={{fontWeight:"400", fontSize:"11px",display:"flex", alignItems:"center", gap:"5px", cursor:"pointer"}}><i className="fa-solid fa-money-bill-transfer"></i>Transfer Organization</p></Typography>
-          <Typography sx={{ p: 1 }}><p style={{fontWeight:"400", fontSize:"11px",display:"flex", alignItems:"center", gap:"5px", cursor:"pointer"}}><i className="fa-solid fa-trash-can"></i> Delete App</p></Typography>
+          <Typography onClick={handleDeleteApp} sx={{ p: 1 }}><p style={{fontWeight:"400", fontSize:"11px",display:"flex", alignItems:"center", gap:"5px", cursor:"pointer"}}><i className="fa-solid fa-trash-can"></i> Delete App</p></Typography>
         </Popover>
       </div>
     );

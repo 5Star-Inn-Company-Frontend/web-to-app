@@ -44,7 +44,6 @@ const App: React.FC = () => {
           {/* App Routes */}
           <Route path="app" element={<DashBoardLayout />}>
             <Route path="settings" element={<Settings />} />
-            
             <Route path="overview" element={<PrivateRoute><CreateAppOverview /></PrivateRoute>} />
             <Route path="editApp" element={<EditApp />} />
             <Route path="edit/overview" element={<PrivateRoute><OverviewPage /></PrivateRoute>} />
@@ -52,7 +51,6 @@ const App: React.FC = () => {
 
             {/* Members Route */}
           <Route path="members">
-          
             <Route
               // path="myaccount" element={<PrivateRoute><MyAccount /></PrivateRoute>} />
               path="account" element={<MemberAccount />} />

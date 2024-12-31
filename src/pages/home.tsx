@@ -1,10 +1,9 @@
-import { AppDetails } from "@/components/customui/app/dashboard/AppDetails";
 import { SearchBar } from "@/components/global/searchInput";
 import { useState } from "react";
 import logo from "@/components/images/Frame 14.png"
 import { useNavigate } from "react-router-dom";
-import DashBoardLayout from "@/layouts/AppDashboardlayout";
 import SelectDropdown from "@/components/global/selectdropdown";
+import { AppDetails } from "@/features/app/AppDetails";
 
 export const DashboardHome = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");

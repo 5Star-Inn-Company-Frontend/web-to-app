@@ -20,7 +20,7 @@ const Modal = ({ children, width, isOpen, closeModal, heading, btn1style, btn2st
     if (!isOpen) return null
     return (
         createPortal(
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-[1000]">
                 <div className={`bg-white rounded-lg  relative ${width}`}>
                     <div className="flex justify-between items-center bg-primary70 p-4 rounded-t-lg">
                         <h2 className="font-medium text-xl">{heading}</h2>
@@ -38,11 +38,11 @@ const Modal = ({ children, width, isOpen, closeModal, heading, btn1style, btn2st
 
                     <div className="border border-primary90 flex items-center gap-x-4 justify-end p-4">
                            
-                            <button onClick={btn1Click} className={`flex items-center py-2 px-8 rounded-lg ${btn1style}`}>
+                            <button onClick={btn1Click} className={`flex items-center py-2 px-8 cursor-pointer rounded-lg ${btn1style}`}>
                             {btnIcon && <img src={btnIcon} alt="btn icon" />}
                                 {btn1}
                             </button>
-                            <button onClick={btn2Click} className={`py-2 px-8 rounded-lg ${btn2style}`}>
+                            <button onClick={btn2Click} className={`py-2 px-8 rounded-lg cursor-pointer ${btn2style}`}>
                                 {btn2}
                             </button>
                     </div>
