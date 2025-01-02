@@ -25,7 +25,7 @@ const Routes = [
     },
     {
         name: "Create New app",
-        route: `overview`,
+        route: `createnewapp`,
         icon: (
             "create-icon.png"
         ),
@@ -33,7 +33,6 @@ const Routes = [
 ];
 
 export default function Sidebar() {
-    const { pathname } = location
     return (
         <div className="hidden lg:block w-80 bg-white p-4  h-full border-r rounded-l-md border-primary20">
             <div className="flex justify-between items-center mt-4 mb-11">
@@ -54,7 +53,6 @@ export default function Sidebar() {
                             name={name}
                             route={route}
                             icon={icon}
-                            pathname={pathname}
                         />
                     );
                 })}

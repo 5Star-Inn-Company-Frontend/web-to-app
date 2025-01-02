@@ -13,7 +13,6 @@ import { AppDownloadPage } from "@/pages/app/appdownload";
 import { NativePluginPage } from "@/pages/app/native_pugin";
 import { AppServicePage } from "@/pages/app/app_service";
 import { AppAccessPage } from "@/pages/app/app_access";
-import { Settings } from "@/components/settings/Settings";
 import { SupportPage } from "@/components/supportPage/SupportPage";
 import { PushNotification } from "@/components/pushNotification/PushNotification";
 import { NativeNavigation } from "@/components/nativeNavigation/NativeNavigation";
@@ -26,6 +25,8 @@ import DashBoardLayout from "@/layouts/AppDashboardlayout";
 import Members from "@/pages/members";
 import { AuthLayout } from "@/layouts/authLayout";
 import MemberAccount from "@/features/members/MemberAccount";
+import Settings from "./pages/settings";
+import ViewApp from "./pages/app/viewapp";
 
 
 const App: React.FC = () => {
@@ -39,11 +40,14 @@ const App: React.FC = () => {
             <Route path="/" element={<DashboardHome />} />
             <Route path="app" element={<DashboardHome />} />
             <Route path="members" element={<Members />} />
+            <Route path="settings" element={<Settings />} />
           </Route>
+
+          {/* Other Home Routes */}
+          <Route path="app/viewapp" element={<ViewApp />} />
 
           {/* App Routes */}
           <Route path="app" element={<DashBoardLayout />}>
-            <Route path="settings" element={<Settings />} />
             <Route path="overview" element={<PrivateRoute><CreateAppOverview /></PrivateRoute>} />
             <Route path="editApp" element={<EditApp />} />
             <Route path="edit/overview" element={<PrivateRoute><OverviewPage /></PrivateRoute>} />
