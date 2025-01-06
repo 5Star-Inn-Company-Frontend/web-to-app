@@ -16,17 +16,16 @@ import { AppAccessPage } from "@/pages/app/app_access";
 import { SupportPage } from "@/components/supportPage/SupportPage";
 import { PushNotification } from "@/components/pushNotification/PushNotification";
 import { NativeNavigation } from "@/components/nativeNavigation/NativeNavigation";
-import { EditApp } from "@/components/EditApp/EditApp";
 import { CreateAppOverview } from "@/components/CreateAppOverview/CreateAppOverview";
 import { Plan } from "@/components/plan/Plan";
 import { AuthProvider } from "@/AuthContext";
 import PrivateRoute from "@/PrivateRoute";
-import DashBoardLayout from "@/layouts/AppDashboardlayout";
 import Members from "@/pages/members";
 import { AuthLayout } from "@/layouts/authLayout";
 import MemberAccount from "@/features/members/MemberAccount";
 import Settings from "./pages/settings";
 import ViewApp from "./pages/app/viewapp";
+import HomeDashboard from "@/layouts/HomeDashboard";
 
 
 const App: React.FC = () => {
@@ -36,32 +35,19 @@ const App: React.FC = () => {
       <Router>
         <Routes>
           {/* Home Route */}
-          <Route path="/" element={<DashBoardLayout/>}>
+          <Route path="/" element={<HomeDashboard />}>
             <Route path="/" element={<DashboardHome />} />
             <Route path="app" element={<DashboardHome />} />
             <Route path="members" element={<Members />} />
             <Route path="settings" element={<Settings />} />
           </Route>
 
-          {/* Other Home Routes */}
-          <Route path="app/viewapp" element={<ViewApp />} />
 
-          {/* App Routes */}
-          <Route path="app" element={<DashBoardLayout />}>
-            <Route path="overview" element={<PrivateRoute><CreateAppOverview /></PrivateRoute>} />
-            <Route path="editApp" element={<EditApp />} />
-            <Route path="edit/overview" element={<PrivateRoute><OverviewPage /></PrivateRoute>} />
-          </Route>
-
-            {/* Members Route */}
+          {/* Members Route */}
           <Route path="members">
-            <Route
-              // path="myaccount" element={<PrivateRoute><MyAccount /></PrivateRoute>} />
-              path="account" element={<MemberAccount />} />
-              
+            <Route path="account" element={<MemberAccount />} />
           </Route>
 
-          
 
           {/* Auth Routes */}
           <Route path="auth" element={<AuthLayout />}>
@@ -70,15 +56,40 @@ const App: React.FC = () => {
             <Route path="password_reset" element={<ResetPage />} />
           </Route>
 
-         
+
+          {/* App Routes Routes */}
+          <Route path="app/viewapp" element={<ViewApp />} />
+          <Route path="app/branding" element={<BrandingPage />} />
+          <Route path="app/appaccess" element={<AppAccessPage />} />
+
+
+
+
+
+
+
+
+
+          {/* App Routes */}
+          <Route path="app">
+            <Route path="overview" element={<CreateAppOverview />} />
+            <Route path="edit/overview" element={<OverviewPage />} />
+          </Route>
+
+
+
+
+
+
+
 
 
 
           {/*App  Dynamic Action Routes */}
           <Route path="/app/:action">
             <Route path="branding" element={<BrandingPage />} />
-            <Route path="interface" element={<InterfacePage />} />
             <Route path="link_handling" element={<LinkHandlingPage />} />
+            <Route path="interface" element={<InterfacePage />} />
             <Route path="web_overrides" element={<WebOveridesPage />} />
             <Route path="app_permission" element={<AppPermissionPage />} />
             <Route path="native_plugins" element={<NativePluginPage />} />

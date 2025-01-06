@@ -40,7 +40,7 @@ interface AppItem {
         <AppHeader logo={item.logo} title={item.title} />
         <div className="mt-3 flex items-center justify-between lg:flex-row md:flex-row sm:flex-col sm:gap-4 ">
           <AppInfo plan={item.plan} ios={item.ios} android={item.android}/>
-          <ActionButton onViewClick={() => navigate("/app/editApp")} onEditClick={() => navigate("/app/edit/overview")} onDeleteClick={openDeleteModal} />
+          <ActionButton onViewClick={() => navigate("/app/viewapp")} onEditClick={() => navigate("/app/viewapp")} onDeleteClick={openDeleteModal} />
         </div>
         <AppMetaData user={item.user} members={item.members} lastSaved={item.lastSaved} />
   

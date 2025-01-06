@@ -35,7 +35,7 @@ import { Outlet } from 'react-router-dom';
 //   );
 // };
 
-const DashBoardLayout = () => {
+const HomeDashboard = () => {
   
   return (
     <div>
@@ -54,4 +54,4 @@ const DashBoardLayout = () => {
   );
 }
 
-export default DashBoardLayout
+export default HomeDashboard
