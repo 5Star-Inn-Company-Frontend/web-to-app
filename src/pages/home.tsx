@@ -61,7 +61,7 @@ export const DashboardHome = () => {
       title: "WebhostingApp",
       plan: "free",
       ios: "co.5start.ios.qlije",
-      android: "co.5start.android.qlije",
+      android: "co.5start.android.qlij",
       user: "Admin",
       members: 2,
       lastSaved: "Last saved 12 days ago",
