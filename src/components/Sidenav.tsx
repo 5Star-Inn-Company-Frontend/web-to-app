@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import { Text } from "@/components/global/text";
 import { AiOutlineDoubleRight } from "react-icons/ai";
 import { RouteBtn } from "./global/routeBtn";

@@ -1,12 +1,11 @@
 import { useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { RouteBtn } from '../../global/routeBtn';
 import { AiOutlineDoubleRight } from 'react-icons/ai';
 import { Text } from '@/components/global/text';
 
 export const AppSideNav = ({ style }: { style?: string }) => {
   const { action } = useParams();
-  const location = useLocation();
   useEffect(() => {
     const init = async () => {
       const { Sidenav, Ripple, Tab, initTE } = await import('tw-elements');
