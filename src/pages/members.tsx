@@ -1,5 +1,5 @@
-import { SearchBar } from "@/components/global/searchInput"
-import Modal from "@/components/Modal";
+// import { SearchBar } from "@/components/global/searchInput"
+// import Modal from "@/components/Modal";
 import InviteMembersModal from "@/features/members/InviteMembersModal";
 import MembersSearch from "@/features/members/MembersSearch";
 import Table from "@/features/members/table"
@@ -30,7 +30,10 @@ const Members = () => {
   const [openModal, setOpenModal] = useState(false)
   const [value, setValue] = useState("collaborator")
 
-  const handleSearch = () => { }
+  const handleSearch = () => { 
+    console.log(value)
+    setValue("admin")
+  }
 
   const handleOpenModal = () => setOpenModal(true)
   const handleCloseModal = () => setOpenModal(false)

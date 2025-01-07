@@ -6,8 +6,8 @@ import { RouteBtn } from "./global/routeBtn";
 
 export const SideNav = ({ style}: { style?: string }) => {
   // const action = "create";
-  const location = useLocation();
-  const { pathname } = location;
+  // const location = useLocation();
+  // const { pathname } = location;
 
   useEffect(() => {
     const init = async () => {
@@ -80,7 +80,7 @@ export const SideNav = ({ style}: { style?: string }) => {
                 name={name}
                 route={route}
                 icon={icon}
-                pathname={pathname}
+                // pathname={pathname}
               />
             );
           })}

@@ -23,7 +23,7 @@ export const RouteBtn = ({ route, icon, name}: RouteBtnProps) => {
         to="#"
         data-te-sidenav-link-ref
       >
-        <div className=" w-[2rem] h-[2rem] relative me-4">
+        <div className=" w-[1.5rem] h-[1.5rem] relative me-4">
           <img src={`/${icon}`} alt="object not found" className="w-full" />
         </div>
         <Text

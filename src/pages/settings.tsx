@@ -7,7 +7,6 @@ const Settings = () => {
                 <input type="text" name="name" placeholder="Emmy`s Team" className="border w-full py-3 px-7 rounded-lg" />
                 <button className="bg-lightpink text-red px-5 py-2 rounded-lg">Leave Organization</button>
             </div>
-
         </div>
     )
 }

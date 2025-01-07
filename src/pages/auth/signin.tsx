@@ -8,6 +8,7 @@ export const SigninPage = () => {
 
   const handleLogin = (email: string, password: string) => {
     setCredentials({ email, password });
+    console.log(credentials)
   };
 
   return (

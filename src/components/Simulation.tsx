@@ -5,12 +5,10 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import {
     AiOutlineCamera,
-    AiOutlineDoubleRight,
     AiOutlineHome,
     AiOutlinePicture,
     AiOutlineReload,
     AiOutlineRotateLeft,
-    AiOutlineSync,
     AiOutlineUpload,
 } from "react-icons/ai";
 import { SelectItem } from "./ui/select";

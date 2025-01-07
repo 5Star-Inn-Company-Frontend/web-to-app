@@ -12,20 +12,21 @@ import { AppPermissionPage } from "@/pages/app/app_permission";
 import { AppDownloadPage } from "@/pages/app/appdownload";
 import { NativePluginPage } from "@/pages/app/native_pugin";
 import { AppServicePage } from "@/pages/app/app_service";
-import { AppAccessPage } from "@/pages/app/app_access";
 import { SupportPage } from "@/components/supportPage/SupportPage";
 import { PushNotification } from "@/components/pushNotification/PushNotification";
 import { NativeNavigation } from "@/components/nativeNavigation/NativeNavigation";
 import { CreateAppOverview } from "@/components/CreateAppOverview/CreateAppOverview";
 import { Plan } from "@/components/plan/Plan";
 import { AuthProvider } from "@/AuthContext";
-import PrivateRoute from "@/PrivateRoute";
+// import PrivateRoute from "@/PrivateRoute";
 import Members from "@/pages/members";
 import { AuthLayout } from "@/layouts/authLayout";
 import MemberAccount from "@/features/members/MemberAccount";
 import Settings from "./pages/settings";
 import ViewApp from "./pages/app/viewapp";
 import HomeDashboard from "@/layouts/HomeDashboard";
+import AppDashboard from "./layouts/AppDashboard";
+import AppAccess from "./pages/app/AppAccess";
 
 
 const App: React.FC = () => {
@@ -57,36 +58,13 @@ const App: React.FC = () => {
           </Route>
 
 
-          {/* App Routes Routes */}
-          <Route path="app/viewapp" element={<ViewApp />} />
-          <Route path="app/branding" element={<BrandingPage />} />
-          <Route path="app/appaccess" element={<AppAccessPage />} />
-
-
-
-
-
-
-
-
-
           {/* App Routes */}
-          <Route path="app">
-            <Route path="overview" element={<CreateAppOverview />} />
-            <Route path="edit/overview" element={<OverviewPage />} />
-          </Route>
-
-
-
-
-
-
-
-
-
+          <Route path="app/viewapp" element={<ViewApp />} />
 
           {/*App  Dynamic Action Routes */}
-          <Route path="/app/:action">
+          <Route path="app/:action/" element={<AppDashboard />}>
+            <Route path="overview" element={<CreateAppOverview />} />
+            <Route path="edit/overview" element={<OverviewPage />} />
             <Route path="branding" element={<BrandingPage />} />
             <Route path="link_handling" element={<LinkHandlingPage />} />
             <Route path="interface" element={<InterfacePage />} />
@@ -99,7 +77,7 @@ const App: React.FC = () => {
             <Route path="app_service" element={<AppServicePage />} />
             <Route path="app_support" element={<SupportPage />} />
             <Route path="app_plan" element={<Plan />} />
-            <Route path="app_access" element={<AppAccessPage />} />
+            <Route path="app_access" element={<AppAccess />} />
           </Route>
         </Routes>
       </Router>

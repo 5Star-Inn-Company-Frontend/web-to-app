@@ -7,7 +7,6 @@ import { Text } from '@/components/global/text';
 export const AppSideNav = ({ style }: { style?: string }) => {
   const { action } = useParams();
   const location = useLocation();
-  const { pathname } = location;
   useEffect(() => {
     const init = async () => {
       const { Sidenav, Ripple, Tab, initTE } = await import('tw-elements');
@@ -121,7 +120,6 @@ export const AppSideNav = ({ style }: { style?: string }) => {
                 name={name}
                 route={route}
                 icon={icon}
-                pathname={pathname}
               />
             );
           })}
