@@ -1,5 +1,7 @@
 /* eslint-disable no-undef */
 /** @type {import('tailwindcss').Config} */
+import tailwindcssAnimate from "tailwindcss-animate";
+
 export const darkMode = ["class"];
 export const content = [
   './pages/**/*.{ts,tsx}',
@@ -28,6 +30,7 @@ export const theme = {
       gray1: "#CCCCCC",
       lightpink: "#FFEAEA",
       pink1: "#FF00001A",
+      pink2: "#FF00001A",
       red1: "#C62828",
       red: "#FF3535",
       deepgray: "#F2F2F2",
@@ -100,4 +103,4 @@ export const theme = {
     },
   },
 };
-export const plugins = [require("tailwindcss-animate")];
+export const plugins = [tailwindcssAnimate];
