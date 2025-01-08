@@ -1,5 +1,6 @@
 // TableComponent.tsx
 
+import Initials from "@/utils/initials";
 import { useNavigate } from "react-router-dom";
 import { Fragment } from "react/jsx-runtime";
 
@@ -15,15 +16,6 @@ type TableProps = {
 };
 
 const Table: React.FC<TableProps> = ({ users }) => {
-
-  const getUserInitials = (name: string) => {
-    const initials = name
-      .split(' ')
-      .map((word) => word[0].toUpperCase())
-      .join('');
-    return initials;
-  };
-
   const navigate = useNavigate()
 
   return (
@@ -42,9 +34,7 @@ const Table: React.FC<TableProps> = ({ users }) => {
             <Fragment key={index}>
               <tr className="bg-deepgray mb-2">
                 <td className="px-4 py-4 text-xs flex items-center">
-                  <span className="w-8 h-8 bg-pinkred text-white rounded-full flex items-center justify-center mr-3">
-                    {getUserInitials(user.fullName)}
-                  </span>
+                 <Initials name={user.fullName}/>
                   {user.fullName}
                 </td>
                 <td className="px-4 py-4 text-xs mb-2">{user.email}</td>

@@ -77,7 +77,7 @@ const App: React.FC = () => {
             <Route path="app_service" element={<AppServicePage />} />
             <Route path="app_support" element={<SupportPage />} />
             <Route path="app_plan" element={<Plan />} />
-            <Route path="app_access" element={<AppAccess />} />
+            <Route path="appaccess" element={<AppAccess />} />
           </Route>
         </Routes>
       </Router>
