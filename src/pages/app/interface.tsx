@@ -1,4 +1,3 @@
-import { EditLayout } from "@/components/customui/app/edit_app/editlayout"
 import { InterfaceSection } from "@/components/customui/app/interface/view"
 // import { useParams } from "react-router-dom"
 export const InterfacePage =()=>{
@@ -6,8 +5,8 @@ export const InterfacePage =()=>{
     //     action
     // }=useParams();
     return(
-        <EditLayout>
+        <>
             <InterfaceSection />
-        </EditLayout>
+        </>
     )
 }

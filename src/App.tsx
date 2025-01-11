@@ -27,6 +27,7 @@ import ViewApp from "./pages/app/viewapp";
 import HomeDashboard from "@/layouts/HomeDashboard";
 import AppDashboard from "./layouts/AppDashboard";
 import AppAccess from "./pages/app/AppAccess";
+import AppClone from "./pages/app/AppClone";
 
 
 const App: React.FC = () => {
@@ -62,22 +63,23 @@ const App: React.FC = () => {
           <Route path="app/viewapp" element={<ViewApp />} />
 
           {/*App  Dynamic Action Routes */}
-          <Route path="app/:action/" element={<AppDashboard />}>
-            <Route path="overview" element={<CreateAppOverview />} />
-            <Route path="edit/overview" element={<OverviewPage />} />
+          <Route path="app/:action" element={<AppDashboard />}>
+            <Route path="create_overview" element={<CreateAppOverview />} />
+            <Route path="edit_overview" element={<OverviewPage />} />
             <Route path="branding" element={<BrandingPage />} />
             <Route path="link_handling" element={<LinkHandlingPage />} />
             <Route path="interface" element={<InterfacePage />} />
             <Route path="web_overrides" element={<WebOveridesPage />} />
             <Route path="app_permission" element={<AppPermissionPage />} />
             <Route path="native_plugins" element={<NativePluginPage />} />
-            <Route path="appdownload" element={<AppDownloadPage />} />
+            <Route path="app_download" element={<AppDownloadPage />} />
             <Route path="native_navigation" element={<NativeNavigation />} />
             <Route path="push_notification" element={<PushNotification />} />
             <Route path="app_service" element={<AppServicePage />} />
             <Route path="app_support" element={<SupportPage />} />
             <Route path="app_plan" element={<Plan />} />
-            <Route path="appaccess" element={<AppAccess />} />
+            <Route path="app_access" element={<AppAccess />} />
+            <Route path="app_clone" element={<AppClone />} />
           </Route>
         </Routes>
       </Router>

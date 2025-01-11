@@ -37,6 +37,7 @@ export const theme = {
       pinkred: "#D47979",
       primary5: "#E2DFDD",
       primary10: "#515151",
+      primary15: "#7D7A77",
       primary20: "#CCCCCC",
       primary30: "#D0D0D0",
       primary40: "#999999",

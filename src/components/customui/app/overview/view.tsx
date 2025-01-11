@@ -9,13 +9,13 @@ import { SelectItem } from "@/components/ui/select"
 export const OverviewSection =()=>{
     return(
         <div className="flex gap-1 flex-col">
-            <div className="p-2 bg-white w-full rounded">
+            <div className="px-6 py-10 bg-white w-full rounded">
                 <Text
-                    style="text-xl font-semibold"
+                    style="text-3xl font-semibold"
                     value="App Overview"
                 />
             </div>
-            <div className="p-4 bg-white">
+            <div className="px-6 bg-white border-t border-primary20 py-10">
                 <CollapsibleComponent
                     title="Website Url"
                     subTitle="The website to display when you loads"
@@ -26,7 +26,7 @@ export const OverviewSection =()=>{
                     />
                 </CollapsibleComponent>
             </div>
-            <div className="p-4 bg-white">
+            <div className="p-4 bg-white border-t border-primary20 py-10">
                 <CollapsibleComponent
                     title="App Name"
                     subTitle="Your name is displayed on the device homescreen"
