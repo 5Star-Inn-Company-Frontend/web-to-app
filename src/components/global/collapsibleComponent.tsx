@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ChevronsUpDown } from "lucide-react";
+import { FaChevronUp } from "react-icons/fa6";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -31,7 +31,7 @@ export function CollapsibleComponent({
           <div className="text-md font-semibold w-full">{title}</div>
           <CollapsibleTrigger asChild>
             <Button variant="ghost" size="sm" className="w-9 p-0">
-              <ChevronsUpDown className="h-4 w-4" />
+              <FaChevronUp className="h-4 w-4" />
               <span className="sr-only">Toggle</span>
             </Button>
           </CollapsibleTrigger>
