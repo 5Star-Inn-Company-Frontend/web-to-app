@@ -25,7 +25,7 @@ export function CollapsibleComponent({
       <Collapsible
         open={isOpen}
         onOpenChange={setIsOpen}
-        className="w-full space-y-2 h-fit-content overflow-auto relative"
+        className="w-full space-y-4 h-fit-content overflow-auto relative"
       >
         <div className="flex items-center justify-between space-x-4 px-4">
           <div className="text-md font-semibold w-full">{title}</div>
@@ -39,7 +39,7 @@ export function CollapsibleComponent({
         <div className="px-4">
           {subTitle && <Text style="text-sm text-[grey]" value={subTitle} />}
         </div>
-        <CollapsibleContent className="space-y-2">
+        <CollapsibleContent className="space-y-4">
           <div className="px-4 h-full overflow-auto">{children}</div>
         </CollapsibleContent>
       </Collapsible>

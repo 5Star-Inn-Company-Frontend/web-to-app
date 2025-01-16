@@ -26,27 +26,37 @@ export const RestoreDefaultActionList =()=>{
                     },{
                         title:"Google Map Search",
                         dropdowns:["App Browser"]
+                    },{
+                        title:"All Pages on my domain",
+                        dropdowns:["App Browser"]
+                    },{
+                        title:"All other links",
+                        dropdowns:["App Browser"]
                     }
                 ]?.map((list,index)=>{
                     return(       
                         <div 
-                            className="p-2 rounded-md border"
+                            className="p-3 first:rounded-t-lg last:rounded-b-lg border border-primary20 last:border-b  border-b-0 "
                             key={index}
                         >
-                            <div  className="flex gap-4 flex-rap items-center p-1 bg-[#f9fafb]">
+                            <div  className=" rounded-md p-2 border border-primary20">
+                                <div className="py-1 px-2 bg-deepgray  flex gap-4 flex-rap items-center rounded-md">
+
                                 <div className="flex gap-4 items-center flex-grow">
-                                    <IoMoveSharp size="1.4rem" />
+                                    <img src="/drag.svg" alt="" />
                                     <Input
                                         type="text"
-                                        className="border"
+                                        className="border border-primary60 bg-deepgray px-2"
                                         defaultValue={list.title}
+                                    
                                     />
                                 </div>
                                 <div className="flex gap-4 items-center">
                                     <SelectInput
                                         label="App Browser"
                                         placeholder="App Browser"
-                                        style="w-full border"
+                                        style="w-full border bg-deepgray"
+                                        
                                     >
                                         {
                                             list.dropdowns.map((selectvalue,index)=>{
@@ -62,6 +72,7 @@ export const RestoreDefaultActionList =()=>{
                                     </SelectInput>
                                     <AiOutlineEdit size="1.4rem"/>
                                     <AiOutlineDelete size="1.4rem"/>
+                                </div>
                                 </div>
                             </div>
                         </div>

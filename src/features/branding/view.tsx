@@ -1,9 +1,9 @@
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent"
 import { Text } from "@/components/global/text"
-import { SplashScreenCard } from "@/features/branding/splashscreencard"
-import { AppIconCard } from "@/features/branding/appIconCard"
-import { ThemeColorsCard } from "@/features/branding/themecolorsCard"
-import { StatusbarCard } from "@/features/branding/statusbarcard"
+import { AppIconCard } from "./appIconCard"
+import { SplashScreenCard } from "./splashscreencard"
+import { StatusbarCard } from "./statusbarcard"
+import { ThemeColorsCard } from "./themecolorsCard"
 
 export const BrandingSection = () => {
     return (
@@ -36,7 +36,7 @@ export const BrandingSection = () => {
                     </div>
                 </CollapsibleComponent>
             </div>
-            <div className="px-6 py-10 bg-white border-b border-primary20">
+            <div className="px-6 py-10 bg-white">
                 <CollapsibleComponent
                     title="Splash Screen"
                     subTitle="Configure the splash screen that displays while your app initially launches. Splash screen appearance varies between iOS and Android to meet design guidelines for each platform. The splash screen will display until your webpage finishes loading (when the DOMContentLoaded event fires) so that the transition between splash screen and your app is seamless."
@@ -55,7 +55,7 @@ export const BrandingSection = () => {
                     </div>
                 </CollapsibleComponent>
             </div>
-            <div className="px-6 py-10 bg-white border-b border-primary20">
+            <div className="px-6 bg-white">
                 <CollapsibleComponent
                     title="Theme Colors"
                     subTitle="Set a Primary Color used for text fields and labels, also referred to as the Tint color for iOS and the Accent color for Android."
@@ -70,7 +70,7 @@ export const BrandingSection = () => {
                     </div>
                 </CollapsibleComponent>
             </div>
-            <div className="p-4 bg-white mb-16 ">
+            <div className="p-4 bg-white">
                 <CollapsibleComponent
                     title="Status Bar"
                     subTitle="Set default styling options and Light/Dark mode for the device status bar while your app is open. When the status bar is in Light mode it will display with black text, in Dark mode white text, in Auto mode it will follow the device Light/Dark mode setting. You may also customize and dynamically set the status bar visibility and style during runtime from your website using the Median Javascript Bridge."
