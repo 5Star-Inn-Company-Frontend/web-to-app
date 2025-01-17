@@ -1,38 +1,33 @@
 import { Text } from "@/components/global/text"
-import { AiFillAndroid, AiFillApple } from "react-icons/ai"
+import { CiLight } from "react-icons/ci"
+import { FaAndroid, FaApple } from "react-icons/fa6"
 export const KeepScreenOnCard =({
     os
 }:{
     os:"IOS"|"Android"
 })=>{
     return(
-        <div className="p-4 rounded-md border">
-            <div className="flex gap-2 items-center border border-b p-4 rounded-t-md">
+        <div className="rounded-md border border-primary20">
+            <div className="flex text-sm gap-2 items-center px-6 py-2 border-b border-primary20 rounded-t-md">
                 {
                     os ==="IOS"?(
-                        <AiFillApple size="2rem"/>
+                        <FaApple size="1.3rem"/>
                     ):(
-                        <AiFillAndroid size="2rem"/>
+                        <FaAndroid size="1.3rem"/>
                     )
                 }
                 {os}
             </div>
-            <div>
+            <div className="px-6 py-4">
                 <Text
-                    style="text-md mb-2 my-4"
+                    style="text-xs mb-5"
                     value="Loading Spinner Color"
                 />
-                <div className="flex gap-4 items-center">
+                <div className="flex justify-between items-center gap-4 w-[60%]">
                     <div className="flex flex-col gap-2">
                         <div className="flex gap-2 items-center text-[grey] text-xs mb-2">
-                            <div className=" w-[0.8rem] h-[0.8rem] relative">
-                                <img
-                                    src="/whitescreen.svg"
-                                    alt="object not found"
-                                    className="w-full"
-                                />
-                            </div>
-                            Light mode
+                            <CiLight/>
+                            LIGHT MODE
                         </div>
                         <div className="w-fit flex justify-between border rounded-md px-2 py-1 items-center gap-2">
                             <div className="h-[0.7rem] w-[0.7rem] p-1 rounded border bg-white"></div>
@@ -51,7 +46,7 @@ export const KeepScreenOnCard =({
                                     className="w-full"
                                 />
                             </div>
-                            Dark mode
+                            DARK MODE
                         </div>
                         <div className="w-fit flex justify-between border rounded-md px-2 py-1 items-center gap-2">
                             <div className="h-[0.7rem] w-[0.7rem] p-1 rounded border bg-black"></div>

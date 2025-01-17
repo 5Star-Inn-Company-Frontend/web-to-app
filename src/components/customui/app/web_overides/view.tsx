@@ -9,10 +9,10 @@ import { OsConfigCard } from "@/components/global/os_config_card"
 
 export const Web_OveridesSection =()=>{
     return(
-        <div className="flex gap-1 flex-col">
-            <div className="p-2 bg-white w-full rounded">
+        <div>
+            <div className="px-12 py-10 border-b border-primary20 bg-white w-full rounded">
                 <Text
-                    style="text-xl font-semibold mb-1"
+                    style="text-4xl font-medium mb-4"
                     value="Website Overides"
                 />
                 <Text
@@ -20,7 +20,7 @@ export const Web_OveridesSection =()=>{
                     value="Web Overrides allow you to control how your website is presented within your app and how your app sends requests to your web server."
                 />
             </div>
-            <div className="p-4 bg-white">
+            <div className="px-6 py-10 bg-white border-b border-primary20">
                 <CollapsibleComponent
                     title="User Agent"
                     subTitle={`By default, a string is appended to the end of the device user agent so that you can identify requests originating from your app versus a standard mobile browser. You may choose to customize the string that is appended or provide a complete custom user agent to be used as a replacement instead of the device default user agent. Note that for apps initially created on GoNative.io the default string that is appended includes "gonative" while newer apps include "median".`}
@@ -39,7 +39,58 @@ export const Web_OveridesSection =()=>{
                     </div>
                 </CollapsibleComponent>
             </div>
-            <div className="p-4 bg-white">
+            <div className="px-6 py-10 bg-white border-b border-primary20">
+                <CollapsibleComponent
+                    title="Custom Css"
+                    subTitle={`Custom CSS rules are applied to your website when it is displayed through your app. For instance, within your app you may need to hide navigation elements such as a footer menu or overlay elements such as a chat widget. CSS rules added in the top section are added to both iOS and Android apps.`}
+                >
+                    <div className="grid grid-col-1 gap-8">
+                        <OsConfigCard
+                            os="IOS and Android"
+                        >  
+                            <CustomConfigCard
+                                title="Custom CSS"
+                            />
+                        </OsConfigCard>
+                        <OsConfigCard
+                            os="IOS"
+                        >  
+                            <CustomConfigCard
+                                title="Custom CSS"
+                            />
+                        </OsConfigCard>
+                        <OsConfigCard
+                            os="Android"
+                        >  
+                            <CustomConfigCard
+                                title="Custom CSS"
+                            />
+                        </OsConfigCard>
+                    </div>
+                </CollapsibleComponent>
+            </div>
+            <div className="px-6 py-10 bg-white border-b border-primary20">
+                <CollapsibleComponent
+                    title="Cookie Persistence"
+                    subTitle="By default, the cookie store in your app will respect the expiry parameters of cookies as received. Using this option you may force the expiry of all cookies to a preset duration. This functionality is useful for extending the duration of login sessions when it is not possible to make changes at the server level."
+                >
+                    <div>
+                        <RadioGroup 
+                            className="flex justify-between border p-[0.5rem] rounded-md w-fit gap-8"
+                            defaultValue="default">
+                            <div className="flex items-center space-x-2">
+                                <RadioGroupItem value="default" id="r1" />
+                                <Label htmlFor="r1">Default</Label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                                <RadioGroupItem value="Customize" id="r2" />
+                                <Label htmlFor="r2">Custom</Label>
+                            </div>
+                        </RadioGroup>
+                    </div>
+                </CollapsibleComponent>
+            </div>
+            {/* <div className="p-4 bg-white">
                 <CollapsibleComponent
                     title="Javascript Frameworks and NPM"
                     subTitle={`When using the Median JavaScript Bridge NPM package within your web app you must enable this option in the App Studio to prevent the use of your native app's embedded JavaScript Bridge Library and to provide support for listeners. Note that enabling this option in the App Studio without including the NPM package in your web app will cause regular JavaScript Bridge functions and callbacks to not be available.`}
@@ -49,8 +100,8 @@ export const Web_OveridesSection =()=>{
                         <Switch id="USE NPM PACKAGE" />
                     </div>
                 </CollapsibleComponent>
-            </div>
-            <div className="p-4 bg-white">
+            </div> */}
+            {/* <div className="p-4 bg-white">
                 <CollapsibleComponent
                     title="Custom Header"
                     subTitle={`Your app can be configured to send custom headers to your web server. You can define parameter names and values and use both constant strings as well as device variables.`}
@@ -72,58 +123,9 @@ export const Web_OveridesSection =()=>{
                         </OsConfigCard>
                     </div>
                 </CollapsibleComponent>
-            </div>
-            <div className="p-4 bg-white">
-                <CollapsibleComponent
-                    title="Custom Css"
-                    subTitle={`Custom CSS rules are applied to your website when it is displayed through your app. For instance, within your app you may need to hide navigation elements such as a footer menu or overlay elements such as a chat widget. CSS rules added in the top section are added to both iOS and Android apps.`}
-                >
-                    <div className="grid grid-col-1 gap-8">
-                        <OsConfigCard
-                            os="IOS and Android"
-                        >  
-                            <CustomConfigCard
-                                title="Custom Css"
-                            />
-                        </OsConfigCard>
-                        <OsConfigCard
-                            os="IOS"
-                        >  
-                            <CustomConfigCard
-                                title="Custom Css"
-                            />
-                        </OsConfigCard>
-                        <OsConfigCard
-                            os="Android"
-                        >  
-                            <CustomConfigCard
-                                title="Custom Css"
-                            />
-                        </OsConfigCard>
-                    </div>
-                </CollapsibleComponent>
-            </div>
-            <div className="p-4 bg-white">
-                <CollapsibleComponent
-                    title="Cookie Persistence"
-                    subTitle="By default, the cookie store in your app will respect the expiry parameters of cookies as received. Using this option you may force the expiry of all cookies to a preset duration. This functionality is useful for extending the duration of login sessions when it is not possible to make changes at the server level."
-                >
-                    <div>
-                        <RadioGroup 
-                            className="flex justify-between border p-[0.7rem] rounded-md w-fit gap-8"
-                            defaultValue="default">
-                            <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="default" id="r1" />
-                                <Label htmlFor="r1">Default</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="Customize" id="r2" />
-                                <Label htmlFor="r2">Customize</Label>
-                            </div>
-                        </RadioGroup>
-                    </div>
-                </CollapsibleComponent>
-            </div>
+            </div> */}
+            
+           
             <div className="p-4 bg-white">
                 <CollapsibleComponent
                     title="Custom Javascript"

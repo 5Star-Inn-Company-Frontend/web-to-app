@@ -1,7 +1,7 @@
 import { Label } from "@/components/ui/label"
-import { AiFillAndroid, AiFillApple } from "react-icons/ai"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Text } from "@/components/global/text"
+import { FaAndroid, FaApple } from "react-icons/fa6"
 
 export const ScreenOrientationConfigCard =({
     os
@@ -9,56 +9,56 @@ export const ScreenOrientationConfigCard =({
     os:"IOS"|"Android"
 })=>{
     return(
-        <div className="p-4 rounded-md border">
-            <div className="flex gap-2 items-center border border-b p-4 rounded-t-md">
+        <div className="p-4 rounded-md border border-primary20">
+            <div className="flex gap-x-2 text-sm items-center border border-primary20 border-b p-4 rounded-t-md">
                 {
                     os ==="IOS"?(
-                        <AiFillApple size="2rem"/>
+                        <FaApple size="1.3rem"/>
                     ):(
-                        <AiFillAndroid size="2rem"/>
+                        <FaAndroid size="1.3rem"/>
                     )
                 }
                 {os}
             </div>
             <div className="flex flex-col gap-4">
                 <Text
-                    style="text-md font-semibold"
+                    style="text-sm mt-2"
                     value={os ==="IOS"?"Iphone":"Phone"}
                 />
                 <RadioGroup 
-                    className="flex flex-col border p-[0.7rem] flex-grow rounded-md"
+                    className="flex flex-col text-primary40 border border-primary20 p-[0.7rem] flex-grow rounded-md"
                     defaultValue="auto">
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-2 mb-1">
                         <RadioGroupItem value="auto" id="r1" />
-                        <Label htmlFor="auto">Auto Rotate</Label>
+                        <Label className="text-xs" htmlFor="auto">Auto Rotate</Label>
                     </div>
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-2 mb-1">
                         <RadioGroupItem value="portrait" id="r2" />
-                        <Label htmlFor="portrait">Fixed Portrait</Label>
+                        <Label className="text-xs" htmlFor="portrait">Fixed Portrait</Label>
                     </div>
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-2 mb-1">
                         <RadioGroupItem value="landscape" id="r2" />
-                        <Label htmlFor="Landscape">Fixed Landscape</Label>
+                        <Label className="text-xs" htmlFor="Landscape">Fixed Landscape</Label>
                     </div>
                 </RadioGroup>
                 <Text
-                    style="text-md font-semibold"
+                    style="text-sm mt-2"
                     value={os ==="IOS"?"Ipad":"Tablet"}
                 />
                 <RadioGroup 
-                    className="flex flex-col border p-[0.7rem] flex-grow rounded-md"
+                    className="flex flex-col text-primary40 border border-primary20 p-[0.7rem] flex-grow rounded-md"
                     defaultValue="off">
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-2 mb-1">
                         <RadioGroupItem value="auto" id="r1" />
-                        <Label htmlFor="auto">Auto Rotate</Label>
+                        <Label className="text-xs" htmlFor="auto">Auto Rotate</Label>
                     </div>
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-2 mb-1">
                         <RadioGroupItem value="portrait" id="r2" />
-                        <Label htmlFor="portrait">Fixed Portrait</Label>
+                        <Label className="text-xs" htmlFor="portrait">Fixed Portrait</Label>
                     </div>
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-2 mb-1">
                         <RadioGroupItem value="landscape" id="r2" />
-                        <Label htmlFor="Landscape">Fixed Landscape</Label>
+                        <Label className="text-xs" htmlFor="Landscape">Fixed Landscape</Label>
                     </div>
                 </RadioGroup>
             </div>

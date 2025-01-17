@@ -4,22 +4,23 @@ import { Input } from "@/components/ui/input"
 
 export const UserAgentConfigCard =()=>{
     return(
-        <div className="p-4 rounded-md border">
+        <div className="rounded-md px-3 pt-4">
             <RadioGroup 
-                className="flex justify-between border p-[0.7rem] flex-grow rounded-md"
+                className="flex justify-between border border-primary20 p-[0.5rem] flex-grow rounded-md mb-4"
                 defaultValue="off">
                 <div className="flex items-center space-x-2">
                     <RadioGroupItem value="enable" id="r1" />
-                    <Label htmlFor="enable">Enable</Label>
+                    <Label className="text-xs" htmlFor="enable">Enable</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                     <RadioGroupItem value="blocked" id="r2" />
-                    <Label htmlFor="disable">Disable</Label>
+                    <Label className="text-xs" htmlFor="disable">Disable</Label>
                 </div>
             </RadioGroup>
             <Input
-                className="w-full p-2 rounded-md border"
+                className="w-full py-1 px-2 rounded-md border border-primary20"
                 type="text"
+                placeholder="5starcom"
             />
         </div>
     )

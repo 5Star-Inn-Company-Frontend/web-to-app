@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input"
 
 export const LinkHandlingSection =()=>{
     return(
-        <div>
+        <>
             <div className="px-12 py-10 border-b border-primary20 bg-white w-full rounded">
                 <Text
                     style="text-4xl font-medium mb-4"
@@ -99,6 +99,6 @@ export const LinkHandlingSection =()=>{
                         />
                 </CollapsibleComponent>
             </div>
-        </div>
+        </>
     )
 }
