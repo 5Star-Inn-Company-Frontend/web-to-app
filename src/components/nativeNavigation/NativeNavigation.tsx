@@ -1,6 +1,3 @@
-import { AppSideNav } from "../customui/app/sidenav";
-import { SimulationView } from "../global/simulationview";
-import { TopNav } from "../global/topnav";
 import "./nativeNavigation.scss";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
@@ -8,31 +5,37 @@ import { TopNavigation } from "./topNavigation/TopNavigation";
 import { SidebarNavigation } from "./SidebarNavigation/SidebarNavigation";
 import { BottomTabBar } from "./bottomTabBar/BottomTabBar";
 import { ContextNavToolbar } from "./ContextNavToolbar/ContextNavToolbar";
+import { Text } from "../global/text";
 
 
 
 export function NativeNavigation() {
   return (
     <>
-      <div className="top">
-        <h2>Native Navigation</h2>
-        <p>
-          Native Navigation menus allow you to create a natural native
+      <div className="px-12 py-10 border-b border-primary20 bg-white w-full rounded">
+        <Text
+          style="text-4xl font-medium mb-4"
+          value="Native Navigation"
+        />
+        <Text
+          style="text-sm text-[grey]"
+          value="Native Navigation menus allow you to create a natural native
           app experience for users comparable to the most widely used
           and popular iOS and Android apps. Median supports a Top
           Navigation Bar, Sidebar Navigation Menu, Bottom Tab Bar Menu,
-          and an iOS a Contextual Navigation Toolbar.
-        </p>
+          and an iOS a Contextual Navigation Toolbar."
+        />
       </div>
-      <div className="content">
-        <div className="contentBar">
+      {/* content */}
+      <div >
+        {/* .contentBar */}
+        <div> 
           <Tabs defaultValue="Top Navigation Bar" className="w-full">
-            <ScrollArea className="w-full whitespace-nowrap">
-              <div className="flex justify-between items-center pb-4 px-4">
+            <ScrollArea className="whitespace-nowrap">
+              <div className="flex justify-between items-center pt-2 pb-4 px-10">
                 <TabsList
                   id="tabs"
-                  style={{ backgroundColor: "#F2F2F2", width: "100%" }}
-                  className="justify-start items-start flex w-full lg:gap-4 xl:gap-4 md:gap-2 sm:gap-2 h-fit"
+                  className="bg-deepgray justify-start items-start flex w-full lg:gap-4 xl:gap-4 md:gap-2 sm:gap-2 h-fit"
                 >
                   <TabsTrigger
                     value="Top Navigation Bar"
@@ -82,9 +85,10 @@ export function NativeNavigation() {
               </div>
               <ScrollBar orientation="horizontal" />
             </ScrollArea>
-            <div className="-md bg-white px-4">
+            <div className=" bg-white">
+             
               <TabsContent value="Top Navigation Bar">
-                <TopNavigation />
+              <TopNavigation />
               </TabsContent>
               <TabsContent value="Sidebar Navigation">
                 <SidebarNavigation />

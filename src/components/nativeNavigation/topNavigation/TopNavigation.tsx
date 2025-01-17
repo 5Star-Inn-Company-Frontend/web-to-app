@@ -1,260 +1,185 @@
-import "./topNavigation.scss";
+import { Text } from "@/components/global/text";
+import { FaAngleDown } from "react-icons/fa6";
+import { OsConfigCard } from "@/components/global/os_config_card";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { TopNavigationCard } from "@/features/nativenavigation/TopNavigationCard";
+import { Switch } from "@/components/ui/switch";
+import { IoIosCheckmarkCircle } from "react-icons/io";
+import { IoCopyOutline } from "react-icons/io5";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { IoChevronForward } from "react-icons/io5";
+import { IoEyeSharp, IoAdd } from "react-icons/io5";
 
 export function TopNavigation() {
     return (
-        <div className="topNavigation">
-            <div className="first content">
-                <div className="title">
-                    <h2>Legacy Mode</h2>
-                    <i className="fa-solid fa-angle-up"></i>
-                </div>
-                <p>A native Top Navigation Bar can be used to helo your users navigate throughout your app. 
-                    You can display dynamic titles depending on the page being shown. 
-                    You may also add a search bar form, refresh functionality, and custom buttons. 
-                    When a Sidebar Navigation Menu is also enabled, a "hamburger" toggle button is shown 
-                    in the top nav bar to easily open the menu.
-                </p>
-                <div className="diagram">
-                    <div className="ios">
-                        <p><i className="fa-brands fa-apple"></i> iOS</p>
-                        <form className="radioGroup">
-                            <div className="form-check">
-                              <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-                              <label className="form-check-label" htmlFor="inlineRadio1">Auto</label>
-                            </div>
-                            <div className="form-check">
-                              <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-                              <label className="form-check-label" htmlFor="inlineRadio2">Always</label>
-                            </div>
-                        </form>
-                    </div>
-                    <div className="android">
-                        <p><i className="fa-brands fa-android"></i> Android</p>
-                        <form className="radioGroup">
-                            <div className="form-check">
-                              <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-                              <label className="form-check-label" htmlFor="inlineRadio1">Auto</label>
-                            </div>
-                            <div className="form-check">
-                              <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-                              <label className="form-check-label" htmlFor="inlineRadio2">Always</label>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+        // topNavigation
+        <div>
+            <Collapsible>
+                <CollapsibleTrigger className="w-full flex items-center justify-between mb-4 px-10">
+                    <Text
+                        style="text-base font-medium"
+                        value="Display Mode"
+                    />
+                    <FaAngleDown />
+                </CollapsibleTrigger>
+                <CollapsibleContent className="border-b border-primary20 px-10 pb-6">
 
-            </div>
-            <div className="second content">
-                <div className="title">
-                    <h2>Styling</h2>
-                    <i className="fa-solid fa-angle-up"></i>
-                </div>
-                <p>Configure display settings for text in the top navigation bar and add an optional custom horizontal image.
-                   To show different content based on the page being shown in your app, configure Dynamic Titles.
-                   Note hat for iOS the color of any native UI elements such as the hamburger menu will follow the app-wide Theme colors set on the Branding tab. 
-                </p>
-                <div className="diagram">
-                    <p><i className="fa-brands fa-apple"></i> iOS</p>
-                    <div className="bottom">
-                        <p>Default Display</p>
-                        <form className="radioGroup">
-                            <div className="form-check">
-                              <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-                              <label className="form-check-label" htmlFor="inlineRadio1">Text</label>
-                            </div>
-                            <div className="form-check">
-                              <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-                              <label className="form-check-label" htmlFor="inlineRadio2">Image</label>
-                            </div>
-                        </form>
-                        <div className="color-card">
-                            <div className="left">
-                                <div className="box">
-                                    <h6><img src="../../../light.png" alt="" /> LIGHT MODE</h6>
-                                    
-                                    <p>BACKGROUND COLOR</p>
-                                    <p className="background"><span></span> #FFFFFF</p>
-                                    <p>TEXT COLOR</p>
-                                    <p className="text"><span></span> #0E0D08</p>
-                                </div>
-                                <p>Default Display</p>
-                                <form className="radioGroup">
-                                    <div className="form-check">
-                                      <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-                                      <label className="form-check-label" htmlFor="inlineRadio1">App icon</label>
-                                    </div>
-                                    <div className="form-check">
-                                      <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-                                      <label className="form-check-label" htmlFor="inlineRadio2">New Image</label>
-                                    </div>
-                                </form>
-                            </div>
-                            <div className="right">
-                                <div className="box">
-                                    <h6><i className="fa-solid fa-moon"></i> DARK MODE</h6>
-                                    
-                                    <p>BACKGROUND COLOR</p>
-                                    <p className="background"><span></span> #000000</p>
-                                    <p>TEXT COLOR</p>
-                                    <p className="text"><span></span> #0E0D08</p>
-                                </div>
-                            </div>
+                    <p className="text-sm text-primary60">A native Top Navigation Bar can be used to helo your users navigate throughout your app.
+                        You can display dynamic titles depending on the page being shown.
+                        You may also add a search bar form, refresh functionality, and custom buttons.
+                        When a Sidebar Navigation Menu is also enabled, a "hamburger" toggle button is shown
+                        in the top nav bar to easily open the menu.
+                    </p>
+                    <div>
+                        <div className="grid grid-cols-2 gap-x-8 mt-6">
+                            <OsConfigCard
+                                os="IOS"
+                                radios={[
+                                    {
+                                        title: "Auto",
+                                        label: "Auto"
+                                    }, {
+                                        title: "Always",
+                                        label: "Always"
+                                    }
+                                ]}
+                            />
+                            <OsConfigCard
+                                os="IOS"
+                                radios={[
+                                    {
+                                        title: "Disable",
+                                        label: "disable"
+                                    }, {
+                                        title: "Enable",
+                                        label: "enable"
+                                    }
+                                ]}
+                            />
                         </div>
                     </div>
-                </div>
-                <br />
-                <div className="diagram">
-                    <p><i className="fa-brands fa-android"></i> Android</p>
-                    <div className="bottom">
-                        <p>Default Display</p>
-                        <form className="radioGroup">
-                            <div className="form-check">
-                              <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-                              <label className="form-check-label" htmlFor="inlineRadio1">Text</label>
-                            </div>
-                            <div className="form-check">
-                              <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-                              <label className="form-check-label" htmlFor="inlineRadio2">Image</label>
-                            </div>
-                        </form>
-                        <div className="color-card">
-                            <div className="left">
-                                <div className="box">
-                                    <h6><img src="../../../light.png" alt="" /> LIGHT MODE</h6>
-                                    
-                                    <p>BACKGROUND COLOR</p>
-                                    <p className="background"><span></span> #FFFFFF</p>
-                                    <p>TEXT COLOR</p>
-                                    <p className="text"><span></span> #0E0D08</p>
-                                </div>
-                                <p>Default Display</p>
-                                <form className="radioGroup">
-                                    <div className="form-check">
-                                      <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-                                      <label className="form-check-label" htmlFor="inlineRadio1">App icon</label>
-                                    </div>
-                                    <div className="form-check">
-                                      <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-                                      <label className="form-check-label" htmlFor="inlineRadio2">New Image</label>
-                                    </div>
-                                </form>
-                            </div>
-                            <div className="right">
-                                <div className="box">
-                                    <h6><i className="fa-solid fa-moon"></i> DARK MODE</h6>
-                                    
-                                    <p>BACKGROUND COLOR</p>
-                                    <p className="background"><span></span> #000000</p>
-                                    <p>TEXT COLOR</p>
-                                    <p className="text"><span></span> #0E0D08</p>
+
+                </CollapsibleContent>
+            </Collapsible>
+
+            <Collapsible>
+                <CollapsibleTrigger className="w-full flex items-center justify-between my-4 px-10">
+                    <Text
+                        style="text-base font-medium"
+                        value="Styling"
+                    />
+                    <FaAngleDown />
+                </CollapsibleTrigger>
+                <CollapsibleContent className="border-b border-primary20 px-10 pb-6">
+
+                    <p className="text-sm text-primary60 mb-6">
+                        Configure display settings for text in the top navigation bar and add an optional custom horizontal image.
+                        To show different content based on the page being shown in your app, configure Dynamic Titles.
+                        Note hat for iOS the color of any native UI elements such as the hamburger menu will follow the app-wide Theme colors set on the Branding tab.
+                    </p>
+                    <div className="grid gap-y-5">
+
+                        <TopNavigationCard os="IOS" radios={[{ title: "Text", label: "Text" }, { title: "Image", label: "Image" },]} />
+                        <TopNavigationCard os="Android" radios={[{ title: "Text", label: "Text" }, { title: "Image", label: "Image" },]} />
+                    </div>
+                </CollapsibleContent>
+            </Collapsible>
+            <Collapsible>
+                <CollapsibleTrigger className="w-full flex items-center justify-between my-4 px-10">
+                    <Text
+                        style="text-base font-medium"
+                        value="Top Navigate Bar Visual Editor"
+                    />
+                    <div className="flex items-center gap-x-4">
+                        <Switch id="Advance Mode" />
+                        <FaAngleDown />
+                    </div>
+                </CollapsibleTrigger>
+                <CollapsibleContent className="border-b border-primary20 px-10 pb-6">
+                    <div className="border border-primary20 p-3 rounded-lg">
+                        <div className="border border-primary20 p-2 rounded-lg">
+                            <div className="flex items-center gap-x-5 bg-deepgray p-2 rounded-md">
+                                <Input className="p-1 bg-deepgray border-primary40" placeholder="Top Nav Bar Menu 1 - All Pages" />
+                                <div className="flex items-center gap-x-2">
+                                    <IoIosCheckmarkCircle />
+                                    <IoCopyOutline />
+                                    <RiDeleteBin6Line />
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div className="third content">
-                <div className="title">
-                    <h2>Top Navigate Bar Visual Editor</h2>
-                    <div className="right-title">
-                        <div className="form-check form-switch">
-                            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Advance Mode</label>
-                            <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" />
+                        <>
+                            <Label className="font-normal my-5 block">Pages to Display Top Nav Bar</Label>
+                            <RadioGroup defaultValue="comfortable" className="flex justify-between items-center p-1 rounded-md border border-primary20">
+                                <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="default" id="r1" />
+                                    <Label className="text-primary40 font-normal text-xs" htmlFor="r1">Single Page</Label>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="comfortable" id="r2" />
+                                    <Label className="text-primary40 font-normal text-xs" htmlFor="r2">Multiple Pages</Label>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="compact" id="r3" />
+                                    <Label className="text-primary40 font-normal text-xs" htmlFor="r3">All Pages</Label>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="compact" id="r3" />
+                                    <Label className="text-primary40 font-normal text-xs" htmlFor="r3">Custom</Label>
+                                </div>
+                            </RadioGroup>
+                        </>
+                        <div className="flex items-center justify-end mt-8">
+                            <p className="text-xs">TEST RULE</p>
+                            <IoChevronForward />
                         </div>
-                        <i className="fa-solid fa-angle-up"></i>
-                    </div>
-                    
-                </div>
-                <div className="mainContainer">
-                    <div className="mainContainerTop">
-                        <div className="mainExtra">
-                            <div className="mainContainerLeft">
-                                <p>Top Nav Bar Menu 1 - All Pages</p>
+                        <>
+                            <Label className="font-normal my-5 block">Display Mode</Label>
+                            <RadioGroup defaultValue="comfortable" className="flex justify-between items-center p-1 rounded-md border border-primary20">
+                                <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="default" id="r1" />
+                                    <Label className="text-primary40 font-normal text-xs" htmlFor="r1">Page Title</Label>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="comfortable" id="r2" />
+                                    <Label className="text-primary40 font-normal text-xs" htmlFor="r2">Custom Title</Label>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="compact" id="r3" />
+                                    <Label className="text-primary40 font-normal text-xs" htmlFor="r3">Images</Label>
+                                </div>
+
+                            </RadioGroup>
+                        </>
+                        <div className="flex items-center justify-center mt-8">
+                            <div className="flex items-center gap-x-4">
+                                <IoEyeSharp />
+                                <div className="bg-deepgray px-14 py-3">
+                                    <p className="text-xs">Page Title</p>
+                                </div>
+                                <IoAdd />
                             </div>
-                            <div className="mainConatinerRight">
-                                <i className="fa-solid fa-square-check"></i>
-                                <i className="fa-regular fa-copy"></i>
-                                <i className="fa-regular fa-trash-can"></i>
-                            </div>
-                        </div>
-                        
-                    </div>
-                    <div className="pages">
-                        <p>Pages to Display Top Nav Bar</p>
-                        <form action="" id="radios">
-                            <div className="single">
-                                <input type="radio" name="single" />
-                                <label htmlFor="single">Single Page</label>
-                            </div>
-                            <div className="multiple">
-                                <input type="radio" name="multiple" />
-                                <label htmlFor="multiple">Multiple Pages</label>
-                            </div>
-                            <div className="all">
-                                <input type="radio" name="all" />
-                                <label htmlFor="all">All Page</label>
-                            </div>
-                            <div className="custom">
-                                <input type="radio" name="custom" />
-                                <label htmlFor="custom">Custom</label>
-                            </div>
-                        </form>
-                    </div>
-                    <h6>TEST RULE <i className="fa-solid fa-angle-right"></i></h6>
-                    <div className="display">
-                        <p>Display Mode</p>
-                        <form action="" className="threeRadios">
-                            <div className="page">
-                                <input type="radio" name="page" />
-                                <label htmlFor="page">Page Title</label>
-                            </div>
-                            <div className="custom">
-                                <input type="radio" name="custom" />
-                                <label htmlFor="custom">Custom Title</label>
-                            </div>
-                            <div className="img">
-                                <input type="radio" name="img" />
-                                <label htmlFor="img">Images</label>
-                            </div>
-                        </form>
-                    </div>
-                    <div className="last">
-                        <i className="fa-solid fa-eye"></i>
-                        <p>Page Title</p>
-                        <i className="fa-solid fa-plus"></i>
-                    </div>
-                </div>
-                <div className="deleteAdd">
-                    <p><i className="fa-solid fa-trash-can"></i> Clear All</p>
-                    <p><i className="fa-solid fa-plus"></i> Add Top Nav Bar</p>
-                </div>
-            </div>
-            <div className="lastly">
-                <div className="title">
-                    <h2>Auto New Windows</h2>
-                    <div className="right-title">
-                        <div className="form-check form-switch">
-                            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Advance Mode</label>
-                            <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" />
-                        </div>
-                        <i className="fa-solid fa-angle-up"></i>
-                    </div>
-                </div>
-                <p>
-                    Define a hierarchy for your website so that pages in a higher level will open in a new Windows
-                    within your app versus the current view. The top navigation bar will show a "<i className="fa-solid fa-angle-left"></i> Back" button
-                    to allow easy navigation back to the same place on the lower level page. 
-                </p>
-                <div className="firstSquare">
-                    <div className="secondSquare">
-                        <div className="thirdSquare">
-                            <p>Level</p>
-                            <i className="fa-solid fa-trash-can"></i>
                         </div>
                     </div>
-                </div>
-                <button><i className="fa-solid fa-plus"></i> Add Level</button>
-            </div>
+
+                   
+
+                    <div className="flex items-center gap-x-6 justify-center my-10">
+                        <div className="flex items-center gap-x-2 cursor-pointer">
+                            <RiDeleteBin6Line />
+                            <span className="text-xs">Clear All</span>
+                        </div>
+                        <div className="flex items-center gap-x-2 cursor-pointer">
+                            <IoAdd />
+                            <span className="text-xs">Add Top Nav Bar</span>
+                        </div>
+                    </div>
+                </CollapsibleContent>
+
+            </Collapsible>
+
         </div>
     )
 };
