@@ -1,6 +1,6 @@
 import { Label } from "@/components/ui/label"
-import { AiFillAndroid, AiFillApple } from "react-icons/ai"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { FaAndroid, FaApple } from "react-icons/fa6"
 
 export const OsConfigCard =({
     os,
@@ -15,21 +15,23 @@ export const OsConfigCard =({
     }[]
 })=>{
     return(
-        <div>
-            <div className="flex gap-2 items-center border border-b p-4 rounded-t-md">
+        <div className="border border-primary20 rounded-lg">
+            <div className="flex gap-2 px-6 py-2 border-b border-primary20 items-center rounded-t-md text-sm">
                 {
                     os ==="IOS"?(
-                        <AiFillApple size="2rem"/>
+                        <FaApple size="1.3rem"/>
                     ):os ==="Android"?(
-                        <AiFillAndroid size="2rem"/>
-                    ):<div className="flex gap-4 items-center"><AiFillApple size="2rem"/><AiFillAndroid size="2rem"/></div>
+                        <FaAndroid size="1.3rem"/>
+                    ):<div className="flex gap-4 items-center"><FaApple size="1.3rem"/><FaAndroid size="1.3rem"/></div>
                 }
                 {os}
             </div>
+            <div className="pb-4">
+
             {
                 radios&&(
                     <RadioGroup 
-                        className="flex justify-between border p-[0.7rem] flex-grow rounded-md"
+                        className="flex justify-between border border-primary20 mt-4 mx-4 p-[0.3rem] flex-grow rounded-md"
                         defaultValue="off">
                         {
                             radios.map((rad,index)=>{
@@ -43,7 +45,7 @@ export const OsConfigCard =({
                                             key={index}
                                         >
                                             <RadioGroupItem value={label} id="r1" />
-                                            <Label htmlFor={label}>{title}</Label>
+                                            <Label className="text-xs" htmlFor={label}>{title}</Label>
                                         </div>
                                     )
                                 })
@@ -53,6 +55,7 @@ export const OsConfigCard =({
             }{
                 children && <div>{children}</div>
             }
+            </div>
         </div>
     )
 }

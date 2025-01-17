@@ -1,5 +1,5 @@
 import { Label } from "@/components/ui/label"
-import { AiFillAndroid, AiFillApple } from "react-icons/ai"
+import { FaAndroid, FaApple } from "react-icons/fa6"
 
 export const AppIconCard = ({
     os,
@@ -13,9 +13,9 @@ export const AppIconCard = ({
             <div className="flex gap-x-2 items-center border-b border-primary20 p-4 rounded-t-md">
                 {
                     os === "IOS" ? (
-                        <AiFillApple size="2rem" />
+                        <FaApple size="2rem" />
                     ) : (
-                        <AiFillAndroid size="2rem" />
+                        <FaAndroid size="2rem" />
                     )
                 }
                 {os}

@@ -11,8 +11,8 @@ export const SplashScreenCard =({
     img:string, 
 })=>{
     return(
-        <div className="rounded-md border">
-            <div className="flex gap-2 items-center border-b py-3 px-8 rounded-t-md">
+        <div className="rounded-md border border-primary20">
+            <div className="flex gap-2 items-center border-b border-primary20 py-3 px-8 rounded-t-md">
                 {
                     os ==="IOS"?(
                         <AiFillApple size="2rem"/>

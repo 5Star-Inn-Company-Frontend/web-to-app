@@ -1,33 +1,33 @@
 import { Text } from "@/components/global/text"
-import { CiLight } from "react-icons/ci"
 import { FaAndroid, FaApple } from "react-icons/fa6"
-export const KeepScreenOnCard =({
+import { CiLight } from "react-icons/ci";
+export const ThemeColorsCard =({
     os
 }:{
     os:"IOS"|"Android"
 })=>{
     return(
         <div className="rounded-md border border-primary20">
-            <div className="flex text-sm gap-2 items-center px-6 py-2 border-b border-primary20 rounded-t-md">
+            <div className="flex gap-2 items-center border-b border-primary20 py-2 px-6 rounded-t-md">
                 {
                     os ==="IOS"?(
-                        <FaApple size="1.3rem"/>
+                        <FaApple size="2rem"/>
                     ):(
-                        <FaAndroid size="1.3rem"/>
+                        <FaAndroid size="2rem"/>
                     )
                 }
                 {os}
             </div>
             <div className="px-6 py-4">
                 <Text
-                    style="text-xs mb-5"
-                    value="Loading Spinner Color"
+                    style="text-md mb-4"
+                    value={os ==="IOS"?"Primary Color":"Secondary Color"}
                 />
-                <div className="flex justify-between items-center gap-4 w-[60%]">
-                    <div className="flex flex-col gap-2">
-                        <div className="flex gap-2 items-center text-[grey] text-xs mb-2">
+                <div className="flex gap-4 items-center text-primary40 w-[60%]">
+                    <div className="w-full">
+                        <div className="flex gap-2 items-center text-xs mb-4">
                             <CiLight/>
-                            LIGHT MODE
+                            Light mode
                         </div>
                         <div className="w-fit flex justify-between border rounded-md px-2 py-1 items-center gap-2">
                             <div className="h-[0.7rem] w-[0.7rem] p-1 rounded border bg-white"></div>
@@ -37,8 +37,8 @@ export const KeepScreenOnCard =({
                             />
                         </div>
                     </div>
-                    <div className="flex flex-col gap-2">
-                        <div className="flex gap-2 items-center text-[grey] text-xs mb-2">
+                    <div>
+                        <div className="flex gap-2 items-center text-primary40 text-xs mb-4">
                             <div className=" w-[0.8rem] h-[0.8rem] relative">
                                 <img
                                     src="/darkscreen.svg"
@@ -46,7 +46,7 @@ export const KeepScreenOnCard =({
                                     className="w-full"
                                 />
                             </div>
-                            DARK MODE
+                            Dark mode
                         </div>
                         <div className="w-fit flex justify-between border rounded-md px-2 py-1 items-center gap-2">
                             <div className="h-[0.7rem] w-[0.7rem] p-1 rounded border bg-black"></div>

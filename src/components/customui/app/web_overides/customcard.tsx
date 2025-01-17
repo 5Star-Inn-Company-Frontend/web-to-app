@@ -1,4 +1,3 @@
-import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { AiOutlinePlus} from "react-icons/ai"
 
@@ -8,16 +7,12 @@ export const CustomConfigCard =({
     title:string
 })=>{
     return(
-        <div className="p-4 rounded-md border">
+        <div className="p-4 rounded-md">
             <div>
-                <Button className="flex items-center gap-2 bg-white border text-black my-4 m-auto mb-4">
+                <Button className="flex items-center gap-2 bg-white font-normal  text-black m-auto hover:text-white">
                     <AiOutlinePlus size="1.4rem"/>
                     Add {title}
                 </Button>
-                <Input 
-                    type="text"
-                    className="w-full p-2 rounded"
-                />
             </div>
         </div>
     )
