@@ -1,143 +1,163 @@
-import "./contextNavToolbar.scss";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Text } from "@/components/global/text";
+import { FaAngleDown, FaApple } from "react-icons/fa6";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { SwitchDemo } from "@/components/Switch";
 
 export function ContextNavToolbar() {
     return (
-        <div className="contextNavToolbar">
-            <div className="content">
-                <div className="title">
-                    <h2>Enable</h2>
-                    <div className="right-title">
-                        <div className="form-check form-switch">
-                            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Advance Mode</label>
-                            <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" />
+        <>
+            <Collapsible >
+                <CollapsibleTrigger className="w-full flex items-center justify-between mb-4 px-10">
+                    <Text
+                        style="text-base font-medium"
+                        value="Enable"
+                    />
+                    <div className="flex items-center gap-x-5">
+                        <SwitchDemo text="Advanced Mode" />
+                        <FaAngleDown />
+                    </div>
+                </CollapsibleTrigger>
+                <CollapsibleContent className="border-b border-primary20 px-10 pb-6">
+                    <p className="text-sm text-primary60 mb-4">
+                        Unlike Android devices iPhones and iPads do not have a built-in back button, which can make navigating your website from within your app challenging.
+                        This feature provides a native navigation toolbar that shows on the bottom of the device screen dependent on navigation history and page URL.
+                        By default, the toolbar will include a Back button but it can be customized to also show with Forward and Refresh buttons.
+                    </p>
+                    <div className="border border-primary40 rounded-lg">
+                        <div className="flex items-center gap-x-1 px-4 py-2 border-b border-primary40 ">
+                            <FaApple />
+                            <span className="text-sm">IOS</span>
                         </div>
-                        <i className="fa-solid fa-angle-up"></i>
-                    </div>    
-                </div>
-                <p>
-                    Unlike Android devices iPhones and iPads do not have a built-in back butto, 
-                    which can make navigating your website frrom within your app challenging. 
-                    This feature provides a native navigation toolbar that shows on the bottom 
-                    of the device screen dependent on navigation history and page URL. By default, 
-                    the toolbar will include a Back button but it can be customized to also show 
-                    with Forward and Refresh buttons.
-                </p>
-                <div className="diagram">
-                    <div className="ios">
-                        <p><i className="fa-brands fa-apple"></i> iOS</p>
-                        <form className="radioGroup">
-                            <div className="form-check">
-                              <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-                              <label className="form-check-label" htmlFor="inlineRadio1">Auto</label>
-                            </div>
-                            <div className="form-check">
-                              <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-                              <label className="form-check-label" htmlFor="inlineRadio2">Always</label>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div className="Toolbar content">
-                <div className="title">
-                    <h2>Toolbar visibility by Pages</h2>
-                    <i className="fa-solid fa-angle-up"></i>
-                </div>
-                <form className="radioGroup">
-                    <div className="form-check">
-                      <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-                      <label className="form-check-label" htmlFor="inlineRadio1">All Pages</label>
-                    </div>
-                    <div className="form-check">
-                      <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-                      <label className="form-check-label" htmlFor="inlineRadio2">Specific Pages</label>
-                    </div>
-                </form>
-            </div>
-            <div className="black content">
-                <div className="title">
-                    <h2>Black Button Configuration</h2>
-                    <i className="fa-solid fa-angle-up"></i>
-                </div>
-                <h3>Label</h3>
-                <form className="radioGroup">
-                    <div className="form-check">
-                      <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-                      <label className="form-check-label" htmlFor="inlineRadio1">No Text</label>
-                    </div>
-                    <div className="form-check">
-                      <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-                      <label className="form-check-label" htmlFor="inlineRadio2">Default Text</label>
-                    </div>
-                    <div className="form-check">
-                      <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-                      <label className="form-check-label" htmlFor="inlineRadio2">Custom Text</label>
-                    </div>
-                </form>
-                <h3>Pages to Activate Button</h3>
-                <form className="radioGroup">
-                    <div className="form-check">
-                      <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-                      <label className="form-check-label" htmlFor="inlineRadio1">All Pages</label>
-                    </div>
-                    <div className="form-check">
-                      <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-                      <label className="form-check-label" htmlFor="inlineRadio2">Specific Pages</label>
-                    </div>
-                </form>
-            </div>
-            <div className="refresh content">
-                <div className="title">
-                    <h2>Refresh Button Configuration</h2>
-                    <i className="fa-solid fa-angle-up"></i>
-                </div>
-                <form className="radioGroup">
-                    <div className="form-check">
-                      <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-                      <label className="form-check-label" htmlFor="inlineRadio1">Disable</label>
-                    </div>
-                    <div className="form-check">
-                      <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-                      <label className="form-check-label" htmlFor="inlineRadio2">Enable</label>
-                    </div>
-                </form>
-            </div>
-            <div className="refresh content">
-                <div className="title">
-                    <h2>Forward Button Configuration</h2>
-                    <i className="fa-solid fa-angle-up"></i>
-                </div>
-                <form className="radioGroup">
-                    <div className="form-check">
-                      <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-                      <label className="form-check-label" htmlFor="inlineRadio1">Disable</label>
-                    </div>
-                    <div className="form-check">
-                      <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-                      <label className="form-check-label" htmlFor="inlineRadio2">Enable</label>
-                    </div>
-                </form>
-            </div>
-            <div className="preview content">
-                <div className="title">
-                    <h2>Preview</h2>
-                    <i className="fa-solid fa-angle-up"></i>
-                </div>
-                <div className="bottom">
-                    <div className="left">
-                        <h6><img src="../../../light.png" alt="" /> LIGHT MODE</h6>
-                        <div className="box">
-                            <p><i className="fa-solid fa-angle-left"></i> Back</p>
+                        <div className="px-4 py-3">
+
+                            <RadioGroup defaultValue="disable" className="inline-flex items-center gap-x-20 p-1 rounded-md border">
+                                <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="disable" id="r1" />
+                                    <Label className="text-xs text-primary40" htmlFor="r1">Auto</Label>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="enable" id="r2" />
+                                    <Label className="text-xs text-primary40" htmlFor="r2">Always</Label>
+                                </div>
+
+                            </RadioGroup>
                         </div>
                     </div>
-                    <div className="right">
-                        <h6><i className="fa-solid fa-moon"></i> DARK MODE</h6>
-                        <div className="box">
-                            <p><i className="fa-solid fa-angle-left"></i> Back</p>
+
+                </CollapsibleContent>
+            </Collapsible>
+            <Collapsible >
+                <CollapsibleTrigger className="w-full flex items-center justify-between py-6 px-10">
+                    <Text
+                        style="text-base font-medium"
+                        value="Toolbar visibility by Pages"
+                    />
+                    <FaAngleDown />
+                </CollapsibleTrigger>
+                <CollapsibleContent className="border-b border-primary20 px-10 pb-6">
+                    <RadioGroup defaultValue="disable" className="inline-flex items-center gap-x-20 p-1 rounded-md border">
+                        <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="disable" id="r1" />
+                            <Label className="text-xs text-primary40" htmlFor="r1">All Pages</Label>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                        <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="enable" id="r2" />
+                            <Label className="text-xs text-primary40" htmlFor="r2">Specific Pages</Label>
+                        </div>
+                    </RadioGroup>
+
+                </CollapsibleContent>
+            </Collapsible>
+            <Collapsible>
+                <CollapsibleTrigger className="w-full flex items-center justify-between py-6 px-10">
+                    <Text
+                        style="text-base font-medium"
+                        value="Black Button Configuration"
+                    />
+                    <FaAngleDown />
+                </CollapsibleTrigger>
+                <CollapsibleContent className="border-b border-primary20 px-10 pb-6">
+                    <Text
+                        style="mb-3 font-medium"
+                        value="Label"
+                    />
+                    <RadioGroup defaultValue="disable" className="inline-flex items-center gap-x-20 p-1 rounded-md border">
+                        <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="disable" id="r1" />
+                            <Label className="text-xs text-primary40" htmlFor="r1">No Text</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="enable" id="r2" />
+                            <Label className="text-xs text-primary40" htmlFor="r2">Default Text</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="enable" id="r2" />
+                            <Label className="text-xs text-primary40" htmlFor="r2">Custom Text</Label>
+                        </div>
+                    </RadioGroup>
+                    <Text
+                        style="my-3 font-medium"
+                        value="Pages to Activate Button"
+                    />
+                    <RadioGroup defaultValue="disable" className="inline-flex items-center gap-x-20 p-1 rounded-md border">
+                        <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="disable" id="r1" />
+                            <Label className="text-xs text-primary40" htmlFor="r1">All Pages</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="enable" id="r2" />
+                            <Label className="text-xs text-primary40" htmlFor="r2">Specific Pages</Label>
+                        </div>
+                    </RadioGroup>
+
+                </CollapsibleContent>
+            </Collapsible>
+            <Collapsible>
+                <CollapsibleTrigger className="w-full flex items-center justify-between py-6 px-10">
+                    <Text
+                        style="text-base font-medium"
+                        value="Refresh Button Configuration"
+                    />
+                    <FaAngleDown />
+                </CollapsibleTrigger>
+                <CollapsibleContent className="border-b border-primary20 px-10 pb-6">
+                    <RadioGroup defaultValue="disable" className="inline-flex items-center gap-x-20 p-1 rounded-md border">
+                        <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="disable" id="r1" />
+                            <Label className="text-xs text-primary40" htmlFor="r1">Disable</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="enable" id="r2" />
+                            <Label className="text-xs text-primary40" htmlFor="r2">Enable</Label>
+                        </div>
+                    </RadioGroup>
+
+                </CollapsibleContent>
+            </Collapsible>
+            <Collapsible>
+                <CollapsibleTrigger className="w-full flex items-center justify-between py-6 px-10">
+                    <Text
+                        style="text-base font-medium"
+                        value="Forward Button Configuration"
+                    />
+                    <FaAngleDown />
+                </CollapsibleTrigger>
+                <CollapsibleContent className="border-b border-primary20 px-10 pb-6">
+                    <RadioGroup defaultValue="disable" className="inline-flex items-center gap-x-20 p-1 rounded-md border">
+                        <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="disable" id="r1" />
+                            <Label className="text-xs text-primary40" htmlFor="r1">Disable</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="enable" id="r2" />
+                            <Label className="text-xs text-primary40" htmlFor="r2">Enable</Label>
+                        </div>
+                    </RadioGroup>
+
+                </CollapsibleContent>
+            </Collapsible>
+        </>
     )
 };

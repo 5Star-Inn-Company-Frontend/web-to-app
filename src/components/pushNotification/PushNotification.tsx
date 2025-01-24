@@ -1,236 +1,252 @@
-import { AppSideNav } from "../customui/app/sidenav";
-import { SimulationView } from "../global/simulationview";
-import { TopNav } from "../global/topnav";
-import "./pushNotification.scss";
-import { motion } from "framer-motion";
+import { Text } from "@/components/global/text";
+import { Button } from "@/components/ui/button";
+import { Label } from "../ui/label";
+import { Switch } from "../ui/switch";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../ui/collapsible";
+import { FaAndroid, FaAngleDown } from "react-icons/fa6";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { BsArrowRightShort } from "react-icons/bs";
+import { Input } from "../ui/input";
 
-const layoutVariant = {
-    hidden: {
-      opacity: 0,
-      y: "100vw",
-      scale: 0
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        delay: 0.2,
-        duration: 0.7
-      }
-    }
-  }
 
 export function PushNotification() {
     return (
-        <div className="pushNotification">
-            <TopNav />
-            <div className="bigContainer">
-                <div className="mainContainer">
-                    <div className="header">
-                        <div className="left">
-                            <img src="/access-logo.png" alt="" />
-                            <h2>WebhostingApp</h2>
-                        </div>
-                        <div className="right">
-                            <p>Last saved 12days ago</p>
-                            <button>Done Editing</button>
-                            <i className="fa-solid fa-ellipsis-vertical"></i>
-                        </div>
-                    </div>
-                    <motion.div className="leftContainer"
-                        variants={layoutVariant}
-                        initial="hidden"
-                        animate="visible"
-                    >
-                        <div className="sidenav">
-                            <AppSideNav style="relative desktopNav w-60 overflow-hidden dark:bg-zinc-800 bg-white me-2"/>
-                        </div>
-                        <div className="center">
-                            <div className="top">
-                                <h2>Push Notifications</h2>
-                                <p>OneSignal</p>
-                            </div>
-                            <div className="content">
-                                <div className="first tab">
-                                    <p>OneSignal can be tested during development. A license is required to publish.</p>
-                                    <h2>#20,000 <span>one-time payment</span></h2>
-                                    <button>Add License</button>
-                                </div>
-                                <div className="second tab">
-                                    <div className="title">
-                                        <h2>Enable OneSignal</h2>
-                                        <i className="fa-solid fa-angle-up"></i>
-                                    </div>
-                                    <form className="radioGroup">
-                                        <div className="form-check">
-                                          <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-                                          <label className="form-check-label" htmlFor="inlineRadio1">Disable</label>
-                                        </div>
-                                        <div className="form-check">
-                                          <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-                                          <label className="form-check-label" htmlFor="inlineRadio2">Enable</label>
-                                        </div>
-                                    </form>
-
-                                </div>
-                                <div className="third tab">
-                                    <div className="title">
-                                        <h2>Legacy Mode</h2>
-                                        <i className="fa-solid fa-angle-up"></i>
-                                    </div>
-                                    <p>Your app will integrate with the latest OneSignal SDKs and user-centric data model by default. <br /> 
-                                        Legacy mode provides support for OneSignal`s v4 SDKs and their previous device-centric data model. To migrate your app from legacy mode o the latest SDKs disable this
-                                        setting and refer to OneSignal`s User Model Migration Guide as linked in our documentation.
-                                    </p>
-                                    <form className="radioGroup">
-                                        <div className="form-check">
-                                          <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-                                          <label className="form-check-label" htmlFor="inlineRadio1">Disable</label>
-                                        </div>
-                                        <div className="form-check">
-                                          <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-                                          <label className="form-check-label" htmlFor="inlineRadio2">Enable</label>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div className="fourth tab">
-                                    <div className="title">
-                                        <h2>App-ID</h2>
-                                        <i className="fa-solid fa-angle-up"></i>
-                                    </div>
-                                    <p>
-                                        Median requires just your OneSignal App Id to configure OneSignal to send notifications to your app. You will find this on your OneSignal Dashboard under App Settings 
-                                        <span><i className="fa-solid fa-arrow-right"></i></span> Keys & IDs.
-                                    </p>
-                                    <input type="text" name="app-id" placeholder="xxxxxxxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxxxx"/>
-                                </div>
-                                <div className="fifth tab">
-                                    <div className="title">
-                                        <h2>Automatic Registration</h2>
-                                        <i className="fa-solid fa-angle-up"></i>
-                                    </div>
-                                    <p>
-                                        By default, on first launch your app will automatically register for push notifications and prompt for user consent. When set to manual,
-                                        you must initiate registation using the Javascript Bridge.
-                                    </p>
-                                    <form className="radioGroup">
-                                        <div className="form-check">
-                                          <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-                                          <label className="form-check-label" htmlFor="inlineRadio1">Automatic</label>
-                                        </div>
-                                        <div className="form-check">
-                                          <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-                                          <label className="form-check-label" htmlFor="inlineRadio2">Manual</label>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div className="sixth tab">
-                                    <div className="title">
-                                        <h2>Automatic Data Transmission</h2>
-                                        <i className="fa-solid fa-angle-up"></i>
-                                    </div>
-                                    <p>
-                                        By default, your app will automatically send device data to OneSignal prior to 
-                                        requesting push notification consent. This includes obtaining  a OneSignalUserId 
-                                        which can be used to associate the device and user. To facilitate GDPR compliance, 
-                                        you may set this to manual which will defer sending device data until you obtain 
-                                        consent from the user. You must then use the Javascript Bridge to confirm consent 
-                                        has bbeen granted and begin transmitting data.
-                                    </p>
-                                    <form className="radioGroup">
-                                        <div className="form-check">
-                                          <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-                                          <label className="form-check-label" htmlFor="inlineRadio1">Automatic</label>
-                                        </div>
-                                        <div className="form-check">
-                                          <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-                                          <label className="form-check-label" htmlFor="inlineRadio2">Manual</label>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div className="seventh tab">
-                                    <div className="title">
-                                        <h2>Foreground Notifications</h2>
-                                        <i className="fa-solid fa-angle-up"></i>
-                                    </div>
-                                    <form className="radioGroup">
-                                        <div className="form-check">
-                                          <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-                                          <label className="form-check-label" htmlFor="inlineRadio1">Show</label>
-                                        </div>
-                                        <div className="form-check">
-                                          <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-                                          <label className="form-check-label" htmlFor="inlineRadio2">Hide</label>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div className="eight tab">
-                                    <div className="title">
-                                        <h2>Foreground Notifications</h2>
-                                        <i className="fa-solid fa-angle-up"></i>
-                                    </div>
-                                    <p>
-                                        Android notification icons are built into your app and 
-                                        must be a monochromatic image with transparent background.
-                                    </p>
-                                    <div className="android">
-                                        <h2><i className="fa-brands fa-android"></i> Android</h2>
-                                        <div className="androidBottom">
-                                            <button>Change Image</button>
-                                            <i className="fa-brands fa-android"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="ninth tab">
-                                    <div className="title">
-                                        <h2>Automatic Data Transmission</h2>
-                                        <i className="fa-solid fa-angle-up"></i>
-                                    </div>
-                                    <p>
-                                        Display a native UI within your app which users can use to toggle OneSignal 
-                                        data tags on/off to self-manage their subscriptions. Host a JSON file your app 
-                                        will load dynamically at routine to determine the data tags to display in the UI.
-                                    </p>
-                                    <input type="text" name="url" placeholder="https://www.topwisesz.com/assets/section2_4_.271c6ee4" />
-                                </div>
-                                <div className="tenth tab">
-                                    <div className="title">
-                                        <h2>Notification Sound</h2>
-                                        <i className="fa-solid fa-angle-up"></i>
-                                    </div>
-                                    <p>
-                                        Optionally include yoour own custom notification sounds to specify in OneSignal 
-                                        and play on the user`s device when the push notification is received. mp3 and wav files are supported.
-                                    </p>
-                                    <div className="buttons">
-                                        <div className="button">
-                                            <p>CUSTOM_SOUND_1</p>
-                                            <button>Upload</button>
-                                        </div>
-                                        <div className="button">
-                                            <p>CUSTOM_SOUND_2</p>
-                                            <button>Upload</button>
-                                        </div>
-                                        <div className="button">
-                                            <p>CUSTOM_SOUND_3</p>
-                                            <button>Upload</button>
-                                        </div>
-                                        <div className="button">
-                                            <p>CUSTOM_SOUND_4</p>
-                                            <button>Upload</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </motion.div>
+        <>
+            <div className="px-10 pt-8 border-b">
+                <Text style="font-medium text-3xl mb-4" value="Push Notifications" />
+                <Button className="bg-deepgray  text-black hover:bg-deepgray w-full">One Signal</Button>
+            </div>
+            <div className="px-10 py-8 border-b border-primary20">
+                <p className="text-sm mb-4 text-primary60">OneSignal can be tested during development. A license is required to publish.</p>
+                <div className="flex items-center gap-x-2 mb-6">
+                    <Text style="font-semibold text-xl" value="#20,000" />
+                    <span>one-time payment</span>
                 </div>
-                
-                <div className="simulator">
-                    <SimulationView />
+                <h2> </h2>
+                <div className="flex items-center space-x-4">
+                    <Switch id="airplane-mode" />
+                    <Label htmlFor="airplane-mode">Add License</Label>
                 </div>
             </div>
-        </div>
+            <Collapsible open={true}>
+                <CollapsibleTrigger className="w-full flex items-center justify-between py-6 px-10">
+                    <Text
+                        style="text-base font-medium"
+                        value="Enable One Signal"
+                    />
+                    <FaAngleDown />
+                </CollapsibleTrigger>
+                <CollapsibleContent className="border-b border-primary20 px-10 pb-6">
+                    <RadioGroup defaultValue="disable" className="inline-flex items-center gap-x-20 p-1 rounded-md border">
+                        <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="disable" id="r1" />
+                            <Label className="text-xs text-primary40" htmlFor="r1">Disable</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="enable" id="r2" />
+                            <Label className="text-xs text-primary40" htmlFor="r2">Enable</Label>
+                        </div>
+                    </RadioGroup>
+
+                </CollapsibleContent>
+            </Collapsible>
+            <Collapsible open={true}>
+                <CollapsibleTrigger className="w-full flex items-center justify-between py-6 px-10">
+                    <Text
+                        style="text-base font-medium"
+                        value="Legacy Mode"
+                    />
+                    <FaAngleDown />
+                </CollapsibleTrigger>
+                <CollapsibleContent className="border-b border-primary20 px-10 pb-6">
+                    <p className="text-sm text-primary60 mb-4">Your app will integrate with the latest OneSignal SDKs and user-centric data model by default. Legacy mode provides support for OneSignal’s v4 SDKs and their previous device-centric data model. To migrate your app from legacy mode to the latest SDKs disable this setting and refer to OneSignal’s User Model Migration Guide as linked in our documentation.</p>
+                    <RadioGroup defaultValue="disable" className="inline-flex items-center gap-x-20 p-1 rounded-md border">
+                        <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="disable" id="r1" />
+                            <Label className="text-xs text-primary40" htmlFor="r1">Disable</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="enable" id="r2" />
+                            <Label className="text-xs text-primary40" htmlFor="r2">Enable</Label>
+                        </div>
+                    </RadioGroup>
+
+                </CollapsibleContent>
+            </Collapsible>
+            <Collapsible open={true}>
+                <CollapsibleTrigger className="w-full flex items-center justify-between py-6 px-10">
+                    <Text
+                        style="text-base font-medium"
+                        value="App-ID"
+                    />
+                    <FaAngleDown />
+                </CollapsibleTrigger>
+                <CollapsibleContent className="border-b border-primary20 px-10 pb-6">
+                    <p className="text-sm text-primary60 mb-4">
+                        Median requires just your OneSignal App Id to configure OneSignal to send notifications to your app. You will find this on your OneSignal Dashboard under App Settings <span className="inline-flex items-center text-sm"><BsArrowRightShort /> Keys & IDs.</span>
+                    </p>
+                    <Input className="px-2 w-[70%]" placeholder="xxxxxxxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" />
+
+                </CollapsibleContent>
+            </Collapsible>
+            <Collapsible open={true}>
+                <CollapsibleTrigger className="w-full flex items-center justify-between py-6 px-10">
+                    <Text
+                        style="text-base font-medium"
+                        value="Automatic Registration"
+                    />
+                    <FaAngleDown />
+                </CollapsibleTrigger>
+                <CollapsibleContent className="border-b border-primary20 px-10 pb-6">
+                    <p className="text-sm text-primary60 mb-4">
+                        By default, on first launch your app will automatically register for push notifications and prompt for user consent. When set to manual, you must initiate registration using the JavaScript Bridge.
+                    </p>
+                    <RadioGroup defaultValue="disable" className="inline-flex items-center gap-x-20 p-1 rounded-md border">
+                        <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="disable" id="r1" />
+                            <Label className="text-xs text-primary40" htmlFor="r1">Automatic</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="enable" id="r2" />
+                            <Label className="text-xs text-primary40" htmlFor="r2">Manual</Label>
+                        </div>
+                    </RadioGroup>
+
+                </CollapsibleContent>
+            </Collapsible>
+            <Collapsible open={true}>
+                <CollapsibleTrigger className="w-full flex items-center justify-between py-6 px-10">
+                    <Text
+                        style="text-base font-medium"
+                        value="Automatic Data Transmission"
+                    />
+                    <FaAngleDown />
+                </CollapsibleTrigger>
+                <CollapsibleContent className="border-b border-primary20 px-10 pb-6">
+                    <p className="text-sm text-primary60 mb-4">
+                        By default, your app will automatically send device data to OneSignal prior to requesting push notification consent. This includes obtaining a oneSignalUserId which can be used to associate the device and user. To facilitate GDPR compliance, you may set this to manual which will defer sending device data until you obtain consent from the user. You must then use the JavaScript Bridge to confirm consent has been granted and begin transmitting data.
+                    </p>
+                    <RadioGroup defaultValue="disable" className="inline-flex items-center gap-x-20 p-1 rounded-md border">
+                        <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="disable" id="r1" />
+                            <Label className="text-xs text-primary40" htmlFor="r1">Automatic</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="enable" id="r2" />
+                            <Label className="text-xs text-primary40" htmlFor="r2">Manual</Label>
+                        </div>
+                    </RadioGroup>
+
+                </CollapsibleContent>
+            </Collapsible>
+            <Collapsible open={true}>
+                <CollapsibleTrigger className="w-full flex items-center justify-between py-6 px-10">
+                    <Text
+                        style="text-base font-medium"
+                        value="Foreground Notifications"
+                    />
+                    <FaAngleDown />
+                </CollapsibleTrigger>
+                <CollapsibleContent className="border-b border-primary20 px-10 pb-6">
+                    <RadioGroup defaultValue="disable" className="inline-flex items-center gap-x-20 p-1 rounded-md border">
+                        <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="disable" id="r1" />
+                            <Label className="text-xs text-primary40" htmlFor="r1">Show</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="enable" id="r2" />
+                            <Label className="text-xs text-primary40" htmlFor="r2">Hide</Label>
+                        </div>
+                    </RadioGroup>
+
+                </CollapsibleContent>
+            </Collapsible>
+            <Collapsible open={true}>
+                <CollapsibleTrigger className="w-full flex items-center justify-between py-4 px-10">
+                    <Text
+                        style="text-base font-medium"
+                        value="Android Notifications Icon"
+                    />
+                    <FaAngleDown />
+                </CollapsibleTrigger>
+                <CollapsibleContent className="border-b border-primary20 px-10 pb-6">
+                    <p className="text-sm text-primary60 mb-4">
+                        Android notification icons are built into your app and must be a monochromatic image with transparent background.
+                    </p>
+
+                    <div className="border border-primary60 rounded-lg w-[60%]">
+                        <div className="flex items-center gap-x-2 px-5 py-3 border-b border-primary60">
+                            <FaAndroid />
+                            <span>Andriod</span>
+                        </div>
+                        <div className="px-5 py-4 flex items-center justify-between ">
+                            <Label htmlFor="picture" className="border cursor-pointer py-2 px-5 rounded-md">
+                                Change Image
+                            </Label>
+                            <Input id="picture" type="file" className="hidden" />
+                            <div className="bg-primary80 w-20 h-20 flex items-center justify-center">
+                                <FaAndroid className="text-white text-5xl" />
+                            </div>
+                        </div>
+                    </div>
+
+                </CollapsibleContent>
+            </Collapsible>
+            <Collapsible open={true}>
+                <CollapsibleTrigger className="w-full flex items-center justify-between py-6 px-10">
+                    <Text
+                        style="text-base font-medium"
+                        value="Auto Data Transmission"
+                    />
+                    <FaAngleDown />
+                </CollapsibleTrigger>
+                <CollapsibleContent className="border-b border-primary20 px-10 pb-6">
+                    <p className="text-sm text-primary60 mb-4">
+                        Display a native UI within your app which users can use to toggle OneSignal data tags on/off to self-manage their subscriptions. Host a JSON file which your app will load dynaically at runtime to determine the data tags to display in the UI.
+                    </p>
+                    <Input className="px-2 w-full" placeholder="https://www.topwisesz.com/assets/section2_4.271c6ee4" />
+
+                </CollapsibleContent>
+            </Collapsible>
+            <Collapsible open={true}>
+                <CollapsibleTrigger className="w-full flex items-center justify-between py-6 px-10">
+                    <Text
+                        style="text-base font-medium"
+                        value="Notification Sound"
+                    />
+                    <FaAngleDown />
+                </CollapsibleTrigger>
+                <CollapsibleContent className="border-b border-primary20 px-10 pb-6">
+                    <p className="text-sm text-primary60 mb-4">
+                        Optionally include your own custom notification sounds to specify in OneSignal and play on the user's device when the push notification is received. mp3 and wav files are supported.
+                    </p>
+                    <div>
+                        <CustomSound title="CUSTOM_SOUND_1"/>
+                        <CustomSound title="CUSTOM_SOUND_2"/>
+                        <CustomSound title="CUSTOM_SOUND_3"/>
+                        <CustomSound title="CUSTOM_SOUND_4"/>
+                    </div>
+
+                </CollapsibleContent>
+            </Collapsible>
+        </>
+
     )
 };
+
+
+interface CustomSoundProps {
+    title: string;
+}
+const CustomSound = ({title}: CustomSoundProps) => {
+    return (
+        <div className="px-5 py-4 flex items-center gap-x-10">
+            <span className="text-xs text-primary60">{title}</span>
+            <Label htmlFor="picture" className="border cursor-pointer py-3 px-8 text-xs rounded-2xl">
+                Upload
+            </Label>
+            <Input id="picture" type="file" className="hidden" />
+            
+        </div>
+    )
+}

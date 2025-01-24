@@ -1,96 +1,61 @@
-import "./bottomTabBar.scss";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Text } from "@/components/global/text";
+import { FaAngleDown } from "react-icons/fa6";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { BottomTopBarStylingCard } from "@/features/nativenavigation/BottomTopBarStylingCard";
+import { BottomTopBarStylingCard2 } from "@/features/nativenavigation/BottomTopBarStylingCard2";
 
 export function BottomTabBar() {
     return (
-        <div className="bottomTabBar">
-            <div className="default content">
-                <div className="title">
-                    <h2>Default Mode</h2>
-                    <i className="fa-solid fa-angle-up"></i>
-                </div>
-                <p>
-                    A Bottom Tab Bar menu is the most common native navigation menu component. 
-                    You can configure your app with multiple tab bar menus to show on different pages 
-                    and define optional icons and labels for each menu. You can also set and control 
-                    the tab menu at runtime from your website using the JavaScript Bridge.
-                </p>
-                <form className="radioGroup">
-                    <div className="form-check">
-                      <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-                      <label className="form-check-label" htmlFor="inlineRadio1">Hidden</label>
+        <>
+            <Collapsible>
+                <CollapsibleTrigger className="w-full flex items-center justify-between mb-4 px-10">
+                    <Text
+                        style="text-base font-medium"
+                        value="Default Mode"
+                    />
+                    <FaAngleDown />
+                </CollapsibleTrigger>
+                <CollapsibleContent className="border-b border-primary20 px-10 pb-6">
+
+                    <p className="text-sm text-primary60 mb-4">
+                        A Bottom Tab Bar menu is the most common native navigation menu component.
+                        You can configure your app with multiple tab bar menus to show on different pages
+                        and define optional icons and labels for each menu. You can also set and control
+                        the tab menu at runtime from your website using the JavaScript Bridge.
+                    </p>
+                    <div>
+                        <RadioGroup defaultValue="disable" className="inline-flex items-center gap-x-20 p-1 rounded-md border">
+                            <div className="flex items-center space-x-2">
+                                <RadioGroupItem value="disable" id="r1" />
+                                <Label className="text-xs text-primary40" htmlFor="r1">Hidden</Label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                                <RadioGroupItem value="enable" id="r2" />
+                                <Label className="text-xs text-primary40" htmlFor="r2">Active</Label>
+                            </div>
+
+                        </RadioGroup>
                     </div>
-                    <div className="form-check">
-                      <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-                      <label className="form-check-label" htmlFor="inlineRadio2">Active</label>
-                    </div>
-                </form>
-            </div>
-            <div className="styling content">
-                <div className="title">
-                    <h2>Styling</h2>
-                    <i className="fa-solid fa-angle-up"></i>
-                </div>
-                <p>
-                    iOS colors follow the Branding settings. Android colors are configured independently.
-                    The iOS bottom tab menu follows Apple`s Human Interface Guidelines while Android 
-                    bottom tab bar menu follows Google Material Design principles.
-                </p>
-                <div className="diagram first">
-                    <div className="ios">
-                        <p><i className="fa-brands fa-apple"></i> iOS</p>
-                    </div>
-                    <p>Background Color</p>
-                    <div className="box">
-                        <div className="left">
-                            <h6><img src="../../../light.png" alt="" /> LIGHT MODE</h6>
-                            <p className="text"><span></span> #FFFFFF</p>
-                        </div>
-                        <div className="right">
-                            <h6><i className="fa-solid fa-moon"></i> DARK MODE</h6>
-                            <p className="background"><span></span> #000000</p>
-                        </div>
-                    </div>
-                    
-                </div>
-                <div className="diagram second">
-                    <div className="ios">
-                        <p><i className="fa-brands fa-android"></i> Android</p>
-                    </div>
-                    <p>Tab Bar Background</p>
-                    <div className="box">
-                        <div className="left">
-                            <h6><img src="../../../light.png" alt="" /> LIGHT MODE</h6>
-                            <p className="text"><span></span> #FFFFFF</p>
-                        </div>
-                        <div className="right">
-                            <h6><i className="fa-solid fa-moon"></i> DARK MODE</h6>
-                            <p className="background"><span></span> #000000</p>
-                        </div>
-                    </div>
-                    <p>Tab Bar Text</p>
-                    <div className="box">
-                        <div className="left">
-                            <h6><img src="../../../light.png" alt="" /> LIGHT MODE</h6>
-                            <p className="text"><span></span> #FFFFFF</p>
-                        </div>
-                        <div className="right">
-                            <h6><i className="fa-solid fa-moon"></i> DARK MODE</h6>
-                            <p className="background"><span></span> #000000</p>
-                        </div>
-                    </div>
-                    <p>Tab Bar Indicator</p>
-                    <div className="box">
-                        <div className="left">
-                            <h6><img src="../../../light.png" alt="" /> LIGHT MODE</h6>
-                            <p className="text"><span></span> #FFFFFF</p>
-                        </div>
-                        <div className="right">
-                            <h6><i className="fa-solid fa-moon"></i> DARK MODE</h6>
-                            <p className="background"><span></span> #000000</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                </CollapsibleContent>
+            </Collapsible>
+            <Collapsible>
+                    <CollapsibleTrigger className="w-full flex items-center justify-between my-4 px-10">
+                      <Text
+                        style="text-base font-medium"
+                        value="Styling"
+                      />
+                      <FaAngleDown />
+                    </CollapsibleTrigger>
+                    <CollapsibleContent className="border-b border-primary20 px-10 pb-6">
+                      <p className="text-sm text-primary60 mb-6">
+                        iOS and Android styling is configured independently. The iOS sidebar menu follows Apple's Human Interface Guidelines while the Android sidebar menu follows Google Material Design principles.
+                      </p>
+                      <BottomTopBarStylingCard os="IOS"/>
+                      <BottomTopBarStylingCard2 os="Android"/>
+                    </CollapsibleContent>
+                  </Collapsible>
+        </>
     )
 };

@@ -1,15 +1,12 @@
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import "./sidebarNavigation.scss";
 import { FaAngleDown } from "react-icons/fa6";
 import { Text } from "@/components/global/text";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { SideNavigationCard } from "@/features/nativenavigation/SideNavigationCard";
 import { SideNavigationCard2 } from "@/features/nativenavigation/SideNavigationCard2";
-import { RiDragMove2Fill } from "react-icons/ri";
-import { Input } from "@/components/ui/input";
-import { RiDeleteBin6Line } from "react-icons/ri";
 import SideVisualEditorCard from "@/features/nativenavigation/SideVisualEditorCard";
+import { SwitchDemo } from "@/components/Switch";
 
 export function SidebarNavigation() {
   return (
@@ -70,7 +67,7 @@ export function SidebarNavigation() {
             value="Side Visual Editor"
           />
           <div className="flex items-center gap-x-3">
-            <span className="block text-xs font-normal">Advanced Mode</span>
+            <SwitchDemo text="Advanced Mode"/>
             <FaAngleDown />
           </div>
         </CollapsibleTrigger>
