@@ -10,7 +10,7 @@ export function SupportPage() {
             </div>
             <CollapsibleComponent title="Self-Support for free" subTitle="">
                 <div className="border-b border-primary20 pb-4 px-8">
-                    <ul className="text-xs text-[grey] gap-8 list-disc list-inside leading-7 ">
+                    <ul className="text-xs text-[grey] gap-8 list-disc list-inside leading-7">
                         <li>Six months of online app rebuilds for changes to your app configuration</li>
                         <li>Apps function indefinitely subject to future compatibility with iOS and Android versions</li>
                         <li>Community support through Median`s documentation and support portal</li>
@@ -20,7 +20,6 @@ export function SupportPage() {
                         <AiOutlineExport size="0.8rem" />
                     </Button>
                 </div>
-
                 <div className="grid lg:grid-cols-2 xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-4 px-8 py-5">
                     <div className="border border-primary20 p-4 rounded-md flex flex-col justify-between">
                         <div>

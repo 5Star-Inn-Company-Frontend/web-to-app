@@ -1,7 +1,6 @@
 @import "../../responsive.scss";
 
 .createAppOverview {
-    width: 100vw;
     margin: 0;
     background-color: #F2F2F2;
     font-family: "Inter", sans-serif;
@@ -9,7 +8,6 @@
 
     @include mini {
         padding-bottom: 50px;
-        width: 100vw;
         margin: 0;
         padding: 0;
         // display: block;
@@ -127,7 +125,6 @@
             .leftContainer {
                 display: flex;
                 justify-content: center;
-                padding-left: 20px;
 
                 @include mini {
                     width: 100vw;
@@ -173,7 +170,7 @@
                         font-weight: 400;
                         font-size: 12px;
                         color: #666666;
-                        margin-bottom: 5px;
+                        margin-bottom: 10px;
                     }
 
                     form {
@@ -196,28 +193,6 @@
                             padding: 3px 5px 3px 10px;
                         }
 
-                        .form-select {
-                            font-size: 14px;
-                            font-weight: 400;
-                            box-shadow: none;
-                        }
-
-                        button {
-                            margin-top: 60px;
-                            display: flex;
-                            align-items: flex-start;
-                            background-color: #000000;
-                            border-radius: 8px;
-                            color: #ffffff;
-                            width: 200px;
-                            font-weight: 400;
-                            font-size: 14px;
-                            padding: 7px 15px;
-
-                            &:hover {
-                                background-color: #0e0e0eca;
-                            }
-                        }
                     }
                     
   
