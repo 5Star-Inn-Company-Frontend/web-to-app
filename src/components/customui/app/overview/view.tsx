@@ -56,16 +56,26 @@ export const OverviewSection = () => {
                                 <Initials name="Emmy O" />
                                 <Text value="Emmy" style="text-sm text-start" />
                             </div>
-                            <Dropdown options={[]} selected="Admin" label="Admin" onSelect={() => {}} />
+                            <Dropdown
+                                options={["Admin", "Editor", "Viewer"]}
+                                selected="Admin"
+                                label="Admin"
+                                onSelect={() => {}}
+                            />
                         </div>
-                        <div className="flex items-center justify-between py-2 pr-1">
+                        <div className="flex items-center justify-between py-2 pr-1 mb-5">
                             <div className="flex gap-x-1 items-center">
                                 <Initials name="Odejinmi Samuel" />
                                 <Text value="Odejinmi Samuel" style="text-sm text-start" />
                             </div>
-                            <Dropdown options={[]} selected="Admin" label="Admin" onSelect={() => {}} />
+                            <Dropdown
+                                options={["Admin", "Editor", "Viewer"]}
+                                selected="Admin"
+                                label="Admin"
+                                onSelect={() => {}}
+                            />
                         </div>
-                        <div className="w-fit mt-5">
+                        <div className="w-fit mt-5 mb-10">
                             <Button className="flex items-center gap-4 text-sm cursor-pointer justify-between">
                                 <AiOutlineUsergroupAdd size="1.3rem" color="grey" />
                                 Manage access
