@@ -15,10 +15,8 @@ import { AppServicePage } from "@/pages/app/app_service";
 import { SupportPage } from "@/components/supportPage/SupportPage";
 import { PushNotification } from "@/components/pushNotification/PushNotification";
 import { NativeNavigation } from "@/components/nativeNavigation/NativeNavigation";
-import { CreateAppOverview } from "@/components/CreateAppOverview/CreateAppOverview";
 import { Plan } from "@/components/plan/Plan";
 import { AuthProvider } from "@/AuthContext";
-// import PrivateRoute from "@/PrivateRoute";
 import Members from "@/pages/members";
 import { AuthLayout } from "@/layouts/authLayout";
 import MemberAccount from "@/features/members/MemberAccount";
@@ -28,6 +26,7 @@ import HomeDashboard from "@/layouts/HomeDashboard";
 import AppDashboard from "./layouts/AppDashboard";
 import AppAccess from "./pages/app/AppAccess";
 import AppClone from "./pages/app/AppClone";
+import { CreateApp } from "@/components/CreateAppOverview/CreateApp";
 
 const App: React.FC = () => {
     return (
@@ -56,28 +55,11 @@ const App: React.FC = () => {
 
                     {/* App Routes */}
                     <Route path="app/viewapp" element={<ViewApp />} />
+                    <Route path="app/create" element={<CreateApp />} />
 
                     {/*Edit APP  Dynamic Action Routes */}
-                    <Route path="app/edit" element={<AppDashboard />}>
+                    <Route path="app" element={<AppDashboard />}>
                         <Route path="overview" element={<OverviewPage />} />
-                        <Route path="branding" element={<BrandingPage />} />
-                        <Route path="link_handling" element={<LinkHandlingPage />} />
-                        <Route path="interface" element={<InterfacePage />} />
-                        <Route path="web_overrides" element={<WebOveridesPage />} />
-                        <Route path="app_permission" element={<AppPermissionPage />} />
-                        <Route path="native_plugins" element={<NativePluginPage />} />
-                        <Route path="app_download" element={<AppDownloadPage />} />
-                        <Route path="native_navigation" element={<NativeNavigation />} />
-                        <Route path="push_notification" element={<PushNotification />} />
-                        <Route path="app_service" element={<AppServicePage />} />
-                        <Route path="app_support" element={<SupportPage />} />
-                        <Route path="app_plan" element={<Plan />} />
-                        <Route path="app_access" element={<AppAccess />} />
-                        <Route path="app_clone" element={<AppClone />} />
-                    </Route>
-                    <Route path="app/create" element={<AppDashboard />}>
-                        <Route path="overview" element={<CreateAppOverview />} />
-                        <Route path="edit_overview" element={<OverviewPage />} />
                         <Route path="branding" element={<BrandingPage />} />
                         <Route path="link_handling" element={<LinkHandlingPage />} />
                         <Route path="interface" element={<InterfacePage />} />

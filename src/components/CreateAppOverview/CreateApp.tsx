@@ -1,15 +1,10 @@
-import { TopNav } from "../global/topnav";
-import "./createAppOverview.scss";
-import { AppSideNav } from "../customui/app/sidenav";
-import { SimulationView } from "../global/simulationview";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useNavigate } from "react-router-dom";
-import Dropdown from "../Dropdown";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "../ui/select";
 
-export function CreateAppOverview() {
+export function CreateApp() {
     interface AppInput {
         name: string;
         url: string;
@@ -74,15 +69,14 @@ export function CreateAppOverview() {
             setIsLoading(false);
         }
     }
-    const options = ["Admin", "Editor", "Viewer"];
     return (
-        <div className="createAppOverview">
-            <div className="bigContainer">
-                <div className="mainContainer">
-                    <div className="leftContainer">
-                        <div className="center">
+        <div>
+            <div>
+                <div>
+                    <div>
+                        <div>
                             <form onSubmit={handleSubmit}>
-                                <div className="inputs">
+                                <div>
                                     <h2>Website URL</h2>
                                     <p>The webpage to display when your app loads.</p>
                                     <input type="url" name="url" placeholder="https://" onChange={handleChange} required />

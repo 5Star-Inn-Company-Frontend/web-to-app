@@ -7,7 +7,7 @@ import { Outlet, useParams } from "react-router-dom";
 
 const AppDashboard = () => {
     const { action } = useParams();
-    console.log(action); // This should log "overview"
+    console.log(action);
 
     return (
         <>
@@ -59,72 +59,72 @@ const DashboardNav = () => {
     const Routes = [
         {
             name: "Overview",
-            route: `/edit/overview`,
+            route: `app/overview`,
             icon: "home_icon.png",
         },
         {
             name: "Branding",
-            route: `/${action}/branding`,
+            route: `app/branding`,
             icon: "secondnav_icon.png",
         },
         {
             name: "Link Handling",
-            route: `/${action}/link_handling`,
+            route: `app/link_handling`,
             icon: "thirdnav_icon.png",
         },
         {
             name: "Interface",
-            route: `/${action}/interface`,
+            route: `app/interface`,
             icon: "forthnav_icon.png",
         },
         {
             name: "Website Overides",
-            route: `/${action}/web_overides`,
+            route: `app/web_overrides`,
             icon: "fifthnav_icon.png",
         },
         {
             name: "Permissions",
-            route: `/${action}/app_permission`,
+            route: `app/app_permission`,
             icon: "sixthnav_icon.png",
         },
         {
             name: "Native Navigation",
-            route: `/${action}/native_navigation`,
+            route: `app/native_navigation`,
             icon: "seventhnav_icon.png",
         },
         {
             name: "Push Notification",
-            route: `/${action}/push_notification`,
+            route: `app/push_notification`,
             icon: "eightnav_icon.png",
         },
         {
             name: "Native Pluggins",
-            route: `/${action}/native_plugins`,
+            route: `app/native_plugins`,
             icon: "ninthnav_icon.png",
         },
         {
             name: "Build & Download",
-            route: `/${action}/appdownload`,
+            route: `app/app_download`,
             icon: "tenthnav_icon.png",
         },
         {
             name: "Services",
-            route: `/${action}/app_service`,
+            route: `app/app_service`,
             icon: "eleventhnav_icon.png",
         },
         {
             name: "Support",
-            route: `/${action}/app_support`,
+            route: `app/app_support`,
             icon: "twelvethnav_icon.png",
         },
         {
             name: "Plan",
-            route: `/${action}/app_plan`,
+            route: `app/app_plan`,
             icon: "thirteenthnav_icon.png",
         },
         {
             name: "Access",
-            route: `/${action}/app_access`,
+            route: `app/app_access`,
             icon: "fortheenthnav_icon.png",
         },
     ];
