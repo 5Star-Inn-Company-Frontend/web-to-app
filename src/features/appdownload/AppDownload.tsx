@@ -37,20 +37,3 @@ export const AppDownload = () => {
 
 
 
-// export const AppDownload = () => {
-//     const [isOpen, setIsOpen] = useState(false)
-//     return (
-//         <Collapsible className="mb-2 border border-primary5 p-4 rounded-lg" open={isOpen}>
-//             <CollapsibleTrigger className="w-full" onClick={() => setIsOpen(!isOpen)}>
-                
-//                         {isOpen ? <HiMiniChevronUp className="text-xl"/> : <HiMiniChevronDown className="text-xl"/>}
-
-               
-//             </CollapsibleTrigger>
-//             <CollapsibleContent className="px-8 py-4">
-                
-//             </CollapsibleContent>
-//         </Collapsible>
-
-//     )
-// }

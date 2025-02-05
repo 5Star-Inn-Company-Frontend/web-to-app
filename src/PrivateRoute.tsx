@@ -1,17 +1,18 @@
-import { Navigate } from 'react-router-dom';
-import { useAuth } from './AuthContext';
-import { ReactNode } from 'react';
+// import { Navigate } from "react-router-dom";
+import { ReactNode } from "react";
+// import { useSelector } from "react-redux";
+// import { RootState } from "./redux/store";
 
 function PrivateRoute({ children }: { children: ReactNode }) {
-  const { user } = useAuth();
+    // const { token, user } = useSelector((state: RootState) => state.auth);
 
-  // If no user is logged in, redirect to the sign-in page
-  if (!user) {
-    return <Navigate to="/auth/signin" replace />;
-  }
+    // If no user is logged in, redirect to the sign-in page
+    // if (!user || !token) {
+    //     return <Navigate to="/auth/signin" replace />;
+    // }
 
-  // If the user is logged in, render the children components (protected routes)
-  return children;
+    // If the user is logged in, render the children components (protected routes)
+    return children;
 }
 
 export default PrivateRoute;
