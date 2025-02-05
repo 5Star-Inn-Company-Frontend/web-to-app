@@ -29,63 +29,57 @@ import AppDashboard from "./layouts/AppDashboard";
 import AppAccess from "./pages/app/AppAccess";
 import AppClone from "./pages/app/AppClone";
 
-
 const App: React.FC = () => {
+    return (
+        <AuthProvider>
+            <Router>
+                <Routes>
+                    {/* Home Route */}
+                    <Route path="/" element={<HomeDashboard />}>
+                        <Route path="/" element={<DashboardHome />} />
+                        <Route path="app" element={<DashboardHome />} />
+                        <Route path="members" element={<Members />} />
+                        <Route path="settings" element={<Settings />} />
+                    </Route>
 
-  return (
-    <AuthProvider>
-      <Router>
-        <Routes>
-          {/* Home Route */}
-          <Route path="/" element={<HomeDashboard />}>
-            <Route path="/" element={<DashboardHome />} />
-            <Route path="app" element={<DashboardHome />} />
-            <Route path="members" element={<Members />} />
-            <Route path="settings" element={<Settings />} />
-          </Route>
+                    {/* Members Route */}
+                    <Route path="members">
+                        <Route path="account" element={<MemberAccount />} />
+                    </Route>
 
+                    {/* Auth Routes */}
+                    <Route path="auth" element={<AuthLayout />}>
+                        <Route path="signin" element={<SigninPage />} />
+                        <Route path="signup" element={<SignupPage />} />
+                        <Route path="password_reset" element={<ResetPage />} />
+                    </Route>
 
-          {/* Members Route */}
-          <Route path="members">
-            <Route path="account" element={<MemberAccount />} />
-          </Route>
+                    {/* App Routes */}
+                    <Route path="app/viewapp" element={<ViewApp />} />
 
-
-          {/* Auth Routes */}
-          <Route path="auth" element={<AuthLayout />}>
-            <Route path="signin" element={<SigninPage />} />
-            <Route path="signup" element={<SignupPage />} />
-            <Route path="password_reset" element={<ResetPage />} />
-          </Route>
-
-
-          {/* App Routes */}
-          <Route path="app/viewapp" element={<ViewApp />} />
-
-          {/*App  Dynamic Action Routes */}
-          <Route path="app/:action" element={<AppDashboard />}>
-            <Route path="create_overview" element={<CreateAppOverview />} />
-            <Route path="edit_overview" element={<OverviewPage />} />
-            <Route path="branding" element={<BrandingPage />} />
-            <Route path="link_handling" element={<LinkHandlingPage />} />
-            <Route path="interface" element={<InterfacePage />} />
-            <Route path="web_overrides" element={<WebOveridesPage />} />
-            <Route path="app_permission" element={<AppPermissionPage />} />
-            <Route path="native_plugins" element={<NativePluginPage />} />
-            <Route path="app_download" element={<AppDownloadPage />} />
-            <Route path="native_navigation" element={<NativeNavigation />} />
-            <Route path="push_notification" element={<PushNotification />} />
-            <Route path="app_service" element={<AppServicePage />} />
-            <Route path="app_support" element={<SupportPage />} />
-            <Route path="app_plan" element={<Plan />} />
-            <Route path="app_access" element={<AppAccess />} />
-            <Route path="app_clone" element={<AppClone />} />
-          </Route>
-        </Routes>
-      </Router>
-
-    </AuthProvider>
-  );
+                    {/*App  Dynamic Action Routes */}
+                    <Route path="app" element={<AppDashboard />}>
+                        <Route path="create" element={<CreateAppOverview />} />
+                        <Route path="edit" element={<OverviewPage />} />
+                        <Route path="branding" element={<BrandingPage />} />
+                        <Route path="link_handling" element={<LinkHandlingPage />} />
+                        <Route path="interface" element={<InterfacePage />} />
+                        <Route path="web_overrides" element={<WebOveridesPage />} />
+                        <Route path="app_permission" element={<AppPermissionPage />} />
+                        <Route path="native_plugins" element={<NativePluginPage />} />
+                        <Route path="app_download" element={<AppDownloadPage />} />
+                        <Route path="native_navigation" element={<NativeNavigation />} />
+                        <Route path="push_notification" element={<PushNotification />} />
+                        <Route path="app_service" element={<AppServicePage />} />
+                        <Route path="app_support" element={<SupportPage />} />
+                        <Route path="app_plan" element={<Plan />} />
+                        <Route path="app_access" element={<AppAccess />} />
+                        <Route path="app_clone" element={<AppClone />} />
+                    </Route>
+                </Routes>
+            </Router>
+        </AuthProvider>
+    );
 };
 
 export default App;
