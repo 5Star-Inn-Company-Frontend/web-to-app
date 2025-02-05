@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "../ui/button";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useNavigate } from "react-router-dom";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "../ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 
 export function CreateApp() {
     interface AppInput {
@@ -69,56 +69,56 @@ export function CreateApp() {
             setIsLoading(false);
         }
     }
-    return (
-        <div>
-            <div>
-                <div>
-                    <div>
-                        <div>
-                            <form onSubmit={handleSubmit}>
-                                <div>
-                                    <h2>Website URL</h2>
-                                    <p>The webpage to display when your app loads.</p>
-                                    <input type="url" name="url" placeholder="https://" onChange={handleChange} required />
-                                </div>
-                                <div className="inputs">
-                                    <h2>App Name</h2>
-                                    <p>Our App Name is displayed on the device home screen.</p>
-                                    <input type="text" name="AppName" placeholder="App Name" onChange={handleChange} required />
-                                </div>
-                                <div className="inputs mb-10">
-                                    <h2>Organization</h2>
-                                    <p>The Organization account where this new app will reside.</p>
-                                    <Select>
-                                        <SelectTrigger className="w-full">
-                                            <SelectValue placeholder="Select a fruit" />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            <SelectGroup>
-                                                <SelectLabel>Fruits</SelectLabel>
-                                                <SelectItem value="apple">Apple</SelectItem>
-                                                <SelectItem value="banana">Banana</SelectItem>
-                                                <SelectItem value="blueberry">Blueberry</SelectItem>
-                                                <SelectItem value="grapes">Grapes</SelectItem>
-                                                <SelectItem value="pineapple">Pineapple</SelectItem>
-                                            </SelectGroup>
-                                        </SelectContent>
-                                    </Select>
-                                </div>
 
-                                {isLoading ? (
-                                    <Button disabled className="w-full text-white bg-[#24243E] p-[0.5rem]">
-                                        <ReloadIcon className="mr-2 h-4 w-4 animate-spin text-white" />
-                                        Please wait...
-                                    </Button>
-                                ) : (
-                                    <Button className="w-[13.8125rem]">Start Building your app</Button>
-                                )}
-                            </form>
-                        </div>
-                    </div>
+    return (
+        <div className="py-20 px-14">
+            <form onSubmit={handleSubmit}>
+                <div className="mb-10">
+                    <h2 className="text-base font-medium mb-5">Website URL</h2>
+                    <p className="text-primary60 mb-2">The webpage to display when your app loads.</p>
+                    <input
+                        type="url"
+                        name="url"
+                        className="border border-primary60 w-full rounded-sm px-5 py-2"
+                        placeholder="https://"
+                        onChange={handleChange}
+                        required
+                    />
                 </div>
-            </div>
+                <div className="mb-10">
+                    <h2 className="text-base font-medium mb-5">App Name</h2>
+                    <p className="text-primary60 mb-2">Our App Name is displayed on the device home screen.</p>
+                    <input
+                        type="text"
+                        name="AppName"
+                        placeholder="App Name"
+                        className="border border-primary60 w-full rounded-sm px-5 py-2"
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="mb-20">
+                    <h2 className="text-base font-medium mb-5">Organization</h2>
+                    <p className="text-primary60 mb-2">The Organization account where this new app will reside.</p>
+                    <Select>
+                        <SelectTrigger>
+                            <SelectValue placeholder="Select Team" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="emmy">Emmy's Team</SelectItem>
+                        </SelectContent>
+                    </Select>
+                </div>
+
+                {isLoading ? (
+                    <Button disabled className="w-full text-white bg-[#24243E] p-[0.5rem]">
+                        <ReloadIcon className="mr-2 h-4 w-4 animate-spin text-white" />
+                        Please wait...
+                    </Button>
+                ) : (
+                    <Button className="py-7 px-8">Start Building your app</Button>
+                )}
+            </form>
         </div>
     );
 }

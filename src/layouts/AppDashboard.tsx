@@ -54,78 +54,76 @@ const DashboardHeader = () => {
 };
 
 const DashboardNav = () => {
-    const { action } = useParams();
-
     const Routes = [
         {
             name: "Overview",
             route: `app/overview`,
-            icon: "home_icon.png",
+            icon: "home_icon.svg",
         },
         {
             name: "Branding",
             route: `app/branding`,
-            icon: "secondnav_icon.png",
+            icon: "branding_icon.svg",
         },
         {
             name: "Link Handling",
             route: `app/link_handling`,
-            icon: "thirdnav_icon.png",
+            icon: "link_icon.svg",
         },
         {
             name: "Interface",
             route: `app/interface`,
-            icon: "forthnav_icon.png",
+            icon: "interface_icon.svg",
         },
         {
             name: "Website Overides",
             route: `app/web_overrides`,
-            icon: "fifthnav_icon.png",
+            icon: "website_icon.svg",
         },
         {
             name: "Permissions",
             route: `app/app_permission`,
-            icon: "sixthnav_icon.png",
+            icon: "permission_icon.svg",
         },
         {
             name: "Native Navigation",
             route: `app/native_navigation`,
-            icon: "seventhnav_icon.png",
+            icon: "native_icon.svg",
         },
         {
             name: "Push Notification",
             route: `app/push_notification`,
-            icon: "eightnav_icon.png",
+            icon: "notification_icon.svg",
         },
         {
             name: "Native Pluggins",
             route: `app/native_plugins`,
-            icon: "ninthnav_icon.png",
+            icon: "plugin_icon.svg",
         },
         {
             name: "Build & Download",
             route: `app/app_download`,
-            icon: "tenthnav_icon.png",
+            icon: "download_icon.svg",
         },
         {
             name: "Services",
             route: `app/app_service`,
-            icon: "eleventhnav_icon.png",
+            icon: "services_icon.svg",
         },
         {
             name: "Support",
             route: `app/app_support`,
-            icon: "twelvethnav_icon.png",
+            icon: "support_icon.svg",
         },
         {
             name: "Plan",
             route: `app/app_plan`,
-            icon: "thirteenthnav_icon.png",
+            icon: "plan_icon.svg",
         },
         {
             name: "Access",
             route: `app/app_access`,
-            icon: "fortheenthnav_icon.png",
+            icon: "access_icon.svg",
         },
     ];
     return (

@@ -23,9 +23,9 @@ import MemberAccount from "@/features/members/MemberAccount";
 import Settings from "./pages/settings";
 import ViewApp from "./pages/app/viewapp";
 import HomeDashboard from "@/layouts/HomeDashboard";
-import AppDashboard from "./layouts/AppDashboard";
-import AppAccess from "./pages/app/AppAccess";
-import AppClone from "./pages/app/AppClone";
+import AppDashboard from "@/layouts/AppDashboard";
+import AppAccess from "@/pages/app/AppAccess";
+import AppClone from "@/pages/app/AppClone";
 import { CreateApp } from "@/components/CreateAppOverview/CreateApp";
 
 const App: React.FC = () => {
@@ -55,11 +55,11 @@ const App: React.FC = () => {
 
                     {/* App Routes */}
                     <Route path="app/viewapp" element={<ViewApp />} />
-                    <Route path="app/create" element={<CreateApp />} />
 
                     {/*Edit APP  Dynamic Action Routes */}
                     <Route path="app" element={<AppDashboard />}>
                         <Route path="overview" element={<OverviewPage />} />
+                        <Route path="create" element={<CreateApp />} />
                         <Route path="branding" element={<BrandingPage />} />
                         <Route path="link_handling" element={<LinkHandlingPage />} />
                         <Route path="interface" element={<InterfacePage />} />
