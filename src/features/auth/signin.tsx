@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useNavigate } from "react-router-dom";
-import { Bounce, ToastContainer, toast, useToast } from "react-toastify";
+import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Partnership from "./partnership";
 import Authprompt from "./authprompt";
@@ -34,6 +34,7 @@ export const SigninForm = () => {
     const { isPending, mutate } = useMutation({
         mutationFn: loginApi,
         onSuccess: (data) => {
+            console.log("data===============", data);
             dispatch(login(data));
             toast.success(data.message);
             navigate("/app");
@@ -41,13 +42,20 @@ export const SigninForm = () => {
     });
 
     function onSubmit(values: z.infer<typeof SigninformSchema>) {
+        console.log(values);
         mutate(values);
     }
 
     return (
         <div className="flex flex-col my-2 font-lato ">
-            <Text style="text-xl font-lato font-bold leading-[140%] text-primary60 text-center" value="WELCOME BACK BECOME AN" />
-            <Text style="text-xl font-lato font-bold leading-[140%] text-primary60 mb-4 text-center" value="EXCLUSIVE MEMBERS" />
+            <Text
+                style="text-xl font-lato font-bold leading-[140%] text-primary60 text-center"
+                value="WELCOME BACK BECOME AN"
+            />
+            <Text
+                style="text-xl font-lato font-bold leading-[140%] text-primary60 mb-4 text-center"
+                value="EXCLUSIVE MEMBERS"
+            />
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
                     <FormField
@@ -68,7 +76,12 @@ export const SigninForm = () => {
                         render={({ field }) => (
                             <FormItem>
                                 <FormControl>
-                                    <IconInput type="password" category="formInput" placeHolder="Password" field={field} />
+                                    <IconInput
+                                        type="password"
+                                        category="formInput"
+                                        placeHolder="Password"
+                                        field={field}
+                                    />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

@@ -1,71 +1,57 @@
-import "./plan.scss";
+import { Text } from "../global/text";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+
+type TPlan = {
+    amount: string;
+    type: string;
+};
+const plans: TPlan[] = [
+    { amount: "0.00", type: "Free" },
+    { amount: "10,000", type: "Gold" },
+    { amount: "20,000", type: "Premium" },
+];
 
 export function Plan() {
     return (
-        <div className="plan">
-            <div className="bigContainer">
-                <div className="mainContainer">
-                    <div className="leftContainer">
-                        <div className="center">
-                            <div className="header">
-                                <h1>Plan</h1>
-                            </div>
-                            <div className="content">
-                                <h6>Application</h6>
-                                <p className="pLicense">5star Free License</p>
+        <>
+            <div className="px-10 pt-8 border-b border-primary20">
+                <Text style="font-medium text-4xl mb-4" value="Plan" />
+            </div>
+            <h3 className="mt-5 mx-10 mb-4 font-normal">Application</h3>
+            <div>
+                {plans.map((plan: TPlan) => (
+                    <PlanCard planAmount={plan.amount} planType={plan.type} />
+                ))}
+            </div>
+        </>
+    );
+}
 
-                                <div className="box">
-                                    <div className="boxTop">
-                                        <h6>Free Plan </h6>
-                                        <button>Add License</button>
-                                    </div>
-                                    <h1>
-                                        #0.00 <span>one-time payment</span>
-                                    </h1>
-                                    <p>
-                                        A paid license is required to remove Median branding and to <br />
-                                        access advanced functionality including the JavaScript Bridge.
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="content">
-                                <p className="pLicense">5star Free License</p>
+interface IPlanCard {
+    planAmount: string;
+    planType: string;
+}
 
-                                <div className="box">
-                                    <div className="boxTop">
-                                        <h6>Gold Plan </h6>
-                                        <button>Add License</button>
-                                    </div>
-                                    <h1>
-                                        #10,000.00 <span>one-time payment</span>
-                                    </h1>
-                                    <p>
-                                        A paid license is required to remove Median branding and to <br />
-                                        access advanced functionality including the JavaScript Bridge.
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="content">
-                                <p className="pLicense">5star Free License</p>
-
-                                <div className="box">
-                                    <div className="boxTop">
-                                        <h6>Premium Plan </h6>
-                                        <button>Add License</button>
-                                    </div>
-                                    <h1>
-                                        #20,000.00 <span>one-time payment</span>
-                                    </h1>
-                                    <p>
-                                        A paid license is required to remove Median branding and to <br />
-                                        access advanced functionality including the JavaScript Bridge.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+const PlanCard = ({ planAmount, planType }: IPlanCard) => {
+    return (
+        <div className="py-8 px-10 border-b border-primary20 first:pt-0">
+            <div className="mb-4 ">
+                <Input value="5star Free license" className="border border-primary20 bg-primary30 px-4" />
+            </div>
+            <div className="border border-primary20 px-5 py-5 rounded-lg">
+                <div className="mb-1 flex items-center justify-between">
+                    <h6 className="mb-1">{planType} Plan</h6>
+                    <Button className="text-xs h-7 px-8 rounded-xl">Add License</Button>
                 </div>
+                <h3 className="font-bold mb-3 text-lg">
+                    #{planAmount} <span className="font-light text-xs">one-time payment</span>
+                </h3>
+                <p className="text-sm text-primary60">
+                    A paid license is required to remove Median branding and to <br />
+                    access advanced functionality including the JavaScript Bridge.
+                </p>
             </div>
         </div>
     );
-}
+};

@@ -1,12 +1,8 @@
-import { AppDownloadSection } from "@/components/customui/app/app_download&build/view"
-// import { useParams } from "react-router-dom"
-export const AppDownloadPage =()=>{
-    // const{
-    //     action
-    // }=useParams();
-    return(
+import { AppDownloadSection } from "@/components/customui/app/app_download&build/view";
+export const AppDownloadPage = () => {
+    return (
         <>
-            <AppDownloadSection/>
+            <AppDownloadSection />
         </>
-    )
-}
+    );
+};
