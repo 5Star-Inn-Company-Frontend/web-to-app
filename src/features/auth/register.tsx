@@ -15,7 +15,6 @@ import { IconInput } from "@/components/global/iconinput";
 import { useMutation } from "@tanstack/react-query";
 import { registerApi } from "@/api/auth";
 import axios, { AxiosError } from "axios";
-import axiosInstance from "@/api/apiConfig";
 
 export function SignupForm() {
     const navigate = useNavigate();
@@ -85,7 +84,12 @@ export function SignupForm() {
                         render={({ field }) => (
                             <FormItem>
                                 <FormControl>
-                                    <IconInput type="password" category="formInput" placeHolder="Password" field={field} />
+                                    <IconInput
+                                        type="password"
+                                        category="formInput"
+                                        placeHolder="Password"
+                                        field={field}
+                                    />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

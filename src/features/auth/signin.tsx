@@ -16,6 +16,7 @@ import { useMutation } from "@tanstack/react-query";
 import { loginApi } from "@/api/auth";
 import { useAppDispatch } from "@/redux/hook";
 import { login } from "@/redux/auth/authSlice";
+import axios, { AxiosError } from "axios";
 
 // Define the type for the SignIn props
 
@@ -34,10 +35,14 @@ export const SigninForm = () => {
     const { isPending, mutate } = useMutation({
         mutationFn: loginApi,
         onSuccess: (data) => {
-            console.log("data===============", data);
             dispatch(login(data));
             toast.success(data.message);
             navigate("/app");
+        },
+        onError: (error: Error | AxiosError) => {
+            if (axios.isAxiosError(error)) {
+                toast.error(error?.response?.data.message);
+            }
         },
     });
 

@@ -26,10 +26,12 @@ import AppDashboard from "@/layouts/AppDashboard";
 import AppAccess from "@/pages/app/AppAccess";
 import AppClone from "@/pages/app/AppClone";
 import { CreateApp } from "@/components/CreateAppOverview/CreateApp";
+import { Toaster } from "react-hot-toast";
 
 const App: React.FC = () => {
     return (
         <Router>
+            <Toaster />
             <Routes>
                 {/* Home Route */}
                 <Route path="/" element={<HomeDashboard />}>
