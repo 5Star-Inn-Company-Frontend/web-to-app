@@ -1,5 +1,4 @@
-import { MembersIcon, PersonIcon } from "@/components/icons/PlatformIcon"
-
+import { MembersIcon, PersonIcon } from "@/components/icons/PlatformIcon";
 
 interface AppMetaDataProps {
     user: string;
@@ -16,13 +15,11 @@ function AppMetaData({ user, members, lastSaved }: AppMetaDataProps) {
             </div>
             <div className="flex items-center gap-2">
                 <MembersIcon />
-                <span className="text-xs font-medium">{members}</span>
+                <span className="text-xs font-medium">{members || 0}</span>
             </div>
-            <span className="text-xs text-[#666666] font-medium">
-                {lastSaved}
-            </span>
+            <span className="text-xs text-[#666666] font-medium">{lastSaved}</span>
         </div>
-    )
+    );
 }
 
-export default AppMetaData
+export default AppMetaData;

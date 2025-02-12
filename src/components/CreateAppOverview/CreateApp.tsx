@@ -4,9 +4,9 @@ import { ReloadIcon } from "@radix-ui/react-icons";
 import { useNavigate } from "react-router-dom";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { useMutation } from "@tanstack/react-query";
-import { createApp } from "@/api/auth";
 import axios, { AxiosError } from "axios";
 import toast from "react-hot-toast";
+import { createApp } from "@/api/app";
 
 export function CreateApp() {
     interface AppInput {

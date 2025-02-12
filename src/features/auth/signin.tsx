@@ -47,7 +47,6 @@ export const SigninForm = () => {
     });
 
     function onSubmit(values: z.infer<typeof SigninformSchema>) {
-        console.log(values);
         mutate(values);
     }
 

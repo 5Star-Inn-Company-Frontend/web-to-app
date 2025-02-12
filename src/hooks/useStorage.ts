@@ -1,15 +1,29 @@
 import { LoginResponse } from "@/types/type";
 
+const getExpiryTime = () => {
+    return Date.now() + 3600 * 1000;
+};
+
 export const getToken = () => {
-    return sessionStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
+    const expiryTime = sessionStorage.getItem("tokenExpiry");
+
+    if (token && expiryTime && Date.now() > parseInt(expiryTime)) {
+        removeToken();
+        return null;
+    }
+
+    return token;
 };
 
 export const setToken = (token: string) => {
     sessionStorage.setItem("token", token);
+    sessionStorage.setItem("tokenExpiry", getExpiryTime().toString());
 };
 
 export const removeToken = () => {
     sessionStorage.removeItem("token");
+    sessionStorage.removeItem("tokenExpiry");
 };
 
 export const setUser = (user: LoginResponse) => {
@@ -21,5 +35,5 @@ export const getUser = () => {
 };
 
 export const removeUser = () => {
-    sessionStorage.removeUser("user");
+    sessionStorage.removeItem("user");
 };
