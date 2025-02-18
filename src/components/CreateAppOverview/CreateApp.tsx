@@ -3,6 +3,10 @@ import { Button } from "../ui/button";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useNavigate } from "react-router-dom";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { useMutation } from "@tanstack/react-query";
+import { createApp } from "@/api/auth";
+import axios, { AxiosError } from "axios";
+import toast from "react-hot-toast";
 
 export function CreateApp() {
     interface AppInput {
@@ -15,7 +19,6 @@ export function CreateApp() {
         name: "",
         url: "",
     });
-    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     function handleChange(e: { target: { name: string; value: string } }) {
         if (e.target.name === "url") {
@@ -33,42 +36,30 @@ export function CreateApp() {
         }
     }
 
-    async function handleSubmit(e: React.FormEvent) {
-        // const { url, name } = appInput;
-        // Get the token from localStorage
-        const savedToken: string | null = localStorage.getItem("authToken");
-        e.preventDefault();
-
-        setIsLoading(true);
-        //fetch api
-        const requestOptions = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-                Authorization: `Bearer ${savedToken}`,
-            },
-            body: JSON.stringify(appInput),
-        };
-
-        try {
-            const response = await fetch("https://web2app.prisca.5starcompany.com.ng/api/app", requestOptions);
-
-            //log response error
-            if (!response.ok) {
-                throw new Error("Unprocessable content!");
+    const { isPending, data, mutate } = useMutation({
+        mutationFn: createApp,
+        onSuccess: () => {
+            setAppInput({ name: "", url: "" });
+            toast.success("App Created Successfully", {
+                position: "top-center",
+            });
+            navigate("/app/overview");
+        },
+        onError: (error: Error | AxiosError) => {
+            if (axios.isAxiosError(error)) {
+                toast.error(error?.response?.data.message, {
+                    position: "top-center",
+                });
             }
+        },
+    });
 
-            const result = await response.json();
-            console.log("Response: ", result);
-            //navigate to homepage after successful login
-            navigate("/app/:action/link_handling");
-        } catch (error) {
-            console.error("Error:", error);
-        } finally {
-            setIsLoading(false);
-        }
+    async function handleSubmit(e: React.FormEvent) {
+        e.preventDefault();
+        mutate(appInput);
     }
+
+    console.log(data);
 
     return (
         <div className="py-20 px-14">
@@ -110,8 +101,8 @@ export function CreateApp() {
                     </Select>
                 </div>
 
-                {isLoading ? (
-                    <Button disabled className="w-full text-white bg-[#24243E] p-[0.5rem]">
+                {isPending ? (
+                    <Button disabled className="py-7 px-8">
                         <ReloadIcon className="mr-2 h-4 w-4 animate-spin text-white" />
                         Please wait...
                     </Button>

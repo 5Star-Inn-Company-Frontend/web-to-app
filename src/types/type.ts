@@ -31,3 +31,8 @@ export interface RegisterRequest {
     email: string;
     password: string;
 }
+
+export interface CreateAppRequest {
+    name: string;
+    url: string;
+}
