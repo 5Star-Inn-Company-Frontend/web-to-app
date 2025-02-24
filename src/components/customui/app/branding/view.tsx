@@ -4,8 +4,12 @@ import { SplashScreenCard } from "@/features/branding/splashscreencard";
 import { AppIconCard } from "@/features/branding/appIconCard";
 import { ThemeColorsCard } from "@/features/branding/themecolorsCard";
 import { StatusbarCard } from "@/features/branding/statusbarcard";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 export const BrandingSection = () => {
+    const data = useSelector((state: RootState) => state.app);
+
     return (
         <>
             <div className="px-12 py-10 border-b border-primary20 bg-white w-full rounded">
@@ -22,8 +26,8 @@ export const BrandingSection = () => {
                     subTitle="Your app icon is your app’s identity and is used on the device home screen and in other locations such as settings. Upload a PNG or JPG square image to use as your app's launch icon. Recommended resolution is 1024x1024 pixels."
                 >
                     <div className="gap-4 grid mt-8 md:grid-cols-2 grd-cols-1 px-8 ">
-                        <AppIconCard os="IOS" img="/giftcard2.png" />
-                        <AppIconCard os="Android" img="/giftcard2.png" />
+                        <AppIconCard os="IOS" img={data?.branding?.app_icon || "/giftcard2.png"} />
+                        <AppIconCard os="Android" img={data?.branding?.app_icon || "/giftcard2.png"} />
                     </div>
                 </CollapsibleComponent>
             </div>
@@ -33,8 +37,8 @@ export const BrandingSection = () => {
                     subTitle="Configure the splash screen that displays while your app initially launches. Splash screen appearance varies between iOS and Android to meet design guidelines for each platform. The splash screen will display until your webpage finishes loading (when the DOMContentLoaded event fires) so that the transition between splash screen and your app is seamless."
                 >
                     <div className="flex flex-col gap-4 mt-6 px-8">
-                        <SplashScreenCard os="IOS" img="/giftcard.png" />
-                        <SplashScreenCard os="Android" img="/giftcard.png" />
+                        <SplashScreenCard os="IOS" img={data?.branding?.app_icon || "/giftcard2.png"} />
+                        {/* <SplashScreenCard os="Android" img={data?.branding?.app_icon || "/giftcard2.png"} /> */}
                     </div>
                 </CollapsibleComponent>
             </div>
@@ -45,7 +49,7 @@ export const BrandingSection = () => {
                 >
                     <div className="flex flex-col gap-4 px-8">
                         <ThemeColorsCard os="IOS" />
-                        <ThemeColorsCard os="Android" />
+                        {/* <ThemeColorsCard os="Android" /> */}
                     </div>
                 </CollapsibleComponent>
             </div>
@@ -56,7 +60,6 @@ export const BrandingSection = () => {
                 >
                     <div className="flex flex-col gap-4 px-8">
                         <StatusbarCard os="IOS" />
-                        <StatusbarCard os="Android" />
                     </div>
                 </CollapsibleComponent>
             </div>

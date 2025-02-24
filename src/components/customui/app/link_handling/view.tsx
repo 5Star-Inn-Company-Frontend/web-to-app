@@ -4,9 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { RestoreDefaultActionList } from "./restore_default_actionlist";
 import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { AiOutlinePlus, AiOutlineReload } from "react-icons/ai";
 import { Input } from "@/components/ui/input";
+import LinkHandlingRadio from "@/features/linkhandling/LinkHandlingRadio";
 
 export const LinkHandlingSection = () => {
     return (
@@ -56,21 +56,7 @@ export const LinkHandlingSection = () => {
                     title="New windows"
                     subTitle="By default a URL specified in the window.open() JavaScript function will load in a new window within your app similar to how a browser opens a new tab. When new windows are blocked your app will instead open the URL in the current webview. You can also use the Median Javascript Bridge to manually open and close webview windows."
                 >
-                    <div className="px-8">
-                        <RadioGroup
-                            className="flex justify-between border p-[0.7rem] rounded-md w-fit gap-8"
-                            defaultValue="permitted"
-                        >
-                            <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="permitted" id="r1" />
-                                <Label htmlFor="r1">Permitted</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="blocked" id="r2" />
-                                <Label htmlFor="r2">Blocked</Label>
-                            </div>
-                        </RadioGroup>
-                    </div>
+                    <LinkHandlingRadio />
                 </CollapsibleComponent>
             </div>
             <div className="px-4 py-8 bg-white border-b border-primary20">

@@ -10,6 +10,8 @@ export const getToken = () => {
 
     if (token && expiryTime && Date.now() > parseInt(expiryTime)) {
         removeToken();
+        removeUser();
+        window.location.href = "/auth/signin";
         return null;
     }
 

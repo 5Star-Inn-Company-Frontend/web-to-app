@@ -107,7 +107,7 @@ interface IBuildSetting {
 }
 
 export interface IAppData {
-    id: number;
+    id: number | null;
     url: string;
     name: string;
     description: string;
@@ -115,7 +115,7 @@ export interface IAppData {
     branding: IBranding | null;
     link_handling: ILinkHandling | null;
     interface: IInterface | null;
-    website_overide: IWebsiteOveride | null;
+    website_override: IWebsiteOveride | null;
     permission: IPermission | null;
     navigation: INavigation | null;
     notification: INotification | null;
@@ -123,4 +123,52 @@ export interface IAppData {
     build_setting: IBuildSetting | null;
     last_saved: string;
     member_count: number;
+}
+
+export interface IEditApp {
+    id: number | null;
+    url: string;
+    name: string;
+    description: string;
+    plan: string;
+    branding: IBranding;
+    link_handling: ILinkHandling;
+    interface: IInterface;
+    website_override: IWebsiteOveride;
+    permission: IPermission;
+    navigation: INavigation;
+    notification: INotification;
+    plugin: IPlugin;
+    build_setting: IBuildSetting;
+    last_saved: string;
+    member_count: number;
+}
+
+export interface IEditAppResponse {
+    data: IEditApp;
+}
+
+export interface IAppResponse {
+    data: IAppData[];
+}
+
+export interface IAppDataResponse {
+    data: IAppData;
+}
+
+export interface IRole {
+    id: number;
+    name: string;
+    created_at: string;
+    updated_at: string;
+}
+export interface IUser {
+    id: number;
+    name: string;
+    email: string;
+    role: IRole;
+}
+
+export interface IMember {
+    data: IUser[];
 }

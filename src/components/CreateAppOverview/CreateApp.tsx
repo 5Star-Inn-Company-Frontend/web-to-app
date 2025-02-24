@@ -3,10 +3,11 @@ import { Button } from "../ui/button";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useNavigate } from "react-router-dom";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 import toast from "react-hot-toast";
 import { createApp } from "@/api/app";
+import { IAppDataResponse, IAppResponse } from "@/types/type";
 
 export function CreateApp() {
     interface AppInput {
@@ -14,6 +15,7 @@ export function CreateApp() {
         url: string;
     }
     const navigate = useNavigate();
+    const queryClient = useQueryClient();
 
     const [appInput, setAppInput] = useState<AppInput>({
         name: "",
@@ -38,12 +40,13 @@ export function CreateApp() {
 
     const { isPending, data, mutate } = useMutation({
         mutationFn: createApp,
-        onSuccess: () => {
+        onSuccess: (data: IAppDataResponse) => {
+            queryClient.setQueryData(["apps"], (apps: IAppResponse) => apps.data.push(data.data));
             setAppInput({ name: "", url: "" });
             toast.success("App Created Successfully", {
                 position: "top-center",
             });
-            navigate("/app/overview");
+            navigate(`/app/overview/${data.data.id}`);
         },
         onError: (error: Error | AxiosError) => {
             if (axios.isAxiosError(error)) {

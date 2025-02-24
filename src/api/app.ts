@@ -10,3 +10,8 @@ export const fetchApps = async () => {
     const response = await axiosInstance.get("/app");
     return response.data;
 };
+
+export const fetchApp = async (id: number) => {
+    const response = await axiosInstance.get(`/app/${id}`);
+    return response.data;
+};

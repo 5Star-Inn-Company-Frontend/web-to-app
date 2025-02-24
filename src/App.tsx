@@ -43,7 +43,7 @@ const App: React.FC = () => {
 
                 {/* Members Route */}
                 <Route path="members">
-                    <Route path="account" element={<MemberAccount />} />
+                    <Route path="account/:id" element={<MemberAccount />} />
                 </Route>
 
                 {/* Auth Routes */}
@@ -57,7 +57,7 @@ const App: React.FC = () => {
                 <Route path="app/viewapp" element={<ViewApp />} />
 
                 {/*Edit APP  Dynamic Action Routes */}
-                <Route path="app" element={<AppDashboard />}>
+                <Route path="app/:id/*" element={<AppDashboard />}>
                     <Route path="overview" element={<OverviewPage />} />
                     <Route path="create" element={<CreateApp />} />
                     <Route path="branding" element={<BrandingPage />} />

@@ -6,6 +6,7 @@ import { AppDetails } from "@/features/app/AppDetails";
 import { useQuery } from "@tanstack/react-query";
 import { fetchApps } from "@/api/app";
 import { IAppData } from "@/types/type";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export const DashboardHome = () => {
     const [searchTerm, setSearchTerm] = useState<string>("");
@@ -34,63 +35,12 @@ export const DashboardHome = () => {
         { value: "View", label: "View" },
     ];
 
-    // const app = [
-    //     {
-    //         id: 1,
-    //         logo: logo,
-    //         title: "WebhostingApp",
-    //         plan: "free",
-    //         ios: "co.5start.ios.qlije",
-    //         android: "co.5start.android.qlije",
-    //         user: "Admin",
-    //         members: 2,
-    //         lastSaved: "Last saved 12 days ago",
-    //     },
-    //     {
-    //         id: 2,
-    //         logo: logo,
-    //         title: "WebhostingApp",
-    //         plan: "free",
-    //         ios: "co.5start.ios.qlije",
-    //         android: "co.5start.android.qlije",
-    //         user: "Admin",
-    //         members: 2,
-    //         lastSaved: "Last saved 12 days ago",
-    //     },
-    //     {
-    //         id: 3,
-    //         logo: logo,
-    //         title: "WebhostingApp",
-    //         plan: "free",
-    //         ios: "co.5start.ios.qlije",
-    //         android: "co.5start.android.qlij",
-    //         user: "Admin",
-    //         members: 2,
-    //         lastSaved: "Last saved 12 days ago",
-    //     },
-    //     {
-    //         id: 4,
-    //         logo: logo,
-    //         title: "WebhostingApp",
-    //         plan: "free",
-    //         ios: "co.5start.ios.qlije",
-    //         android: "co.5start.android.qlije",
-    //         user: "Admin",
-    //         members: 2,
-    //         lastSaved: "Last saved 12 days ago",
-    //     },
-    // ];
-
-    const { isLoading, data } = useQuery({
+    // =======================================
+    // Fetch all Apps
+    const { isLoading, isSuccess, data } = useQuery({
         queryKey: ["apps"],
-        queryFn: fetchApps,
+        queryFn: () => fetchApps(),
     });
-
-    if (isLoading) {
-        return <div>Fetching....</div>;
-    }
-
-    console.log(data);
 
     return (
         <>
@@ -173,11 +123,22 @@ export const DashboardHome = () => {
                     />
                 </div>
 
-                <div className="my-9 grid gap-4">
-                    {data.data?.map((item: IAppData) => (
-                        <AppDetails key={item.id} {...item} />
-                    ))}
-                </div>
+                {isLoading && (
+                    <div className="my-9 flex flex-col space-y-5">
+                        <Skeleton className="h-[100px] w-full rounded-xl" />
+                        <Skeleton className="h-[100px] w-full rounded-xl" />
+                        <Skeleton className="h-[100px] w-full rounded-xl" />
+                        <Skeleton className="h-[100px] w-full rounded-xl" />
+                    </div>
+                )}
+
+                {isSuccess && (
+                    <div className="my-9 grid gap-4">
+                        {data.data.map((item: IAppData) => (
+                            <AppDetails key={item.id} {...item} />
+                        ))}
+                    </div>
+                )}
             </div>
         </>
     );

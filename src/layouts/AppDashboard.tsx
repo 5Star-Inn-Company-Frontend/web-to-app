@@ -1,13 +1,30 @@
+import { fetchApp } from "@/api/app";
 import { Text } from "@/components/global/text";
 import { Navbar } from "@/components/Navbar";
 import RouteLink from "@/components/RouteLink";
 import { Simulation } from "@/components/Simulation";
 import { Button } from "@/components/ui/button";
+import { setAppData } from "@/redux/app/appSlice";
+import { useAppDispatch } from "@/redux/hook";
+import { IEditAppResponse } from "@/types/type";
+import { useQuery } from "@tanstack/react-query";
 import { Outlet, useParams } from "react-router-dom";
 
 const AppDashboard = () => {
-    const { action } = useParams();
-    console.log(action);
+    const { id } = useParams();
+    const appId = Number(id);
+
+    const dispatch = useAppDispatch();
+
+    const { data, isLoading, isSuccess } = useQuery<IEditAppResponse>({
+        queryKey: ["app", appId],
+        queryFn: () => fetchApp(appId),
+        enabled: !!id,
+    });
+
+    if (isSuccess) {
+        dispatch(setAppData(data.data));
+    }
 
     return (
         <>
@@ -16,9 +33,9 @@ const AppDashboard = () => {
                 <div className="w-[75%] px-4">
                     <DashboardHeader />
                     <div className="flex rounded-t-md bg-white">
-                        <DashboardNav />
+                        <DashboardNav id={appId} />
                         <div className="flex-1">
-                            <Outlet />
+                            {isLoading ? <div>Loading........</div> : <Outlet context={data} />}
                         </div>
                     </div>
                 </div>
@@ -53,76 +70,79 @@ const DashboardHeader = () => {
     );
 };
 
-const DashboardNav = () => {
+interface IDashboardNav {
+    id: number;
+}
+const DashboardNav = ({ id }: IDashboardNav) => {
     const Routes = [
         {
             name: "Overview",
-            route: `app/overview`,
+            route: `app/${id}/overview`,
             icon: "home_icon.svg",
         },
         {
             name: "Branding",
-            route: `app/branding`,
+            route: `app/${id}/branding`,
             icon: "branding_icon.svg",
         },
         {
             name: "Link Handling",
-            route: `app/link_handling`,
+            route: `app/${id}/link_handling`,
             icon: "link_icon.svg",
         },
         {
             name: "Interface",
-            route: `app/interface`,
+            route: `app/${id}/interface`,
             icon: "interface_icon.svg",
         },
         {
             name: "Website Overides",
-            route: `app/web_overrides`,
+            route: `app/${id}/web_overrides`,
             icon: "website_icon.svg",
         },
         {
             name: "Permissions",
-            route: `app/app_permission`,
+            route: `app/${id}/app_permission`,
             icon: "permission_icon.svg",
         },
         {
             name: "Native Navigation",
-            route: `app/native_navigation`,
+            route: `app/${id}/native_navigation`,
             icon: "native_icon.svg",
         },
         {
             name: "Push Notification",
-            route: `app/push_notification`,
+            route: `app/${id}/push_notification`,
             icon: "notification_icon.svg",
         },
         {
             name: "Native Pluggins",
-            route: `app/native_plugins`,
+            route: `app/${id}/native_plugins`,
             icon: "plugin_icon.svg",
         },
         {
             name: "Build & Download",
-            route: `app/app_download`,
+            route: `app/${id}/app_download`,
             icon: "download_icon.svg",
         },
         {
             name: "Services",
-            route: `app/app_service`,
+            route: `app/${id}/app_service`,
             icon: "services_icon.svg",
         },
         {
             name: "Support",
-            route: `app/app_support`,
+            route: `app/${id}/app_support`,
             icon: "support_icon.svg",
         },
         {
             name: "Plan",
-            route: `app/app_plan`,
+            route: `app/${id}/app_plan`,
             icon: "plan_icon.svg",
         },
         {
             name: "Access",
-            route: `app/app_access`,
+            route: `app/${id}/app_access`,
             icon: "access_icon.svg",
         },
     ];

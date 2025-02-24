@@ -37,7 +37,7 @@ export const SigninForm = () => {
         onSuccess: (data) => {
             dispatch(login(data));
             toast.success(data.message);
-            navigate("/app");
+            navigate("/");
         },
         onError: (error: Error | AxiosError) => {
             if (axios.isAxiosError(error)) {

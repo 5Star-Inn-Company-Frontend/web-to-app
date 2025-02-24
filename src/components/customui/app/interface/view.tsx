@@ -5,25 +5,15 @@ import { Label } from "@/components/ui/label";
 import { ScreenOrientationConfigCard } from "./screenorientationconfig";
 import { KeepScreenOnCard } from "./keep_screen_config";
 import { SwipeGestorsCardCard } from "./swipegestors";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
 import { OsConfigCard } from "@/components/global/os_config_card";
 import { OsConfigCard2 } from "@/features/interface/OsConfigCard2";
+import Localization from "@/features/interface/Localization";
+import ViewPort from "@/features/interface/ViewPort";
+import MaximumWindows from "@/features/interface/MaximumWindows";
+import FrontScalling from "@/features/interface/FrontScalling";
 
 export const InterfaceSection = () => {
-    const languages: string[] = [
-        "English",
-        "Arabic",
-        "Catain",
-        "Chinese",
-        "Danish",
-        "Dutch",
-        "Finnish",
-        "French",
-        "Hebrew",
-        "Others",
-    ];
-
     return (
         <>
             <div className="px-12 py-10 border-b border-primary20 bg-white w-full rounded">
@@ -309,93 +299,10 @@ export const InterfaceSection = () => {
                     </div>
                 </CollapsibleComponent>
             </div>
-            <div className="p-4 pb-10 bg-white border-b border-primary20">
-                <CollapsibleComponent
-                    title="Front Scalling"
-                    subTitle="Disable Android system front scaling or set a specific scale irrespective of device and device settings. e.g. 90% for smaller text than default."
-                >
-                    <div className="grid grid-cols-2 px-8">
-                        <OsConfigCard
-                            os="IOS"
-                            radios={[
-                                {
-                                    title: "Off",
-                                    label: "off",
-                                },
-                                {
-                                    title: "On",
-                                    label: "on",
-                                },
-                            ]}
-                        />
-                    </div>
-                </CollapsibleComponent>
-            </div>
-            <div className="p-4 pb-10 bg-white border-b border-primary20">
-                <CollapsibleComponent
-                    title="Maximum windows"
-                    subTitle={`Set a maximum number of windows that are opened simultaneously to improve performance for resource-intensive apps. Once the maximum number of windows has been reached, then previously opened windows will be automatically closed starting with the window that was open first. Enable "Auto Close" so that when your primary website URL (app home screen) is opened, all other previously opened windows will be automatically closed.`}
-                >
-                    <div className="px-8">
-                        <RadioGroup
-                            className="flex justify-between border p-[0.5rem] flex-grow rounded-md w-fit gap-8"
-                            defaultValue="disable"
-                        >
-                            <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="permitted" id="r1" />
-                                <Label htmlFor="disable">Disable</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="enable" id="r2" />
-                                <Label htmlFor="enable">Enable</Label>
-                            </div>
-                        </RadioGroup>
-                    </div>
-                </CollapsibleComponent>
-            </div>
-            <div className="p-4 pb-10 bg-white border-b border-primary20">
-                <CollapsibleComponent
-                    title="View port width"
-                    subTitle={`The app's viewport is the visible area of the window where content is visible. To adjust the scale of pages shown within your app, you can force a page width. Before modifying this setting, we first suggest altering the viewport meta tag on your website.`}
-                >
-                    <div className="px-8">
-                        <RadioGroup
-                            className="flex justify-between border p-[0.5rem] flex-grow rounded-md w-fit gap-8"
-                            defaultValue="disable"
-                        >
-                            <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="permitted" id="r1" />
-                                <Label htmlFor="disable">Disable</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="enable" id="r2" />
-                                <Label htmlFor="enable">Enable</Label>
-                            </div>
-                        </RadioGroup>
-                    </div>
-                </CollapsibleComponent>
-            </div>
-            <div className="p-4 pb-10 bg-white border-b border-primary20">
-                <CollapsibleComponent
-                    title="Localization"
-                    subTitle={`By default your user's default device language will be set within your app for all web content which will then display in the corresponding language in the same manner it is displayed in a regular browser, i.e. if there is an Accept-Language header present. The native UI components in the native app layer have been localized to various languages as contributed by customers. These must be selected to enable for your app.`}
-                >
-                    <div className="grid border border-primary40 p-5 mx-9 lg:grid-col-2 xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-8 px-8">
-                        {languages.map((lang, index) => {
-                            return (
-                                <div className="flex-grow" key={index}>
-                                    <div className="flex items-center space-x-2">
-                                        <Checkbox value={lang} id="r1" />
-                                        <Label className="text-primary60" htmlFor={lang}>
-                                            {lang}
-                                        </Label>
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </div>
-                </CollapsibleComponent>
-            </div>
+            <FrontScalling />
+            <MaximumWindows />
+            <ViewPort />
+            <Localization />
         </>
     );
 };
