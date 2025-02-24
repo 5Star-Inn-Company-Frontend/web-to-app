@@ -3,7 +3,6 @@ import { Text } from "@/components/global/text";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { OsConfigCard } from "@/components/global/os_config_card";
-import { OsConfigCard2 } from "@/features/interface/OsConfigCard2";
 import Localization from "@/features/interface/Localization";
 import ViewPort from "@/features/interface/ViewPort";
 import MaximumWindows from "@/features/interface/MaximumWindows";
@@ -14,6 +13,7 @@ import SwipeGestures from "@/features/interface/SwipeGestures";
 import PullToRefresh from "@/features/interface/PullToRefresh";
 import KeepScreenOn from "@/features/interface/KeepScreenOn";
 import ScreenOrientation from "@/features/interface/ScreenOrientation";
+import DarkMode from "@/features/interface/DarkMode";
 
 export const InterfaceSection = () => {
     return (
@@ -82,49 +82,7 @@ export const InterfaceSection = () => {
                     </div>
                 </CollapsibleComponent>
             </div>
-            <div className="p-4 pb-10 bg-white border-b border-primary20">
-                <CollapsibleComponent
-                    title="Dark Mode"
-                    subTitle="Set the default Light/Dark mode for your app. The Auto mode follows the device setting for Light & Dark Mode, but you can set Light or Dark to force a mode irrespective of the device setting. The current mode can also be changed at runtime using the Median JavaScript Bridge."
-                >
-                    <div className="grid lg:grid-col-2 xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-8 px-8">
-                        <OsConfigCard2
-                            os="IOS"
-                            radios={[
-                                {
-                                    title: "Auto",
-                                    label: "Auto Light/Dark",
-                                },
-                                {
-                                    title: "Light",
-                                    label: "Light",
-                                },
-                                {
-                                    title: "dark",
-                                    label: "Dark",
-                                },
-                            ]}
-                        />
-                        <OsConfigCard2
-                            os="Android"
-                            radios={[
-                                {
-                                    title: "Auto",
-                                    label: "Auto Light/Dark",
-                                },
-                                {
-                                    title: "Light",
-                                    label: "Light",
-                                },
-                                {
-                                    title: "dark",
-                                    label: "Dark",
-                                },
-                            ]}
-                        />
-                    </div>
-                </CollapsibleComponent>
-            </div>
+            <DarkMode />
             <ScreenOrientation />
             <KeepScreenOn />
             <PullToRefresh />
