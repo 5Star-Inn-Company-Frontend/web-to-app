@@ -12,6 +12,7 @@ import Localization from "@/features/interface/Localization";
 import ViewPort from "@/features/interface/ViewPort";
 import MaximumWindows from "@/features/interface/MaximumWindows";
 import FrontScalling from "@/features/interface/FrontScalling";
+import Accessibility from "@/features/interface/Accessibility";
 
 export const InterfaceSection = () => {
     return (
@@ -277,28 +278,7 @@ export const InterfaceSection = () => {
                     </div>
                 </CollapsibleComponent>
             </div>
-            <div className="p-4 pb-10 bg-white border-b border-primary20">
-                <CollapsibleComponent
-                    title="Accessibility & Dynamic Type"
-                    subTitle="When enabled the text on pages displayed within your iOS app will adjust in size according to your device's settings using the CSS property -webkit-text-size-adjust"
-                >
-                    <div className="grid grid-cols-2 px-8">
-                        <OsConfigCard
-                            os="IOS"
-                            radios={[
-                                {
-                                    title: "Off",
-                                    label: "off",
-                                },
-                                {
-                                    title: "On",
-                                    label: "on",
-                                },
-                            ]}
-                        />
-                    </div>
-                </CollapsibleComponent>
-            </div>
+            <Accessibility />
             <FrontScalling />
             <MaximumWindows />
             <ViewPort />
