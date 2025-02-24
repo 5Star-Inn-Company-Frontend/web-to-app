@@ -13,6 +13,7 @@ import ViewPort from "@/features/interface/ViewPort";
 import MaximumWindows from "@/features/interface/MaximumWindows";
 import FrontScalling from "@/features/interface/FrontScalling";
 import Accessibility from "@/features/interface/Accessibility";
+import PitchToZoom from "@/features/interface/PitchToZoom";
 
 export const InterfaceSection = () => {
     return (
@@ -243,41 +244,7 @@ export const InterfaceSection = () => {
                     </div>
                 </CollapsibleComponent>
             </div>
-            <div className="p-4 pb-10 bg-white border-b border-primary20">
-                <CollapsibleComponent
-                    title="Pinch to zoom"
-                    subTitle="Add pinch-to-zoom functionality so that users can use two fingers to zoom in and out without your app. This feature is disabled by default as in some scenarios the behavior may not be required."
-                >
-                    <div className="grid lg:grid-col-2 xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-8 px-8">
-                        <OsConfigCard
-                            os="IOS"
-                            radios={[
-                                {
-                                    title: "Off",
-                                    label: "off",
-                                },
-                                {
-                                    title: "On",
-                                    label: "on",
-                                },
-                            ]}
-                        />
-                        <OsConfigCard
-                            os="Android"
-                            radios={[
-                                {
-                                    title: "Off",
-                                    label: "off",
-                                },
-                                {
-                                    title: "On",
-                                    label: "on",
-                                },
-                            ]}
-                        />
-                    </div>
-                </CollapsibleComponent>
-            </div>
+            <PitchToZoom />
             <Accessibility />
             <FrontScalling />
             <MaximumWindows />
