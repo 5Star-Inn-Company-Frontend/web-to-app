@@ -2,7 +2,6 @@ import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { Text } from "@/components/global/text";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { OsConfigCard } from "@/components/global/os_config_card";
 import Localization from "@/features/interface/Localization";
 import ViewPort from "@/features/interface/ViewPort";
 import MaximumWindows from "@/features/interface/MaximumWindows";
@@ -14,6 +13,7 @@ import PullToRefresh from "@/features/interface/PullToRefresh";
 import KeepScreenOn from "@/features/interface/KeepScreenOn";
 import ScreenOrientation from "@/features/interface/ScreenOrientation";
 import DarkMode from "@/features/interface/DarkMode";
+import FullScreen from "@/features/interface/FullScreen";
 
 export const InterfaceSection = () => {
     return (
@@ -47,41 +47,7 @@ export const InterfaceSection = () => {
                     </div>
                 </CollapsibleComponent>
             </div>
-            <div className="p-4 pb-10 bg-white border-b border-primary20">
-                <CollapsibleComponent
-                    title="Full Screen"
-                    subTitle="Control whether your app is displayed in full screen. This mode can also be set at runtime from your website using the JavaScript Bridge. Note that on Android when full screen mode enabled the keyboard will overlay on top of your web content which can cause issues for users completing forms."
-                >
-                    <div className="grid lg:grid-col-2 xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-8 px-8">
-                        <OsConfigCard
-                            os="IOS"
-                            radios={[
-                                {
-                                    title: "Disable",
-                                    label: "disable",
-                                },
-                                {
-                                    title: "Enable",
-                                    label: "enable",
-                                },
-                            ]}
-                        />
-                        <OsConfigCard
-                            os="Android"
-                            radios={[
-                                {
-                                    title: "Disable",
-                                    label: "disable",
-                                },
-                                {
-                                    title: "Enable",
-                                    label: "enable",
-                                },
-                            ]}
-                        />
-                    </div>
-                </CollapsibleComponent>
-            </div>
+            <FullScreen />
             <DarkMode />
             <ScreenOrientation />
             <KeepScreenOn />
