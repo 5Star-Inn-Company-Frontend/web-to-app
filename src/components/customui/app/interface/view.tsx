@@ -3,8 +3,6 @@ import { Text } from "@/components/global/text";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { ScreenOrientationConfigCard } from "./screenorientationconfig";
-import { KeepScreenOnCard } from "./keep_screen_config";
-import { Slider } from "@/components/ui/slider";
 import { OsConfigCard } from "@/components/global/os_config_card";
 import { OsConfigCard2 } from "@/features/interface/OsConfigCard2";
 import Localization from "@/features/interface/Localization";
@@ -14,6 +12,8 @@ import FrontScalling from "@/features/interface/FrontScalling";
 import Accessibility from "@/features/interface/Accessibility";
 import PitchToZoom from "@/features/interface/PitchToZoom";
 import SwipeGestures from "@/features/interface/SwipeGestures";
+import PullToRefresh from "@/features/interface/PullToRefresh";
+import KeepScreenOn from "@/features/interface/KeepScreenOn";
 
 export const InterfaceSection = () => {
     return (
@@ -136,91 +136,8 @@ export const InterfaceSection = () => {
                     </div>
                 </CollapsibleComponent>
             </div>
-            <div className="p-4 pb-10 bg-white border-b border-primary20">
-                <CollapsibleComponent
-                    title="Keep Screen On"
-                    subTitle="With native page transitions enabled a loading spinner will show when loading new pages within your app. The current page will fade out, the loading spinner will be displayed, and then the new page will fade in when it has finished loading."
-                >
-                    <div className="px-8">
-                        <RadioGroup
-                            className="inline-flex text-xs border border-primary40 p-[0.4rem] rounded-md"
-                            defaultValue="disable"
-                        >
-                            <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="disable" id="r1" />
-                                <Label className="text-xs" htmlFor="disable">
-                                    Disable
-                                </Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="enable" id="r2" />
-                                <Label className="text-xs" htmlFor="enable">
-                                    Enable
-                                </Label>
-                            </div>
-                        </RadioGroup>
-                        <div className="flex flex-col gap-2 my-8">
-                            <Label className="text-xs" htmlFor="overlay">
-                                Alpha transparency level:0.5
-                            </Label>
-                            <Slider
-                                defaultValue={[50]}
-                                max={100}
-                                step={1}
-                                className="lg:w-[30%] xl:w-[50%] md:w-30%] sm:w-full"
-                                style={{ height: "1px" }}
-                            />
-                        </div>
-                        <div className="grid gap-y-8">
-                            <KeepScreenOnCard os="IOS" />
-                            <KeepScreenOnCard os="Android" />
-                        </div>
-                    </div>
-                </CollapsibleComponent>
-            </div>
-            <div className="p-4 pb-10 bg-white border-b border-primary20">
-                <CollapsibleComponent
-                    title="Pull To Refresh"
-                    subTitle="With native page transitions enabled a loading spinner will show when loading new pages within your app. The current page will fade out, the loading spinner will be displayed, and then the new page will fade in when it has finished loading."
-                >
-                    <div className="grid  lg:grid-col-2 xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-8 px-8">
-                        <OsConfigCard
-                            os="IOS"
-                            radios={[
-                                {
-                                    title: "Off",
-                                    label: "off",
-                                },
-                                {
-                                    title: "On",
-                                    label: "on",
-                                },
-                            ]}
-                        />
-                        <OsConfigCard
-                            os="Android"
-                            radios={[
-                                {
-                                    title: "Off",
-                                    label: "off",
-                                },
-                                {
-                                    title: "On",
-                                    label: "on",
-                                },
-                            ]}
-                        >
-                            <div className="px-6">
-                                <span className="text-[0.6rem] text-primary80 ">Pull to Refresh Icon Color</span>
-                                <div className="w-fit flex justify-between border rounded-md px-2 pr-6 py-1 items-center gap-2 mt-4 mb-4">
-                                    <div className="h-[0.7rem] w-[0.7rem] p-1 rounded border bg-white"></div>
-                                    <Text style="text-[grey] text-xs" value="#FFFFFF" />
-                                </div>
-                            </div>
-                        </OsConfigCard>
-                    </div>
-                </CollapsibleComponent>
-            </div>
+            <KeepScreenOn />
+            <PullToRefresh />
             <SwipeGestures />
             <PitchToZoom />
             <Accessibility />
