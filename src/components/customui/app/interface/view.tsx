@@ -2,7 +2,6 @@ import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { Text } from "@/components/global/text";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { ScreenOrientationConfigCard } from "./screenorientationconfig";
 import { OsConfigCard } from "@/components/global/os_config_card";
 import { OsConfigCard2 } from "@/features/interface/OsConfigCard2";
 import Localization from "@/features/interface/Localization";
@@ -14,6 +13,7 @@ import PitchToZoom from "@/features/interface/PitchToZoom";
 import SwipeGestures from "@/features/interface/SwipeGestures";
 import PullToRefresh from "@/features/interface/PullToRefresh";
 import KeepScreenOn from "@/features/interface/KeepScreenOn";
+import ScreenOrientation from "@/features/interface/ScreenOrientation";
 
 export const InterfaceSection = () => {
     return (
@@ -125,17 +125,7 @@ export const InterfaceSection = () => {
                     </div>
                 </CollapsibleComponent>
             </div>
-            <div className="p-4 pb-10 bg-white border-b border-primary20">
-                <CollapsibleComponent
-                    title="Screen Orientation"
-                    subTitle="Control whether the orientation of your app changes automatically as the device is rotated or remains fixed in portrait or landscape mode. Note that Fixed Portrait for iPad will automatically disable multi-tasking."
-                >
-                    <div className="grid lg:grid-col-2 xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-8 px-8">
-                        <ScreenOrientationConfigCard os="IOS" />
-                        <ScreenOrientationConfigCard os="Android" />
-                    </div>
-                </CollapsibleComponent>
-            </div>
+            <ScreenOrientation />
             <KeepScreenOn />
             <PullToRefresh />
             <SwipeGestures />
