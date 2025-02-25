@@ -86,11 +86,34 @@ const appSlice = createSlice({
         updateAppData: (state: IEditApp, action: PayloadAction<IEditApp>) => {
             return { ...state, ...action.payload };
         },
+        updateName: (state: IEditApp, action: PayloadAction<string>) => {
+            state.name = action.payload;
+        },
+        updateUrl: (state: IEditApp, action: PayloadAction<string>) => {
+            state.url = action.payload;
+        },
+        updateDescription: (state: IEditApp, action: PayloadAction<string>) => {
+            console.log(action.payload);
+            state.description = action.payload;
+        },
+        updatePlan: (state: IEditApp, action: PayloadAction<string>) => {
+            state.plan = action.payload;
+        },
+
         updateInterface: (state: IEditApp, action: PayloadAction<Partial<IEditApp["interface"]>>) => {
             return { ...state, interface: { ...state.interface, ...action.payload } };
         },
     },
 });
 
-export const { setAppData, updateAppData, resetAppState, updateInterface } = appSlice.actions;
+export const {
+    setAppData,
+    updateAppData,
+    resetAppState,
+    updateInterface,
+    updateName,
+    updateUrl,
+    updatePlan,
+    updateDescription,
+} = appSlice.actions;
 export default appSlice.reducer;
