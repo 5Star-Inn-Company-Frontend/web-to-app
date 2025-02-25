@@ -6,7 +6,7 @@ import { DashboardHome } from "@/pages/home";
 import { OverviewPage } from "@/pages/app/overview";
 import { BrandingPage } from "@/pages/app/branding";
 import { LinkHandlingPage } from "@/pages/app/link_handling";
-import { InterfacePage } from "@/pages/app/interface";
+import { Interface } from "@/pages/app/interface";
 import { WebOveridesPage } from "@/pages/app/web_overides";
 import { AppPermissionPage } from "@/pages/app/app_permission";
 import { AppDownloadPage } from "@/pages/app/appdownload";
@@ -62,7 +62,7 @@ const App: React.FC = () => {
                     <Route path="create" element={<CreateApp />} />
                     <Route path="branding" element={<BrandingPage />} />
                     <Route path="link_handling" element={<LinkHandlingPage />} />
-                    <Route path="interface" element={<InterfacePage />} />
+                    <Route path="interface" element={<Interface />} />
                     <Route path="web_overrides" element={<WebOveridesPage />} />
                     <Route path="app_permission" element={<AppPermissionPage />} />
                     <Route path="native_plugins" element={<NativePluginPage />} />

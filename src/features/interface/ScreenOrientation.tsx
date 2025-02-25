@@ -1,4 +1,4 @@
-import { ScreenOrientationConfigCard } from "@/components/customui/app/interface/screenorientationconfig";
+import { ScreenOrientationConfigCard } from "@/features/interface/screenorientationconfig";
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { updateInterface } from "@/redux/app/appSlice";
 import { useAppDispatch } from "@/redux/hook";

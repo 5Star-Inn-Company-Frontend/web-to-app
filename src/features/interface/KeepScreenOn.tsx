@@ -1,4 +1,4 @@
-import { KeepScreenOnCard } from "@/components/customui/app/interface/keep_screen_config";
+import { KeepScreenOnCard } from "@/features/interface/keep_screen_config";
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";

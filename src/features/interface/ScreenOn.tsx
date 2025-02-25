@@ -1,4 +1,3 @@
-import { SwipeGestorsCardCard } from "@/features/interface/swipegestors";
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -8,30 +7,29 @@ import { RootState } from "@/redux/store";
 import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 
-export default function SwipeGestures() {
+export default function ScreenOn() {
     const dispatch = useAppDispatch();
-    const swipeGesture = useSelector((state: RootState) => state.app.interface.swipe_gesture);
+    const keepScreenOn = useSelector((state: RootState) => state.app.interface.screen_on);
 
-    const initialValue = useMemo(() => (swipeGesture ? "on" : "off"), [swipeGesture]);
-    const [enableSwipeGestures, setEnableSwipeGestures] = useState(initialValue);
+    const initialValue = useMemo(() => (keepScreenOn ? "on" : "off"), [keepScreenOn]);
+    const [enableKeepScreenOn, setEnableKeepScreenOn] = useState(initialValue);
 
-    const handleChangeEnableSwipeGestures = (newvalue: string) => {
-        setEnableSwipeGestures(newvalue);
-        const swipeGestureIsEnabled = newvalue === "on";
-        dispatch(updateInterface({ swipe_gesture: swipeGestureIsEnabled }));
+    const handleChangeEnableKeepScreenOn = (newvalue: string) => {
+        setEnableKeepScreenOn(newvalue);
+        const keepScreenOnEnabled = newvalue === "on";
+        dispatch(updateInterface({ screen_on: keepScreenOnEnabled }));
     };
-
     return (
         <div className="p-4 pb-10 bg-white border-b border-primary20">
             <CollapsibleComponent
-                title="Swipe Gestures"
-                subTitle="Add swipe gestures to your app to enable swiping to go back and forward in the navigation history. On Android, arrow indicators will show on the screen to indicate when there is a page available to go back to or to go forward to."
+                title="Kepp Screen On"
+                subTitle="Keep the device screen on all the time for many purposes such as a in-vehicle display app, museum kiosk app, trade show demo, etc. In addition to an app configuration which will be enabled at all times this setting can also be set and cleared via the JavaScript Bridge."
             >
                 <div className="px-8">
                     <RadioGroup
-                        className="flex justify-between border border-primary20 p-[0.5rem] flex-grow rounded-md w-fit gap-8 mb-4"
-                        value={enableSwipeGestures}
-                        onValueChange={handleChangeEnableSwipeGestures}
+                        className="flex w-fit gap-8 justify-between border p-[0.7rem]  rounded-md"
+                        value={enableKeepScreenOn}
+                        onValueChange={handleChangeEnableKeepScreenOn}
                     >
                         <div className="flex items-center space-x-2">
                             <RadioGroupItem value="off" id="r1" />
@@ -42,7 +40,6 @@ export default function SwipeGestures() {
                             <Label htmlFor="on">On</Label>
                         </div>
                     </RadioGroup>
-                    <SwipeGestorsCardCard os="Android" />
                 </div>
             </CollapsibleComponent>
         </div>
