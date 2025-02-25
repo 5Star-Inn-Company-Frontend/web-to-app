@@ -12,9 +12,9 @@ export default function Organization() {
         <div className="p-4 bg-white border-t border-primary20">
             <CollapsibleComponent title="Organization members with access to this app">
                 <div className="flex flex-col px-8">
-                    {members.map((member) => {
+                    {members.map((member, id) => {
                         return (
-                            <div className="flex items-center justify-between py-2 pr-1">
+                            <div key={id} className="flex items-center justify-between py-2 pr-1">
                                 <div className="flex gap-x-1 items-center">
                                     <Initials name={member} />
                                     <Text value={member} style="text-sm text-start" />

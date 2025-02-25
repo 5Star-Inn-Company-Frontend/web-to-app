@@ -14,9 +14,6 @@ const MemberAccount = () => {
     const members: IMember = queryclient.getQueryData(["members"]) || { data: [] };
     const currentMember: IUser | undefined = members?.data.find((member) => member?.id === Number(id));
 
-    const allApps = queryclient.getQueryData(["apps"]);
-    console.log(allApps);
-
     return (
         <>
             <Navbar />

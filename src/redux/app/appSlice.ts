@@ -80,8 +80,45 @@ const appSlice = createSlice({
     reducers: {
         resetAppState: () => initialState,
 
-        setAppData: (state: IEditApp, action: PayloadAction<IEditApp>) => {
-            return { ...state, ...action.payload };
+        setAppData: (state, action: PayloadAction<Partial<IEditApp>>) => {
+            // Merge top-level properties
+            const newState = { ...state, ...action.payload };
+
+            // Only spread nested objects if they are not null/undefined
+            newState.branding =
+                action.payload.branding != null ? { ...state.branding, ...action.payload.branding } : state.branding;
+            newState.link_handling =
+                action.payload.link_handling != null
+                    ? { ...state.link_handling, ...action.payload.link_handling }
+                    : state.link_handling;
+            newState.interface =
+                action.payload.interface != null
+                    ? { ...state.interface, ...action.payload.interface }
+                    : state.interface;
+            newState.website_override =
+                action.payload.website_override != null
+                    ? { ...state.website_override, ...action.payload.website_override }
+                    : state.website_override;
+            newState.permission =
+                action.payload.permission != null
+                    ? { ...state.permission, ...action.payload.permission }
+                    : state.permission;
+            newState.navigation =
+                action.payload.navigation != null
+                    ? { ...state.navigation, ...action.payload.navigation }
+                    : state.navigation;
+            newState.notification =
+                action.payload.notification != null
+                    ? { ...state.notification, ...action.payload.notification }
+                    : state.notification;
+            newState.plugin =
+                action.payload.plugin != null ? { ...state.plugin, ...action.payload.plugin } : state.plugin;
+            newState.build_setting =
+                action.payload.build_setting != null
+                    ? { ...state.build_setting, ...action.payload.build_setting }
+                    : state.build_setting;
+
+            return newState;
         },
         updateAppData: (state: IEditApp, action: PayloadAction<IEditApp>) => {
             return { ...state, ...action.payload };

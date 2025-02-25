@@ -3,7 +3,7 @@ import { ResetPage } from "@/pages/auth/reset";
 import { SignupPage } from "@/pages/auth/register";
 import { SigninPage } from "@/pages/auth/signin";
 import { DashboardHome } from "@/pages/home";
-import { OverviewPage } from "@/pages/app/overview";
+import { Overview } from "@/pages/app/overview";
 import { BrandingPage } from "@/pages/app/branding";
 import { LinkHandlingPage } from "@/pages/app/link_handling";
 import { Interface } from "@/pages/app/interface";
@@ -55,11 +55,11 @@ const App: React.FC = () => {
 
                 {/* App Routes */}
                 <Route path="app/viewapp" element={<ViewApp />} />
+                <Route path="app/create" element={<CreateApp />} />
 
                 {/*Edit APP  Dynamic Action Routes */}
                 <Route path="app/:id/*" element={<AppDashboard />}>
-                    <Route path="overview" element={<OverviewPage />} />
-                    <Route path="create" element={<CreateApp />} />
+                    <Route path="overview" element={<Overview />} />
                     <Route path="branding" element={<BrandingPage />} />
                     <Route path="link_handling" element={<LinkHandlingPage />} />
                     <Route path="interface" element={<Interface />} />
