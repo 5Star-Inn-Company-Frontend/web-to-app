@@ -4,11 +4,11 @@ import { SignupPage } from "@/pages/auth/register";
 import { SigninPage } from "@/pages/auth/signin";
 import { DashboardHome } from "@/pages/home";
 import { Overview } from "@/pages/app/overview";
-import { BrandingPage } from "@/pages/app/branding";
-import { LinkHandlingPage } from "@/pages/app/link_handling";
+import { Branding } from "@/pages/app/branding";
+import { LinkHandling } from "@/pages/app/link_handling";
 import { Interface } from "@/pages/app/interface";
-import { WebOveridesPage } from "@/pages/app/web_overides";
-import { AppPermissionPage } from "@/pages/app/app_permission";
+import { WebOverides } from "@/pages/app/web_overides";
+import { AppPermission } from "@/pages/app/app_permission";
 import { AppDownloadPage } from "@/pages/app/appdownload";
 import { NativePluginPage } from "@/pages/app/native_pugin";
 import { AppServicePage } from "@/pages/app/app_service";
@@ -60,11 +60,11 @@ const App: React.FC = () => {
                 {/*Edit APP  Dynamic Action Routes */}
                 <Route path="app/:id/*" element={<AppDashboard />}>
                     <Route path="overview" element={<Overview />} />
-                    <Route path="branding" element={<BrandingPage />} />
-                    <Route path="link_handling" element={<LinkHandlingPage />} />
+                    <Route path="branding" element={<Branding />} />
+                    <Route path="link_handling" element={<LinkHandling />} />
                     <Route path="interface" element={<Interface />} />
-                    <Route path="web_overrides" element={<WebOveridesPage />} />
-                    <Route path="app_permission" element={<AppPermissionPage />} />
+                    <Route path="web_overrides" element={<WebOverides />} />
+                    <Route path="app_permission" element={<AppPermission />} />
                     <Route path="native_plugins" element={<NativePluginPage />} />
                     <Route path="app_download" element={<AppDownloadPage />} />
                     <Route path="native_navigation" element={<NativeNavigation />} />

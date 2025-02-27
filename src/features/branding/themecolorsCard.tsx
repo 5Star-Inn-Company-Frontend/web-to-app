@@ -8,24 +8,25 @@ import { useEffect, useState } from "react";
 import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "@/redux/hook";
-import { updateAppData } from "@/redux/app/appSlice";
+import { updateBranding } from "@/redux/app/appSlice";
 
 export const ThemeColorsCard = ({ os }: { os: "IOS" | "Android" }) => {
-    const [screenBackground, setScreenBackground] = useState("#FFFFFF");
-
-    const appData = useSelector((state: RootState) => state.app);
     const dispatch = useAppDispatch();
+    const themeColor = useSelector((state: RootState) => state.app.branding.theme_color);
+
+    const initialValue = themeColor || "#FFFFFF";
+
+    const [screenBackground, setScreenBackground] = useState(initialValue);
 
     const updateThemeColor = (color: string) => {
         setScreenBackground(color);
-        const newData = { ...appData, branding: { ...appData.branding, theme_color: color } };
-        dispatch(updateAppData(newData));
+        dispatch(updateBranding({ theme_color: color }));
     };
 
     useEffect(() => {
-        setScreenBackground(appData.branding.theme_color || "#FFFFFF");
+        setScreenBackground(themeColor);
         //eslint-disable-next-line
-    }, []);
+    }, [themeColor]);
 
     return (
         <div className="rounded-md border border-primary20">

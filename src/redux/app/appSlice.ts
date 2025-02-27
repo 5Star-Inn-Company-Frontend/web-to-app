@@ -140,6 +140,16 @@ const appSlice = createSlice({
         updateInterface: (state: IEditApp, action: PayloadAction<Partial<IEditApp["interface"]>>) => {
             return { ...state, interface: { ...state.interface, ...action.payload } };
         },
+
+        updateBranding: (state: IEditApp, action: PayloadAction<Partial<IEditApp["branding"]>>) => {
+            return { ...state, branding: { ...state.branding, ...action.payload } };
+        },
+        updateWebsiteOverrides: (state: IEditApp, action: PayloadAction<Partial<IEditApp["website_override"]>>) => {
+            return { ...state, website_override: { ...state.website_override, ...action.payload } };
+        },
+        updatePermission: (state: IEditApp, action: PayloadAction<Partial<IEditApp["permission"]>>) => {
+            return { ...state, permission: { ...state.permission, ...action.payload } };
+        },
     },
 });
 
@@ -148,9 +158,12 @@ export const {
     updateAppData,
     resetAppState,
     updateInterface,
+    updateBranding,
     updateName,
     updateUrl,
     updatePlan,
     updateDescription,
+    updateWebsiteOverrides,
+    updatePermission,
 } = appSlice.actions;
 export default appSlice.reducer;

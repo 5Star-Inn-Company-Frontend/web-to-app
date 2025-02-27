@@ -26,7 +26,7 @@ export const AppDetails = ({ name, id, member_count, last_saved }: IAppData) => 
                 <AppInfo plan="Free" ios="co.5start.ios.qlije" android="co.5start.android.qlije" />
                 <ActionButton
                     onViewClick={() => navigate("/app/viewapp")}
-                    onEditClick={() => navigate(`/app/${id}/overview/`)}
+                    onEditClick={() => navigate(`/app/${id}/overview`)}
                     onDeleteClick={openDeleteModal}
                 />
             </div>
