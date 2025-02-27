@@ -1,7 +1,24 @@
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { OsConfigCard } from "@/components/global/os_config_card";
+import { updatePermission } from "@/redux/app/appSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { RootState } from "@/redux/store";
+import { useState } from "react";
 
 export default function LocationService() {
+    const dispatch = useAppDispatch();
+    const locationService = useAppSelector((state: RootState) => state.app.permission.location_service);
+
+    const initialValue = locationService ? "enable" : "disable";
+    const [enableLocationService, setEnableLocationService] = useState(initialValue);
+
+    const handleChangeLocationService = (value: string) => {
+        setEnableLocationService(value);
+        const locationServiceIsEnabled = value === "enable";
+
+        dispatch(updatePermission({ location_service: locationServiceIsEnabled }));
+    };
+
     return (
         <div className="px-6 py-4 bg-white border-b border-primary20">
             <CollapsibleComponent
@@ -11,6 +28,8 @@ export default function LocationService() {
                 <div className="w-[50%] px-8">
                     <OsConfigCard
                         os="Android"
+                        value={enableLocationService}
+                        onValueChange={handleChangeLocationService}
                         radios={[
                             { title: "Disable", label: "disable" },
                             { title: "Enable", label: "enable" },
