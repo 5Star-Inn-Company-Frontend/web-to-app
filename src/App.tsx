@@ -14,7 +14,7 @@ import { NativePluginPage } from "@/pages/app/native_pugin";
 import { AppServicePage } from "@/pages/app/app_service";
 import { SupportPage } from "@/components/supportPage/SupportPage";
 import { PushNotification } from "@/components/pushNotification/PushNotification";
-import { NativeNavigation } from "@/components/nativeNavigation/NativeNavigation";
+import { NativeNavigation } from "@/pages/app/NativeNavigation";
 import { Plan } from "@/components/plan/Plan";
 import Members from "@/pages/members";
 import { AuthLayout } from "@/layouts/authLayout";

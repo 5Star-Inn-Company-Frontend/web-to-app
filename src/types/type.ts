@@ -1,3 +1,5 @@
+import React from "react";
+
 export interface AuthState {
     user: User | null;
     token: string | null;
@@ -71,10 +73,63 @@ export interface IWebsiteOveride {
     cookie_persistence: string;
     custom_javascript: string[];
 }
-export interface INavigation {
+
+interface IColorScheme {
+    background_color: string;
+    text_color: string;
+}
+
+interface IColorSchemeMode {
+    light_mode: IColorScheme;
+    dark_mode: IColorScheme;
+}
+
+interface ITopNavStyling extends IColorSchemeMode {
+    default_display: string;
+}
+
+interface ITopNavBarVisualEditor {
+    pages_to_display_top_nav_bar: string;
     display_mode: string;
-    styling: string[];
-    navigation_bar: string[];
+}
+
+interface ITopNavBar {
+    display_mode: string;
+    styling: ITopNavStyling;
+    top_navigate_bar_visual_editor: ITopNavBarVisualEditor;
+}
+
+interface ISidbarNavStyling extends IColorSchemeMode {
+    image: string;
+    sidebar_font: string;
+}
+
+interface ISideBarNavigation {
+    enable: true;
+    styling: ISidbarNavStyling;
+}
+
+interface IBottomTabBar {
+    default_mode: "hidden";
+    styling: IColorSchemeMode;
+}
+
+export interface IBackButtonConfig {
+    label: string;
+    pages_to_activate_button: string;
+}
+export interface IContextualNavToolbar {
+    enable: string;
+    toolbar_visibility_by_pages: string;
+    back_button_configuration: IBackButtonConfig;
+    refresh_button_configuration: boolean;
+    forward_button_configuration: boolean;
+}
+export interface INavigation {
+    top_nav_bar: ITopNavBar;
+    sidebar_navigation: ISideBarNavigation;
+    bottom_tab_bar: IBottomTabBar;
+    contextual_nav_toolbar: IContextualNavToolbar;
 }
 export interface IPermission {
     javascript_bridge: string[];
@@ -171,4 +226,9 @@ export interface IUser {
 
 export interface IMember {
     data: IUser[];
+}
+
+export interface ITabConfig {
+    value: string;
+    component: React.ComponentType;
 }

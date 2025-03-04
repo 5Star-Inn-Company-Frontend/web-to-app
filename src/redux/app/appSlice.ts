@@ -34,7 +34,7 @@ const initialState: IEditApp = {
         localization: ["Arabic", "Chinese", "English"],
     },
     website_override: {
-        user_agent: "5starcom",
+        user_agent: "",
         custom_css: [],
         cookie_persistence: "default",
         custom_javascript: [],
@@ -49,9 +49,62 @@ const initialState: IEditApp = {
         permission: [],
     },
     navigation: {
-        display_mode: "auto",
-        styling: [],
-        navigation_bar: [],
+        top_nav_bar: {
+            display_mode: "auto",
+            styling: {
+                default_display: "text",
+                light_mode: {
+                    background_color: "#ffffff",
+                    text_color: "#000000",
+                },
+                dark_mode: {
+                    background_color: "#000000",
+                    text_color: "#ffffff",
+                },
+            },
+            top_navigate_bar_visual_editor: {
+                pages_to_display_top_nav_bar: "multiple pages",
+                display_mode: "page title",
+            },
+        },
+        sidebar_navigation: {
+            enable: true,
+            styling: {
+                image: "text",
+                sidebar_font: "light",
+                light_mode: {
+                    background_color: "#ffffff",
+                    text_color: "#000000",
+                },
+                dark_mode: {
+                    background_color: "#000000",
+                    text_color: "#ffffff",
+                },
+            },
+        },
+        bottom_tab_bar: {
+            default_mode: "hidden",
+            styling: {
+                light_mode: {
+                    background_color: "#ffffff",
+                    text_color: "#000000",
+                },
+                dark_mode: {
+                    background_color: "#000000",
+                    text_color: "#ffffff",
+                },
+            },
+        },
+        contextual_nav_toolbar: {
+            enable: "auto",
+            toolbar_visibility_by_pages: "all pages",
+            back_button_configuration: {
+                label: "no text",
+                pages_to_activate_button: "all pages",
+            },
+            refresh_button_configuration: true,
+            forward_button_configuration: true,
+        },
     },
     notification: {
         signal: true,
@@ -150,6 +203,10 @@ const appSlice = createSlice({
         updatePermission: (state: IEditApp, action: PayloadAction<Partial<IEditApp["permission"]>>) => {
             return { ...state, permission: { ...state.permission, ...action.payload } };
         },
+
+        updateNavigation: (state: IEditApp, action: PayloadAction<Partial<IEditApp["navigation"]>>) => {
+            return { ...state, navigation: { ...state.navigation, ...action.payload } };
+        },
     },
 });
 
@@ -165,5 +222,6 @@ export const {
     updateDescription,
     updateWebsiteOverrides,
     updatePermission,
+    updateNavigation,
 } = appSlice.actions;
 export default appSlice.reducer;
