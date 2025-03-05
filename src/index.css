@@ -125,6 +125,7 @@ input[type="file"] {
     }
 }
 @layer base {
+<<<<<<< HEAD
     * {
         @apply border-border;
     }
@@ -132,3 +133,21 @@ input[type="file"] {
         @apply bg-background text-foreground;
     }
 }
+=======
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+>>>>>>> 45a96c3edca5f3f853b48d874b89a15bcd70858b

@@ -1,21 +1,44 @@
-import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { updatePermission } from "@/redux/app/appSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { RootState } from "@/redux/store";
+import { useState } from "react";
 
-export const DownloadDirConfigCard =()=>{
-    return(
+export const DownloadDirConfigCard = () => {
+    const dispatch = useAppDispatch();
+    const downloadDirectory = useAppSelector((state: RootState) => state.app.permission.downloads_directory);
+
+    const initialValue = downloadDirectory || "files saved private to app";
+    const [downloadDirLocation, setDownloadDirLocation] = useState(initialValue);
+
+    const handleChangeDownDirectory = (value: string) => {
+        setDownloadDirLocation(value);
+
+        dispatch(updatePermission({ downloads_directory: value }));
+    };
+
+    return (
         <div className="flex flex-col gap-4 p-2">
-            <RadioGroup 
+            <RadioGroup
+                value={downloadDirLocation}
+                onValueChange={handleChangeDownDirectory}
                 className="flex flex-col border p-1 border-primary20 flex-grow rounded-md"
-                defaultValue="app">
+                defaultValue="app"
+            >
                 <div className="flex items-center space-x-2 mb-2">
-                    <RadioGroupItem value="app" id="r2" />
-                    <Label className="text-primary40 font-normal" htmlFor="app">Files saved private to app</Label>
+                    <RadioGroupItem value="files saved private to app" id="r2" />
+                    <Label className="text-primary40 font-normal" htmlFor="app">
+                        Files saved private to app
+                    </Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="folder" id="r2" />
-                    <Label className="text-primary40 font-normal" htmlFor="folder">Files saved to download folder</Label>
+                    <RadioGroupItem value="files saved to download folder" id="r2" />
+                    <Label className="text-primary40 font-normal" htmlFor="folder">
+                        Files saved to download folder
+                    </Label>
                 </div>
             </RadioGroup>
         </div>
-    )
-}
+    );
+};

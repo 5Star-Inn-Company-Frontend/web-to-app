@@ -1,10 +1,11 @@
 import { Navbar } from "@/components/Navbar";
 import Sidebar from "@/features/maindashboard/sidebar";
+import PrivateRoute from "@/PrivateRoute";
 import { Outlet } from "react-router-dom";
 
 const HomeDashboard = () => {
     return (
-        <div>
+        <PrivateRoute>
             <Navbar />
             <div className="flex h-screen overflow-hidden p-6">
                 {/* Sidebar */}
@@ -16,7 +17,7 @@ const HomeDashboard = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </PrivateRoute>
     );
 };
 

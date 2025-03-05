@@ -1,12 +1,17 @@
-import { Web_OveridesSection } from "@/components/customui/app/web_overides/view"
-// import { useParams } from "react-router-dom"
-export const WebOveridesPage =()=>{
-    // const{
-    //     action
-    // }=useParams();
-    return(
+import WebOverridesHeading from "@/features/webOverrides/WebOverridesHeading";
+import UserAgent from "@/features/webOverrides/UserAgent";
+import CustomCss from "@/features/webOverrides/CustomCss";
+import CookiePersistence from "@/features/webOverrides/CookiePersistence";
+import CustomJavascript from "@/features/webOverrides/CustomJavascript";
+
+export const WebOverides = () => {
+    return (
         <>
-            <Web_OveridesSection/>
+            <WebOverridesHeading />
+            <UserAgent />
+            <CustomCss />
+            <CookiePersistence />
+            <CustomJavascript />
         </>
-    )
-}
+    );
+};

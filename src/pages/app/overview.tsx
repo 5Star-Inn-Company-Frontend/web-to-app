@@ -1,12 +1,21 @@
-import { OverviewSection } from "@/components/customui/app/overview/view"
-// import { useParams } from "react-router-dom"
-export const OverviewPage =()=>{
-    // const{
-    //     action
-    // }=useParams();
-    return(
+import Organization from "@/features/overview/Organization";
+import PublicSharing from "@/features/overview/PublicSharing";
+import PrivateSharing from "@/features/overview/PrivateSharing";
+import AppDescription from "@/features/overview/AppDescription";
+import AppName from "@/features/overview/AppName";
+import WebsiteUrl from "@/features/overview/WebsiteUrl";
+import OverviewHeading from "@/features/overview/OverviewHeading";
+
+export const Overview = () => {
+    return (
         <>
-            <OverviewSection />
+            <OverviewHeading />
+            <WebsiteUrl />
+            <AppName />
+            <AppDescription />
+            <PrivateSharing />
+            <PublicSharing />
+            <Organization />
         </>
-    )
-}
+    );
+};
