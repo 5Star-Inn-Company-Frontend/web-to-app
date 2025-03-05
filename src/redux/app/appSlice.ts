@@ -22,7 +22,7 @@ const initialState: IEditApp = {
     interface: {
         screen_on: true,
         full_screen: false,
-        dark_mode: "enable",
+        dark_mode: "auto",
         screen_orientation: "auto rotate",
         pull_to_refresh: true,
         swipe_gesture: true,
@@ -31,10 +31,10 @@ const initialState: IEditApp = {
         front_scaling: true,
         maximum_window: false,
         view_port_width: true,
-        localization: ["Arabic", "Chinese", "English"],
+        localization: ["English"],
     },
-    website_override: {
-        user_agent: "",
+    website_overide: {
+        user_agent: "enable",
         custom_css: [],
         cookie_persistence: "default",
         custom_javascript: [],
@@ -142,10 +142,10 @@ const appSlice = createSlice({
                 action.payload.interface != null
                     ? { ...state.interface, ...action.payload.interface }
                     : state.interface;
-            newState.website_override =
-                action.payload.website_override != null
-                    ? { ...state.website_override, ...action.payload.website_override }
-                    : state.website_override;
+            newState.website_overide =
+                action.payload.website_overide != null
+                    ? { ...state.website_overide, ...action.payload.website_overide }
+                    : state.website_overide;
             newState.permission =
                 action.payload.permission != null
                     ? { ...state.permission, ...action.payload.permission }
@@ -191,8 +191,8 @@ const appSlice = createSlice({
         updateBranding: (state: IEditApp, action: PayloadAction<Partial<IEditApp["branding"]>>) => {
             return { ...state, branding: { ...state.branding, ...action.payload } };
         },
-        updateWebsiteOverrides: (state: IEditApp, action: PayloadAction<Partial<IEditApp["website_override"]>>) => {
-            return { ...state, website_override: { ...state.website_override, ...action.payload } };
+        updateWebsiteOverrides: (state: IEditApp, action: PayloadAction<Partial<IEditApp["website_overide"]>>) => {
+            return { ...state, website_override: { ...state.website_overide, ...action.payload } };
         },
         updatePermission: (state: IEditApp, action: PayloadAction<Partial<IEditApp["permission"]>>) => {
             return { ...state, permission: { ...state.permission, ...action.payload } };
