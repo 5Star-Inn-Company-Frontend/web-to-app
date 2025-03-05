@@ -74,7 +74,7 @@ export interface IWebsiteOveride {
     custom_javascript: string[];
 }
 
-interface IColorScheme {
+export interface IColorScheme {
     background_color: string;
     text_color: string;
 }
@@ -99,19 +99,23 @@ interface ITopNavBar {
     top_navigate_bar_visual_editor: ITopNavBarVisualEditor;
 }
 
-interface ISidbarNavStyling extends IColorSchemeMode {
+export interface ISidbarNavStyling extends IColorSchemeMode {
     image: string;
     sidebar_font: string;
 }
 
-interface ISideBarNavigation {
-    enable: true;
+export interface ISideBarNavigation {
+    enable: boolean;
     styling: ISidbarNavStyling;
 }
 
-interface IBottomTabBar {
-    default_mode: "hidden";
-    styling: IColorSchemeMode;
+export interface IBgColorScheme {
+    light_mode: string;
+    dark_mode: string;
+}
+export interface IBottomTabBar {
+    default_mode: "hidden" | "active";
+    styling: IBgColorScheme;
 }
 
 export interface IBackButtonConfig {

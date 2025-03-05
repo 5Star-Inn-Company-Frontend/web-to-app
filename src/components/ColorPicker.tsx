@@ -14,7 +14,7 @@ export function ColorPicker({ background, setBackground }: IColorPicker) {
                 value={background}
                 onChange={(e) => setBackground(e.target.value.toUpperCase())}
             />
-            <span className="text-sm">{background}</span>
+            <span className="text-xs uppercase">{background}</span>
         </div>
     );
 }

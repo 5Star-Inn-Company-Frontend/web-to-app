@@ -1,8 +1,33 @@
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import TopNavigationCollapsable from "../TopNavigationCollapsable";
 import { Label } from "@/components/ui/label";
+import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { RootState } from "@/redux/store";
+import { updateNavigation } from "@/redux/app/appSlice";
+import { ISideBarNavigation } from "@/types/type";
+
+type TinitialValue = "enable" | "disable";
 
 export default function Enable() {
+    const dispatch = useAppDispatch();
+    const sideNavEnabled = useAppSelector((state: RootState) => state.app.navigation.sidebar_navigation);
+
+    const initialValue: TinitialValue = sideNavEnabled.enable ? "enable" : "disable";
+    const [enableSideNav, setEnableSideNav] = useState<TinitialValue>(initialValue);
+
+    useEffect(() => {
+        setEnableSideNav(initialValue);
+    }, [initialValue]);
+
+    const handleChangeEnableSideNav = (value: TinitialValue) => {
+        setEnableSideNav(value);
+        const isEnableSideNav = value === "enable";
+        const newSideBarNavValue: ISideBarNavigation = { ...sideNavEnabled, enable: isEnableSideNav };
+
+        dispatch(updateNavigation({ sidebar_navigation: newSideBarNavValue }));
+    };
+
     return (
         <TopNavigationCollapsable title="Enable">
             <p className="text-sm text-primary60 mb-4">
@@ -13,7 +38,11 @@ export default function Enable() {
                 well as set dynamically via the JavaScript Bridge
             </p>
             <div>
-                <RadioGroup defaultValue="disable" className="inline-flex items-center gap-x-20 p-1 rounded-md border">
+                <RadioGroup
+                    value={enableSideNav}
+                    onValueChange={handleChangeEnableSideNav}
+                    className="inline-flex items-center gap-x-20 p-1 rounded-md border"
+                >
                     <div className="flex items-center space-x-2">
                         <RadioGroupItem value="disable" id="r1" />
                         <Label className="text-xs text-primary40" htmlFor="r1">

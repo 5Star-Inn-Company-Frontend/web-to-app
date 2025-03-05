@@ -85,14 +85,8 @@ const initialState: IEditApp = {
         bottom_tab_bar: {
             default_mode: "hidden",
             styling: {
-                light_mode: {
-                    background_color: "#ffffff",
-                    text_color: "#000000",
-                },
-                dark_mode: {
-                    background_color: "#000000",
-                    text_color: "#ffffff",
-                },
+                light_mode: "#ffffff",
+                dark_mode: "#000000",
             },
         },
         contextual_nav_toolbar: {
@@ -207,6 +201,31 @@ const appSlice = createSlice({
         updateNavigation: (state: IEditApp, action: PayloadAction<Partial<IEditApp["navigation"]>>) => {
             return { ...state, navigation: { ...state.navigation, ...action.payload } };
         },
+
+        updateNavigationSideBarTab: (
+            state: IEditApp,
+            action: PayloadAction<Partial<IEditApp["navigation"]["sidebar_navigation"]>>
+        ) => {
+            return {
+                ...state,
+                navigation: {
+                    ...state.navigation,
+                    sidebar_navigation: { ...state.navigation.sidebar_navigation, ...action.payload },
+                },
+            };
+        },
+        updateNavigationTopBarTab: (
+            state: IEditApp,
+            action: PayloadAction<Partial<IEditApp["navigation"]["top_nav_bar"]>>
+        ) => {
+            return {
+                ...state,
+                navigation: {
+                    ...state.navigation,
+                    top_nav_bar: { ...state.navigation.top_nav_bar, ...action.payload },
+                },
+            };
+        },
     },
 });
 
@@ -223,5 +242,7 @@ export const {
     updateWebsiteOverrides,
     updatePermission,
     updateNavigation,
+    updateNavigationSideBarTab,
+    updateNavigationTopBarTab,
 } = appSlice.actions;
 export default appSlice.reducer;
