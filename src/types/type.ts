@@ -174,7 +174,7 @@ export interface IAppData {
     branding: IBranding | null;
     link_handling: ILinkHandling | null;
     interface: IInterface | null;
-    website_override: IWebsiteOveride | null;
+    website_overide: IWebsiteOveride | null;
     permission: IPermission | null;
     navigation: INavigation | null;
     notification: INotification | null;
@@ -193,7 +193,7 @@ export interface IEditApp {
     branding: IBranding;
     link_handling: ILinkHandling;
     interface: IInterface;
-    website_override: IWebsiteOveride;
+    website_overide: IWebsiteOveride;
     permission: IPermission;
     navigation: INavigation;
     notification: INotification;
