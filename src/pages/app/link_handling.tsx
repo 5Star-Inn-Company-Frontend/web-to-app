@@ -1,9 +1,17 @@
-import { LinkHandlingSection } from "@/components/customui/app/link_handling/view"
-// import { useParams } from "react-router-dom"
-export const LinkHandlingPage =()=>{
-    return(
+import LinkHandlingHeading from "@/features/linkhandling/LinkHandlingHeading";
+import LinkBehaviour from "@/features/linkhandling/LinkBehaviour";
+import NewWindows from "@/features/linkhandling/NewWindows";
+import UniversalLink from "@/features/linkhandling/UniversalLink";
+import UniversalLinkUrl from "@/features/linkhandling/UniversalLinkUrl";
+
+export const LinkHandling = () => {
+    return (
         <>
-            <LinkHandlingSection  />
+            <LinkHandlingHeading />
+            <LinkBehaviour />
+            <NewWindows />
+            <UniversalLink />
+            <UniversalLinkUrl />
         </>
-    )
-}
+    );
+};

@@ -37,7 +37,7 @@ export const SigninForm = () => {
         onSuccess: (data) => {
             dispatch(login(data));
             toast.success(data.message);
-            navigate("/app");
+            navigate("/");
         },
         onError: (error: Error | AxiosError) => {
             if (axios.isAxiosError(error)) {
@@ -47,7 +47,6 @@ export const SigninForm = () => {
     });
 
     function onSubmit(values: z.infer<typeof SigninformSchema>) {
-        console.log(values);
         mutate(values);
     }
 

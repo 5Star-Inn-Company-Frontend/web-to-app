@@ -11,9 +11,17 @@ interface ITopNavigationCollapsable {
 export default function TopNavigationCollapsable({ title, children }: ITopNavigationCollapsable) {
     const [toggleDropdown, setToggleDropdown] = useState(true);
 
+    const handleClickToggleDropdown = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        setToggleDropdown(!toggleDropdown);
+    };
+
     return (
-        <Collapsible open={toggleDropdown} onClick={() => setToggleDropdown(!toggleDropdown)}>
-            <CollapsibleTrigger className="w-full flex items-center justify-between mb-4 px-10">
+        <Collapsible open={toggleDropdown}>
+            <CollapsibleTrigger
+                onClick={handleClickToggleDropdown}
+                className="w-full flex items-center justify-between mb-4 px-10"
+            >
                 <Text style="text-base font-medium" value={title} />
                 <FaAngleDown />
             </CollapsibleTrigger>

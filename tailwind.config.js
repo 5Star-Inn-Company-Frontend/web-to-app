@@ -10,6 +10,7 @@ export const content = [
     "./src/**/*.{ts,tsx}",
 ];
 export const prefix = "";
+export const mode = "jit";
 export const theme = {
     container: {
         center: true,

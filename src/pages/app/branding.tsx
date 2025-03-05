@@ -1,10 +1,17 @@
-import { BrandingSection } from "@/components/customui/app/branding/view"
-// import { useParams } from "react-router-dom"
-export const BrandingPage =()=>{
-  
-    return(
+import BrandingHeader from "@/features/branding/BrandingHeader";
+import AppIcon from "@/features/branding/AppIcon";
+import SplashScreen from "@/features/branding/splashScreen";
+import ThemeColor from "@/features/branding/ThemeColor";
+import StatusBar from "@/components/customui/app/branding/StatusBar";
+
+export const Branding = () => {
+    return (
         <>
-            <BrandingSection />
+            <BrandingHeader />
+            <AppIcon />
+            <SplashScreen />
+            <ThemeColor />
+            <StatusBar />
         </>
-    )
-}
+    );
+};
