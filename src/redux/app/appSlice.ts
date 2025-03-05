@@ -105,8 +105,9 @@ const initialState: IEditApp = {
         legacy_mode: false,
         app_id: "ikwwiniwe",
         automatic_registration: true,
-        automatic_data_transmission: false,
-        foreground_notification: true,
+        automatic_data_transmission: "automatic",
+        foreground_notification: "show",
+        android_notifications_icon: null,
         notification_sound: [],
     },
     plugin: {
@@ -143,9 +144,9 @@ const appSlice = createSlice({
                     ? { ...state.interface, ...action.payload.interface }
                     : state.interface;
             newState.website_overide =
-                action.payload.website_overide != null
+                action.payload.website_overide !== null
                     ? { ...state.website_overide, ...action.payload.website_overide }
-                    : state.website_overide;
+                    : initialState.website_overide;
             newState.permission =
                 action.payload.permission != null
                     ? { ...state.permission, ...action.payload.permission }
@@ -198,6 +199,10 @@ const appSlice = createSlice({
             return { ...state, permission: { ...state.permission, ...action.payload } };
         },
 
+        updateNotification: (state: IEditApp, action: PayloadAction<Partial<IEditApp["notification"]>>) => {
+            return { ...state, notification: { ...state.notification, ...action.payload } };
+        },
+
         updateNavigation: (state: IEditApp, action: PayloadAction<Partial<IEditApp["navigation"]>>) => {
             return { ...state, navigation: { ...state.navigation, ...action.payload } };
         },
@@ -241,6 +246,7 @@ export const {
     updateDescription,
     updateWebsiteOverrides,
     updatePermission,
+    updateNotification,
     updateNavigation,
     updateNavigationSideBarTab,
     updateNavigationTopBarTab,

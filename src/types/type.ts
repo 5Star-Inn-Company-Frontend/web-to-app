@@ -84,16 +84,16 @@ interface IColorSchemeMode {
     dark_mode: IColorScheme;
 }
 
-interface ITopNavStyling extends IColorSchemeMode {
+export interface ITopNavStyling extends IColorSchemeMode {
     default_display: string;
 }
 
-interface ITopNavBarVisualEditor {
+export interface ITopNavBarVisualEditor {
     pages_to_display_top_nav_bar: string;
     display_mode: string;
 }
 
-interface ITopNavBar {
+export interface ITopNavBar {
     display_mode: string;
     styling: ITopNavStyling;
     top_navigate_bar_visual_editor: ITopNavBarVisualEditor;
@@ -145,13 +145,14 @@ export interface IPermission {
     permission: string[];
 }
 
-interface INotification {
+export interface INotification {
     signal: boolean;
     legacy_mode: boolean;
     app_id: string;
     automatic_registration: boolean;
-    automatic_data_transmission: boolean;
-    foreground_notification: boolean;
+    automatic_data_transmission: string;
+    foreground_notification: string;
+    android_notifications_icon: null;
     notification_sound: string[];
 }
 
@@ -235,4 +236,14 @@ export interface IMember {
 export interface ITabConfig {
     value: string;
     component: React.ComponentType;
+}
+
+export interface IAppState {
+    id: null | number;
+    name: string;
+    url: string;
+    description: string;
+    plan: string;
+    last_saved: string;
+    member_count: number;
 }

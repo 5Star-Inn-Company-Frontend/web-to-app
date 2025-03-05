@@ -4,6 +4,13 @@ import { Simulation } from "@/components/Simulation";
 import DashboardHeader from "@/features/layout/DashboardHeader";
 import DashboardNav from "@/features/layout/DashboardNav";
 import { setAppData } from "@/redux/app/appSlice";
+import { defaultBrandingState, setBranding } from "@/redux/app/brandSlice";
+import { defaultInterfaceSliceState, updateInterface } from "@/redux/app/interfaceSlice";
+import { defaultLinkHandlingState, setLinkHandling } from "@/redux/app/linkHandlingSlice";
+import { defaultNavigationState, updateNavigation } from "@/redux/app/NavigationSlice";
+import { defaultNotificationState, setNotification } from "@/redux/app/NotificationSlice";
+import { defaultPermissionState, setPermission } from "@/redux/app/permissionSlice";
+import { defaultWebsiteOverideState, setWebsiteOveride } from "@/redux/app/websiteOverideSlice";
 import { useAppDispatch } from "@/redux/hook";
 import { IEditAppResponse } from "@/types/type";
 import { useQuery } from "@tanstack/react-query";
@@ -23,6 +30,13 @@ const AppDashboard = () => {
 
     if (isSuccess) {
         dispatch(setAppData(data.data));
+        dispatch(setBranding(data.data.branding ?? defaultBrandingState));
+        dispatch(updateInterface(data.data.interface ?? defaultInterfaceSliceState));
+        dispatch(setLinkHandling(data.data.link_handling ?? defaultLinkHandlingState));
+        dispatch(updateNavigation(data.data.navigation ?? defaultNavigationState));
+        dispatch(setNotification(data.data.notification ?? defaultNotificationState));
+        dispatch(setPermission(data.data.permission ?? defaultPermissionState));
+        dispatch(setWebsiteOveride(data.data.website_overide ?? defaultWebsiteOverideState));
     }
 
     return (
@@ -33,7 +47,9 @@ const AppDashboard = () => {
                     <DashboardHeader />
                     <div className="flex rounded-t-md bg-white">
                         <DashboardNav id={appId} />
-                        <div className="flex-1">{isLoading ? <div>Loading........</div> : <Outlet />}</div>
+                        <div className="flex-1">
+                            {isLoading ? <div>Loading........</div> : <Outlet />}
+                        </div>
                     </div>
                 </div>
                 <div className="w-[28%]">

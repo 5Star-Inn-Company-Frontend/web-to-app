@@ -1,11 +1,40 @@
 import CollapseableWithArrow from "@/components/CollapseableWithArrow";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { updateNotification } from "@/redux/app/appSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { RootState } from "@/redux/store";
+import { useEffect, useState } from "react";
+
+type TInitialValue = "enable" | "disable";
 
 export default function EnableOneSignal() {
+    const dispatch = useAppDispatch();
+    const notificationStore = useAppSelector((state: RootState) => state.app.notification);
+
+    const initialValue: TInitialValue = notificationStore.signal ? "enable" : "disable";
+
+    const [enableOneSignal, setEnableOneSignal] = useState<TInitialValue>(initialValue);
+
+    useEffect(() => {
+        setEnableOneSignal(initialValue);
+    }, [initialValue]);
+
+    const handleChangeEnableOneSignal = (value: TInitialValue) => {
+        setEnableOneSignal(value);
+
+        const isEnableOneSignal = value === "enable";
+
+        dispatch(updateNotification({ signal: isEnableOneSignal }));
+    };
+
     return (
         <CollapseableWithArrow title="Enable One Signal">
-            <RadioGroup defaultValue="disable" className="inline-flex items-center gap-x-20 p-1  rounded-md border">
+            <RadioGroup
+                value={enableOneSignal}
+                onValueChange={handleChangeEnableOneSignal}
+                className="inline-flex items-center gap-x-20 p-1  rounded-md border"
+            >
                 <div className="flex items-center space-x-2">
                     <RadioGroupItem value="disable" id="r1" />
                     <Label className="text-xs text-primary40" htmlFor="r1">
