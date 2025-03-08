@@ -3,36 +3,31 @@
 import { Text } from "@/components/global/text";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { updateAppData } from "@/redux/app/appSlice";
-import { useAppDispatch } from "@/redux/hook";
+import { updateStatusBar } from "@/redux/app/brandSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { IEditApp } from "@/types/type";
 import { useEffect, useState } from "react";
 import { CiLight } from "react-icons/ci";
 import { FaAndroid, FaApple } from "react-icons/fa6";
-import { useSelector } from "react-redux";
 
 interface IStatusBarCard {
     os: "IOS" | "Android";
 }
 
 export const StatusbarCard = ({ os }: IStatusBarCard) => {
-    const appData = useSelector((state: RootState) => state.app);
-    const [statusBar, setStatusBar] = useState("overlay");
-
     const dispatch = useAppDispatch();
+    const appData = useAppSelector((state: RootState) => state.apps.branding.status_bar);
 
-    const updateStatusBar = (status: string) => {
-        setStatusBar(status);
-
-        const newData: IEditApp = { ...appData, branding: { ...appData.branding, status_bar: status } };
-        dispatch(updateAppData(newData));
-    };
+    const [statusBar, setStatusBar] = useState(appData);
 
     useEffect(() => {
-        setStatusBar(appData.branding.status_bar || "overlay");
-        //eslint-disable-next-line
-    }, []);
+        setStatusBar(appData);
+    }, [appData]);
+
+    const handleUpdateStatusBar = (status: string) => {
+        setStatusBar(status);
+        dispatch(updateStatusBar(status));
+    };
 
     return (
         <div className="rounded-md border border-primary20">
@@ -81,7 +76,7 @@ export const StatusbarCard = ({ os }: IStatusBarCard) => {
                                 <RadioGroup
                                     className="flex justify-between border p-[0.7rem] rounded-md w-full"
                                     value={statusBar}
-                                    onValueChange={updateStatusBar}
+                                    onValueChange={handleUpdateStatusBar}
                                 >
                                     <div className="flex items-center space-x-2">
                                         <RadioGroupItem value="overlay" id="r1" />
@@ -111,7 +106,11 @@ export const StatusbarCard = ({ os }: IStatusBarCard) => {
                             <div>
                                 <div className="flex gap-2 items-center text-[grey] text-xs mb-4">
                                     <div className=" w-[0.8rem] h-[0.8rem] relative">
-                                        <img src="/darkscreen.svg" alt="object not found" className="w-full" />
+                                        <img
+                                            src="/darkscreen.svg"
+                                            alt="object not found"
+                                            className="w-full"
+                                        />
                                     </div>
                                     Dark mode
                                 </div>

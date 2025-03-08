@@ -4,7 +4,8 @@ import { useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
 
 export default function SplashScreen() {
-    const appIcon = useAppSelector((state: RootState) => state.app.branding.app_icon) || "/giftcard2.png";
+    const appIcon =
+        useAppSelector((state: RootState) => state.apps.branding.app_icon) || "/giftcard2.png";
 
     return (
         <div className="px-6 py-10 bg-white border-b border-primary20">

@@ -5,8 +5,10 @@ import { Text } from "@/components/global/text";
 import { useCallback, useMemo, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { IContextualNavToolbar } from "@/types/type";
-import { updateNavigation } from "@/redux/app/appSlice";
+import {
+    updateContextualBackBtnLabel,
+    updateContextualPagesToActiveBtn,
+} from "@/redux/app/NavigationSlice";
 
 type IBackBtnLabel = "no text" | "default text" | "custom text";
 type IBackBtnPages = "all pages" | "specific pages";
@@ -14,35 +16,36 @@ type IBackBtnPages = "all pages" | "specific pages";
 export default function BackButtonConfig() {
     const dispatch = useAppDispatch();
 
-    const backButtonConfig = useAppSelector((state: RootState) => state.app.navigation.contextual_nav_toolbar);
+    const backButtonConfig = useAppSelector(
+        (state: RootState) => state.apps.navigation.contextual_nav_toolbar
+    );
 
     /* ========== Memoize Initial Value from Redux ============= */
 
     const initialValue = useMemo(() => {
         return {
             label: (backButtonConfig.back_button_configuration.label ?? "no text") as IBackBtnLabel,
-            pages_to_activate_button: (backButtonConfig.back_button_configuration.pages_to_activate_button ??
-                "all pages") as IBackBtnPages,
+            pages_to_activate_button: (backButtonConfig.back_button_configuration
+                .pages_to_activate_button ?? "all pages") as IBackBtnPages,
         };
     }, [backButtonConfig?.back_button_configuration]);
 
     /* ============== State ============ */
 
     const [backBtnLabel, setBackBtnLabel] = useState<IBackBtnLabel>(initialValue.label);
-    const [backBtnPages, setBackBtnPages] = useState<IBackBtnPages>(initialValue.pages_to_activate_button);
+    const [backBtnPages, setBackBtnPages] = useState<IBackBtnPages>(
+        initialValue.pages_to_activate_button
+    );
 
     /* ========= Handle Pages Change ============ */
 
     const handleChangeBackBtnPages = useCallback(
         (value: IBackBtnPages) => {
             setBackBtnPages(value);
-            const newContextualValue: IContextualNavToolbar = {
-                ...backButtonConfig,
-                back_button_configuration: { ...backButtonConfig.back_button_configuration, label: value },
-            };
-            dispatch(updateNavigation({ contextual_nav_toolbar: newContextualValue }));
+
+            dispatch(updateContextualPagesToActiveBtn(value));
         },
-        [dispatch, backButtonConfig]
+        [dispatch]
     );
 
     /* =============== Handle Label Change ========== */
@@ -50,16 +53,10 @@ export default function BackButtonConfig() {
     const handleChangeBackBtnLabel = useCallback(
         (value: IBackBtnLabel) => {
             setBackBtnLabel(value);
-            const newContextualValue: IContextualNavToolbar = {
-                ...backButtonConfig,
-                back_button_configuration: {
-                    ...backButtonConfig.back_button_configuration,
-                    pages_to_activate_button: value,
-                },
-            };
-            dispatch(updateNavigation({ contextual_nav_toolbar: newContextualValue }));
+
+            dispatch(updateContextualBackBtnLabel(value));
         },
-        [dispatch, backButtonConfig]
+        [dispatch]
     );
 
     return (

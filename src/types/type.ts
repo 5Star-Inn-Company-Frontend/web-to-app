@@ -79,7 +79,7 @@ export interface IColorScheme {
     text_color: string;
 }
 
-interface IColorSchemeMode {
+export interface IColorSchemeMode {
     light_mode: IColorScheme;
     dark_mode: IColorScheme;
 }
@@ -239,7 +239,7 @@ export interface ITabConfig {
 }
 
 export interface IAppState {
-    id: null | number;
+    id: number | null;
     name: string;
     url: string;
     description: string;

@@ -1,23 +1,27 @@
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { updateInterface } from "@/redux/app/appSlice";
+import { updateMaximumWindow } from "@/redux/app/interfaceSlice";
 import { useAppDispatch } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 
 export default function MaximumWindows() {
     const dispatch = useAppDispatch();
-    const maxWindow = useSelector((state: RootState) => state.app.interface.maximum_window);
+    const maxWindow = useSelector((state: RootState) => state.apps.interface.maximum_window);
 
     const initialMaxWindow = useMemo(() => (maxWindow ? "enable" : "disable"), [maxWindow]);
     const [enableMaxWindow, setEnableMaxWindow] = useState(initialMaxWindow);
 
+    useEffect(() => {
+        setEnableMaxWindow(initialMaxWindow);
+    }, [initialMaxWindow]);
+
     const handleChangeEnableMaxWindow = (status: string) => {
         setEnableMaxWindow(status);
         const isMaxWindowEnabled = status === "enable";
-        dispatch(updateInterface({ maximum_window: isMaxWindowEnabled }));
+        dispatch(updateMaximumWindow(isMaxWindowEnabled));
     };
 
     return (

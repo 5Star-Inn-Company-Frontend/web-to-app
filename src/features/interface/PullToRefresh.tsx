@@ -1,23 +1,27 @@
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { OsConfigCard } from "@/components/global/os_config_card";
 import { Text } from "@/components/global/text";
-import { updateInterface } from "@/redux/app/appSlice";
+import { updatePullToRefresh } from "@/redux/app/interfaceSlice";
 import { useAppDispatch } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 
 export default function PullToRefresh() {
     const dispatch = useAppDispatch();
-    const pullToRefresh = useSelector((state: RootState) => state.app.interface.pull_to_refresh);
+    const pullToRefresh = useSelector((state: RootState) => state.apps.interface.pull_to_refresh);
 
     const initialValue = useMemo(() => (pullToRefresh ? "on" : "off"), [pullToRefresh]);
     const [enablePullToRefresh, setEnablePullToRefresh] = useState(initialValue);
 
+    useEffect(() => {
+        setEnablePullToRefresh(initialValue);
+    }, [initialValue]);
+
     const handleChangePullToRefresh = (newvalue: string) => {
         setEnablePullToRefresh(newvalue);
         const pullToRefreshIsEnabled = newvalue === "on";
-        dispatch(updateInterface({ pull_to_refresh: pullToRefreshIsEnabled }));
+        dispatch(updatePullToRefresh(pullToRefreshIsEnabled));
     };
 
     return (
@@ -58,7 +62,9 @@ export default function PullToRefresh() {
                         ]}
                     >
                         <div className="px-6">
-                            <span className="text-[0.6rem] text-primary80 ">Pull to Refresh Icon Color</span>
+                            <span className="text-[0.6rem] text-primary80 ">
+                                Pull to Refresh Icon Color
+                            </span>
                             <div className="w-fit flex justify-between border rounded-md px-2 pr-6 py-1 items-center gap-2 mt-4 mb-4">
                                 <div className="h-[0.7rem] w-[0.7rem] p-1 rounded border bg-white"></div>
                                 <Text style="text-[grey] text-xs" value="#FFFFFF" />

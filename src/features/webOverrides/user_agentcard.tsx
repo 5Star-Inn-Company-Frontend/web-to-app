@@ -4,20 +4,24 @@ import { Input } from "@/components/ui/input";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useState } from "react";
-import { updateWebsiteOverrides } from "@/redux/app/appSlice";
+import { useEffect, useState } from "react";
+import { updateUserAgent } from "@/redux/app/websiteOverideSlice";
 
 export const UserAgentConfigCard = () => {
     const dispatch = useDispatch();
-    const userAgent = useAppSelector((state: RootState) => state.app.website_override.user_agent);
+    const userAgent = useAppSelector((state: RootState) => state.apps.websiteOveride.user_agent);
 
     const initialValue = userAgent || "enable";
 
     const [enableUserAgent, setEnableUserAgent] = useState(initialValue);
 
+    useEffect(() => {
+        setEnableUserAgent(initialValue);
+    }, [initialValue]);
+
     const handleChangeUserAgent = (newvalue: string) => {
         setEnableUserAgent(newvalue);
-        dispatch(updateWebsiteOverrides({ user_agent: newvalue }));
+        dispatch(updateUserAgent(newvalue));
     };
 
     return (
@@ -40,7 +44,11 @@ export const UserAgentConfigCard = () => {
                     </Label>
                 </div>
             </RadioGroup>
-            <Input className="w-full py-1 px-2 rounded-md border border-primary20" type="text" placeholder="5starcom" />
+            <Input
+                className="w-full py-1 px-2 rounded-md border border-primary20"
+                type="text"
+                placeholder="5starcom"
+            />
         </div>
     );
 };

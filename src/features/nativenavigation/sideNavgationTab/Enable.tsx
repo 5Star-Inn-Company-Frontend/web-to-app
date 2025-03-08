@@ -4,14 +4,15 @@ import { Label } from "@/components/ui/label";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { updateNavigation } from "@/redux/app/appSlice";
-import { ISideBarNavigation } from "@/types/type";
+import { updateSideNavEnable } from "@/redux/app/NavigationSlice";
 
 type TinitialValue = "enable" | "disable";
 
 export default function Enable() {
     const dispatch = useAppDispatch();
-    const sideNavEnabled = useAppSelector((state: RootState) => state.app.navigation.sidebar_navigation);
+    const sideNavEnabled = useAppSelector(
+        (state: RootState) => state.apps.navigation.sidebar_navigation
+    );
 
     const initialValue: TinitialValue = sideNavEnabled.enable ? "enable" : "disable";
     const [enableSideNav, setEnableSideNav] = useState<TinitialValue>(initialValue);
@@ -23,19 +24,19 @@ export default function Enable() {
     const handleChangeEnableSideNav = (value: TinitialValue) => {
         setEnableSideNav(value);
         const isEnableSideNav = value === "enable";
-        const newSideBarNavValue: ISideBarNavigation = { ...sideNavEnabled, enable: isEnableSideNav };
 
-        dispatch(updateNavigation({ sidebar_navigation: newSideBarNavValue }));
+        dispatch(updateSideNavEnable(isEnableSideNav));
     };
 
     return (
         <TopNavigationCollapsable title="Enable">
             <p className="text-sm text-primary60 mb-4">
-                A Sidebar Navigation Menu is a standard navigation feature that is highly configurable. Users access the
-                navigation menu through a "hamburger" toggle button if a Top Nav Bar is enabled, or by sliding from the
-                left side of the screen. The menu items in the sidebar nav menu can be configured with an optional icon
-                and in collapsible groupings. The sidebar menu items can be configured within the app configuration as
-                well as set dynamically via the JavaScript Bridge
+                A Sidebar Navigation Menu is a standard navigation feature that is highly
+                configurable. Users access the navigation menu through a "hamburger" toggle button
+                if a Top Nav Bar is enabled, or by sliding from the left side of the screen. The
+                menu items in the sidebar nav menu can be configured with an optional icon and in
+                collapsible groupings. The sidebar menu items can be configured within the app
+                configuration as well as set dynamically via the JavaScript Bridge
             </p>
             <div>
                 <RadioGroup

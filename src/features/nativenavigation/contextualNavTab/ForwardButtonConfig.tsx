@@ -4,15 +4,16 @@ import { Label } from "@/components/ui/label";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { updateNavigation } from "@/redux/app/appSlice";
+import { updateContextualForwardBtn } from "@/redux/app/NavigationSlice";
 
 type TInitialValue = "enable" | "disable";
 
 export default function ForwardButtonConfig() {
     const dispatch = useAppDispatch();
-    const fwdButtonConfig = useAppSelector((state: RootState) => state.app.navigation.contextual_nav_toolbar);
+    const fwdButtonConfig = useAppSelector(
+        (state: RootState) => state.apps.navigation.contextual_nav_toolbar
+    );
 
-    // const initialValue = fwdButtonConfig.forward_button_configuration ? "enable" : "disable";
     const initialValue = useMemo<TInitialValue>(() => {
         return fwdButtonConfig.forward_button_configuration ? "enable" : "disable";
     }, [fwdButtonConfig.forward_button_configuration]);
@@ -27,12 +28,10 @@ export default function ForwardButtonConfig() {
         (value: TInitialValue) => {
             setForwardButtonConfig(value);
             const fwdButtonConfigIsEnabled = value === "enable";
-            // new value
-            const newContextualValue = { ...fwdButtonConfig, forward_button_configuration: fwdButtonConfigIsEnabled };
             // update redux store
-            dispatch(updateNavigation({ contextual_nav_toolbar: newContextualValue }));
+            dispatch(updateContextualForwardBtn(fwdButtonConfigIsEnabled));
         },
-        [dispatch, fwdButtonConfig]
+        [dispatch]
     );
 
     return (

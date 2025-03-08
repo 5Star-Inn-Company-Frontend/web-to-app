@@ -1,13 +1,10 @@
 import {
-    IBackButtonConfig,
     IBottomTabBar,
+    IColorScheme,
     IContextualNavToolbar,
     INavigation,
-    ISidbarNavStyling,
     ISideBarNavigation,
     ITopNavBar,
-    ITopNavBarVisualEditor,
-    ITopNavStyling,
 } from "@/types/type";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
@@ -77,17 +74,28 @@ const navigation = createSlice({
             state.top_nav_bar = updatedTopNav;
         },
 
-        updateTopNavStyling: (state: INavigation, action: PayloadAction<ITopNavStyling>) => {
-            const updateTopNavStyle = { ...state.top_nav_bar.styling, ...action.payload };
-            state.top_nav_bar.styling = updateTopNavStyle;
+        updateDisplayMode: (state: INavigation, action: PayloadAction<"auto" | "always">) => {
+            state.top_nav_bar.display_mode = action.payload;
         },
 
-        updateTopNavigate: (state: INavigation, action: PayloadAction<ITopNavBarVisualEditor>) => {
-            const updatedTopNavigate = {
-                ...state.top_nav_bar.top_navigate_bar_visual_editor,
-                ...action.payload,
-            };
-            state.top_nav_bar.top_navigate_bar_visual_editor = updatedTopNavigate;
+        updateDefaultDisplay: (state: INavigation, action: PayloadAction<"text" | "image">) => {
+            state.top_nav_bar.styling.default_display = action.payload;
+        },
+
+        updateTopNavLightMode: (state: INavigation, action: PayloadAction<IColorScheme>) => {
+            state.top_nav_bar.styling.light_mode = action.payload;
+        },
+        updateTopNavDarkMode: (state: INavigation, action: PayloadAction<IColorScheme>) => {
+            state.top_nav_bar.styling.dark_mode = action.payload;
+        },
+
+        updateTopNavigatePagesToDisplay: (state: INavigation, action: PayloadAction<string>) => {
+            state.top_nav_bar.top_navigate_bar_visual_editor.pages_to_display_top_nav_bar =
+                action.payload;
+        },
+
+        updateTopNavigateDisplayMode: (state: INavigation, action: PayloadAction<string>) => {
+            state.top_nav_bar.top_navigate_bar_visual_editor.display_mode = action.payload;
         },
 
         updateSideNav: (state: INavigation, action: PayloadAction<ISideBarNavigation>) => {
@@ -95,14 +103,42 @@ const navigation = createSlice({
             state.sidebar_navigation = updatedSideNav;
         },
 
-        updateSideNavStyling: (state: INavigation, action: PayloadAction<ISidbarNavStyling>) => {
-            const updatedNavStyling = { ...state.sidebar_navigation.styling, ...action.payload };
-            state.sidebar_navigation.styling = updatedNavStyling;
+        updateSideNavEnable: (state: INavigation, action: PayloadAction<boolean>) => {
+            state.sidebar_navigation.enable = action.payload;
+        },
+
+        updateSideNavImage: (state: INavigation, action: PayloadAction<string>) => {
+            state.sidebar_navigation.styling.image = action.payload;
+        },
+
+        updateSideNavFont: (state: INavigation, action: PayloadAction<string>) => {
+            state.sidebar_navigation.styling.sidebar_font = action.payload;
+        },
+
+        updateSideNavLightMode: (state: INavigation, action: PayloadAction<IColorScheme>) => {
+            state.sidebar_navigation.styling.light_mode = action.payload;
+        },
+        updateSideNavDarkMode: (state: INavigation, action: PayloadAction<IColorScheme>) => {
+            state.sidebar_navigation.styling.dark_mode = action.payload;
         },
 
         updateBottomBar: (state: INavigation, action: PayloadAction<IBottomTabBar>) => {
             const updatedBottomBar = { ...state.bottom_tab_bar, ...action.payload };
             state.bottom_tab_bar = updatedBottomBar;
+        },
+
+        updateBottomBarDefaultMode: (
+            state: INavigation,
+            action: PayloadAction<"hidden" | "active">
+        ) => {
+            state.bottom_tab_bar.default_mode = action.payload;
+        },
+
+        updateBottomBarStylingLight: (state: INavigation, action: PayloadAction<string>) => {
+            state.bottom_tab_bar.styling.light_mode = action.payload;
+        },
+        updateBottomBarStylingDark: (state: INavigation, action: PayloadAction<string>) => {
+            state.bottom_tab_bar.styling.dark_mode = action.payload;
         },
 
         updateBottomBarStyling: (state: INavigation, action: PayloadAction<IBottomTabBar>) => {
@@ -115,13 +151,28 @@ const navigation = createSlice({
             state.contextual_nav_toolbar = updatedContextual;
         },
 
-        updateContextualBackBtn: (state: INavigation, action: PayloadAction<IBackButtonConfig>) => {
-            const updatedBackBtn = {
-                ...state.contextual_nav_toolbar.back_button_configuration,
-                ...action.payload,
-            };
+        updateContextualEnable: (state: INavigation, action: PayloadAction<string>) => {
+            state.contextual_nav_toolbar.enable = action.payload;
+        },
 
-            state.contextual_nav_toolbar.back_button_configuration = updatedBackBtn;
+        updateContextualToolBarVisibility: (state: INavigation, action: PayloadAction<string>) => {
+            state.contextual_nav_toolbar.toolbar_visibility_by_pages = action.payload;
+        },
+
+        updateContextualBackBtnLabel: (state: INavigation, action: PayloadAction<string>) => {
+            state.contextual_nav_toolbar.back_button_configuration.label = action.payload;
+        },
+
+        updateContextualPagesToActiveBtn: (state: INavigation, action: PayloadAction<string>) => {
+            state.contextual_nav_toolbar.back_button_configuration.pages_to_activate_button =
+                action.payload;
+        },
+
+        updateContextualRefreshBtn: (state: INavigation, action: PayloadAction<boolean>) => {
+            state.contextual_nav_toolbar.refresh_button_configuration = action.payload;
+        },
+        updateContextualForwardBtn: (state: INavigation, action: PayloadAction<boolean>) => {
+            state.contextual_nav_toolbar.forward_button_configuration = action.payload;
         },
     },
 });
@@ -129,10 +180,30 @@ const navigation = createSlice({
 export const {
     updateNavigation,
     updateSideNav,
-    updateSideNavStyling,
     updateTopNav,
-    updateTopNavStyling,
-    updateTopNavigate,
+    updateDisplayMode,
+    updateDefaultDisplay,
+    updateTopNavDarkMode,
+    updateTopNavLightMode,
+    updateTopNavigateDisplayMode,
+    updateTopNavigatePagesToDisplay,
+    updateSideNavEnable,
+    updateSideNavFont,
+    updateSideNavImage,
+    updateSideNavDarkMode,
+    updateSideNavLightMode,
+    updateBottomBar,
+    updateBottomBarStylingLight,
+    updateBottomBarStylingDark,
+    updateBottomBarDefaultMode,
+    updateBottomBarStyling,
+    updateContextual,
+    updateContextualEnable,
+    updateContextualToolBarVisibility,
+    updateContextualForwardBtn,
+    updateContextualBackBtnLabel,
+    updateContextualPagesToActiveBtn,
+    updateContextualRefreshBtn,
 } = navigation.actions;
 
 export default navigation.reducer;

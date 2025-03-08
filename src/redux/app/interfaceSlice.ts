@@ -25,17 +25,7 @@ const interfaceSlice = createSlice({
         },
 
         updateLocalization: (state: IInterface, action: PayloadAction<string[]>) => {
-            if (action.payload) {
-                state.localization = state.localization.concat(action.payload);
-            }
-        },
-
-        removeLocalization: (state: IInterface, action: PayloadAction<string[]>) => {
-            if (action.payload) {
-                state.localization = state.localization.filter((lang) =>
-                    action.payload.includes(lang)
-                );
-            }
+            state.localization = action.payload;
         },
 
         updateViewPortWidth: (state: IInterface, action: PayloadAction<boolean>) => {

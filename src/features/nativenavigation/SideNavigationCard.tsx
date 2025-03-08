@@ -24,8 +24,8 @@ export const SideNavigationCard = ({ os, radios, title }: SideNavigationCardProp
 
                 <div className="border border-primary20 rounded-lg mt-4 px-4 pb-5">
                     <div className="grid grid-cols-2 gap-x-3 mb-5">
-                        <SideNavColorScheme mode="LIGHT MODE" img="/light-logo.png" />
-                        <SideNavColorScheme mode="DARK MODE" img="/dark-logo.png" />
+                        <SideNavColorScheme mode="LIGHT" img="/light-logo.png" />
+                        <SideNavColorScheme mode="DARK" img="/dark-logo.png" />
                     </div>
                 </div>
             </div>

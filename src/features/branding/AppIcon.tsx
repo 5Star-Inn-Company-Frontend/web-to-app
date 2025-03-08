@@ -1,9 +1,11 @@
 import { AppIconCard } from "@/components/customui/app/branding/appIconCard";
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { useAppSelector } from "@/redux/hook";
+import { RootState } from "@/redux/store";
 
 export default function AppIcon() {
-    const appIcon = useAppSelector((state) => state.app.branding.app_icon) || "/giftcard2.png";
+    const appIcon =
+        useAppSelector((state: RootState) => state.apps.branding.app_icon) || "/giftcard2.png";
 
     return (
         <div className="px-6 py-10 bg-white border-b border-primary20">

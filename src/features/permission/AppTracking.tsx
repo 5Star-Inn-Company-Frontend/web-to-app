@@ -1,21 +1,27 @@
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { OsConfigCard } from "@/components/global/os_config_card";
-import { updatePermission } from "@/redux/app/appSlice";
+import { updateAppTracking } from "@/redux/app/permissionSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function AppTracking() {
     const dispatch = useAppDispatch();
-    const appTracking = useAppSelector((state: RootState) => state.app.permission.app_tracking_transparency);
+    const appTracking = useAppSelector(
+        (state: RootState) => state.apps.permission.app_tracking_transparency
+    );
 
     const initialValue = appTracking ? "enable" : "disable";
     const [enableAppTracking, setEnableAppTracking] = useState(initialValue);
 
+    useEffect(() => {
+        setEnableAppTracking(initialValue);
+    }, [initialValue]);
+
     const handleChangeAppTracking = (value: string) => {
         setEnableAppTracking(value);
         const appTrackingIsEnabled = value === "enable";
-        dispatch(updatePermission({ app_tracking_transparency: appTrackingIsEnabled }));
+        dispatch(updateAppTracking(appTrackingIsEnabled));
     };
 
     return (

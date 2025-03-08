@@ -1,6 +1,12 @@
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { updateNavigationSideBarTab } from "@/redux/app/appSlice";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
+import { updateSideNavFont } from "@/redux/app/NavigationSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
 import { useEffect, useState } from "react";
@@ -9,7 +15,9 @@ type TSideBarFont = "light" | "dark" | "system";
 
 export default function SidebarFont() {
     const dispatch = useAppDispatch();
-    const sideBarFont = useAppSelector((state: RootState) => state.app.navigation.sidebar_navigation.styling);
+    const sideBarFont = useAppSelector(
+        (state: RootState) => state.apps.navigation.sidebar_navigation.styling
+    );
 
     const initialValue = sideBarFont.sidebar_font as TSideBarFont;
     const [selected, setSelected] = useState<TSideBarFont>(initialValue);
@@ -20,8 +28,7 @@ export default function SidebarFont() {
 
     const handleSelected = (value: TSideBarFont) => {
         setSelected(value);
-
-        dispatch(updateNavigationSideBarTab({ styling: { ...sideBarFont, sidebar_font: value } }));
+        dispatch(updateSideNavFont(value));
     };
     return (
         <div className="w-[45%]">

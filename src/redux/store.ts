@@ -23,9 +23,9 @@ const appReducers = combineReducers({
 
 export const store = configureStore({
     reducer: {
-        auth: authReducer,
         app: appReducer,
         apps: appReducers,
+        auth: authReducer,
     },
 });
 

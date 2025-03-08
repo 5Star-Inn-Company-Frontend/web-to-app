@@ -7,9 +7,8 @@ import { useState } from "react";
 
 export default function WebRTC() {
     // const dispatch = useAppDispatch();
-    // const media = useAppSelector((state: RootState) => state.app.permission.media);
+    // const media = useAppSelector((state: RootState) => state.apps.permission.media);
 
-    // const initialValue = {microphone: med}
     const [enableMicrophone, setEnableMicrophone] = useState("disable");
     const [enableCamera, setEnableCamera] = useState("disable");
 

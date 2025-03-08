@@ -1,22 +1,25 @@
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { OsConfigCard2 } from "./OsConfigCard2";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useAppDispatch } from "@/redux/hook";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import { updateInterface } from "@/redux/app/appSlice";
+import { updateDarkMode } from "@/redux/app/interfaceSlice";
 
 export default function DarkMode() {
     const dispatch = useAppDispatch();
-    const darkMode = useSelector((state: RootState) => state.app.interface.dark_mode);
+    const darkMode = useSelector((state: RootState) => state.apps.interface.dark_mode);
 
-    const initialvalue = useMemo(() => darkMode, [darkMode]);
-    const [enableDarkMode, setEnableDarkMode] = useState(initialvalue || "auto");
+    const initialvalue = useMemo(() => darkMode || "auto", [darkMode]);
+    const [enableDarkMode, setEnableDarkMode] = useState(initialvalue);
+
+    useEffect(() => {
+        setEnableDarkMode(initialvalue);
+    }, [initialvalue]);
 
     const handleChangeEnableDarkMode = (newvalue: string) => {
         setEnableDarkMode(newvalue);
-
-        dispatch(updateInterface({ dark_mode: newvalue }));
+        dispatch(updateDarkMode(newvalue));
     };
 
     return (

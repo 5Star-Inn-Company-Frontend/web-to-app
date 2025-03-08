@@ -1,21 +1,27 @@
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { updatePermission } from "@/redux/app/appSlice";
+import { updateDownloadDirectory } from "@/redux/app/permissionSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const DownloadDirConfigCard = () => {
     const dispatch = useAppDispatch();
-    const downloadDirectory = useAppSelector((state: RootState) => state.app.permission.downloads_directory);
+    const downloadDirectory = useAppSelector(
+        (state: RootState) => state.apps.permission.downloads_directory
+    );
 
     const initialValue = downloadDirectory || "files saved private to app";
     const [downloadDirLocation, setDownloadDirLocation] = useState(initialValue);
 
+    useEffect(() => {
+        setDownloadDirLocation(initialValue);
+    }, [initialValue]);
+
     const handleChangeDownDirectory = (value: string) => {
         setDownloadDirLocation(value);
 
-        dispatch(updatePermission({ downloads_directory: value }));
+        dispatch(updateDownloadDirectory(value));
     };
 
     return (

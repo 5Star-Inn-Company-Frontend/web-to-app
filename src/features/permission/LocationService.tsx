@@ -1,22 +1,28 @@
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { OsConfigCard } from "@/components/global/os_config_card";
-import { updatePermission } from "@/redux/app/appSlice";
+import { updateLocationService } from "@/redux/app/permissionSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function LocationService() {
     const dispatch = useAppDispatch();
-    const locationService = useAppSelector((state: RootState) => state.app.permission.location_service);
+    const locationService = useAppSelector(
+        (state: RootState) => state.apps.permission.location_service
+    );
 
     const initialValue = locationService ? "enable" : "disable";
     const [enableLocationService, setEnableLocationService] = useState(initialValue);
+
+    useEffect(() => {
+        setEnableLocationService(initialValue);
+    }, []);
 
     const handleChangeLocationService = (value: string) => {
         setEnableLocationService(value);
         const locationServiceIsEnabled = value === "enable";
 
-        dispatch(updatePermission({ location_service: locationServiceIsEnabled }));
+        dispatch(updateLocationService(locationServiceIsEnabled));
     };
 
     return (

@@ -1,23 +1,26 @@
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { OsConfigCard } from "@/components/global/os_config_card";
-import { updateInterface } from "@/redux/app/appSlice";
-import { useAppDispatch } from "@/redux/hook";
+import { updateFrontScaling } from "@/redux/app/interfaceSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useMemo, useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useMemo, useState } from "react";
 
 export default function FrontScalling() {
     const dispatch = useAppDispatch();
-    const frontScaling = useSelector((state: RootState) => state.app.interface.front_scaling);
+    const frontScaling = useAppSelector((state: RootState) => state.apps.interface.front_scaling);
 
     const initialFrontScaling = useMemo(() => (frontScaling ? "on" : "off"), [frontScaling]);
     const [enableFrontScaling, setEnableFrontScaling] = useState(initialFrontScaling);
+
+    useEffect(() => {
+        setEnableFrontScaling(initialFrontScaling);
+    }, [initialFrontScaling]);
 
     const handleChangeFrontScaling = (newValue: string) => {
         setEnableFrontScaling(newValue);
 
         const frontScalingIsEnabled = newValue === "on";
-        dispatch(updateInterface({ front_scaling: frontScalingIsEnabled }));
+        dispatch(updateFrontScaling(frontScalingIsEnabled));
     };
 
     return (

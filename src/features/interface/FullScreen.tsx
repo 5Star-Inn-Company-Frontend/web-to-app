@@ -1,22 +1,25 @@
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { OsConfigCard } from "@/components/global/os_config_card";
-import { updateInterface } from "@/redux/app/appSlice";
-import { useAppDispatch } from "@/redux/hook";
+import { updateFullScreen } from "@/redux/app/interfaceSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useMemo, useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useMemo, useState } from "react";
 
 export default function FullScreen() {
     const dispatch = useAppDispatch();
-    const fullScreen = useSelector((state: RootState) => state.app.interface.full_screen);
+    const fullScreen = useAppSelector((state: RootState) => state.apps.interface.full_screen);
 
     const initialValue = useMemo(() => (fullScreen ? "enable" : "disable"), [fullScreen]);
     const [enableFullScreen, setEnableFullScreen] = useState(initialValue || "disable");
 
+    useEffect(() => {
+        setEnableFullScreen(initialValue);
+    }, [initialValue]);
+
     const handleChangeFullScreen = (newvalue: string) => {
         setEnableFullScreen(newvalue);
         const fullScreenIsEnabled = newvalue === "enable";
-        dispatch(updateInterface({ full_screen: fullScreenIsEnabled }));
+        dispatch(updateFullScreen(fullScreenIsEnabled));
     };
 
     return (

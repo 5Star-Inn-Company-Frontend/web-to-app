@@ -1,23 +1,27 @@
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { OsConfigCard } from "@/components/global/os_config_card";
-import { updateInterface } from "@/redux/app/appSlice";
+import { updateAccessibility } from "@/redux/app/interfaceSlice";
 import { useAppDispatch } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 
 export default function Accessibility() {
     const dispatch = useAppDispatch();
-    const accessibility = useSelector((state: RootState) => state.app.interface.accessibility);
+    const accessibility = useSelector((state: RootState) => state.apps.interface.accessibility);
 
     const initialState = useMemo(() => (accessibility ? "on" : "off"), [accessibility]);
     const [enableAccessibility, setEnableAccessibility] = useState(initialState);
+
+    useEffect(() => {
+        setEnableAccessibility(initialState);
+    }, [initialState]);
 
     const handleChangeEnableAccessibility = (newValue: string) => {
         setEnableAccessibility(newValue);
         const accessibilityEnabled = newValue === "on" ? true : false;
 
-        dispatch(updateInterface({ accessibility: accessibilityEnabled }));
+        dispatch(updateAccessibility(accessibilityEnabled));
     };
 
     return (

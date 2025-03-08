@@ -1,10 +1,10 @@
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import { updateInterface } from "@/redux/app/appSlice";
+import { updateLocalization } from "@/redux/app/interfaceSlice";
 import { useAppDispatch } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { useSelector } from "react-redux";
 
 const languages: string[] = [
@@ -22,21 +22,22 @@ const languages: string[] = [
 
 export default function Localization() {
     const dispatch = useAppDispatch();
-    const localizations = useSelector((state: RootState) => state.app.interface.localization) || [];
+    const localizations = useSelector((state: RootState) => state.apps.interface.localization);
 
-    const checkedLocalizations = localizations.map((local) => local.toLowerCase());
+    const checkedLocalizations = useMemo(
+        () => localizations.map((local) => local.toLowerCase() || []),
+        [localizations]
+    );
 
     const handleCheckChange = useCallback(
         (checked: boolean | string, lang: string) => {
-            const isChecked = checked === true;
-            const newLocalizations = isChecked
+            const newLocalizations = checked
                 ? [...localizations, lang]
                 : localizations.filter((local) => local.toLowerCase() !== lang.toLowerCase());
 
-            dispatch(updateInterface({ localization: newLocalizations }));
+            dispatch(updateLocalization(newLocalizations));
         },
-        //eslint-disable-next-line
-        [dispatch]
+        [dispatch, localizations]
     );
 
     return (
@@ -54,7 +55,9 @@ export default function Localization() {
                                         value={lang}
                                         id="r1"
                                         checked={checkedLocalizations.includes(lang.toLowerCase())}
-                                        onCheckedChange={(checked) => handleCheckChange(checked, lang)}
+                                        onCheckedChange={(checked) =>
+                                            handleCheckChange(checked, lang)
+                                        }
                                     />
                                     <Label className="text-primary60" htmlFor={lang}>
                                         {lang}

@@ -4,6 +4,7 @@ import { Simulation } from "@/components/Simulation";
 import DashboardHeader from "@/features/layout/DashboardHeader";
 import DashboardNav from "@/features/layout/DashboardNav";
 import { setAppData } from "@/redux/app/appSlice";
+import { updateAppState } from "@/redux/app/appStateSlice";
 import { defaultBrandingState, setBranding } from "@/redux/app/brandSlice";
 import { defaultInterfaceSliceState, updateInterface } from "@/redux/app/interfaceSlice";
 import { defaultLinkHandlingState, setLinkHandling } from "@/redux/app/linkHandlingSlice";
@@ -29,7 +30,17 @@ const AppDashboard = () => {
     });
 
     if (isSuccess) {
-        dispatch(setAppData(data.data));
+        dispatch(
+            updateAppState({
+                id: data.data.id,
+                name: data.data.name,
+                description: data.data.description,
+                url: data.data.url,
+                plan: data.data.plan,
+                member_count: data.data.member_count,
+                last_saved: data.data.last_saved,
+            })
+        );
         dispatch(setBranding(data.data.branding ?? defaultBrandingState));
         dispatch(updateInterface(data.data.interface ?? defaultInterfaceSliceState));
         dispatch(setLinkHandling(data.data.link_handling ?? defaultLinkHandlingState));
@@ -37,6 +48,7 @@ const AppDashboard = () => {
         dispatch(setNotification(data.data.notification ?? defaultNotificationState));
         dispatch(setPermission(data.data.permission ?? defaultPermissionState));
         dispatch(setWebsiteOveride(data.data.website_overide ?? defaultWebsiteOverideState));
+        dispatch(setAppData(data.data));
     }
 
     return (

@@ -1,8 +1,8 @@
 import { ColorPicker } from "@/components/ColorPicker";
-import { updateNavigationSideBarTab } from "@/redux/app/appSlice";
+import { updateSideNavDarkMode, updateSideNavLightMode } from "@/redux/app/NavigationSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { IColorScheme, ISidbarNavStyling } from "@/types/type";
+import { IColorScheme } from "@/types/type";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { CiLight } from "react-icons/ci";
 import { MdDarkMode } from "react-icons/md";
@@ -14,11 +14,16 @@ interface ISideNavColorScheme {
 
 export default function SideNavColorScheme({ mode, img }: ISideNavColorScheme) {
     const dispatch = useAppDispatch();
-    const stylingColorScheme = useAppSelector((state: RootState) => state.app.navigation.sidebar_navigation.styling);
-    const current_mode = mode === "LIGHT MODE" ? "light_mode" : "dark_mode";
+    const stylingColorScheme = useAppSelector(
+        (state: RootState) => state.apps.navigation.sidebar_navigation.styling
+    );
+    const current_mode = mode === "LIGHT" ? "light_mode" : "dark_mode";
 
     const initialValue = useMemo(
-        () => (current_mode === "light_mode" ? stylingColorScheme.light_mode : stylingColorScheme.dark_mode) || "",
+        () =>
+            (current_mode === "light_mode"
+                ? stylingColorScheme.light_mode
+                : stylingColorScheme.dark_mode) || "",
         [stylingColorScheme, current_mode]
     );
 
@@ -34,25 +39,29 @@ export default function SideNavColorScheme({ mode, img }: ISideNavColorScheme) {
         (color: string) => {
             setColorScheme((prev) => ({ ...prev, text_color: color }));
 
-            const newColorScheme: ISidbarNavStyling = {
-                ...stylingColorScheme,
-                [current_mode]: { ...colorScheme, text_color: color },
-            };
-            dispatch(updateNavigationSideBarTab({ styling: newColorScheme }));
+            const newColorScheme: IColorScheme = { ...colorScheme, text_color: color };
+
+            if (mode === "LIGHT") {
+                dispatch(updateSideNavLightMode(newColorScheme));
+            } else {
+                dispatch(updateSideNavDarkMode(newColorScheme));
+            }
         },
-        [colorScheme, current_mode, dispatch, stylingColorScheme]
+        [colorScheme, dispatch, mode]
     );
     const handleChangeBgColorScheme = useCallback(
         (color: string) => {
             setColorScheme((prev) => ({ ...prev, background_color: color }));
 
-            const newColorScheme: ISidbarNavStyling = {
-                ...stylingColorScheme,
-                [current_mode]: { ...colorScheme, background_color: color },
-            };
-            dispatch(updateNavigationSideBarTab({ styling: newColorScheme }));
+            const newColorScheme: IColorScheme = { ...colorScheme, background_color: color };
+
+            if (mode === "LIGHT") {
+                dispatch(updateSideNavLightMode(newColorScheme));
+            } else {
+                dispatch(updateSideNavDarkMode(newColorScheme));
+            }
         },
-        [colorScheme, current_mode, dispatch, stylingColorScheme]
+        [colorScheme, mode, dispatch]
     );
 
     return (
@@ -60,7 +69,11 @@ export default function SideNavColorScheme({ mode, img }: ISideNavColorScheme) {
             <div className=" mb-3">
                 <div className="flex gap-2 items-center text-[grey] text-[0.625rem] mb-2">
                     <div className=" w-[0.8rem] h-[0.8rem] flex items-center">
-                        {mode.toUpperCase() === "LIGHT MODE" ? <CiLight className="text-2xl" /> : <MdDarkMode />}
+                        {mode.toUpperCase() === "LIGHT MODE" ? (
+                            <CiLight className="text-2xl" />
+                        ) : (
+                            <MdDarkMode />
+                        )}
                     </div>
                     {mode}
                 </div>

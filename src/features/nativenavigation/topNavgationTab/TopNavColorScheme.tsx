@@ -1,5 +1,5 @@
 import { ColorPicker } from "@/components/ColorPicker";
-import { updateNavigationTopBarTab } from "@/redux/app/appSlice";
+import { updateTopNavDarkMode, updateTopNavLightMode } from "@/redux/app/NavigationSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
 import { IColorScheme } from "@/types/type";
@@ -12,10 +12,13 @@ interface ITopNavColorScheme {
 }
 export default function TopNavColorScheme({ mode, title }: ITopNavColorScheme) {
     const dispatch = useAppDispatch();
-    const topNavStylingStore = useAppSelector((state: RootState) => state.app.navigation.top_nav_bar.styling);
+    const topNavStylingStore = useAppSelector(
+        (state: RootState) => state.apps.navigation.top_nav_bar.styling
+    );
 
     const initialvalue = useMemo(
-        () => (mode === "light_mode" ? topNavStylingStore.light_mode : topNavStylingStore.dark_mode),
+        () =>
+            mode === "light_mode" ? topNavStylingStore.light_mode : topNavStylingStore.dark_mode,
         [topNavStylingStore, mode]
     );
 
@@ -30,13 +33,23 @@ export default function TopNavColorScheme({ mode, title }: ITopNavColorScheme) {
 
         const newColorScheme = { ...colorSchemeState, text_color: color };
 
-        dispatch(updateNavigationTopBarTab({ styling: { ...topNavStylingStore, [mode]: newColorScheme } }));
+        if (mode === "light_mode") {
+            dispatch(updateTopNavLightMode(newColorScheme));
+        } else {
+            dispatch(updateTopNavDarkMode(newColorScheme));
+        }
     };
+
     const handleChangeBgColor = (color: string) => {
         setColorSchemeState((prev) => ({ ...prev, background_color: color }));
 
         const newColorScheme = { ...colorSchemeState, background_color: color };
-        dispatch(updateNavigationTopBarTab({ styling: { ...topNavStylingStore, [mode]: newColorScheme } }));
+
+        if (mode === "light_mode") {
+            dispatch(updateTopNavLightMode(newColorScheme));
+        } else {
+            dispatch(updateTopNavDarkMode(newColorScheme));
+        }
     };
 
     return (
@@ -48,13 +61,19 @@ export default function TopNavColorScheme({ mode, title }: ITopNavColorScheme) {
                 </div>
                 <span className="text-[0.625rem] text-primary40">BACKGROUND COLOR</span>
                 <div className="w-fit flex justify-between border rounded-md px-2 py-1 items-center gap-2">
-                    <ColorPicker background={colorSchemeState.background_color} setBackground={handleChangeBgColor} />
+                    <ColorPicker
+                        background={colorSchemeState.background_color}
+                        setBackground={handleChangeBgColor}
+                    />
                 </div>
             </div>
             <div className="">
                 <span className="text-[0.625rem] text-primary40">TEXT COLOR</span>
                 <div className="w-fit flex justify-between border rounded-md px-2 py-1 items-center gap-2">
-                    <ColorPicker background={colorSchemeState.text_color} setBackground={handleChangeTextColor} />
+                    <ColorPicker
+                        background={colorSchemeState.text_color}
+                        setBackground={handleChangeTextColor}
+                    />
                 </div>
             </div>
         </div>

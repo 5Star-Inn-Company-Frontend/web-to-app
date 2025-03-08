@@ -1,9 +1,9 @@
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { updateNavigationSideBarTab } from "@/redux/app/appSlice";
+import { updateSideNavImage } from "@/redux/app/NavigationSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface IRadio {
     title: string;
@@ -20,20 +20,21 @@ type TSidebarType = "text" | "image";
 export default function SidebarImage({ title, radios }: ISidebarImage) {
     const dispatch = useAppDispatch();
 
-    const sidebarImageType = useAppSelector((state: RootState) => state.app.navigation.sidebar_navigation);
+    const sidebarImageType = useAppSelector(
+        (state: RootState) => state.apps.navigation.sidebar_navigation
+    );
 
     const initialvalue = sidebarImageType.styling.image as TSidebarType;
 
     const [sidebarType, setSideBarType] = useState<TSidebarType>(initialvalue);
 
+    useEffect(() => {
+        setSideBarType(initialvalue);
+    }, [initialvalue]);
+
     const handleChangeSideBarType = (value: TSidebarType) => {
         setSideBarType(value);
-
-        const newValue = { ...sidebarImageType.styling, image: value };
-
-        console.log(newValue);
-
-        dispatch(updateNavigationSideBarTab({ styling: newValue }));
+        dispatch(updateSideNavImage(value));
     };
 
     return (

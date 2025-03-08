@@ -1,16 +1,14 @@
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { Textarea } from "@/components/ui/textarea";
-import { updateDescription } from "@/redux/app/appSlice";
-import { useAppDispatch } from "@/redux/hook";
-// import { useAppDispatch } from "@/redux/hook";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
 import { ChangeEvent, useState } from "react";
-import { useSelector } from "react-redux";
 import { debounce } from "lodash";
+import { updateDescription } from "@/redux/app/appStateSlice";
 
 export default function AppDescription() {
     const dispatch = useAppDispatch();
-    const appDescription = useSelector((state: RootState) => state.app.description);
+    const appDescription = useAppSelector((state: RootState) => state.apps.appState.description);
     const [description, setDescription] = useState(appDescription || "");
 
     const debounceUpdatedDescription = debounce((newvalue: string) => {

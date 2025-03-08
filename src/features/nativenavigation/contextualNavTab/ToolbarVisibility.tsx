@@ -4,14 +4,15 @@ import { Label } from "@/components/ui/label";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
 import { useMemo, useState } from "react";
-import { IContextualNavToolbar } from "@/types/type";
-import { updateNavigation } from "@/redux/app/appSlice";
+import { updateContextualToolBarVisibility } from "@/redux/app/NavigationSlice";
 
 type TinitialValue = "all page" | "specific pages";
 
 export default function ToolbarVisibility() {
     const dispatch = useAppDispatch();
-    const toolbar = useAppSelector((state: RootState) => state.app.navigation.contextual_nav_toolbar);
+    const toolbar = useAppSelector(
+        (state: RootState) => state.apps.navigation.contextual_nav_toolbar
+    );
 
     const initialValue = useMemo(
         () => (toolbar.toolbar_visibility_by_pages || "all pages") as TinitialValue,
@@ -22,9 +23,7 @@ export default function ToolbarVisibility() {
 
     const handleChangeToolBarVisibility = (value: TinitialValue) => {
         setEnableToolBar(value);
-
-        const newContextualValue: IContextualNavToolbar = { ...toolbar, toolbar_visibility_by_pages: value };
-        dispatch(updateNavigation({ contextual_nav_toolbar: newContextualValue }));
+        dispatch(updateContextualToolBarVisibility(value));
     };
 
     return (
