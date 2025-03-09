@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 
 export default function ViewPort() {
     const dispatch = useAppDispatch();
-    const viewPortWidth = useSelector((state: RootState) => state.app.interface.view_port_width);
+    const viewPortWidth = useSelector((state: RootState) => state.apps.interface.view_port_width);
 
     const initialViewPortStatus = useMemo(
         () => (viewPortWidth ? "enable" : "disable"),

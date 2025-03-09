@@ -5,7 +5,7 @@ const initialState: IPermission = {
     javascript_bridge: [],
     app_tracking_transparency: false,
     location_service: true,
-    media: true,
+    media: { camera: true, microphone: false },
     downloads_directory: "files saved private to app",
     background_audio: true,
     permission: [],
@@ -31,8 +31,12 @@ const permission = createSlice({
             state.location_service = action.payload;
         },
 
-        updateMedia: (state: IPermission, action: PayloadAction<boolean>) => {
-            state.media = action.payload;
+        updateMediaMicrophone: (state: IPermission, action: PayloadAction<boolean>) => {
+            state.media.microphone = action.payload;
+        },
+
+        updateMediaCamera: (state: IPermission, action: PayloadAction<boolean>) => {
+            state.media.camera = action.payload;
         },
 
         updateDownloadDirectory: (state: IPermission, action: PayloadAction<string>) => {
@@ -54,7 +58,8 @@ export const {
     updateJavascript,
     updateAppTracking,
     updateLocationService,
-    updateMedia,
+    updateMediaCamera,
+    updateMediaMicrophone,
     updateDownloadDirectory,
     updateBackgroundAudio,
     updatePermission,

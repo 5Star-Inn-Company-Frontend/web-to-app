@@ -135,11 +135,16 @@ export interface INavigation {
     bottom_tab_bar: IBottomTabBar;
     contextual_nav_toolbar: IContextualNavToolbar;
 }
+
+export interface IMedia {
+    camera: boolean;
+    microphone: boolean;
+}
 export interface IPermission {
     javascript_bridge: string[];
     app_tracking_transparency: boolean;
     location_service: boolean;
-    media: boolean;
+    media: IMedia;
     downloads_directory: string;
     background_audio: boolean;
     permission: string[];

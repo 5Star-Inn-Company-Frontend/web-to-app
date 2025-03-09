@@ -3,7 +3,6 @@ import { Navbar } from "@/components/Navbar";
 import { Simulation } from "@/components/Simulation";
 import DashboardHeader from "@/features/layout/DashboardHeader";
 import DashboardNav from "@/features/layout/DashboardNav";
-import { setAppData } from "@/redux/app/appSlice";
 import { updateAppState } from "@/redux/app/appStateSlice";
 import { defaultBrandingState, setBranding } from "@/redux/app/brandSlice";
 import { defaultInterfaceSliceState, updateInterface } from "@/redux/app/interfaceSlice";
@@ -48,7 +47,6 @@ const AppDashboard = () => {
         dispatch(setNotification(data.data.notification ?? defaultNotificationState));
         dispatch(setPermission(data.data.permission ?? defaultPermissionState));
         dispatch(setWebsiteOveride(data.data.website_overide ?? defaultWebsiteOverideState));
-        dispatch(setAppData(data.data));
     }
 
     return (

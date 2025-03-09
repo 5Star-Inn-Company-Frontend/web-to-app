@@ -24,11 +24,17 @@ const notificationSlice = createSlice({
             state.notification_sound = action.payload;
         },
 
-        updateForegroundNotification: (state: INotification, action: PayloadAction<string>) => {
+        updateForegroundNotification: (
+            state: INotification,
+            action: PayloadAction<"show" | "hide">
+        ) => {
             state.foreground_notification = action.payload;
         },
 
-        updateAutoDataTransmission: (state: INotification, action: PayloadAction<"automatic" | "manual">) => {
+        updateAutoDataTransmission: (
+            state: INotification,
+            action: PayloadAction<"automatic" | "manual">
+        ) => {
             state.automatic_data_transmission = action.payload;
         },
 

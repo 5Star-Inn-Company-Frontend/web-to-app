@@ -3,21 +3,43 @@ import { Text } from "@/components/global/text";
 import { Button } from "@/components/ui/button";
 import { useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
+import { ReloadIcon } from "@radix-ui/react-icons";
 import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
 
 export default function DashboardHeader() {
     const { id } = useParams();
     const appId = Number(id);
 
-    const appData = useAppSelector((state: RootState) => state.app);
+    const currentStoreData = useAppSelector((state: RootState) => state.apps);
 
-    const { data, mutate } = useMutation({
+    const appData = {
+        ...currentStoreData.appState,
+        branding: currentStoreData.branding,
+        link_handling: currentStoreData.linkHandling,
+        interface: currentStoreData.interface,
+        website_overide: currentStoreData.websiteOveride,
+        permission: currentStoreData.permission,
+        navigation: currentStoreData.navigation,
+        notification: currentStoreData.notification,
+        plugin: {
+            social_login: false,
+        },
+        build_setting: {
+            google_service: [],
+            development_tools: true,
+            app_config: [],
+        },
+    };
+
+    const { data, mutate, isPending } = useMutation({
         mutationKey: ["app", appId],
         mutationFn: updateApp,
+        onSuccess: () => {
+            toast.success("App updated successfully");
+        },
     });
-
-    // console.log(appData);
 
     const handleSubmit = () => {
         mutate({ appData, appId });
@@ -34,10 +56,18 @@ export default function DashboardHeader() {
                 <h1>WebHosting App</h1>
             </div>
             <div className="flex ml-auto gap-4 items-center">
-                <Text style="text-xs text-[grey]" value="Last saved 12days ago" />
-                <Button onClick={handleSubmit} className="bg-black">
-                    Done Editing
-                </Button>
+                <Text style="text-xs text-[grey]" value={`Last Saved ${appData.last_saved}`} />
+
+                {isPending ? (
+                    <Button disabled className=" text-white bg-[#24243E] p-[0.5rem]">
+                        <ReloadIcon className="mr-2 h-4 w-4 animate-spin text-white" />
+                        Updating...
+                    </Button>
+                ) : (
+                    <Button onClick={handleSubmit} className="bg-black">
+                        Done Editing
+                    </Button>
+                )}
                 <button className="border flex items-center justify-center py-2 px-4 rounded-lg">
                     {/* <AiOutlineMore size="1.2rem" /> */}
                     <img src="/3dots2.svg" alt="" className="" />

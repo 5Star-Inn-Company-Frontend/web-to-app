@@ -1,6 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import authReducer from "@/redux/auth/authSlice";
-import appReducer from "@/redux/app/appSlice";
 import brandReducer from "@/redux/app/brandSlice";
 import notificationReducer from "@/redux/app/NotificationSlice";
 import appStateReducer from "@/redux/app/appStateSlice";
@@ -23,7 +22,6 @@ const appReducers = combineReducers({
 
 export const store = configureStore({
     reducer: {
-        app: appReducer,
         apps: appReducers,
         auth: authReducer,
     },
