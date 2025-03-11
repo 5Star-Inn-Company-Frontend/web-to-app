@@ -8,7 +8,7 @@ export default function AppIcon() {
         useAppSelector((state: RootState) => state.apps.branding.app_icon) || "/giftcard2.png";
 
     return (
-        <div className="px-6 py-10 bg-white border-b border-primary20">
+        <div className="xl:px-6 py-10 bg-white border-b border-primary20">
             <CollapsibleComponent
                 title="App Icon"
                 subTitle="Your app icon is your app’s identity and is used on the device home screen and in other locations such as settings. Upload a PNG or JPG square image to use as your app's launch icon. Recommended resolution is 1024x1024 pixels."

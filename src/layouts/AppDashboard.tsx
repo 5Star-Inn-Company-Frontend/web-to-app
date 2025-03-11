@@ -52,17 +52,17 @@ const AppDashboard = () => {
     return (
         <>
             <Navbar />
-            <div className="flex">
-                <div className="w-[75%] px-4">
+            <div className="xl:flex">
+                <div className="xl:px-5 xl:w-[75%]">
                     <DashboardHeader />
                     <div className="flex rounded-t-md bg-white">
                         <DashboardNav id={appId} />
-                        <div className="flex-1">
+                        <div className="xl:flex-1">
                             {isLoading ? <div>Loading........</div> : <Outlet />}
                         </div>
                     </div>
                 </div>
-                <div className="w-[28%]">
+                <div className="hidden xl:block xl:w-[28%]">
                     <Simulation />
                 </div>
             </div>

@@ -3,7 +3,7 @@ import { ThemeColorsCard } from "./themecolorsCard";
 
 export default function ThemeColor() {
     return (
-        <div className="px-6 py-10 bg-white border-b border-primary20">
+        <div className="xl:px-6 py-10 bg-white border-b border-primary20">
             <CollapsibleComponent
                 title="Theme Colors"
                 subTitle="Set a Primary Color used for text fields and labels, also referred to as the Tint color for iOS and the Accent color for Android."

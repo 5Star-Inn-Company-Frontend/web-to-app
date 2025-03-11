@@ -18,7 +18,11 @@ export function CollapsibleComponent({
 
     return (
         <div className="h-fit-content overflow-auto relative">
-            <Collapsible open={isOpen} onOpenChange={setIsOpen} className="w-full space-y-4 h-fit-content overflow-auto relative">
+            <Collapsible
+                open={isOpen}
+                onOpenChange={setIsOpen}
+                className="w-full space-y-4 h-fit-content overflow-auto relative"
+            >
                 <div className="flex items-center justify-between space-x-4 px-8 pt-3">
                     <div className="text-md font-semibold w-full">{title}</div>
                     <CollapsibleTrigger asChild>
@@ -28,7 +32,9 @@ export function CollapsibleComponent({
                         </Button>
                     </CollapsibleTrigger>
                 </div>
-                <div className="px-8">{subTitle && <Text style="text-sm text-[grey]" value={subTitle} />}</div>
+                <div className="px-8">
+                    {subTitle && <Text style="text-sm text-[grey]" value={subTitle} />}
+                </div>
                 <CollapsibleContent className="space-y-4">
                     <div className="h-full overflow-auto">{children}</div>
                 </CollapsibleContent>

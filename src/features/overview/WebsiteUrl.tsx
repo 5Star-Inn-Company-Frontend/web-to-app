@@ -29,14 +29,14 @@ export default function WebsiteUrl() {
     };
 
     return (
-        <div className="px-8 bg-white pb-5">
+        <div className="xl:px-8 bg-white pb-5">
             <CollapsibleComponent
                 title="Website Url"
                 subTitle="The website to display when you loads"
             >
                 <Input
                     type="text"
-                    className="p-2 w-[90%] mx-auto bg-white border"
+                    className="p-2 w-[83%] mx-auto bg-white border xl:mx-[90%]"
                     value={url}
                     onChange={handleChangeAppUrl}
                 />

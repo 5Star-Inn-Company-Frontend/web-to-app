@@ -22,7 +22,7 @@ export default function AppDescription() {
     };
 
     return (
-        <div className="px-8 pb-5 bg-white border-t border-primary20">
+        <div className="xl:px-8 pb-5 bg-white border-t border-primary20">
             <CollapsibleComponent
                 title="App Description"
                 subTitle="A short description of your app for reference purpose. Only used internally and not not seen by end users."

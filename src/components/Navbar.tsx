@@ -12,8 +12,8 @@ export function Navbar() {
     const navigate = useNavigate();
 
     return (
-        <div className="bg-black w-full flex justify-between items-center py-3 px-[3.125rem]">
-            <div className="w-[100px] h-[50px]">
+        <div className="bg-black w-full flex justify-between items-center px-2 py-3 xl:px-[3.125rem]">
+            <div className="w-[70px] xl:w-[100px]">
                 <img src="/logo.png" alt="" className="logo" onClick={() => navigate("/")} />
             </div>
 
@@ -24,8 +24,12 @@ export function Navbar() {
                             <NavigationMenuItem>
                                 <NavigationMenuTrigger>
                                     {/* <Avatar name="Hamzat lawal" size={"150"} round={true}/> */}
-                                    <div className=" w-[1.8rem] h-[1.8rem] relative">
-                                        <img src={`/userDp.png`} alt="object not found" className="w-full" />
+                                    <div className=" xl:w-[1.8rem] xl:h-[1.8rem] relative">
+                                        <img
+                                            src={`/userDp.png`}
+                                            alt="object not found"
+                                            className="w-full"
+                                        />
                                     </div>
                                 </NavigationMenuTrigger>
                                 <NavigationMenuContent>

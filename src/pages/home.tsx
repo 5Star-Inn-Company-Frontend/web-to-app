@@ -1,6 +1,6 @@
 import { SearchBar } from "@/components/global/searchInput";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import SelectDropdown from "@/components/global/selectdropdown";
 import { AppDetails } from "@/features/app/AppDetails";
 import { useQuery } from "@tanstack/react-query";
@@ -10,7 +10,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export const DashboardHome = () => {
     const [searchTerm, setSearchTerm] = useState<string>("");
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const [licenseSelectedValue, setLicenseSelectedValue] = useState<string>("");
     const [accessSelectedValue, setAccessSelectedValue] = useState<string>("");
@@ -44,7 +44,7 @@ export const DashboardHome = () => {
 
     return (
         <>
-            <div className="menu lg:hidden xl:hidden md:block sm:block mb-3 ">
+            {/* <div className="menu lg:hidden xl:hidden md:block sm:block mb-3 ">
                 <a
                     className="btn"
                     type="button"
@@ -105,7 +105,7 @@ export const DashboardHome = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
             <div className="mb-5">
                 <SearchBar searchTerm={searchTerm} onSearch={setSearchTerm} classname="mb-4" />
                 <div className="flex justify-between items-center gap-x-5 max-w-sm">

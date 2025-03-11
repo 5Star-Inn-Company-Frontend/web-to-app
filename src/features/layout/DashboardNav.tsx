@@ -82,7 +82,7 @@ export default function DashboardNav({ id }: IDashboardNav) {
     ];
 
     return (
-        <div className="w-[25%] py-6 border-r border-primary20 overflow-y-auto no-scrollbar">
+        <div className="hidden xl:block xl:w-[25%] py-6 border-r border-primary20 overflow-y-auto no-scrollbar">
             <div className="flex justify-between items-center mb-7 px-4">
                 <Text style="font-medium text-xs text-primary40" value="CONFIGURATION" />
                 <div className="bg-deepgray rounded-full p-1">
