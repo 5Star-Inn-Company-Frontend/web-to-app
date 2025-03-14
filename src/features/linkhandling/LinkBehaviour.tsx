@@ -7,11 +7,11 @@ import { AiOutlinePlus, AiOutlineReload } from "react-icons/ai";
 
 export default function LinkBehaviour() {
     return (
-        <div className="p-4 bg-white border-b border-primary20">
+        <div className="py-4 xl:p-4 bg-white border-b border-primary20">
             <CollapsibleComponent
                 title={
-                    <div className="flex items-center justify-between w-full">
-                        <span className="text-md font-semibold">Link Behavior</span>
+                    <div className="flex flex-col gap-y-2 xl:flex-row xl:items-center xl:justify-between w-full">
+                        <span className="font-semibold">Link Behavior</span>
                         <div className="flex items-center space-x-2">
                             <Label htmlFor="airplane-mode" className="font-semibold text-sm">
                                 Advance mode

@@ -41,7 +41,7 @@ export default function Localization() {
     );
 
     return (
-        <div className="p-4 pb-10 bg-white border-b border-primary20">
+        <div className="pb-5 pt-2 xl:p-4 xl:pb-10 bg-white border-b border-primary20">
             <CollapsibleComponent
                 title="Localization"
                 subTitle={`By default your user's default device language will be set within your app for all web content which will then display in the corresponding language in the same manner it is displayed in a regular browser, i.e. if there is an Accept-Language header present. The native UI components in the native app layer have been localized to various languages as contributed by customers. These must be selected to enable for your app.`}

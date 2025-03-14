@@ -23,7 +23,7 @@ export default function FullScreen() {
     };
 
     return (
-        <div className="p-4 pb-10 bg-white border-b border-primary20">
+        <div className="pt-2 pb-5 xl:p-4 xl:pb-10 bg-white border-b border-primary20">
             <CollapsibleComponent
                 title="Full Screen"
                 subTitle="Control whether your app is displayed in full screen. This mode can also be set at runtime from your website using the JavaScript Bridge. Note that on Android when full screen mode enabled the keyboard will overlay on top of your web content which can cause issues for users completing forms."

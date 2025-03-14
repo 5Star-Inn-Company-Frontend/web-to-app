@@ -45,8 +45,8 @@ export const RestoreDefaultActionList = () => {
                         key={index}
                     >
                         <div className=" rounded-md p-2 border border-primary20">
-                            <div className="py-1 px-2 bg-deepgray  flex gap-4 flex-rap items-center rounded-md">
-                                <div className="flex gap-4 items-center flex-grow">
+                            <div className="py-2 px-2 xl:py-1 bg-deepgray  flex flex-col xl:flex-row gap-4 flex-rap items-center rounded-md">
+                                <div className="flex flex-col xl:flex-row gap-4 items-center flex-grow">
                                     <img src="/drag.svg" alt="" />
                                     <Input
                                         type="text"

@@ -25,7 +25,7 @@ export default function PullToRefresh() {
     };
 
     return (
-        <div className="p-4 pb-10 bg-white border-b border-primary20">
+        <div className="pb-5 pt-2 xl:p-4 xl:pb-10 bg-white border-b border-primary20">
             <CollapsibleComponent
                 title="Pull To Refresh"
                 subTitle="With native page transitions enabled a loading spinner will show when loading new pages within your app. The current page will fade out, the loading spinner will be displayed, and then the new page will fade in when it has finished loading."

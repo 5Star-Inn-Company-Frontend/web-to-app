@@ -24,7 +24,7 @@ export default function ScreenOn() {
         dispatch(updateScreenOn(keepScreenOnEnabled));
     };
     return (
-        <div className="p-4 pb-10 bg-white border-b border-primary20">
+        <div className="pb-5 pt-2 xl:p-4 xl:pb-10 bg-white border-b border-primary20">
             <CollapsibleComponent
                 title="Kepp Screen On"
                 subTitle="Keep the device screen on all the time for many purposes such as a in-vehicle display app, museum kiosk app, trade show demo, etc. In addition to an app configuration which will be enabled at all times this setting can also be set and cleared via the JavaScript Bridge."

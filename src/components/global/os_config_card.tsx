@@ -32,7 +32,7 @@ export const OsConfigCard = ({ os, radios, value, onValueChange, children }: IOs
             <div className="pb-4">
                 {radios && (
                     <RadioGroup
-                        className="flex justify-between border border-primary20 mt-4 mx-4 p-[0.3rem] flex-grow rounded-md"
+                        className="flex flex-col xl:flex-row gap-y-5 xl:gap-y-0 justify-between border border-primary20 mt-4 mx-4 p-[0.3rem] rounded-md"
                         value={value}
                         onValueChange={onValueChange}
                     >

@@ -4,7 +4,7 @@ import { OsConfigCard } from "@/components/global/os_config_card";
 
 export default function CustomJavascript() {
     return (
-        <div className="p-4 bg-white">
+        <div className="pt-2 pb-5 xl:p-4 bg-white">
             <CollapsibleComponent
                 title="Custom Javascript"
                 subTitle={`Enter Custom JavaScript to be injected onto your website pages when they are displayed through your app. For instance, you may find it more convenient to specify JavaScript Bridge commands here rather than adding this code on your website itself. JavaScript added in the top section is injected in both iOS and Android apps or use the platform-specific sections if only needed for one of your apps. Format the JavaScript similar to an external .js file without any HTML or`}

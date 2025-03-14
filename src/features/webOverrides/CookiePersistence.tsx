@@ -25,7 +25,7 @@ export default function CookiePersistence() {
     };
 
     return (
-        <div className="px-6 py-10 bg-white border-b border-primary20">
+        <div className="pt-2 pb-5 xl:px-6 xl:py-10 bg-white border-b border-primary20">
             <CollapsibleComponent
                 title="Cookie Persistence"
                 subTitle="By default, the cookie store in your app will respect the expiry parameters of cookies as received. Using this option you may force the expiry of all cookies to a preset duration. This functionality is useful for extending the duration of login sessions when it is not possible to make changes at the server level."

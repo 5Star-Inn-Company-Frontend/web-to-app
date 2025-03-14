@@ -24,12 +24,12 @@ export default function FrontScalling() {
     };
 
     return (
-        <div className="p-4 pb-10 bg-white border-b border-primary20">
+        <div className="pb-5 pt-2 xl:p-4 xl:pb-10 bg-white border-b border-primary20">
             <CollapsibleComponent
                 title="Front Scaling"
                 subTitle="Disable Android system front scaling or set a specific scale irrespective of device and device settings. e.g. 90% for smaller text than default."
             >
-                <div className="grid grid-cols-2 px-8">
+                <div className="grid xl:grid-cols-2 px-8">
                     <OsConfigCard
                         os="IOS"
                         value={enableFrontScaling}

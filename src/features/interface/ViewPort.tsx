@@ -28,7 +28,7 @@ export default function ViewPort() {
     };
 
     return (
-        <div className="p-4 pb-10 bg-white border-b border-primary20">
+        <div className="pb-5 pt-2 xl:p-4 xl:pb-10 bg-white border-b border-primary20">
             <CollapsibleComponent
                 title="View port width"
                 subTitle={`The app's viewport is the visible area of the window where content is visible. To adjust the scale of pages shown within your app, you can force a page width. Before modifying this setting, we first suggest altering the viewport meta tag on your website.`}

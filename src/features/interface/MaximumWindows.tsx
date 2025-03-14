@@ -25,7 +25,7 @@ export default function MaximumWindows() {
     };
 
     return (
-        <div className="p-4 pb-10 bg-white border-b border-primary20">
+        <div className="pt-2 pb-5 xl:p-4 xl:pb-10 bg-white border-b border-primary20">
             <CollapsibleComponent
                 title="Maximum windows"
                 subTitle={`Set a maximum number of windows that are opened simultaneously to improve performance for resource-intensive apps. Once the maximum number of windows has been reached, then previously opened windows will be automatically closed starting with the window that was open first. Enable "Auto Close" so that when your primary website URL (app home screen) is opened, all other previously opened windows will be automatically closed.`}

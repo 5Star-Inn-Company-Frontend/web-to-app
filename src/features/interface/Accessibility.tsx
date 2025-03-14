@@ -25,12 +25,12 @@ export default function Accessibility() {
     };
 
     return (
-        <div className="p-4 pb-10 bg-white border-b border-primary20">
+        <div className="pb-5 pt-2 xl:p-4 xl:pb-10 bg-white border-b border-primary20">
             <CollapsibleComponent
                 title="Accessibility & Dynamic Type"
                 subTitle="When enabled the text on pages displayed within your iOS app will adjust in size according to your device's settings using the CSS property -webkit-text-size-adjust"
             >
-                <div className="grid grid-cols-2 px-8">
+                <div className="grid xl:grid-cols-2 px-8">
                     <OsConfigCard
                         os="IOS"
                         value={enableAccessibility}

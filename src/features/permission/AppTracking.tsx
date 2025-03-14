@@ -25,12 +25,12 @@ export default function AppTracking() {
     };
 
     return (
-        <div className="px-6 py-4 bg-white border-b border-primary20">
+        <div className="pt-2 pb-5 xl:px-6 xl:py-4 bg-white border-b border-primary20">
             <CollapsibleComponent
                 title="App Tracking Transparency"
                 subTitle="Configure your app to be compliant with Apple's User Privacy and Data Use Policies using the AppTrackingTransparency Framework."
             >
-                <div className="w-[50%] px-8">
+                <div className="xl:w-[50%] px-8">
                     <OsConfigCard
                         os="IOS"
                         value={enableAppTracking}
