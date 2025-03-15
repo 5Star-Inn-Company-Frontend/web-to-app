@@ -3,27 +3,31 @@ import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Slider } from "@/components/ui/slider";
-import { updateInterface } from "@/redux/app/appSlice";
 import { useAppDispatch } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
+import { updateScreenOn } from "@/redux/app/interfaceSlice";
 
 export default function KeepScreenOn() {
     const dispatch = useAppDispatch();
-    const keepScreenOn = useSelector((state: RootState) => state.app.interface.screen_on);
+    const keepScreenOn = useSelector((state: RootState) => state.apps.interface.screen_on);
 
     const initialValue = useMemo(() => (keepScreenOn ? "enable" : "disable"), [keepScreenOn]);
     const [enableKeepScreenOn, setEnableKeepScreenOn] = useState(initialValue);
 
+    useEffect(() => {
+        setEnableKeepScreenOn(initialValue);
+    }, [initialValue]);
+
     const handleChangeEnableKeepScreenOn = (newvalue: string) => {
         setEnableKeepScreenOn(newvalue);
         const keepScreenOnEnabled = newvalue === "enable";
-        dispatch(updateInterface({ screen_on: keepScreenOnEnabled }));
+        dispatch(updateScreenOn(keepScreenOnEnabled));
     };
 
     return (
-        <div className="p-4 pb-10 bg-white border-b border-primary20">
+        <div className="pt-2 pb-5 xl:p-4 xl:pb-10 bg-white border-b border-primary20">
             <CollapsibleComponent
                 title="Keep Screen On"
                 subTitle="With native page transitions enabled a loading spinner will show when loading new pages within your app. The current page will fade out, the loading spinner will be displayed, and then the new page will fade in when it has finished loading."

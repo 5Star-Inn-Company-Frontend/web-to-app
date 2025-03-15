@@ -1,26 +1,29 @@
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { OsConfigCard2 } from "./OsConfigCard2";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useAppDispatch } from "@/redux/hook";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import { updateInterface } from "@/redux/app/appSlice";
+import { updateDarkMode } from "@/redux/app/interfaceSlice";
 
 export default function DarkMode() {
     const dispatch = useAppDispatch();
-    const darkMode = useSelector((state: RootState) => state.app.interface.dark_mode);
+    const darkMode = useSelector((state: RootState) => state.apps.interface.dark_mode);
 
-    const initialvalue = useMemo(() => darkMode, [darkMode]);
-    const [enableDarkMode, setEnableDarkMode] = useState(initialvalue || "auto");
+    const initialvalue = useMemo(() => darkMode || "auto", [darkMode]);
+    const [enableDarkMode, setEnableDarkMode] = useState(initialvalue);
+
+    useEffect(() => {
+        setEnableDarkMode(initialvalue);
+    }, [initialvalue]);
 
     const handleChangeEnableDarkMode = (newvalue: string) => {
         setEnableDarkMode(newvalue);
-
-        dispatch(updateInterface({ dark_mode: newvalue }));
+        dispatch(updateDarkMode(newvalue));
     };
 
     return (
-        <div className="p-4 pb-10 bg-white border-b border-primary20">
+        <div className="pb-5 pt-2 xl:p-4 xl:pb-10 bg-white border-b border-primary20">
             <CollapsibleComponent
                 title="Dark Mode"
                 subTitle="Set the default Light/Dark mode for your app. The Auto mode follows the device setting for Light & Dark Mode, but you can set Light or Dark to force a mode irrespective of the device setting. The current mode can also be changed at runtime using the Median JavaScript Bridge."

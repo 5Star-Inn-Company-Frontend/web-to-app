@@ -5,36 +5,39 @@ import { Label } from "@/components/ui/label";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
 import { useCallback, useMemo, useState } from "react";
-import { IContextualNavToolbar } from "@/types/type";
-import { updateNavigation } from "@/redux/app/appSlice";
+import { updateContextualEnable } from "@/redux/app/NavigationSlice";
 
 type TinitialValue = "auto" | "always";
 
 export default function ContextEnable() {
     const dispatch = useAppDispatch();
-    const contextual = useAppSelector((state: RootState) => state.app.navigation.contextual_nav_toolbar);
+    const contextual = useAppSelector(
+        (state: RootState) => state.apps.navigation.contextual_nav_toolbar
+    );
 
-    const initialValue = useMemo(() => (contextual.enable || "auto") as TinitialValue, [contextual.enable]);
+    const initialValue = useMemo(
+        () => (contextual.enable || "auto") as TinitialValue,
+        [contextual.enable]
+    );
 
     const [enableToolBar, setEnableToolBar] = useState<TinitialValue>(initialValue);
 
     const handleChangeEnable = useCallback(
         () => (value: TinitialValue) => {
             setEnableToolBar(value);
-            const newContextual: IContextualNavToolbar = { ...contextual, enable: value };
-            dispatch(updateNavigation({ contextual_nav_toolbar: newContextual }));
+            dispatch(updateContextualEnable(value));
         },
-        []
+        [dispatch]
     );
 
     return (
         <TopNavigationCollapsable title="Enable">
             <p className="text-sm text-primary60 mb-4">
-                Unlike Android devices iPhones and iPads do not have a built-in back button, which can make navigating
-                your website from within your app challenging. This feature provides a native navigation toolbar that
-                shows on the bottom of the device screen dependent on navigation history and page URL. By default, the
-                toolbar will include a Back button but it can be customized to also show with Forward and Refresh
-                buttons.
+                Unlike Android devices iPhones and iPads do not have a built-in back button, which
+                can make navigating your website from within your app challenging. This feature
+                provides a native navigation toolbar that shows on the bottom of the device screen
+                dependent on navigation history and page URL. By default, the toolbar will include a
+                Back button but it can be customized to also show with Forward and Refresh buttons.
             </p>
             <div className="border border-primary40 rounded-lg">
                 <div className="flex items-center gap-x-1 px-4 py-2 border-b border-primary40 ">

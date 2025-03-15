@@ -22,7 +22,7 @@ const initialState: IEditApp = {
     interface: {
         screen_on: true,
         full_screen: false,
-        dark_mode: "enable",
+        dark_mode: "auto",
         screen_orientation: "auto rotate",
         pull_to_refresh: true,
         swipe_gesture: true,
@@ -31,10 +31,10 @@ const initialState: IEditApp = {
         front_scaling: true,
         maximum_window: false,
         view_port_width: true,
-        localization: ["Arabic", "Chinese", "English"],
+        localization: ["English"],
     },
-    website_override: {
-        user_agent: "",
+    website_overide: {
+        user_agent: "enable",
         custom_css: [],
         cookie_persistence: "default",
         custom_javascript: [],
@@ -43,7 +43,7 @@ const initialState: IEditApp = {
         javascript_bridge: [],
         app_tracking_transparency: false,
         location_service: true,
-        media: true,
+        media: { camera: true, microphone: false },
         downloads_directory: "files saved private to app",
         background_audio: true,
         permission: [],
@@ -105,8 +105,9 @@ const initialState: IEditApp = {
         legacy_mode: false,
         app_id: "ikwwiniwe",
         automatic_registration: true,
-        automatic_data_transmission: false,
-        foreground_notification: true,
+        automatic_data_transmission: "automatic",
+        foreground_notification: "show",
+        android_notifications_icon: null,
         notification_sound: [],
     },
     plugin: {
@@ -133,7 +134,9 @@ const appSlice = createSlice({
 
             // Only spread nested objects if they are not null/undefined
             newState.branding =
-                action.payload.branding != null ? { ...state.branding, ...action.payload.branding } : state.branding;
+                action.payload.branding != null
+                    ? { ...state.branding, ...action.payload.branding }
+                    : state.branding;
             newState.link_handling =
                 action.payload.link_handling != null
                     ? { ...state.link_handling, ...action.payload.link_handling }
@@ -142,10 +145,10 @@ const appSlice = createSlice({
                 action.payload.interface != null
                     ? { ...state.interface, ...action.payload.interface }
                     : state.interface;
-            newState.website_override =
-                action.payload.website_override != null
-                    ? { ...state.website_override, ...action.payload.website_override }
-                    : state.website_override;
+            newState.website_overide =
+                action.payload.website_overide !== null
+                    ? { ...state.website_overide, ...action.payload.website_overide }
+                    : initialState.website_overide;
             newState.permission =
                 action.payload.permission != null
                     ? { ...state.permission, ...action.payload.permission }
@@ -159,7 +162,9 @@ const appSlice = createSlice({
                     ? { ...state.notification, ...action.payload.notification }
                     : state.notification;
             newState.plugin =
-                action.payload.plugin != null ? { ...state.plugin, ...action.payload.plugin } : state.plugin;
+                action.payload.plugin != null
+                    ? { ...state.plugin, ...action.payload.plugin }
+                    : state.plugin;
             newState.build_setting =
                 action.payload.build_setting != null
                     ? { ...state.build_setting, ...action.payload.build_setting }
@@ -184,21 +189,40 @@ const appSlice = createSlice({
             state.plan = action.payload;
         },
 
-        updateInterface: (state: IEditApp, action: PayloadAction<Partial<IEditApp["interface"]>>) => {
+        updateInterface: (
+            state: IEditApp,
+            action: PayloadAction<Partial<IEditApp["interface"]>>
+        ) => {
             return { ...state, interface: { ...state.interface, ...action.payload } };
         },
 
         updateBranding: (state: IEditApp, action: PayloadAction<Partial<IEditApp["branding"]>>) => {
             return { ...state, branding: { ...state.branding, ...action.payload } };
         },
-        updateWebsiteOverrides: (state: IEditApp, action: PayloadAction<Partial<IEditApp["website_override"]>>) => {
-            return { ...state, website_override: { ...state.website_override, ...action.payload } };
+        updateWebsiteOverrides: (
+            state: IEditApp,
+            action: PayloadAction<Partial<IEditApp["website_overide"]>>
+        ) => {
+            return { ...state, website_override: { ...state.website_overide, ...action.payload } };
         },
-        updatePermission: (state: IEditApp, action: PayloadAction<Partial<IEditApp["permission"]>>) => {
+        updatePermission: (
+            state: IEditApp,
+            action: PayloadAction<Partial<IEditApp["permission"]>>
+        ) => {
             return { ...state, permission: { ...state.permission, ...action.payload } };
         },
 
-        updateNavigation: (state: IEditApp, action: PayloadAction<Partial<IEditApp["navigation"]>>) => {
+        updateNotification: (
+            state: IEditApp,
+            action: PayloadAction<Partial<IEditApp["notification"]>>
+        ) => {
+            return { ...state, notification: { ...state.notification, ...action.payload } };
+        },
+
+        updateNavigation: (
+            state: IEditApp,
+            action: PayloadAction<Partial<IEditApp["navigation"]>>
+        ) => {
             return { ...state, navigation: { ...state.navigation, ...action.payload } };
         },
 
@@ -210,7 +234,10 @@ const appSlice = createSlice({
                 ...state,
                 navigation: {
                     ...state.navigation,
-                    sidebar_navigation: { ...state.navigation.sidebar_navigation, ...action.payload },
+                    sidebar_navigation: {
+                        ...state.navigation.sidebar_navigation,
+                        ...action.payload,
+                    },
                 },
             };
         },
@@ -241,6 +268,7 @@ export const {
     updateDescription,
     updateWebsiteOverrides,
     updatePermission,
+    updateNotification,
     updateNavigation,
     updateNavigationSideBarTab,
     updateNavigationTopBarTab,

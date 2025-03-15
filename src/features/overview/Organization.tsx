@@ -9,7 +9,7 @@ const members = ["Emmy O", "Odejinmi Samuel"];
 
 export default function Organization() {
     return (
-        <div className="p-4 bg-white border-t border-primary20">
+        <div className="xl:p-4 bg-white border-t border-primary20">
             <CollapsibleComponent title="Organization members with access to this app">
                 <div className="flex flex-col px-8">
                     {members.map((member, id) => {

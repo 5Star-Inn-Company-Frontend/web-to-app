@@ -1,6 +1,6 @@
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { updateNavigationTopBarTab } from "@/redux/app/appSlice";
+import { updateTopNavigateDisplayMode } from "@/redux/app/NavigationSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
 import { useEffect, useState } from "react";
@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 export default function VisualEditorDisplayMode() {
     const dispatch = useAppDispatch();
     const topNavigate = useAppSelector(
-        (state: RootState) => state.app.navigation.top_nav_bar.top_navigate_bar_visual_editor
+        (state: RootState) => state.apps.navigation.top_nav_bar.top_navigate_bar_visual_editor
     );
 
     const initialValue = topNavigate.display_mode || "page title";
@@ -22,9 +22,7 @@ export default function VisualEditorDisplayMode() {
     const handleChangeDisplayMode = (value: string) => {
         setDisplayMode(value);
 
-        dispatch(
-            updateNavigationTopBarTab({ top_navigate_bar_visual_editor: { ...topNavigate, display_mode: value } })
-        );
+        dispatch(updateTopNavigateDisplayMode(value));
     };
 
     return (

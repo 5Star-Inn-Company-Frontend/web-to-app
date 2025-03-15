@@ -1,28 +1,34 @@
 import { ScreenOrientationConfigCard } from "@/features/interface/screenorientationconfig";
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
-import { updateInterface } from "@/redux/app/appSlice";
 import { useAppDispatch } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
+import { updateScreenOrientation } from "@/redux/app/interfaceSlice";
 
 export default function ScreenOrientation() {
     const dispatch = useAppDispatch();
-    const screenorientation = useSelector((state: RootState) => state.app.interface.screen_orientation);
+    const screenorientation = useSelector(
+        (state: RootState) => state.apps.interface.screen_orientation
+    );
 
-    const initialValue = useMemo(() => screenorientation, [screenorientation]);
-    const [enableScreenOrientation, setEnableScreenOrientation] = useState(initialValue || "auto rotate");
+    const initialValue = useMemo(() => screenorientation || "auto rotate", [screenorientation]);
+    const [enableScreenOrientation, setEnableScreenOrientation] = useState(initialValue);
+
+    useEffect(() => {
+        setEnableScreenOrientation(initialValue);
+    }, [initialValue]);
 
     const handleChangeScreenOrientation = useCallback(
         (newvalue: string) => {
             setEnableScreenOrientation(newvalue);
-            dispatch(updateInterface({ screen_orientation: newvalue }));
+            dispatch(updateScreenOrientation(newvalue));
         },
         [dispatch]
     );
 
     return (
-        <div className="p-4 pb-10 bg-white border-b border-primary20">
+        <div className="pb-5 pt-2 xl:p-4 xl:pb-10 bg-white border-b border-primary20">
             <CollapsibleComponent
                 title="Screen Orientation"
                 subTitle="Control whether the orientation of your app changes automatically as the device is rotated or remains fixed in portrait or landscape mode. Note that Fixed Portrait for iPad will automatically disable multi-tasking."

@@ -2,27 +2,31 @@ import { SwipeGestorsCardCard } from "@/features/interface/swipegestors";
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { updateInterface } from "@/redux/app/appSlice";
 import { useAppDispatch } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
+import { updateSwipeGesture } from "@/redux/app/interfaceSlice";
 
 export default function SwipeGestures() {
     const dispatch = useAppDispatch();
-    const swipeGesture = useSelector((state: RootState) => state.app.interface.swipe_gesture);
+    const swipeGesture = useSelector((state: RootState) => state.apps.interface.swipe_gesture);
 
     const initialValue = useMemo(() => (swipeGesture ? "on" : "off"), [swipeGesture]);
     const [enableSwipeGestures, setEnableSwipeGestures] = useState(initialValue);
 
+    useEffect(() => {
+        setEnableSwipeGestures(initialValue);
+    }, [initialValue]);
+
     const handleChangeEnableSwipeGestures = (newvalue: string) => {
         setEnableSwipeGestures(newvalue);
         const swipeGestureIsEnabled = newvalue === "on";
-        dispatch(updateInterface({ swipe_gesture: swipeGestureIsEnabled }));
+        dispatch(updateSwipeGesture(swipeGestureIsEnabled));
     };
 
     return (
-        <div className="p-4 pb-10 bg-white border-b border-primary20">
+        <div className="pt-2 pb-5 xl:p-4 xl:pb-10 bg-white border-b border-primary20">
             <CollapsibleComponent
                 title="Swipe Gestures"
                 subTitle="Add swipe gestures to your app to enable swiping to go back and forward in the navigation history. On Android, arrow indicators will show on the screen to indicate when there is a page available to go back to or to go forward to."

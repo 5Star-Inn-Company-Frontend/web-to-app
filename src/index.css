@@ -14,7 +14,8 @@ body {
     margin: 0 auto;
     background: #eef0f3;
     font-weight: 400;
-    font-family: "Inter", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
+    font-family: "Inter", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji", sans-serif;
 }
 .navWidth {
     width: 26.5rem !important;
@@ -30,6 +31,7 @@ body {
 input[type="file"] {
     visibility: hidden;
 }
+
 @layer base {
     :root {
         --background: 0 0% 100%;
@@ -124,8 +126,15 @@ input[type="file"] {
         display: block;
     }
 }
+/* @media only screen and (max-width: 768px) {
+    .desktopNav {
+        display: none !important;
+    }
+    .mobileNav {
+        display: block;
+    }
+} */
 @layer base {
-<<<<<<< HEAD
     * {
         @apply border-border;
     }
@@ -133,21 +142,26 @@ input[type="file"] {
         @apply bg-background text-foreground;
     }
 }
-=======
-  * {
+@layer base {
+    * {
+        @apply border-border outline-ring/50;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+* {
     @apply border-border;
-  }
-  body {
+}
+body {
     @apply bg-background text-foreground;
-  }
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+    * {
+        @apply border-border outline-ring/50;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
 }
->>>>>>> 45a96c3edca5f3f853b48d874b89a15bcd70858b

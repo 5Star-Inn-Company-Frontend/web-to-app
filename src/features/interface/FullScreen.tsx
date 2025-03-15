@@ -1,26 +1,29 @@
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { OsConfigCard } from "@/components/global/os_config_card";
-import { updateInterface } from "@/redux/app/appSlice";
-import { useAppDispatch } from "@/redux/hook";
+import { updateFullScreen } from "@/redux/app/interfaceSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useMemo, useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useMemo, useState } from "react";
 
 export default function FullScreen() {
     const dispatch = useAppDispatch();
-    const fullScreen = useSelector((state: RootState) => state.app.interface.full_screen);
+    const fullScreen = useAppSelector((state: RootState) => state.apps.interface.full_screen);
 
     const initialValue = useMemo(() => (fullScreen ? "enable" : "disable"), [fullScreen]);
     const [enableFullScreen, setEnableFullScreen] = useState(initialValue || "disable");
 
+    useEffect(() => {
+        setEnableFullScreen(initialValue);
+    }, [initialValue]);
+
     const handleChangeFullScreen = (newvalue: string) => {
         setEnableFullScreen(newvalue);
         const fullScreenIsEnabled = newvalue === "enable";
-        dispatch(updateInterface({ full_screen: fullScreenIsEnabled }));
+        dispatch(updateFullScreen(fullScreenIsEnabled));
     };
 
     return (
-        <div className="p-4 pb-10 bg-white border-b border-primary20">
+        <div className="pt-2 pb-5 xl:p-4 xl:pb-10 bg-white border-b border-primary20">
             <CollapsibleComponent
                 title="Full Screen"
                 subTitle="Control whether your app is displayed in full screen. This mode can also be set at runtime from your website using the JavaScript Bridge. Note that on Android when full screen mode enabled the keyboard will overlay on top of your web content which can cause issues for users completing forms."

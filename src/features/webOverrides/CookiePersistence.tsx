@@ -1,26 +1,31 @@
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { updateWebsiteOverrides } from "@/redux/app/appSlice";
+import { updateCookiePresistence } from "@/redux/app/websiteOverideSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function CookiePersistence() {
     const dispatch = useAppDispatch();
-    const cookiesPresistence = useAppSelector((state: RootState) => state.app.website_override.cookie_persistence);
+    const cookiesPresistence = useAppSelector(
+        (state: RootState) => state.apps.websiteOveride.cookie_persistence
+    );
 
     const initialValue = cookiesPresistence || "default";
-
     const [enableCookies, setEnableCookies] = useState(initialValue);
+
+    useEffect(() => {
+        setEnableCookies(initialValue);
+    }, [initialValue]);
 
     const handleChangeCookies = (newvalue: string) => {
         setEnableCookies(newvalue);
-        dispatch(updateWebsiteOverrides({ cookie_persistence: newvalue }));
+        dispatch(updateCookiePresistence(newvalue));
     };
 
     return (
-        <div className="px-6 py-10 bg-white border-b border-primary20">
+        <div className="pt-2 pb-5 xl:px-6 xl:py-10 bg-white border-b border-primary20">
             <CollapsibleComponent
                 title="Cookie Persistence"
                 subTitle="By default, the cookie store in your app will respect the expiry parameters of cookies as received. Using this option you may force the expiry of all cookies to a preset duration. This functionality is useful for extending the duration of login sessions when it is not possible to make changes at the server level."
@@ -36,7 +41,7 @@ export default function CookiePersistence() {
                             <Label htmlFor="r1">Default</Label>
                         </div>
                         <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="Customize" id="r2" />
+                            <RadioGroupItem value="custom" id="r2" />
                             <Label htmlFor="r2">Custom</Label>
                         </div>
                     </RadioGroup>

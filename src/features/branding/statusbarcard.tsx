@@ -1,38 +1,35 @@
 "use client";
 
+import { ColorPicker } from "@/components/ColorPicker";
 import { Text } from "@/components/global/text";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { updateAppData } from "@/redux/app/appSlice";
-import { useAppDispatch } from "@/redux/hook";
+import { updateStatusBar } from "@/redux/app/brandSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { IEditApp } from "@/types/type";
 import { useEffect, useState } from "react";
 import { CiLight } from "react-icons/ci";
 import { FaAndroid, FaApple } from "react-icons/fa6";
-import { useSelector } from "react-redux";
+import { MdDarkMode } from "react-icons/md";
 
 interface IStatusBarCard {
     os: "IOS" | "Android";
 }
 
 export const StatusbarCard = ({ os }: IStatusBarCard) => {
-    const appData = useSelector((state: RootState) => state.app);
-    const [statusBar, setStatusBar] = useState("overlay");
-
     const dispatch = useAppDispatch();
+    const appData = useAppSelector((state: RootState) => state.apps.branding.status_bar);
 
-    const updateStatusBar = (status: string) => {
-        setStatusBar(status);
-
-        const newData: IEditApp = { ...appData, branding: { ...appData.branding, status_bar: status } };
-        dispatch(updateAppData(newData));
-    };
+    const [statusBar, setStatusBar] = useState(appData);
 
     useEffect(() => {
-        setStatusBar(appData.branding.status_bar || "overlay");
-        //eslint-disable-next-line
-    }, []);
+        setStatusBar(appData);
+    }, [appData]);
+
+    const handleUpdateStatusBar = (status: string) => {
+        setStatusBar(status);
+        dispatch(updateStatusBar(status));
+    };
 
     return (
         <div className="rounded-md border border-primary20">
@@ -40,12 +37,12 @@ export const StatusbarCard = ({ os }: IStatusBarCard) => {
                 {os === "IOS" ? <FaApple size="2rem" /> : <FaAndroid size="2rem" />}
                 {os} / Android
             </div>
-            <div className="flex lg:flex-row xl:flex-row md:flex-row sm:flex-col items-center justify-between gap-4 px-6 py-2">
-                <div className="flex gap-2 flex-col items-start flex-grow">
-                    <div className="flex items-center gap-x-6 justify-between">
-                        <div className="w-[90%] mb-2">
+            <div className="flex lg:flex-row xl:flex-row md:flex-row sm:flex-col items-center justify-between gap-4 xl:px-6 py-2">
+                <div className="flex w-full px-4 gap-2 flex-col items-start">
+                    <div className="w-full xl:flex items-center gap-x-6 justify-between">
+                        <div className="xl:w-[90%] mb-2">
                             <Text style="text-md mt-4 mb-3" value="Appearance" />
-                            <div className="w-full text-primary40 flex lg:flex-row xl:flex-row md:flex-row sm:flex-col justify-between items-center gap-4">
+                            <div className="w-full text-primary40 flex justify-between items-center gap-4">
                                 <RadioGroup
                                     className="flex justify-between border p-[0.7rem] rounded-md w-full"
                                     defaultValue="auto"
@@ -67,21 +64,11 @@ export const StatusbarCard = ({ os }: IStatusBarCard) => {
                         </div>
                         <div className="">
                             <Text style="text-md mt-2 mb-3" value="Effects" />
-                            {/* <div className="flex gap-4">
-                                <div className="flex items-center space-x-2">
-                                    <Label htmlFor="overlay">OVERLAY</Label>
-                                    <Switch id="overlay" onChange={} />
-                                </div>
-                                <div className="flex items-center space-x-2">
-                                    <Label htmlFor="blur">BLUR</Label>
-                                    <Switch id="blur" />
-                                </div>
-                            </div> */}
                             <div className="w-full text-primary40 flex lg:flex-row xl:flex-row md:flex-row sm:flex-col justify-between items-center gap-x-4">
                                 <RadioGroup
                                     className="flex justify-between border p-[0.7rem] rounded-md w-full"
                                     value={statusBar}
-                                    onValueChange={updateStatusBar}
+                                    onValueChange={handleUpdateStatusBar}
                                 >
                                     <div className="flex items-center space-x-2">
                                         <RadioGroupItem value="overlay" id="r1" />
@@ -95,29 +82,25 @@ export const StatusbarCard = ({ os }: IStatusBarCard) => {
                             </div>
                         </div>
                     </div>
-                    <div className="w-[60%] pb-4">
+                    <div className="xl:w-[60%] pb-4">
                         <Text style="text-md mb-4" value="Background Color" />
-                        <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-x-8">
                             <div>
-                                <div className="flex gap-2 items-center text-[grey] text-xs mb-4">
+                                <div className="flex gap-2 justify-between items-center text-[grey] xl:text-xs mb-4">
                                     <CiLight />
                                     Light mode
                                 </div>
                                 <div className="flex justify-between border rounded-md px-2 py-1 items-center gap-2">
-                                    <div className="h-[0.7rem] w-[0.7rem] p-1 rounded border bg-white"></div>
-                                    <Text style="text-[grey] text-xs" value="#FFFFFF" />
+                                    <ColorPicker background="#FFFFFF" setBackground={() => {}} />
                                 </div>
                             </div>
                             <div>
-                                <div className="flex gap-2 items-center text-[grey] text-xs mb-4">
-                                    <div className=" w-[0.8rem] h-[0.8rem] relative">
-                                        <img src="/darkscreen.svg" alt="object not found" className="w-full" />
-                                    </div>
+                                <div className="flex gap-2 items-center text-[grey] xl:text-xs mb-4">
+                                    <MdDarkMode />
                                     Dark mode
                                 </div>
                                 <div className="flex justify-between border rounded-md px-2 py-1 items-center gap-2">
-                                    <div className="h-[0.7rem] w-[0.7rem] p-1 rounded border bg-black"></div>
-                                    <Text style="text-[grey] text-xs" value="#000000" />
+                                    <ColorPicker background="#000000" setBackground={() => {}} />
                                 </div>
                             </div>
                         </div>

@@ -4,13 +4,15 @@ import { Label } from "@/components/ui/label";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { updateNavigation } from "@/redux/app/appSlice";
+import { updateContextualRefreshBtn } from "@/redux/app/NavigationSlice";
 
 type RefreshButtonValue = "enable" | "disable";
 
 export default function RefreshButtonConfig() {
     const dispatch = useAppDispatch();
-    const refreshBtnConfig = useAppSelector((state: RootState) => state.app.navigation.contextual_nav_toolbar);
+    const refreshBtnConfig = useAppSelector(
+        (state: RootState) => state.apps.navigation.contextual_nav_toolbar
+    );
 
     // Memoize initial value to avoid recalculating on every render
     const initialValue = useMemo<RefreshButtonValue>(
@@ -32,13 +34,9 @@ export default function RefreshButtonConfig() {
 
             const refreshBtnConfigIsEnabled = value === "enable";
 
-            // new value
-            const newContextualValue = { ...refreshBtnConfig, forward_button_configuration: refreshBtnConfigIsEnabled };
-
-            // update redux store
-            dispatch(updateNavigation({ contextual_nav_toolbar: newContextualValue }));
+            dispatch(updateContextualRefreshBtn(refreshBtnConfigIsEnabled));
         },
-        [dispatch, refreshBtnConfig]
+        [dispatch]
     );
 
     return (

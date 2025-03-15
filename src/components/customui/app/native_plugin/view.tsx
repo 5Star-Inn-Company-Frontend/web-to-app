@@ -2,6 +2,7 @@ import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { Text } from "@/components/global/text";
 import { Input } from "@/components/ui/input";
 import { PluginCard } from "@/features/nativeplugins/PluginCard";
+import PluginCardMobile from "@/features/nativeplugins/PluginCardMobile";
 
 const plugins = [
     {
@@ -93,20 +94,29 @@ const plugins = [
 export const NativePluginSection = () => {
     return (
         <>
-            <div className="px-12 py-8 border-b border-primary20 bg-white w-full rounded">
-                <Text style="text-4xl font-medium" value="Native Plugin" />
+            <div className="py-5 px-6 w-full xl:px-12 xl:py-8 border-b border-primary20 rounded">
+                <Text style="text-[1.7rem] xl:text-4xl font-medium" value="Native Plugin" />
             </div>
-            <div className="px-8 py-8 bg-white">
+            <div className="px-2 py-6 xl:px-8 xl:py-8">
                 <CollapsibleComponent title="Available Plugins" subTitle="">
                     <div className="px-4">
-                        <Input type="text" className="border w-full px-4" placeholder="Search for an app" />
+                        <Input
+                            type="text"
+                            className="border w-full px-4"
+                            placeholder="Search for an app"
+                        />
                     </div>
                 </CollapsibleComponent>
             </div>
 
-            <div className="px-12">
+            <div className="hidden xl:block xl:px-12">
                 {plugins.map((plugin) => (
                     <PluginCard img={plugin.img} title={plugin.value} />
+                ))}
+            </div>
+            <div className="xl:hidden px-6 xl:px-12">
+                {plugins.map((plugin) => (
+                    <PluginCardMobile img={plugin.img} title={plugin.value} />
                 ))}
             </div>
         </>

@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useNavigate } from "react-router-dom";
-import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Partnership from "./partnership";
 import Authprompt from "./authprompt";
@@ -17,6 +16,7 @@ import { loginApi } from "@/api/auth";
 import { useAppDispatch } from "@/redux/hook";
 import { login } from "@/redux/auth/authSlice";
 import axios, { AxiosError } from "axios";
+import toast from "react-hot-toast";
 
 // Define the type for the SignIn props
 
@@ -68,7 +68,12 @@ export const SigninForm = () => {
                         render={({ field }) => (
                             <FormItem>
                                 <FormControl>
-                                    <IconInput type="email" category="formInput" placeHolder="Email" field={field} />
+                                    <IconInput
+                                        type="email"
+                                        category="formInput"
+                                        placeHolder="Email"
+                                        field={field}
+                                    />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -94,7 +99,10 @@ export const SigninForm = () => {
 
                     <div className="flex justify-end items-end bg-[#24243E] rounded-md mt-4">
                         {isPending ? (
-                            <Button disabled className="w-full h-12 text-white bg-[#24243E] p-[0.5rem]">
+                            <Button
+                                disabled
+                                className="w-full h-12 text-white bg-[#24243E] p-[0.5rem]"
+                            >
                                 <ReloadIcon className="mr-2 h-4 w-4 animate-spin text-white" />
                                 Please wait...
                             </Button>
@@ -106,7 +114,6 @@ export const SigninForm = () => {
                                 Proceed to my Account
                             </Button>
                         )}
-                        <ToastContainer transition={Bounce} position="top-right" draggable />
                     </div>
                     <Authprompt action="signin" />
                 </form>

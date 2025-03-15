@@ -1,40 +1,24 @@
-import { Text } from "@/components/global/text"
-import { CiLight } from "react-icons/ci"
-import { FaAndroid, FaApple } from "react-icons/fa6"
-export const KeepScreenOnCard =({
-    os
-}:{
-    os:"IOS"|"Android"
-})=>{
-    return(
+import { ColorPicker } from "@/components/ColorPicker";
+import { Text } from "@/components/global/text";
+import { CiLight } from "react-icons/ci";
+import { FaAndroid, FaApple } from "react-icons/fa6";
+export const KeepScreenOnCard = ({ os }: { os: "IOS" | "Android" }) => {
+    return (
         <div className="rounded-md border border-primary20">
             <div className="flex text-sm gap-2 items-center px-6 py-2 border-b border-primary20 rounded-t-md">
-                {
-                    os ==="IOS"?(
-                        <FaApple size="1.3rem"/>
-                    ):(
-                        <FaAndroid size="1.3rem"/>
-                    )
-                }
+                {os === "IOS" ? <FaApple size="1.3rem" /> : <FaAndroid size="1.3rem" />}
                 {os}
             </div>
             <div className="px-6 py-4">
-                <Text
-                    style="text-xs mb-5"
-                    value="Loading Spinner Color"
-                />
-                <div className="flex justify-between items-center gap-4 w-[60%]">
+                <Text style="text-xs mb-5" value="Loading Spinner Color" />
+                <div className="flex xl:flex-row xl:justify-between xl:items-center gap-4 xl:w-[60%]">
                     <div className="flex flex-col gap-2">
-                        <div className="flex gap-2 items-center text-[grey] text-xs mb-2">
-                            <CiLight/>
+                        <div className="flex  gap-2 items-center text-[grey] text-xs mb-2">
+                            <CiLight />
                             LIGHT MODE
                         </div>
-                        <div className="w-fit flex justify-between border rounded-md px-2 py-1 items-center gap-2">
-                            <div className="h-[0.7rem] w-[0.7rem] p-1 rounded border bg-white"></div>
-                            <Text
-                                style="text-[grey] text-xs"
-                                value="#FFFFFF"
-                            />
+                        <div className="flex justify-between border rounded-md px-2 py-1 items-center gap-2">
+                            <ColorPicker background="#ffff" setBackground={() => {}} />
                         </div>
                     </div>
                     <div className="flex flex-col gap-2">
@@ -48,16 +32,12 @@ export const KeepScreenOnCard =({
                             </div>
                             DARK MODE
                         </div>
-                        <div className="w-fit flex justify-between border rounded-md px-2 py-1 items-center gap-2">
-                            <div className="h-[0.7rem] w-[0.7rem] p-1 rounded border bg-black"></div>
-                            <Text
-                                style="text-[grey] text-xs"
-                                value="#000000"
-                            />
+                        <div className="flex justify-between border rounded-md px-2 py-1 items-center gap-2">
+                            <ColorPicker background="#0000" setBackground={() => {}} />
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};

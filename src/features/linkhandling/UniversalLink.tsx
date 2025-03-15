@@ -4,7 +4,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 
 export default function UniversalLink() {
     return (
-        <div className="px-4 py-8 bg-white border-b border-primary20">
+        <div className="py-4 xl:px-4 xl:py-8 bg-white border-b border-primary20">
             <CollapsibleComponent
                 title="Universal Links /Deep Links "
                 subTitle="Deep Links / Universal Links configure your device to open links pointing to your site in emails/text messages/other websites directly in your app rather than in a mobile browser. This provides a richer native app user experience."

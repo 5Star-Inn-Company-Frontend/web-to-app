@@ -1,6 +1,6 @@
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { updateNavigationTopBarTab } from "@/redux/app/appSlice";
+import { updateTopNavigatePagesToDisplay } from "@/redux/app/NavigationSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
 import { useEffect, useMemo, useState } from "react";
@@ -8,7 +8,7 @@ import { useEffect, useMemo, useState } from "react";
 export default function PagesToDisplayRadio() {
     const dispatch = useAppDispatch();
     const topNavigate = useAppSelector(
-        (state: RootState) => state.app.navigation.top_nav_bar.top_navigate_bar_visual_editor
+        (state: RootState) => state.apps.navigation.top_nav_bar.top_navigate_bar_visual_editor
     );
 
     const initialValue = useMemo(() => {
@@ -24,11 +24,7 @@ export default function PagesToDisplayRadio() {
     const handleChangePagesToDisplay = (value: string) => {
         setPagesToDisplay(value);
 
-        dispatch(
-            updateNavigationTopBarTab({
-                top_navigate_bar_visual_editor: { ...topNavigate, pages_to_display_top_nav_bar: value },
-            })
-        );
+        dispatch(updateTopNavigatePagesToDisplay(value));
     };
 
     return (

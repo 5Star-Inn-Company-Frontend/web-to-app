@@ -3,14 +3,17 @@ import BgColorStyling from "./bottomNavigationTab/BgColorStyling";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { updateNavigation } from "@/redux/app/appSlice";
+import {
+    updateBottomBarStylingDark,
+    updateBottomBarStylingLight,
+} from "@/redux/app/NavigationSlice";
 
 interface IBottomTopBar {
     os: "IOS" | "Android";
 }
 export const BottomTopBarStylingCard = ({ os }: IBottomTopBar) => {
     const dispatch = useAppDispatch();
-    const bottomTab = useAppSelector((state: RootState) => state.app.navigation.bottom_tab_bar);
+    const bottomTab = useAppSelector((state: RootState) => state.apps.navigation.bottom_tab_bar);
 
     const initialValue = useMemo(() => {
         return { light: bottomTab.styling.light_mode, dark: bottomTab.styling.dark_mode };
@@ -27,19 +30,17 @@ export const BottomTopBarStylingCard = ({ os }: IBottomTopBar) => {
     const handleChangeLightBackground = useCallback(
         (value: string) => {
             setLight(value);
-            const newBottomTab = { ...bottomTab, styling: { ...bottomTab.styling, light_mode: value } };
-            dispatch(updateNavigation({ bottom_tab_bar: newBottomTab }));
+            dispatch(updateBottomBarStylingLight(value));
         },
-        [dispatch, bottomTab]
+        [dispatch]
     );
 
     const handleChangeDarkBackground = useCallback(
         (value: string) => {
             setDark(value);
-            const newBottomTab = { ...bottomTab, styling: { ...bottomTab.styling, dark_mode: value } };
-            dispatch(updateNavigation({ bottom_tab_bar: newBottomTab }));
+            dispatch(updateBottomBarStylingDark(value));
         },
-        [dispatch, bottomTab]
+        [dispatch]
     );
     return (
         <div className="rounded-md border border-primary20 mb-10">

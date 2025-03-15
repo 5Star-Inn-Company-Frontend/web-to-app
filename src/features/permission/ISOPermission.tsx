@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 
 export default function ISOPermission() {
     return (
-        <div className="px-6 py-4 bg-white mb-10">
+        <div className="pt-2 pb-5 xl:px-6 xl:py-4 bg-white mb-10">
             <CollapsibleComponent
                 title="ISO Permission Description"
                 subTitle="Apple requires permission descriptions that accurately represent how your app uses device functionality. Update the defaults when necessary to reflect your specific use case."

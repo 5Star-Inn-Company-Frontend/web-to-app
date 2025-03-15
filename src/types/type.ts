@@ -79,21 +79,21 @@ export interface IColorScheme {
     text_color: string;
 }
 
-interface IColorSchemeMode {
+export interface IColorSchemeMode {
     light_mode: IColorScheme;
     dark_mode: IColorScheme;
 }
 
-interface ITopNavStyling extends IColorSchemeMode {
+export interface ITopNavStyling extends IColorSchemeMode {
     default_display: string;
 }
 
-interface ITopNavBarVisualEditor {
+export interface ITopNavBarVisualEditor {
     pages_to_display_top_nav_bar: string;
     display_mode: string;
 }
 
-interface ITopNavBar {
+export interface ITopNavBar {
     display_mode: string;
     styling: ITopNavStyling;
     top_navigate_bar_visual_editor: ITopNavBarVisualEditor;
@@ -135,23 +135,29 @@ export interface INavigation {
     bottom_tab_bar: IBottomTabBar;
     contextual_nav_toolbar: IContextualNavToolbar;
 }
+
+export interface IMedia {
+    camera: boolean;
+    microphone: boolean;
+}
 export interface IPermission {
     javascript_bridge: string[];
     app_tracking_transparency: boolean;
     location_service: boolean;
-    media: boolean;
+    media: IMedia;
     downloads_directory: string;
     background_audio: boolean;
     permission: string[];
 }
 
-interface INotification {
+export interface INotification {
     signal: boolean;
     legacy_mode: boolean;
     app_id: string;
     automatic_registration: boolean;
-    automatic_data_transmission: boolean;
-    foreground_notification: boolean;
+    automatic_data_transmission: string;
+    foreground_notification: string;
+    android_notifications_icon: null;
     notification_sound: string[];
 }
 
@@ -174,7 +180,7 @@ export interface IAppData {
     branding: IBranding | null;
     link_handling: ILinkHandling | null;
     interface: IInterface | null;
-    website_override: IWebsiteOveride | null;
+    website_overide: IWebsiteOveride | null;
     permission: IPermission | null;
     navigation: INavigation | null;
     notification: INotification | null;
@@ -193,7 +199,7 @@ export interface IEditApp {
     branding: IBranding;
     link_handling: ILinkHandling;
     interface: IInterface;
-    website_override: IWebsiteOveride;
+    website_overide: IWebsiteOveride;
     permission: IPermission;
     navigation: INavigation;
     notification: INotification;
@@ -235,4 +241,14 @@ export interface IMember {
 export interface ITabConfig {
     value: string;
     component: React.ComponentType;
+}
+
+export interface IAppState {
+    id: number | null;
+    name: string;
+    url: string;
+    description: string;
+    plan: string;
+    last_saved: string;
+    member_count: number;
 }
