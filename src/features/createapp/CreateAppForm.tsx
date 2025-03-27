@@ -53,7 +53,7 @@ export default function CreateAppForm() {
     }
 
     return (
-        <div className="max-w-[800px] p-16 rounded-lg my-10 mx-auto bg-white">
+        <div className="max-w-[800px] px-2 xl:p-16 rounded-lg my-10 mx-auto bg-white">
             <form className="pb-20" onSubmit={handleSubmit}>
                 <AppUrl handleChange={handleChange} value={appInput.url} />
                 <AppNameInput handleChange={handleChange} value={appInput.name} />

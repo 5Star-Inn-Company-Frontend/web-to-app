@@ -16,6 +16,7 @@ body {
     font-weight: 400;
     font-family: "Inter", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
         "Noto Color Emoji", sans-serif;
+    overflow-y: scroll;
 }
 .navWidth {
     width: 26.5rem !important;

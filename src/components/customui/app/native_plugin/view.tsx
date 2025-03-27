@@ -114,7 +114,7 @@ export const NativePluginSection = () => {
                     <PluginCard img={plugin.img} title={plugin.value} />
                 ))}
             </div>
-            <div className="xl:hidden px-6 xl:px-12">
+            <div className="xl:hidden px-3 mx-auto w-full xl:px-12">
                 {plugins.map((plugin) => (
                     <PluginCardMobile img={plugin.img} title={plugin.value} />
                 ))}

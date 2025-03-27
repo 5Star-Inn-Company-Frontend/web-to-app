@@ -7,11 +7,11 @@ const HomeDashboard = () => {
     return (
         <PrivateRoute>
             <Navbar />
-            <div className="flex h-screen overflow-hidden xl:p-6">
+            <div className="xl:flex h-screen overflow-hidden xl:p-6">
                 {/* Sidebar */}
                 <Sidebar />
                 {/* Main Content */}
-                <div className="flex-1 overflow-y-auto p-6 no-scrollbar rounded-r-md bg-white">
+                <div className="flex-1 overflow-y-auto min-h-screen p-6 no-scrollbar rounded-r-md bg-white">
                     <div className="space-y-6">
                         <Outlet />
                     </div>

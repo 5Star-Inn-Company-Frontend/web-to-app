@@ -15,8 +15,8 @@ const plans: TPlan[] = [
 export function Plan() {
     return (
         <>
-            <div className="px-10 pt-8 border-b border-primary20">
-                <Text style="font-medium text-4xl mb-4" value="Plan" />
+            <div className="px-6 xl:px-10 pt-8 border-b border-primary20">
+                <Text style="font-medium text-3xl xl:text-4xl mb-4" value="Plan" />
             </div>
             <h3 className="mt-5 mx-10 mb-4 font-normal">Application</h3>
             <div>
@@ -35,9 +35,12 @@ interface IPlanCard {
 
 const PlanCard = ({ planAmount, planType }: IPlanCard) => {
     return (
-        <div className="py-8 px-10 border-b border-primary20 first:pt-0">
+        <div className="py-8 px-6 xl:px-10 border-b border-primary20 first:pt-0">
             <div className="mb-4 ">
-                <Input value="5star Free license" className="border border-primary20 bg-primary30 px-4" />
+                <Input
+                    value="5star Free license"
+                    className="border border-primary20 bg-primary30 px-4"
+                />
             </div>
             <div className="border border-primary20 px-5 py-5 rounded-lg">
                 <div className="mb-1 flex items-center justify-between">

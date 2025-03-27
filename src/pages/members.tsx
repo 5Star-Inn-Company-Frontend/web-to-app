@@ -15,6 +15,8 @@ const Members = () => {
         queryFn: () => fetchMembers(),
     });
 
+    console.log(data);
+
     const handleSearch = () => {
         console.log(value);
         setValue("admin");

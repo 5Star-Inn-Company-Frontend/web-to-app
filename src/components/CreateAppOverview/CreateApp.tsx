@@ -8,11 +8,11 @@ export function CreateApp() {
         <>
             <Navbar />
             <div className="flex">
-                <div className=" w-[75%] px-4">
+                <div className="w-full xl:w-[75%] px-4">
                     <DashboardHeader />
                     <CreateAppForm />
                 </div>
-                <div className="w-[28%]">
+                <div className="hidden xl:block xl:w-[28%]">
                     <Simulation />
                 </div>
             </div>

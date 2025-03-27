@@ -39,7 +39,7 @@ export default function DisplayMode() {
                 bar to easily open the menu.
             </p>
             <div>
-                <div className="grid grid-cols-2 gap-x-8 mt-6">
+                <div className="grid xl:grid-cols-2 gap-y-4 xl:gap-y-0 gap-x-8 mt-6">
                     <OsConfigCard
                         os="IOS"
                         value={displayMode}

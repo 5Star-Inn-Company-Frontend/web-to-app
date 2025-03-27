@@ -33,6 +33,8 @@ export default function DashboardHeader() {
         },
     };
 
+    console.log(appData);
+
     const { mutate, isPending } = useMutation({
         mutationKey: ["app", appId],
         mutationFn: updateApp,
@@ -55,13 +57,13 @@ export default function DashboardHeader() {
             </div>
 
             <div className="flex justify-between items-center">
-                <button>
-                    <img src="/left-nav-btn.svg" alt="" />
+                <button className="block xl:hidden">
+                    <img src="/left-nav-btn.svg" alt="" className="block xl:hidden" />
                 </button>
                 <div className="flex justify-center gap-4 xl:justify-start xl:ml-auto items-center">
                     <Text
                         style="hidden xl:block text-xs text-[grey]"
-                        value={`Last Saved ${appData.last_saved}`}
+                        value={`Last Saved ${appData.last_saved || new Date().toLocaleString()}`}
                     />
 
                     {isPending ? (
@@ -79,8 +81,8 @@ export default function DashboardHeader() {
                         <img src="/3dots2.svg" alt="" className="" />
                     </button>
                 </div>
-                <button>
-                    <img src="/right-nav-btn.svg" alt="" />
+                <button className="block xl:hidden ">
+                    <img src="/right-nav-btn.svg" alt="" className="block xl:hidden" />
                 </button>
             </div>
         </div>
