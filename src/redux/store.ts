@@ -8,6 +8,7 @@ import linkHandlingReducer from "@/redux/app/linkHandlingSlice";
 import navigationReducer from "@/redux/app/NavigationSlice";
 import permissionReducer from "@/redux/app/permissionSlice";
 import websiteOverideReducer from "@/redux/app/websiteOverideSlice";
+import navReducer from "@/redux/nav/navslice";
 
 const appReducers = combineReducers({
     appState: appStateReducer,
@@ -23,6 +24,7 @@ const appReducers = combineReducers({
 export const store = configureStore({
     reducer: {
         apps: appReducers,
+        nav: navReducer,
         auth: authReducer,
     },
 });

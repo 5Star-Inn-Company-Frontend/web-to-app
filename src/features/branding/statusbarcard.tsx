@@ -4,10 +4,10 @@ import { ColorPicker } from "@/components/ColorPicker";
 import { Text } from "@/components/global/text";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { updateStatusBar } from "@/redux/app/brandSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hook";
-import { RootState } from "@/redux/store";
-import { useEffect, useState } from "react";
+// import { updateStatusBar } from "@/redux/app/brandSlice";
+// import { useAppDispatch, useAppSelector } from "@/redux/hook";
+// import { RootState } from "@/redux/store";
+// import { useEffect, useState } from "react";
 import { CiLight } from "react-icons/ci";
 import { FaAndroid, FaApple } from "react-icons/fa6";
 import { MdDarkMode } from "react-icons/md";
@@ -17,19 +17,19 @@ interface IStatusBarCard {
 }
 
 export const StatusbarCard = ({ os }: IStatusBarCard) => {
-    const dispatch = useAppDispatch();
-    const appData = useAppSelector((state: RootState) => state.apps.branding.status_bar);
+    // const dispatch = useAppDispatch();
+    // const appData = useAppSelector((state: RootState) => state.apps.branding.statusBar);
 
-    const [statusBar, setStatusBar] = useState(appData);
+    // const [statusBar, setStatusBar] = useState(appData);
 
-    useEffect(() => {
-        setStatusBar(appData);
-    }, [appData]);
+    // useEffect(() => {
+    //     setStatusBar(appData);
+    // }, [appData]);
 
-    const handleUpdateStatusBar = (status: string) => {
-        setStatusBar(status);
-        dispatch(updateStatusBar(status));
-    };
+    // const handleUpdateStatusBar = (status: string) => {
+    //     setStatusBar(status);
+    //     dispatch(updateStatusBar(status));
+    // };
 
     return (
         <div className="rounded-md border border-primary20">
@@ -67,8 +67,8 @@ export const StatusbarCard = ({ os }: IStatusBarCard) => {
                             <div className="w-full text-primary40 flex lg:flex-row xl:flex-row md:flex-row sm:flex-col justify-between items-center gap-x-4">
                                 <RadioGroup
                                     className="flex justify-between border p-[0.7rem] rounded-md w-full"
-                                    value={statusBar}
-                                    onValueChange={handleUpdateStatusBar}
+                                    // value={statusBar}
+                                    // onValueChange={handleUpdateStatusBar}
                                 >
                                     <div className="flex items-center space-x-2">
                                         <RadioGroupItem value="overlay" id="r1" />

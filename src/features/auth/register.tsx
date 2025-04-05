@@ -15,9 +15,13 @@ import { IconInput } from "@/components/global/iconinput";
 import { useMutation } from "@tanstack/react-query";
 import { registerApi } from "@/api/auth";
 import axios, { AxiosError } from "axios";
+import { useState } from "react";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 export function SignupForm() {
     const navigate = useNavigate();
+
+    const [showPassword, setShowPassword] = useState(false);
 
     const { isPending, mutate } = useMutation({
         mutationFn: registerApi,
@@ -43,7 +47,6 @@ export function SignupForm() {
     });
 
     async function onSubmit(values: z.infer<typeof RegisterformSchema>) {
-        console.log(values);
         mutate(values);
     }
 
@@ -61,7 +64,12 @@ export function SignupForm() {
                         name="name"
                         render={({ field }) => (
                             <FormItem>
-                                <IconInput type="text" category="formInput" placeHolder="Full Name" field={field} />
+                                <IconInput
+                                    type="text"
+                                    category="formInput"
+                                    placeHolder="Full Name"
+                                    field={field}
+                                />
                                 <FormMessage />
                             </FormItem>
                         )}
@@ -72,7 +80,12 @@ export function SignupForm() {
                         render={({ field }) => (
                             <FormItem>
                                 <FormControl>
-                                    <IconInput type="email" category="formInput" placeHolder="Email" field={field} />
+                                    <IconInput
+                                        type="email"
+                                        category="formInput"
+                                        placeHolder="Email"
+                                        field={field}
+                                    />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -83,21 +96,40 @@ export function SignupForm() {
                         name="password"
                         render={({ field }) => (
                             <FormItem>
-                                <FormControl>
-                                    <IconInput
-                                        type="password"
-                                        category="formInput"
-                                        placeHolder="Password"
-                                        field={field}
-                                    />
-                                </FormControl>
+                                <div className="relative">
+                                    <FormControl>
+                                        <IconInput
+                                            type={showPassword ? "text" : "password"}
+                                            category="formInput"
+                                            placeHolder="Password"
+                                            field={field}
+                                        />
+                                    </FormControl>
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                                        aria-label={
+                                            showPassword ? "Hide password" : "Show password"
+                                        }
+                                    >
+                                        {showPassword ? (
+                                            <FiEye size={18} />
+                                        ) : (
+                                            <FiEyeOff size={18} />
+                                        )}
+                                    </button>
+                                </div>
                                 <FormMessage />
                             </FormItem>
                         )}
                     />
                     <div className="flex justify-end items-end bg-[#24243E] rounded-md mt-4">
                         {isPending ? (
-                            <Button disabled className="w-full h-12 text-white bg-[#24243E] p-[0.5rem]">
+                            <Button
+                                disabled
+                                className="w-full h-12 text-white bg-[#24243E] p-[0.5rem]"
+                            >
                                 <ReloadIcon className="mr-2 h-4 w-4 animate-spin text-white" />
                                 Please wait...
                             </Button>

@@ -36,7 +36,7 @@ export default function WebsiteUrl() {
             >
                 <Input
                     type="text"
-                    className="p-2 w-[83%] mx-auto bg-white border xl:mx-[90%]"
+                    className="p-2 mx-auto bg-white border w-[85%] xl:w-[90%]"
                     value={url}
                     onChange={handleChangeAppUrl}
                 />

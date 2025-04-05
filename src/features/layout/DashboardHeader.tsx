@@ -1,7 +1,8 @@
 import { updateApp } from "@/api/app";
 import { Text } from "@/components/global/text";
 import { Button } from "@/components/ui/button";
-import { useAppSelector } from "@/redux/hook";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { openMobileNav, openMobileSimulator } from "@/redux/nav/navslice";
 import { RootState } from "@/redux/store";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useMutation } from "@tanstack/react-query";
@@ -11,6 +12,8 @@ import { useParams } from "react-router-dom";
 export default function DashboardHeader() {
     const { id } = useParams();
     const appId = Number(id);
+
+    const dispatch = useAppDispatch();
 
     const currentStoreData = useAppSelector((state: RootState) => state.apps);
 
@@ -32,8 +35,6 @@ export default function DashboardHeader() {
             app_config: [],
         },
     };
-
-    console.log(appData);
 
     const { mutate, isPending } = useMutation({
         mutationKey: ["app", appId],
@@ -57,7 +58,7 @@ export default function DashboardHeader() {
             </div>
 
             <div className="flex justify-between items-center">
-                <button className="block xl:hidden">
+                <button onClick={() => dispatch(openMobileNav())} className="block xl:hidden">
                     <img src="/left-nav-btn.svg" alt="" className="block xl:hidden" />
                 </button>
                 <div className="flex justify-center gap-4 xl:justify-start xl:ml-auto items-center">
@@ -81,7 +82,10 @@ export default function DashboardHeader() {
                         <img src="/3dots2.svg" alt="" className="" />
                     </button>
                 </div>
-                <button className="block xl:hidden ">
+                <button
+                    onClick={() => dispatch(openMobileSimulator())}
+                    className="block xl:hidden "
+                >
                     <img src="/right-nav-btn.svg" alt="" className="block xl:hidden" />
                 </button>
             </div>

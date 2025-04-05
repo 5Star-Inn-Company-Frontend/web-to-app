@@ -9,6 +9,8 @@ const initialState: IAppState = {
     plan: "",
     last_saved: "",
     member_count: 0,
+    private_link: "",
+    public_link: "",
 };
 
 const appState = createSlice({

@@ -17,12 +17,16 @@ import { useAppDispatch } from "@/redux/hook";
 import { login } from "@/redux/auth/authSlice";
 import axios, { AxiosError } from "axios";
 import toast from "react-hot-toast";
+import { useState } from "react";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 // Define the type for the SignIn props
 
 export const SigninForm = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+
+    const [showPassword, setShowPassword] = useState(false);
 
     const form = useForm<z.infer<typeof SigninformSchema>>({
         resolver: zodResolver(SigninformSchema),
@@ -84,14 +88,30 @@ export const SigninForm = () => {
                         name="password"
                         render={({ field }) => (
                             <FormItem>
-                                <FormControl>
-                                    <IconInput
-                                        type="password"
-                                        category="formInput"
-                                        placeHolder="Password"
-                                        field={field}
-                                    />
-                                </FormControl>
+                                <div className="relative">
+                                    <FormControl>
+                                        <IconInput
+                                            type={showPassword ? "text" : "password"}
+                                            category="formInput"
+                                            placeHolder="Password"
+                                            field={field}
+                                        />
+                                    </FormControl>
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                                        aria-label={
+                                            showPassword ? "Hide password" : "Show password"
+                                        }
+                                    >
+                                        {showPassword ? (
+                                            <FiEye size={18} />
+                                        ) : (
+                                            <FiEyeOff size={18} />
+                                        )}
+                                    </button>
+                                </div>
                                 <FormMessage />
                             </FormItem>
                         )}

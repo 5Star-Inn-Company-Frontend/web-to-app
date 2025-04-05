@@ -3,29 +3,29 @@
 import { Text } from "@/components/global/text";
 import { FaAndroid, FaApple } from "react-icons/fa6";
 import { CiLight } from "react-icons/ci";
-import { ColorPicker } from "@/components/ColorPicker";
-import { useEffect, useState } from "react";
-import { RootState } from "@/redux/store";
-import { useAppDispatch, useAppSelector } from "@/redux/hook";
-import { updateThemeColor } from "@/redux/app/brandSlice";
+// import { ColorPicker } from "@/components/ColorPicker";
+// import { useEffect, useState } from "react";
+// import { RootState } from "@/redux/store";
+// import { useAppDispatch, useAppSelector } from "@/redux/hook";
+// import { updateThemeColor } from "@/redux/app/brandSlice";
 
 export const ThemeColorsCard = ({ os }: { os: "IOS" | "Android" }) => {
-    const dispatch = useAppDispatch();
-    const themeColor = useAppSelector((state: RootState) => state.apps.branding.theme_color);
+    // const dispatch = useAppDispatch();
+    // const themeColor = useAppSelector((state: RootState) => state.apps.branding.themeColors);
 
-    const initialValue = themeColor || "#FFFFFF";
+    // const initialValue = themeColor || "#FFFFFF";
 
-    const [screenBackground, setScreenBackground] = useState(initialValue);
+    // const [screenBackground, setScreenBackground] = useState(initialValue);
 
-    const updateColorTheme = (color: string) => {
-        setScreenBackground(color);
-        dispatch(updateThemeColor(color));
-    };
+    // const updateColorTheme = (color: string) => {
+    //     setScreenBackground(color);
+    //     dispatch(updateThemeColor(color));
+    // };
 
-    useEffect(() => {
-        setScreenBackground(themeColor);
-        //eslint-disable-next-line
-    }, [themeColor]);
+    // useEffect(() => {
+    //     setScreenBackground(themeColor);
+    //     //eslint-disable-next-line
+    // }, [themeColor]);
 
     return (
         <div className="rounded-md border border-primary20">
@@ -45,10 +45,10 @@ export const ThemeColorsCard = ({ os }: { os: "IOS" | "Android" }) => {
                             Light mode
                         </div>
                         <div className="w-fit flex justify-between border rounded-md px-2 py-1 items-center gap-2">
-                            <ColorPicker
+                            {/* <ColorPicker
                                 background={screenBackground}
                                 setBackground={(color) => updateColorTheme(color)}
-                            />
+                            /> */}
                         </div>
                     </div>
                     <div>
@@ -63,10 +63,10 @@ export const ThemeColorsCard = ({ os }: { os: "IOS" | "Android" }) => {
                             Dark mode
                         </div>
                         <div className="w-fit flex justify-between border rounded-md px-2 py-1 items-center gap-2">
-                            <ColorPicker
+                            {/* <ColorPicker
                                 background={screenBackground}
                                 setBackground={(color) => updateThemeColor(color)}
-                            />
+                            /> */}
                         </div>
                     </div>
                 </div>

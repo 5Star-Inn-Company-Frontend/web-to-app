@@ -41,9 +41,51 @@ export interface CreateAppRequest {
 
 export interface IBranding {
     app_icon: string;
-    splash_screen: string;
-    theme_color: string;
-    status_bar: string;
+    icons: {
+        ios: string;
+        android: "";
+    };
+    splashScreen: {
+        ios: {
+            launchImages: string;
+            launchImagesDark: string;
+            showSplash: boolean;
+            backgroundColor: string;
+            backgroundColorDark: string;
+        };
+        android: {
+            launchImages: string;
+            launchImagesDark: string;
+            showSplash: boolean;
+            backgroundColor: string;
+            backgroundColorDark: string;
+        };
+    };
+    themeColors: {
+        ios: {
+            primaryColor: string;
+            primaryColorDark: string;
+        };
+        android: {
+            primaryColor: string;
+            primaryColorDark: string;
+        };
+    };
+    statusBar: {
+        ios: {
+            style: string;
+            overlay: boolean;
+            blur: boolean;
+            backgroundColor: string;
+            backgroundColorDark: string;
+        };
+        android: {
+            style: string;
+            overlay: boolean;
+            backgroundColor: string;
+            backgroundColorDark: string;
+        };
+    };
 }
 
 export interface ILinkHandling {
@@ -196,6 +238,8 @@ export interface IEditApp {
     name: string;
     description: string;
     plan: string;
+    private_link: string;
+    public_link: string;
     branding: IBranding;
     link_handling: ILinkHandling;
     interface: IInterface;
@@ -251,4 +295,63 @@ export interface IAppState {
     plan: string;
     last_saved: string;
     member_count: number;
+    private_link: string;
+    public_link: string;
 }
+
+// "interface": {
+//             "keepScreenOn": true,
+//             "fullScreen": {
+//                 "ios": true,
+//                 "android": true
+//             },
+//             "darkMode": {
+//                 "ios": "dark",
+//                 "android": "auto"
+//             },
+//             "screenOrientation": {
+//                 "iphone": "auto",
+//                 "ipad": "auto",
+//                 "androidPhone": "auto",
+//                 "androidTablet": "auto"
+//             },
+//             "nativePageTransitions": {
+//                 "active": true,
+//                 "alpha": 0.5
+//             },
+//             "spinner": {
+//                 "android": {
+//                     "color": "#808080",
+//                     "colorDark": "#808080"
+//                 },
+//                 "ios": {
+//                     "color": "#808080",
+//                     "colorDark": "#808080"
+//                 }
+//             },
+//             "pullToRefresh": {
+//                 "ios": {
+//                     "active": true
+//                 },
+//                 "android": {
+//                     "active": false,
+//                     "iconColor": "#1A100B",
+//                     "iconColorDark": "#FFFFFF"
+//                 }
+//             },
+//             "swipeGestures": {
+//                 "value": true,
+//                 "android": {
+//                     "backgroundColor": "#FFFFFF",
+//                     "backgroundColorDark": "#333333",
+//                     "activeColor": "#000000",
+//                     "activeColorDark": "#FFFFFF",
+//                     "inactiveColor": "#666666",
+//                     "inactiveColorDark": "#666666"
+//                 }
+//             },
+//             "pinchToZoom": {
+//                 "ios": false,
+//                 "android": true
+//             }
+//         },

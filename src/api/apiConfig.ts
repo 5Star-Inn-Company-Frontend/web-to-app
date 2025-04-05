@@ -2,7 +2,7 @@ import { getToken } from "@/hooks/useStorage";
 import axios from "axios";
 
 const axiosInstance = axios.create({
-    baseURL: "https://web2app.prisca.5starcompany.com.ng/api/",
+    baseURL: "https://web2apptest.prisca.5starcompany.com.ng/api/",
     headers: {
         "Content-Type": "application/json",
     },
