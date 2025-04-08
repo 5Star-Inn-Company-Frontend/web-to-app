@@ -43,7 +43,7 @@ export interface IBranding {
     app_icon: string;
     icons: {
         ios: string;
-        android: "";
+        android: string;
     };
     splashScreen: {
         ios: {

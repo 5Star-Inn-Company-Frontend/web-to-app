@@ -68,9 +68,24 @@ const brandingSlice = createSlice({
 
         updateSplashScreen: (
             state: IBranding,
-            action: PayloadAction<IBranding["splashScreen"]>
+            action: PayloadAction<
+                IBranding["splashScreen"]["ios"] | IBranding["splashScreen"]["android"]
+            >
         ) => {
             state.splashScreen = { ...state.splashScreen, ...action.payload };
+        },
+
+        updateSplashScreenIOS: (
+            state: IBranding,
+            action: PayloadAction<IBranding["splashScreen"]["ios"]>
+        ) => {
+            state.splashScreen.ios = action.payload;
+        },
+        updateSplashScreenAndroid: (
+            state: IBranding,
+            action: PayloadAction<IBranding["splashScreen"]["android"]>
+        ) => {
+            state.splashScreen.android = action.payload;
         },
 
         updateThemeColor: (state: IBranding, action: PayloadAction<IBranding["themeColors"]>) => {
@@ -90,6 +105,8 @@ export const {
     updateSplashScreen,
     updateThemeColor,
     updateStatusBar,
+    updateSplashScreenAndroid,
+    updateSplashScreenIOS,
 } = brandingSlice.actions;
 
 export default brandingSlice.reducer;

@@ -3,7 +3,27 @@ import { Button } from "@/components/ui/button";
 import { AiFillAndroid, AiFillApple } from "react-icons/ai";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-export const SplashScreenCard = ({ os, img }: { os: "IOS" | "Android"; img: string }) => {
+import { ColorPicker } from "@/components/ColorPicker";
+
+interface ISplashScreenCard {
+    os: "IOS" | "Android";
+    img: string;
+    imgDark: string;
+    bgColor: string;
+    bgColorDark: string;
+    setBackground: (color: string) => void;
+    setBackgroundDark: (color: string) => void;
+}
+
+export const SplashScreenCard = ({
+    os,
+    img,
+    imgDark,
+    bgColor,
+    bgColorDark,
+    setBackground,
+    setBackgroundDark,
+}: ISplashScreenCard) => {
     return (
         <div className="rounded-md border mx-6">
             <div className="flex gap-2 items-center border-b py-3 px-8 rounded-t-md">
@@ -12,22 +32,28 @@ export const SplashScreenCard = ({ os, img }: { os: "IOS" | "Android"; img: stri
             </div>
             <div className="flex gap-4 flex-col px-6">
                 <Text style="text-md mt-4" value="Screen style" />
-                <div className="flex flex-wrap justify-between items-center gap-4">
+                <div className="flex justify-between items-center gap-4">
                     <RadioGroup
                         className="flex flex-col gap-y-4 xl:flex-row xl:justify-between p-[0.7rem] border text-primary40 flex-grow rounded-md"
                         defaultValue="app_icon"
                     >
                         <div className="flex items-center space-x-2">
                             <RadioGroupItem value="app_icon" id="r1" />
-                            <Label htmlFor="r1">App icon</Label>
+                            <Label htmlFor="r1" className="text-xs">
+                                App icon
+                            </Label>
                         </div>
                         <div className="flex items-center space-x-2">
                             <RadioGroupItem value="new_image" id="r2" />
-                            <Label htmlFor="r2">New image</Label>
+                            <Label htmlFor="r2" className="text-xs">
+                                New image
+                            </Label>
                         </div>
                         <div className="flex items-center space-x-2">
                             <RadioGroupItem value="solid_color" id="r3" />
-                            <Label htmlFor="r3">Solid color</Label>
+                            <Label htmlFor="r3" className="text-xs">
+                                Solid color
+                            </Label>
                         </div>
                     </RadioGroup>
                     <Button className="hidden xl:block bg-white border text-black hover:bg-black hover:text-white outline-none">
@@ -58,15 +84,14 @@ export const SplashScreenCard = ({ os, img }: { os: "IOS" | "Android"; img: stri
                             </div>
                             <Text style="text-[grey] text-xs mb-4" value="BACKGROUND" />
                             <div className="w-fit flex justify-between border rounded-md px-2 py-1 items-center gap-2">
-                                <div className="h-[0.7rem] w-[0.7rem] p-1 rounded border bg-white"></div>
-                                <Text style="text-[grey] text-xs" value="#FFFFFF" />
+                                <ColorPicker background={bgColor} setBackground={setBackground} />
                             </div>
                         </div>
                     </div>
                     <div className="flex gap-x-6 items-start rounded bg-deepgray p-4">
                         <div className="bg-black py-8 px-4 rounded-md h-full flex flex-col justify-center items-center">
                             <div className=" w-[1.4rem] h-[1.4rem] relative">
-                                <img src={img} alt="object not found" className="w-full" />
+                                <img src={imgDark} alt="object not found" className="w-full" />
                             </div>
                         </div>
                         <div>
@@ -82,8 +107,10 @@ export const SplashScreenCard = ({ os, img }: { os: "IOS" | "Android"; img: stri
                             </div>
                             <Text style="text-[grey] text-xs mb-4" value="BACKGROUND" />
                             <div className="w-fit flex justify-between border rounded-md px-2 py-1 items-center gap-2">
-                                <div className="h-[0.7rem] w-[0.7rem] p-1 rounded border bg-black"></div>
-                                <Text style="text-[grey] text-xs" value="#000000" />
+                                <ColorPicker
+                                    background={bgColorDark}
+                                    setBackground={setBackgroundDark}
+                                />
                             </div>
                         </div>
                     </div>
