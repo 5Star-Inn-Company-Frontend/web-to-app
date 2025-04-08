@@ -3,41 +3,31 @@
 import { Text } from "@/components/global/text";
 import { FaAndroid, FaApple } from "react-icons/fa6";
 import { CiLight } from "react-icons/ci";
-// import { ColorPicker } from "@/components/ColorPicker";
-// import { useEffect, useState } from "react";
-// import { RootState } from "@/redux/store";
-// import { useAppDispatch, useAppSelector } from "@/redux/hook";
-// import { updateThemeColor } from "@/redux/app/brandSlice";
+import { ColorPicker } from "@/components/ColorPicker";
 
-export const ThemeColorsCard = ({ os }: { os: "IOS" | "Android" }) => {
-    // const dispatch = useAppDispatch();
-    // const themeColor = useAppSelector((state: RootState) => state.apps.branding.themeColors);
+interface IThemeColorsCard {
+    os: "IOS" | "Android";
+    lightTheme: string;
+    darkTheme: string;
+    setLightTheme: (color: string) => void;
+    setDarkTheme: (color: string) => void;
+}
 
-    // const initialValue = themeColor || "#FFFFFF";
-
-    // const [screenBackground, setScreenBackground] = useState(initialValue);
-
-    // const updateColorTheme = (color: string) => {
-    //     setScreenBackground(color);
-    //     dispatch(updateThemeColor(color));
-    // };
-
-    // useEffect(() => {
-    //     setScreenBackground(themeColor);
-    //     //eslint-disable-next-line
-    // }, [themeColor]);
-
+export const ThemeColorsCard = ({
+    os,
+    lightTheme,
+    darkTheme,
+    setDarkTheme,
+    setLightTheme,
+}: IThemeColorsCard) => {
     return (
         <div className="rounded-md border border-primary20">
             <div className="flex gap-2 items-center border-b border-primary20 py-2 px-6 rounded-t-md">
                 {os === "IOS" ? <FaApple size="2rem" /> : <FaAndroid size="2rem" />}
-                {os}/Android
+                {os}
             </div>
             <div className="px-6 py-4">
-                <Text
-                    style="text-md mb-4"
-                    value={os === "IOS" ? "Primary Color" : "Secondary Color"}
-                />
+                <Text style="text-md mb-4" value="Primary Color" />
                 <div className="flex gap-4 items-center text-primary40 w-[60%]">
                     <div className="w-full">
                         <div className="flex gap-2 items-center text-xs mb-4">
@@ -45,10 +35,7 @@ export const ThemeColorsCard = ({ os }: { os: "IOS" | "Android" }) => {
                             Light mode
                         </div>
                         <div className="w-fit flex justify-between border rounded-md px-2 py-1 items-center gap-2">
-                            {/* <ColorPicker
-                                background={screenBackground}
-                                setBackground={(color) => updateColorTheme(color)}
-                            /> */}
+                            <ColorPicker background={lightTheme} setBackground={setLightTheme} />
                         </div>
                     </div>
                     <div>
@@ -63,10 +50,7 @@ export const ThemeColorsCard = ({ os }: { os: "IOS" | "Android" }) => {
                             Dark mode
                         </div>
                         <div className="w-fit flex justify-between border rounded-md px-2 py-1 items-center gap-2">
-                            {/* <ColorPicker
-                                background={screenBackground}
-                                setBackground={(color) => updateThemeColor(color)}
-                            /> */}
+                            <ColorPicker background={darkTheme} setBackground={setDarkTheme} />
                         </div>
                     </div>
                 </div>
