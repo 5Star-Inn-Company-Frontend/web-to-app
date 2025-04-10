@@ -1,27 +1,28 @@
+import { ColorPicker } from "@/components/ColorPicker";
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { OsConfigCard } from "@/components/global/os_config_card";
-import { Text } from "@/components/global/text";
-import { updatePullToRefresh } from "@/redux/app/interfaceSlice";
+import { updatePullToRefreshAndroid, updatePullToRefreshIos } from "@/redux/app/interfaceSlice";
 import { useAppDispatch } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 
 export default function PullToRefresh() {
     const dispatch = useAppDispatch();
-    const pullToRefresh = useSelector((state: RootState) => state.apps.interface.pull_to_refresh);
+    const pullToRefresh = useSelector((state: RootState) => state.apps.interface.pullToRefresh);
 
-    const initialValue = useMemo(() => (pullToRefresh ? "on" : "off"), [pullToRefresh]);
-    const [enablePullToRefresh, setEnablePullToRefresh] = useState(initialValue);
+    const enablePullToRefresh = pullToRefresh.ios.active ? "on" : "Off";
+    const enablePullToRefreshAndroid = pullToRefresh.android.active ? "on" : "Off";
 
-    useEffect(() => {
-        setEnablePullToRefresh(initialValue);
-    }, [initialValue]);
-
-    const handleChangePullToRefresh = (newvalue: string) => {
-        setEnablePullToRefresh(newvalue);
+    const handlePullToRefreshIos = (newvalue: string) => {
         const pullToRefreshIsEnabled = newvalue === "on";
-        dispatch(updatePullToRefresh(pullToRefreshIsEnabled));
+        dispatch(updatePullToRefreshIos({ ...pullToRefresh.ios, active: pullToRefreshIsEnabled }));
+    };
+
+    const handlePullToRefreshAndroid = (value: string) => {
+        const pullToRefreshIsEnable = value === "on";
+        dispatch(
+            updatePullToRefreshAndroid({ ...pullToRefresh.android, active: pullToRefreshIsEnable })
+        );
     };
 
     return (
@@ -34,7 +35,7 @@ export default function PullToRefresh() {
                     <OsConfigCard
                         os="IOS"
                         value={enablePullToRefresh}
-                        onValueChange={handleChangePullToRefresh}
+                        onValueChange={handlePullToRefreshIos}
                         radios={[
                             {
                                 title: "Off",
@@ -48,8 +49,8 @@ export default function PullToRefresh() {
                     />
                     <OsConfigCard
                         os="Android"
-                        value={enablePullToRefresh}
-                        onValueChange={handleChangePullToRefresh}
+                        value={enablePullToRefreshAndroid}
+                        onValueChange={handlePullToRefreshAndroid}
                         radios={[
                             {
                                 title: "Off",
@@ -66,8 +67,7 @@ export default function PullToRefresh() {
                                 Pull to Refresh Icon Color
                             </span>
                             <div className="w-fit flex justify-between border rounded-md px-2 pr-6 py-1 items-center gap-2 mt-4 mb-4">
-                                <div className="h-[0.7rem] w-[0.7rem] p-1 rounded border bg-white"></div>
-                                <Text style="text-[grey] text-xs" value="#FFFFFF" />
+                                <ColorPicker background="#ffff" setBackground={() => {}} />
                             </div>
                         </div>
                     </OsConfigCard>

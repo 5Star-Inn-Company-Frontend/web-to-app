@@ -7,19 +7,35 @@ import { useEffect, useMemo, useState } from "react";
 
 export default function FullScreen() {
     const dispatch = useAppDispatch();
-    const fullScreen = useAppSelector((state: RootState) => state.apps.interface.full_screen);
+    const fullScreen = useAppSelector((state: RootState) => state.apps.interface.fullScreen);
 
-    const initialValue = useMemo(() => (fullScreen ? "enable" : "disable"), [fullScreen]);
-    const [enableFullScreen, setEnableFullScreen] = useState(initialValue || "disable");
+    const initialValueIos = useMemo(
+        () => (fullScreen.ios ? "enable" : "disable"),
+        [fullScreen.ios]
+    );
+    const initialValueAndroid = useMemo(
+        () => (fullScreen.android ? "enable" : "disable"),
+        [fullScreen.android]
+    );
+    const [enableFullScreenIos, setEnableFullScreenIos] = useState(initialValueIos || "disable");
+    const [enableFullScreenAndroid, setEnableFullScreenAndroid] = useState(
+        initialValueAndroid || "disable"
+    );
 
     useEffect(() => {
-        setEnableFullScreen(initialValue);
-    }, [initialValue]);
+        setEnableFullScreenIos(initialValueIos);
+        setEnableFullScreenAndroid(initialValueAndroid);
+    }, [initialValueIos, initialValueAndroid]);
 
-    const handleChangeFullScreen = (newvalue: string) => {
-        setEnableFullScreen(newvalue);
-        const fullScreenIsEnabled = newvalue === "enable";
-        dispatch(updateFullScreen(fullScreenIsEnabled));
+    const handleEnableFullScreenIos = (value: string) => {
+        setEnableFullScreenIos(value);
+        const fullScreenIsEnabled = value === "enable";
+        dispatch(updateFullScreen({ ...fullScreen, ios: fullScreenIsEnabled }));
+    };
+    const handleEnableFullScreenAndroid = (value: string) => {
+        setEnableFullScreenAndroid(value);
+        const fullScreenIsEnabled = value === "enable";
+        dispatch(updateFullScreen({ ...fullScreen, android: fullScreenIsEnabled }));
     };
 
     return (
@@ -31,8 +47,8 @@ export default function FullScreen() {
                 <div className="grid lg:grid-col-2 xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-8 px-8">
                     <OsConfigCard
                         os="IOS"
-                        value={enableFullScreen}
-                        onValueChange={handleChangeFullScreen}
+                        value={enableFullScreenIos}
+                        onValueChange={handleEnableFullScreenIos}
                         radios={[
                             { title: "Disable", label: "disable" },
                             { title: "Enable", label: "enable" },
@@ -40,8 +56,8 @@ export default function FullScreen() {
                     />
                     <OsConfigCard
                         os="Android"
-                        value={enableFullScreen}
-                        onValueChange={handleChangeFullScreen}
+                        value={enableFullScreenAndroid}
+                        onValueChange={handleEnableFullScreenAndroid}
                         radios={[
                             { title: "Disable", label: "disable" },
                             { title: "Enable", label: "enable" },

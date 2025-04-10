@@ -1,14 +1,14 @@
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { updateScreenOn } from "@/redux/app/interfaceSlice";
+import { updateKeepScreenOn } from "@/redux/app/interfaceSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
 import { useEffect, useMemo, useState } from "react";
 
 export default function ScreenOn() {
     const dispatch = useAppDispatch();
-    const keepScreenOn = useAppSelector((state: RootState) => state.apps.interface.screen_on);
+    const keepScreenOn = useAppSelector((state: RootState) => state.apps.interface.keepScreenOn);
 
     const initialValue = useMemo(() => (keepScreenOn ? "on" : "off"), [keepScreenOn]);
 
@@ -21,7 +21,7 @@ export default function ScreenOn() {
     const handleChangeEnableKeepScreenOn = (newvalue: string) => {
         setEnableKeepScreenOn(newvalue);
         const keepScreenOnEnabled = newvalue === "on";
-        dispatch(updateScreenOn(keepScreenOnEnabled));
+        dispatch(updateKeepScreenOn(keepScreenOnEnabled));
     };
     return (
         <div className="pb-5 pt-2 xl:p-4 xl:pb-10 bg-white border-b border-primary20">

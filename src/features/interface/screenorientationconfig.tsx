@@ -7,9 +7,17 @@ interface IScreenOrientationConfigCard {
     os: "IOS" | "Android";
     value: string;
     onValueChange: (newvalue: string) => void;
+    valueTab: string;
+    onValueChangeTab: (newvalue: string) => void;
 }
 
-export const ScreenOrientationConfigCard = ({ os, value, onValueChange }: IScreenOrientationConfigCard) => {
+export const ScreenOrientationConfigCard = ({
+    os,
+    value,
+    onValueChange,
+    valueTab,
+    onValueChangeTab,
+}: IScreenOrientationConfigCard) => {
     return (
         <div className="p-4 rounded-md border border-primary20">
             <div className="flex gap-x-2 text-sm items-center border border-primary20 border-b p-4 rounded-t-md">
@@ -45,8 +53,8 @@ export const ScreenOrientationConfigCard = ({ os, value, onValueChange }: IScree
                 <Text style="text-sm mt-2" value={os === "IOS" ? "Ipad" : "Tablet"} />
                 <RadioGroup
                     className="flex flex-col text-primary40 border border-primary20 p-[0.7rem] flex-grow rounded-md"
-                    value={value}
-                    onValueChange={onValueChange}
+                    value={valueTab}
+                    onValueChange={onValueChangeTab}
                 >
                     <div className="flex items-center space-x-2 mb-1">
                         <RadioGroupItem value="auto rotate" id="r1" />

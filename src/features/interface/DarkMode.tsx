@@ -8,18 +8,26 @@ import { updateDarkMode } from "@/redux/app/interfaceSlice";
 
 export default function DarkMode() {
     const dispatch = useAppDispatch();
-    const darkMode = useSelector((state: RootState) => state.apps.interface.dark_mode);
+    const darkMode = useSelector((state: RootState) => state.apps.interface.darkMode);
 
-    const initialvalue = useMemo(() => darkMode || "auto", [darkMode]);
-    const [enableDarkMode, setEnableDarkMode] = useState(initialvalue);
+    const initialvalueIos = useMemo(() => darkMode.ios || "auto", [darkMode.ios]);
+    const initialvalueAndroid = useMemo(() => darkMode.android || "auto", [darkMode.android]);
+
+    const [enableDarkModeIos, setEnableDarkModeIos] = useState(initialvalueIos);
+    const [enableDarkModeAndroid, setEnableDarkModeAndroid] = useState(initialvalueAndroid);
 
     useEffect(() => {
-        setEnableDarkMode(initialvalue);
-    }, [initialvalue]);
+        setEnableDarkModeIos(initialvalueIos);
+        setEnableDarkModeAndroid(initialvalueAndroid);
+    }, [initialvalueIos, initialvalueAndroid]);
 
-    const handleChangeEnableDarkMode = (newvalue: string) => {
-        setEnableDarkMode(newvalue);
-        dispatch(updateDarkMode(newvalue));
+    const handleEnableDarkModeIos = (value: string) => {
+        setEnableDarkModeIos(value);
+        dispatch(updateDarkMode({ ...darkMode, ios: value }));
+    };
+    const handleEnableDarkModeAndroid = (value: string) => {
+        setEnableDarkModeAndroid(value);
+        dispatch(updateDarkMode({ ...darkMode, android: value }));
     };
 
     return (
@@ -31,14 +39,14 @@ export default function DarkMode() {
                 <div className="grid lg:grid-col-2 xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-8 px-8">
                     <OsConfigCard2
                         os="IOS"
-                        value={enableDarkMode}
-                        onValueChange={handleChangeEnableDarkMode}
+                        value={enableDarkModeIos}
+                        onValueChange={handleEnableDarkModeIos}
                         radios={[]}
                     />
                     <OsConfigCard2
                         os="Android"
-                        value={enableDarkMode}
-                        onValueChange={handleChangeEnableDarkMode}
+                        value={enableDarkModeAndroid}
+                        onValueChange={handleEnableDarkModeAndroid}
                         radios={[]}
                     />
                 </div>

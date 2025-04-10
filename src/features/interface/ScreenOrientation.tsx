@@ -2,30 +2,27 @@ import { ScreenOrientationConfigCard } from "@/features/interface/screenorientat
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { useAppDispatch } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { updateScreenOrientation } from "@/redux/app/interfaceSlice";
 
 export default function ScreenOrientation() {
     const dispatch = useAppDispatch();
     const screenorientation = useSelector(
-        (state: RootState) => state.apps.interface.screen_orientation
+        (state: RootState) => state.apps.interface.screenOrientation
     );
 
-    const initialValue = useMemo(() => screenorientation || "auto rotate", [screenorientation]);
-    const [enableScreenOrientation, setEnableScreenOrientation] = useState(initialValue);
-
-    useEffect(() => {
-        setEnableScreenOrientation(initialValue);
-    }, [initialValue]);
-
-    const handleChangeScreenOrientation = useCallback(
-        (newvalue: string) => {
-            setEnableScreenOrientation(newvalue);
-            dispatch(updateScreenOrientation(newvalue));
-        },
-        [dispatch]
-    );
+    const handleIPhoneChange = (value: string) => {
+        dispatch(updateScreenOrientation({ ...screenorientation, iphone: value }));
+    };
+    const handleIPadChange = (value: string) => {
+        dispatch(updateScreenOrientation({ ...screenorientation, ipad: value }));
+    };
+    const handlePhoneChange = (value: string) => {
+        dispatch(updateScreenOrientation({ ...screenorientation, iphone: value }));
+    };
+    const handleTabletChange = (value: string) => {
+        dispatch(updateScreenOrientation({ ...screenorientation, androidTablet: value }));
+    };
 
     return (
         <div className="pb-5 pt-2 xl:p-4 xl:pb-10 bg-white border-b border-primary20">
@@ -35,13 +32,17 @@ export default function ScreenOrientation() {
             >
                 <div className="grid lg:grid-col-2 xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-8 px-8">
                     <ScreenOrientationConfigCard
-                        value={enableScreenOrientation}
-                        onValueChange={handleChangeScreenOrientation}
+                        value={screenorientation.iphone}
+                        onValueChange={handleIPhoneChange}
+                        valueTab={screenorientation.ipad}
+                        onValueChangeTab={handleIPadChange}
                         os="IOS"
                     />
                     <ScreenOrientationConfigCard
-                        value={enableScreenOrientation}
-                        onValueChange={handleChangeScreenOrientation}
+                        value={screenorientation.androidPhone}
+                        valueTab={screenorientation.androidTablet}
+                        onValueChange={handlePhoneChange}
+                        onValueChangeTab={handleTabletChange}
                         os="Android"
                     />
                 </div>

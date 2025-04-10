@@ -44,6 +44,7 @@ const initialState: IBranding = {
         android: {
             style: "auto",
             overlay: false,
+            blur: false,
             backgroundColor: "#5C5C5C",
             backgroundColorDark: "#333333",
         },
@@ -92,8 +93,18 @@ const brandingSlice = createSlice({
             state.themeColors.android = action.payload;
         },
 
-        updateStatusBar: (state: IBranding, action: PayloadAction<IBranding["statusBar"]>) => {
-            state.statusBar = { ...state.statusBar, ...action.payload };
+        updateStatusBarIOS: (
+            state: IBranding,
+            action: PayloadAction<IBranding["statusBar"]["ios"]>
+        ) => {
+            state.statusBar.ios = action.payload;
+        },
+
+        updateStatusBarAndroid: (
+            state: IBranding,
+            action: PayloadAction<IBranding["statusBar"]["android"]>
+        ) => {
+            state.statusBar.android = action.payload;
         },
     },
 });
@@ -102,7 +113,8 @@ export const {
     setBranding,
     updateAppIcon,
     updateIcon,
-    updateStatusBar,
+    updateStatusBarIOS,
+    updateStatusBarAndroid,
     updateSplashScreenAndroid,
     updateThemeColorAndroid,
     updateThemeColorIOS,

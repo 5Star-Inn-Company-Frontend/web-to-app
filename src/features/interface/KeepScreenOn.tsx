@@ -3,27 +3,35 @@ import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Slider } from "@/components/ui/slider";
-import { useAppDispatch } from "@/redux/hook";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useEffect, useMemo, useState } from "react";
-import { useSelector } from "react-redux";
-import { updateScreenOn } from "@/redux/app/interfaceSlice";
+import { updateNativePageTransition, updateSpinnerIos } from "@/redux/app/interfaceSlice";
 
 export default function KeepScreenOn() {
     const dispatch = useAppDispatch();
-    const keepScreenOn = useSelector((state: RootState) => state.apps.interface.screen_on);
+    const keepScreenOn = useAppSelector(
+        (state: RootState) => state.apps.interface.nativePageTransitions
+    );
+    const spinner = useAppSelector((state: RootState) => state.apps.interface.spinner);
 
-    const initialValue = useMemo(() => (keepScreenOn ? "enable" : "disable"), [keepScreenOn]);
-    const [enableKeepScreenOn, setEnableKeepScreenOn] = useState(initialValue);
-
-    useEffect(() => {
-        setEnableKeepScreenOn(initialValue);
-    }, [initialValue]);
+    const keepScreenOnIsActive = keepScreenOn.active ? "Enable" : "Disable";
 
     const handleChangeEnableKeepScreenOn = (newvalue: string) => {
-        setEnableKeepScreenOn(newvalue);
         const keepScreenOnEnabled = newvalue === "enable";
-        dispatch(updateScreenOn(keepScreenOnEnabled));
+        dispatch(updateNativePageTransition({ ...keepScreenOn, active: keepScreenOnEnabled }));
+    };
+
+    const handleChangeBgDarkIos = (color: string) => {
+        dispatch(updateSpinnerIos({ ...spinner.ios, colorDark: color }));
+    };
+    const handleChangeBgLightIos = (color: string) => {
+        dispatch(updateSpinnerIos({ ...spinner.android, color: color }));
+    };
+    const handleChangeBgDarkAndroid = (color: string) => {
+        dispatch(updateSpinnerIos({ ...spinner.android, color: color }));
+    };
+    const handleChangeBgLightAndroid = (color: string) => {
+        dispatch(updateSpinnerIos({ ...spinner.android, color: color }));
     };
 
     return (
@@ -35,7 +43,7 @@ export default function KeepScreenOn() {
                 <div className="px-8">
                     <RadioGroup
                         className="inline-flex text-xs border border-primary40 p-[0.4rem] rounded-md"
-                        value={enableKeepScreenOn}
+                        value={keepScreenOnIsActive}
                         onValueChange={handleChangeEnableKeepScreenOn}
                     >
                         <div className="flex items-center space-x-2">
@@ -64,8 +72,20 @@ export default function KeepScreenOn() {
                         />
                     </div>
                     <div className="grid gap-y-8">
-                        <KeepScreenOnCard os="IOS" />
-                        <KeepScreenOnCard os="Android" />
+                        <KeepScreenOnCard
+                            os="IOS"
+                            bgLight={spinner.ios.color}
+                            bgDark={spinner.ios.colorDark}
+                            setBgDark={(color: string) => handleChangeBgDarkIos(color)}
+                            setBgLight={(color: string) => handleChangeBgLightIos(color)}
+                        />
+                        <KeepScreenOnCard
+                            os="Android"
+                            bgLight={spinner.android.color}
+                            bgDark={spinner.android.color}
+                            setBgDark={(color: string) => handleChangeBgDarkAndroid(color)}
+                            setBgLight={(color: string) => handleChangeBgLightAndroid(color)}
+                        />
                     </div>
                 </div>
             </CollapsibleComponent>

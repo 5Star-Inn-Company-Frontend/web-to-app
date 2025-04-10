@@ -2,7 +2,22 @@ import { ColorPicker } from "@/components/ColorPicker";
 import { Text } from "@/components/global/text";
 import { CiLight } from "react-icons/ci";
 import { FaAndroid, FaApple } from "react-icons/fa6";
-export const KeepScreenOnCard = ({ os }: { os: "IOS" | "Android" }) => {
+
+interface IKeepScreenOnCard {
+    os: "IOS" | "Android";
+    bgLight: string;
+    bgDark: string;
+    setBgLight: (color: string) => void;
+    setBgDark: (color: string) => void;
+}
+
+export const KeepScreenOnCard = ({
+    os,
+    bgLight,
+    bgDark,
+    setBgLight,
+    setBgDark,
+}: IKeepScreenOnCard) => {
     return (
         <div className="rounded-md border border-primary20">
             <div className="flex text-sm gap-2 items-center px-6 py-2 border-b border-primary20 rounded-t-md">
@@ -18,7 +33,7 @@ export const KeepScreenOnCard = ({ os }: { os: "IOS" | "Android" }) => {
                             LIGHT MODE
                         </div>
                         <div className="flex justify-between border rounded-md px-2 py-1 items-center gap-2">
-                            <ColorPicker background="#ffff" setBackground={() => {}} />
+                            <ColorPicker background={bgLight} setBackground={setBgLight} />
                         </div>
                     </div>
                     <div className="flex flex-col gap-2">
@@ -33,7 +48,7 @@ export const KeepScreenOnCard = ({ os }: { os: "IOS" | "Android" }) => {
                             DARK MODE
                         </div>
                         <div className="flex justify-between border rounded-md px-2 py-1 items-center gap-2">
-                            <ColorPicker background="#0000" setBackground={() => {}} />
+                            <ColorPicker background={bgDark} setBackground={setBgDark} />
                         </div>
                     </div>
                 </div>

@@ -82,6 +82,7 @@ export interface IBranding {
         android: {
             style: string;
             overlay: boolean;
+            blur: boolean;
             backgroundColor: string;
             backgroundColorDark: string;
         };
@@ -95,13 +96,60 @@ export interface ILinkHandling {
     url_scheme: string;
 }
 export interface IInterface {
-    screen_on: boolean;
-    full_screen: boolean;
-    dark_mode: string;
-    screen_orientation: string;
-    pull_to_refresh: boolean;
-    swipe_gesture: boolean;
-    pitch_to_zoom: boolean;
+    keepScreenOn: boolean;
+    fullScreen: {
+        ios: boolean;
+        android: boolean;
+    };
+    darkMode: {
+        ios: string;
+        android: string;
+    };
+    screenOrientation: {
+        iphone: string;
+        ipad: string;
+        androidPhone: string;
+        androidTablet: string;
+    };
+    nativePageTransitions: {
+        active: boolean;
+        alpha: 0.5;
+    };
+    spinner: {
+        android: {
+            color: string;
+            colorDark: string;
+        };
+        ios: {
+            color: string;
+            colorDark: string;
+        };
+    };
+    pullToRefresh: {
+        ios: {
+            active: boolean;
+        };
+        android: {
+            active: boolean;
+            iconColor: string;
+            iconColorDark: string;
+        };
+    };
+    swipeGestures: {
+        value: boolean;
+        android: {
+            backgroundColor: string;
+            backgroundColorDark: string;
+            activeColor: string;
+            activeColorDark: string;
+            inactiveColor: string;
+            inactiveColorDark: string;
+        };
+    };
+    pinchToZoom: {
+        ios: false;
+        android: true;
+    };
     accessibility: boolean;
     front_scaling: boolean;
     maximum_window: boolean;

@@ -1,13 +1,13 @@
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { OsConfigCard } from "@/components/global/os_config_card";
-import { updatePitchToZoom } from "@/redux/app/interfaceSlice";
+// import { updatePitchToZoom } from "@/redux/app/interfaceSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
 import { useEffect, useMemo, useState } from "react";
 
 export default function PitchToZoom() {
     const dispatch = useAppDispatch();
-    const pitchToZoom = useAppSelector((state: RootState) => state.apps.interface.pitch_to_zoom);
+    const pitchToZoom = useAppSelector((state: RootState) => state.apps.interface.pinchToZoom);
 
     const initialValue = useMemo(() => (pitchToZoom ? "on" : "off"), [pitchToZoom]);
     const [enablePitchToZoom, setEnablePitchToZoom] = useState(initialValue);
@@ -19,7 +19,7 @@ export default function PitchToZoom() {
     const handleChangePitchToZoom = (newvalue: string) => {
         setEnablePitchToZoom(newvalue);
         const pitchToZoomIsEnabled = newvalue === "on";
-        dispatch(updatePitchToZoom(pitchToZoomIsEnabled));
+        // dispatch(updatePitchToZoom(pitchToZoomIsEnabled));
     };
 
     return (
