@@ -3,23 +3,16 @@ import { OsConfigCard } from "@/components/global/os_config_card";
 import { updateAppTracking } from "@/redux/app/permissionSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useEffect, useState } from "react";
 
 export default function AppTracking() {
     const dispatch = useAppDispatch();
     const appTracking = useAppSelector(
-        (state: RootState) => state.apps.permission.app_tracking_transparency
+        (state: RootState) => state.apps.permission.appTrackingTransparency
     );
 
-    const initialValue = appTracking ? "enable" : "disable";
-    const [enableAppTracking, setEnableAppTracking] = useState(initialValue);
-
-    useEffect(() => {
-        setEnableAppTracking(initialValue);
-    }, [initialValue]);
+    const appTrackingValue = appTracking.ios ? "enable" : "disable";
 
     const handleChangeAppTracking = (value: string) => {
-        setEnableAppTracking(value);
         const appTrackingIsEnabled = value === "enable";
         dispatch(updateAppTracking(appTrackingIsEnabled));
     };
@@ -33,7 +26,7 @@ export default function AppTracking() {
                 <div className="xl:w-[50%] px-8">
                     <OsConfigCard
                         os="IOS"
-                        value={enableAppTracking}
+                        value={appTrackingValue}
                         onValueChange={handleChangeAppTracking}
                         radios={[
                             { title: "Disable", label: "disable" },

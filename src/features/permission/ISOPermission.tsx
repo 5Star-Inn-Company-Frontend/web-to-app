@@ -1,8 +1,22 @@
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { OsConfigCard } from "@/components/global/os_config_card";
 import { Input } from "@/components/ui/input";
+import { updatePermissionCamera, updatePermissionLocation } from "@/redux/app/permissionSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { debounce } from "lodash";
 
 export default function ISOPermission() {
+    const dispatch = useAppDispatch();
+    const isoPermissions = useAppSelector((state) => state.apps.permission);
+
+    const isoPermissionsCamera = isoPermissions.camera.ios.description;
+    const isoPermissionsMic = isoPermissions.microphone.ios.description;
+    const isoPermissionsLocation = isoPermissions.location.ios.description;
+
+    const debounceUpdatedPermission = debounce((value: string, fn) => {
+        dispatch(fn(value));
+    }, 1000);
+
     return (
         <div className="pt-2 pb-5 xl:px-6 xl:py-4 bg-white mb-10">
             <CollapsibleComponent
@@ -15,7 +29,13 @@ export default function ISOPermission() {
                             <Input
                                 type="text"
                                 className="border rounded-md w-full p-2 border-primary40"
-                                value="WebhostingApp needs access to your location to customize your app experience."
+                                value={isoPermissionsLocation}
+                                onChange={(e) =>
+                                    debounceUpdatedPermission(
+                                        e.target.value,
+                                        updatePermissionLocation
+                                    )
+                                }
                             />
                         </div>
                     </OsConfigCard>
@@ -24,7 +44,13 @@ export default function ISOPermission() {
                             <Input
                                 type="text"
                                 className="border rounded-md w-full p-2 border-primary40"
-                                value="WebhostingApp needs access to your location to customize your app experience."
+                                value={isoPermissionsCamera}
+                                onChange={(e) =>
+                                    debounceUpdatedPermission(
+                                        e.target.value,
+                                        updatePermissionCamera
+                                    )
+                                }
                             />
                         </div>
                     </OsConfigCard>
@@ -33,7 +59,13 @@ export default function ISOPermission() {
                             <Input
                                 type="text"
                                 className="border rounded-md w-full p-2 border-primary40"
-                                value="WebhostingApp needs access to your location to customize your app experience."
+                                value={isoPermissionsMic}
+                                onChange={(e) =>
+                                    debounceUpdatedPermission(
+                                        e.target.value,
+                                        updatePermissionLocation
+                                    )
+                                }
                             />
                         </div>
                     </OsConfigCard>

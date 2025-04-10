@@ -3,25 +3,17 @@ import { OsConfigCard } from "@/components/global/os_config_card";
 import { updateLocationService } from "@/redux/app/permissionSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useEffect, useState } from "react";
 
 export default function LocationService() {
     const dispatch = useAppDispatch();
     const locationService = useAppSelector(
-        (state: RootState) => state.apps.permission.location_service
+        (state: RootState) => state.apps.permission.locationServices
     );
 
-    const initialValue = locationService ? "enable" : "disable";
-    const [enableLocationService, setEnableLocationService] = useState(initialValue);
-
-    useEffect(() => {
-        setEnableLocationService(initialValue);
-    }, []);
+    const locationServiceValue = locationService.android ? "enable" : "disable";
 
     const handleChangeLocationService = (value: string) => {
-        setEnableLocationService(value);
         const locationServiceIsEnabled = value === "enable";
-
         dispatch(updateLocationService(locationServiceIsEnabled));
     };
 
@@ -34,7 +26,7 @@ export default function LocationService() {
                 <div className="xl:w-[50%] px-8">
                     <OsConfigCard
                         os="Android"
-                        value={enableLocationService}
+                        value={locationServiceValue}
                         onValueChange={handleChangeLocationService}
                         radios={[
                             { title: "Disable", label: "disable" },

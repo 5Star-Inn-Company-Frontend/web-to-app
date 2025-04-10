@@ -232,12 +232,39 @@ export interface IMedia {
 }
 export interface IPermission {
     javascript_bridge: string[];
-    app_tracking_transparency: boolean;
-    location_service: boolean;
-    media: IMedia;
-    downloads_directory: string;
-    background_audio: boolean;
-    permission: string[];
+    appTrackingTransparency: {
+        ios: boolean;
+    };
+    locationServices: {
+        android: boolean;
+    };
+    webRtc: {
+        android: {
+            cameraActive: boolean;
+            microphoneActive: boolean;
+        };
+    };
+    downloadsDirectory: {
+        android: string;
+    };
+    backgroundAudio: {
+        ios: boolean;
+    };
+    camera: {
+        ios: {
+            description: string;
+        };
+    };
+    microphone: {
+        ios: {
+            description: string;
+        };
+    };
+    location: {
+        ios: {
+            description: string;
+        };
+    };
 }
 
 export interface INotification {

@@ -1,39 +1,25 @@
 import { WebRtcConfigCard } from "@/components/customui/app/app_permission/wenRtcCard";
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { OsConfigCard } from "@/components/global/os_config_card";
-import { updateMediaCamera, updateMediaMicrophone } from "@/redux/app/permissionSlice";
+import { updateWebRtc } from "@/redux/app/permissionSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useEffect, useState } from "react";
 
 export default function WebRTC() {
     const dispatch = useAppDispatch();
-    const media = useAppSelector((state: RootState) => state.apps.permission.media);
+    const webRtc = useAppSelector((state: RootState) => state.apps.permission.webRtc);
 
-    const initialValueCamera = media.camera ? "enable" : "disable";
-    const initialValueMicrophone = media.microphone ? "enable" : "disable";
-
-    const [enableMicrophone, setEnableMicrophone] = useState(initialValueMicrophone);
-    const [enableCamera, setEnableCamera] = useState(initialValueCamera);
-
-    useEffect(() => {
-        setEnableCamera(initialValueCamera);
-        setEnableMicrophone(initialValueMicrophone);
-    }, [initialValueCamera, initialValueMicrophone]);
+    const webRtcCamera = webRtc.android.cameraActive ? "enable" : "disable";
+    const webRtcMicrophone = webRtc.android.microphoneActive ? "enable" : "disable";
 
     const handleChangeEnableCamera = (value: string) => {
-        setEnableCamera(value);
         const cameraIsEnabled = value === "enable";
-
-        dispatch(updateMediaCamera(cameraIsEnabled));
+        dispatch(updateWebRtc({ ...webRtc.android, cameraActive: cameraIsEnabled }));
     };
 
     const handleChangeEnableMicrophone = (value: string) => {
-        setEnableMicrophone(value);
-
         const microphoneIsEnabled = value === "enable";
-
-        dispatch(updateMediaMicrophone(microphoneIsEnabled));
+        dispatch(updateWebRtc({ ...webRtc.android, microphoneActive: microphoneIsEnabled }));
     };
 
     return (
@@ -47,8 +33,8 @@ export default function WebRTC() {
                         <WebRtcConfigCard
                             onCamValueChange={handleChangeEnableCamera}
                             onMicValueChange={handleChangeEnableMicrophone}
-                            micValue={enableMicrophone}
-                            camValue={enableCamera}
+                            micValue={webRtcCamera}
+                            camValue={webRtcMicrophone}
                             radios={[
                                 { title: "Disable", label: "disable" },
                                 { title: "Enable", label: "enable" },

@@ -3,12 +3,39 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: IPermission = {
     javascript_bridge: [],
-    app_tracking_transparency: false,
-    location_service: true,
-    media: { camera: true, microphone: false },
-    downloads_directory: "files saved private to app",
-    background_audio: true,
-    permission: [],
+    appTrackingTransparency: {
+        ios: false,
+    },
+    locationServices: {
+        android: false,
+    },
+    webRtc: {
+        android: {
+            cameraActive: false,
+            microphoneActive: false,
+        },
+    },
+    downloadsDirectory: {
+        android: "internal",
+    },
+    backgroundAudio: {
+        ios: true,
+    },
+    camera: {
+        ios: {
+            description: "",
+        },
+    },
+    microphone: {
+        ios: {
+            description: "",
+        },
+    },
+    location: {
+        ios: {
+            description: "",
+        },
+    },
 };
 
 const permission = createSlice({
@@ -20,35 +47,40 @@ const permission = createSlice({
         },
 
         updateJavascript: (state: IPermission, action: PayloadAction<string[]>) => {
-            state.permission = action.payload;
+            state.javascript_bridge = action.payload;
         },
 
         updateAppTracking: (state: IPermission, action: PayloadAction<boolean>) => {
-            state.app_tracking_transparency = action.payload;
+            state.appTrackingTransparency.ios = action.payload;
         },
 
         updateLocationService: (state: IPermission, action: PayloadAction<boolean>) => {
-            state.location_service = action.payload;
+            state.locationServices.android = action.payload;
         },
 
-        updateMediaMicrophone: (state: IPermission, action: PayloadAction<boolean>) => {
-            state.media.microphone = action.payload;
-        },
-
-        updateMediaCamera: (state: IPermission, action: PayloadAction<boolean>) => {
-            state.media.camera = action.payload;
+        updateWebRtc: (
+            state: IPermission,
+            action: PayloadAction<IPermission["webRtc"]["android"]>
+        ) => {
+            state.webRtc.android = action.payload;
         },
 
         updateDownloadDirectory: (state: IPermission, action: PayloadAction<string>) => {
-            state.downloads_directory = action.payload;
+            state.downloadsDirectory.android = action.payload;
         },
 
         updateBackgroundAudio: (state: IPermission, action: PayloadAction<boolean>) => {
-            state.background_audio = action.payload;
+            state.backgroundAudio.ios = action.payload;
         },
 
-        updatePermission: (state: IPermission, action: PayloadAction<string[]>) => {
-            state.permission = action.payload;
+        updatePermissionCamera: (state: IPermission, action: PayloadAction<string>) => {
+            state.camera.ios.description = action.payload;
+        },
+        updatePermissionMicrophone: (state: IPermission, action: PayloadAction<string>) => {
+            state.microphone.ios.description = action.payload;
+        },
+        updatePermissionLocation: (state: IPermission, action: PayloadAction<string>) => {
+            state.location.ios.description = action.payload;
         },
     },
 });
@@ -58,11 +90,12 @@ export const {
     updateJavascript,
     updateAppTracking,
     updateLocationService,
-    updateMediaCamera,
-    updateMediaMicrophone,
     updateDownloadDirectory,
     updateBackgroundAudio,
-    updatePermission,
+    updatePermissionCamera,
+    updatePermissionLocation,
+    updatePermissionMicrophone,
+    updateWebRtc,
 } = permission.actions;
 
 export default permission.reducer;

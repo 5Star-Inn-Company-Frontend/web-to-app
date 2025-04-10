@@ -3,23 +3,16 @@ import { OsConfigCard } from "@/components/global/os_config_card";
 import { updateBackgroundAudio } from "@/redux/app/permissionSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useEffect, useState } from "react";
 
 export default function BackgroundAudio() {
     const dispatch = useAppDispatch();
     const backgroundAudio = useAppSelector(
-        (state: RootState) => state.apps.permission.background_audio
+        (state: RootState) => state.apps.permission.backgroundAudio
     );
 
-    const initialValue = backgroundAudio ? "enable" : "disable";
-    const [enableBackgroundAudio, setEnableBackgroundAudio] = useState(initialValue);
-
-    useEffect(() => {
-        setEnableBackgroundAudio(initialValue);
-    }, [initialValue]);
+    const backgroundAudioIos = backgroundAudio.ios ? "enable" : "disable";
 
     const handleChangeBackgroundAudio = (value: string) => {
-        setEnableBackgroundAudio(value);
         const isBackgroundAudioEnabled = value === "enable";
         dispatch(updateBackgroundAudio(isBackgroundAudioEnabled));
     };
@@ -32,7 +25,7 @@ export default function BackgroundAudio() {
                 <div className="xl:w-1/2 px-8">
                     <OsConfigCard
                         os="Android"
-                        value={enableBackgroundAudio}
+                        value={backgroundAudioIos}
                         onValueChange={handleChangeBackgroundAudio}
                         radios={[
                             { title: "Disable", label: "disable" },
