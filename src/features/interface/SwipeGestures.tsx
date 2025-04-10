@@ -4,25 +4,24 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useAppDispatch } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
-import { updateSwipeGesture } from "@/redux/app/interfaceSlice";
+import { updateSwipeGesture, updateSwipeGestureAndroid } from "@/redux/app/interfaceSlice";
 
 export default function SwipeGestures() {
     const dispatch = useAppDispatch();
-    const swipeGesture = useSelector((state: RootState) => state.apps.interface.swipe_gesture);
+    const swipeGesture = useSelector((state: RootState) => state.apps.interface.swipeGestures);
 
-    const initialValue = useMemo(() => (swipeGesture ? "on" : "off"), [swipeGesture]);
-    const [enableSwipeGestures, setEnableSwipeGestures] = useState(initialValue);
+    const enableSwipeGesture = swipeGesture.value ? "on" : "off";
 
-    useEffect(() => {
-        setEnableSwipeGestures(initialValue);
-    }, [initialValue]);
+    const swipeGestureAndroid = swipeGesture.android;
 
     const handleChangeEnableSwipeGestures = (newvalue: string) => {
-        setEnableSwipeGestures(newvalue);
         const swipeGestureIsEnabled = newvalue === "on";
         dispatch(updateSwipeGesture(swipeGestureIsEnabled));
+    };
+
+    const updateSwipeGestureColor = (key: keyof typeof swipeGestureAndroid, value: string) => {
+        dispatch(updateSwipeGestureAndroid({ ...swipeGestureAndroid, [key]: value }));
     };
 
     return (
@@ -34,7 +33,7 @@ export default function SwipeGestures() {
                 <div className="px-8">
                     <RadioGroup
                         className="flex justify-between border border-primary20 p-[0.5rem] flex-grow rounded-md w-fit gap-8 mb-4"
-                        value={enableSwipeGestures}
+                        value={enableSwipeGesture}
                         onValueChange={handleChangeEnableSwipeGestures}
                     >
                         <div className="flex items-center space-x-2">
@@ -46,7 +45,33 @@ export default function SwipeGestures() {
                             <Label htmlFor="on">On</Label>
                         </div>
                     </RadioGroup>
-                    <SwipeGestorsCardCard os="Android" />
+                    <SwipeGestorsCardCard
+                        os="Android"
+                        bgLight={swipeGestureAndroid.backgroundColor}
+                        setBgLight={(color: string) =>
+                            updateSwipeGestureColor("backgroundColor", color)
+                        }
+                        bgDark={swipeGestureAndroid.backgroundColorDark}
+                        setBgDark={(color: string) =>
+                            updateSwipeGestureColor("backgroundColorDark", color)
+                        }
+                        activeColor={swipeGestureAndroid.activeColor}
+                        setActiveColor={(color: string) =>
+                            updateSwipeGestureColor("activeColor", color)
+                        }
+                        activeColorDark={swipeGestureAndroid.activeColorDark}
+                        setActiveColorDark={(color: string) =>
+                            updateSwipeGestureColor("activeColorDark", color)
+                        }
+                        inActiveColor={swipeGestureAndroid.inactiveColor}
+                        setInActiveColor={(color: string) =>
+                            updateSwipeGestureColor("inactiveColor", color)
+                        }
+                        inActiveColorDark={swipeGestureAndroid.inactiveColorDark}
+                        setInActiveColorDark={(color: string) =>
+                            updateSwipeGestureColor("inactiveColorDark", color)
+                        }
+                    />
                 </div>
             </CollapsibleComponent>
         </div>

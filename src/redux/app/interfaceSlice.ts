@@ -186,6 +186,8 @@ export const {
     updateSpinnerAndroid,
     updateSpinnerIos,
     updateSwipeGestureAndroid,
+    updatePitchToZoomAndroid,
+    updatePitchToZoomIos,
 } = interfaceSlice.actions;
 
 export default interfaceSlice.reducer;

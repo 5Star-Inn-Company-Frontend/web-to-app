@@ -147,8 +147,8 @@ export interface IInterface {
         };
     };
     pinchToZoom: {
-        ios: false;
-        android: true;
+        ios: boolean;
+        android: boolean;
     };
     accessibility: boolean;
     front_scaling: boolean;

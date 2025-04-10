@@ -1,25 +1,23 @@
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { OsConfigCard } from "@/components/global/os_config_card";
-// import { updatePitchToZoom } from "@/redux/app/interfaceSlice";
+import { updatePitchToZoomAndroid, updatePitchToZoomIos } from "@/redux/app/interfaceSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useEffect, useMemo, useState } from "react";
 
 export default function PitchToZoom() {
     const dispatch = useAppDispatch();
     const pitchToZoom = useAppSelector((state: RootState) => state.apps.interface.pinchToZoom);
 
-    const initialValue = useMemo(() => (pitchToZoom ? "on" : "off"), [pitchToZoom]);
-    const [enablePitchToZoom, setEnablePitchToZoom] = useState(initialValue);
+    const pitchToZoomIos = pitchToZoom.ios ? "on" : "off";
+    const pitchToZoomAndroid = pitchToZoom.android ? "on" : "off";
 
-    useEffect(() => {
-        setEnablePitchToZoom(initialValue);
-    }, [initialValue]);
-
-    const handleChangePitchToZoom = (newvalue: string) => {
-        setEnablePitchToZoom(newvalue);
-        const pitchToZoomIsEnabled = newvalue === "on";
-        // dispatch(updatePitchToZoom(pitchToZoomIsEnabled));
+    const handleChangePitchToZoomIos = (value: string) => {
+        const isEnabledPitchToZoomIos = value === "on";
+        dispatch(updatePitchToZoomIos(isEnabledPitchToZoomIos));
+    };
+    const handleChangePitchToZoomAndroid = (value: string) => {
+        const isEnabledPitchToZoomAndroid = value === "on";
+        dispatch(updatePitchToZoomAndroid(isEnabledPitchToZoomAndroid));
     };
 
     return (
@@ -31,26 +29,28 @@ export default function PitchToZoom() {
                 <div className="grid lg:grid-col-2 xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-8 px-8">
                     <OsConfigCard
                         os="IOS"
-                        value={enablePitchToZoom}
-                        onValueChange={handleChangePitchToZoom}
+                        value={pitchToZoomIos}
+                        onValueChange={handleChangePitchToZoomIos}
                         radios={[
                             { title: "Off", label: "off" },
                             { title: "On", label: "on" },
                         ]}
                     />
-                    {/* <OsConfigCard
-                                os="Android"
-                                radios={[
-                                    {
-                                        title: "Off",
-                                        label: "off",
-                                    },
-                                    {
-                                        title: "On",
-                                        label: "on",
-                                    },
-                                ]}
-                            /> */}
+                    <OsConfigCard
+                        os="Android"
+                        value={pitchToZoomAndroid}
+                        onValueChange={handleChangePitchToZoomAndroid}
+                        radios={[
+                            {
+                                title: "Off",
+                                label: "off",
+                            },
+                            {
+                                title: "On",
+                                label: "on",
+                            },
+                        ]}
+                    />
                 </div>
             </CollapsibleComponent>
         </div>

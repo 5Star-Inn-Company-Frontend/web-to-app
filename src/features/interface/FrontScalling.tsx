@@ -3,22 +3,14 @@ import { OsConfigCard } from "@/components/global/os_config_card";
 import { updateFrontScaling } from "@/redux/app/interfaceSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useEffect, useMemo, useState } from "react";
 
 export default function FrontScalling() {
     const dispatch = useAppDispatch();
     const frontScaling = useAppSelector((state: RootState) => state.apps.interface.front_scaling);
 
-    const initialFrontScaling = useMemo(() => (frontScaling ? "on" : "off"), [frontScaling]);
-    const [enableFrontScaling, setEnableFrontScaling] = useState(initialFrontScaling);
-
-    useEffect(() => {
-        setEnableFrontScaling(initialFrontScaling);
-    }, [initialFrontScaling]);
+    const frontScalingValue = frontScaling ? "on" : "off";
 
     const handleChangeFrontScaling = (newValue: string) => {
-        setEnableFrontScaling(newValue);
-
         const frontScalingIsEnabled = newValue === "on";
         dispatch(updateFrontScaling(frontScalingIsEnabled));
     };
@@ -32,7 +24,7 @@ export default function FrontScalling() {
                 <div className="grid xl:grid-cols-2 px-8">
                     <OsConfigCard
                         os="IOS"
-                        value={enableFrontScaling}
+                        value={frontScalingValue}
                         onValueChange={handleChangeFrontScaling}
                         radios={[
                             { title: "Off", label: "off" },

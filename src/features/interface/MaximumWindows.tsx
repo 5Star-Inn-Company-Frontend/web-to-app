@@ -4,22 +4,15 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { updateMaximumWindow } from "@/redux/app/interfaceSlice";
 import { useAppDispatch } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 
 export default function MaximumWindows() {
     const dispatch = useAppDispatch();
     const maxWindow = useSelector((state: RootState) => state.apps.interface.maximum_window);
 
-    const initialMaxWindow = useMemo(() => (maxWindow ? "enable" : "disable"), [maxWindow]);
-    const [enableMaxWindow, setEnableMaxWindow] = useState(initialMaxWindow);
-
-    useEffect(() => {
-        setEnableMaxWindow(initialMaxWindow);
-    }, [initialMaxWindow]);
+    const maxWindowValue = maxWindow ? "enable" : "disable";
 
     const handleChangeEnableMaxWindow = (status: string) => {
-        setEnableMaxWindow(status);
         const isMaxWindowEnabled = status === "enable";
         dispatch(updateMaximumWindow(isMaxWindowEnabled));
     };
@@ -33,7 +26,7 @@ export default function MaximumWindows() {
                 <div className="px-8">
                     <RadioGroup
                         className="flex justify-between border p-[0.5rem] flex-grow rounded-md w-fit gap-8"
-                        value={enableMaxWindow}
+                        value={maxWindowValue}
                         onValueChange={handleChangeEnableMaxWindow}
                     >
                         <div className="flex items-center space-x-2">

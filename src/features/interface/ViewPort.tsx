@@ -4,25 +4,15 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { updateViewPortWidth } from "@/redux/app/interfaceSlice";
 import { useAppDispatch } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 
 export default function ViewPort() {
     const dispatch = useAppDispatch();
     const viewPortWidth = useSelector((state: RootState) => state.apps.interface.view_port_width);
 
-    const initialViewPortStatus = useMemo(
-        () => (viewPortWidth ? "enable" : "disable"),
-        [viewPortWidth]
-    );
-    const [enableViewPort, setEnableViewPort] = useState(initialViewPortStatus);
-
-    useEffect(() => {
-        setEnableViewPort(initialViewPortStatus);
-    }, [initialViewPortStatus]);
+    const enableViewPortWidth = viewPortWidth ? "enable" : "disable";
 
     const handleEnableViewPoint = (status: string) => {
-        setEnableViewPort(status);
         const isEnable = status === "enable";
         dispatch(updateViewPortWidth(isEnable));
     };
@@ -36,7 +26,7 @@ export default function ViewPort() {
                 <div className="px-8">
                     <RadioGroup
                         className="flex justify-between border p-[0.5rem] flex-grow rounded-md w-fit gap-8"
-                        value={enableViewPort}
+                        value={enableViewPortWidth}
                         onValueChange={handleEnableViewPoint}
                     >
                         <div className="flex items-center space-x-2">
