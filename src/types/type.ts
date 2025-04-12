@@ -174,8 +174,27 @@ export interface IColorSchemeMode {
     dark_mode: IColorScheme;
 }
 
-export interface ITopNavStyling extends IColorSchemeMode {
-    default_display: string;
+export interface ITopNavStyling {
+    ios: {
+        defaultDisplay: string;
+        imageType: string;
+        newImage: string;
+        newImageDark: string;
+        textColor: string;
+        textColorDark: string;
+        tintColor: string;
+        tintColorDark: string;
+    };
+    android: {
+        backgroundColor: string;
+        backgroundColorDark: string;
+        defaultDisplay: string;
+        imageType: string;
+        newImage: string;
+        newImageDark: string;
+        textColor: string;
+        textColorDark: string;
+    };
 }
 
 export interface ITopNavBarVisualEditor {
@@ -184,19 +203,89 @@ export interface ITopNavBarVisualEditor {
 }
 
 export interface ITopNavBar {
-    display_mode: string;
+    enable: {
+        ios: {
+            active: boolean;
+        };
+        android: {
+            active: boolean;
+        };
+    };
     styling: ITopNavStyling;
     top_navigate_bar_visual_editor: ITopNavBarVisualEditor;
+    autoNewWindows: {
+        active: boolean;
+        items: [[]];
+    };
+    dynamicTitles: {
+        active: boolean;
+        items: [];
+    };
+    customIcons: {
+        actions: [];
+        actionSelection: [];
+        active: boolean;
+    };
+    refreshButton: {
+        ios: {
+            active: boolean;
+        };
+        android: {
+            active: boolean;
+        };
+    };
 }
 
-export interface ISidbarNavStyling extends IColorSchemeMode {
-    image: string;
-    sidebar_font: string;
+export interface ISidbarNavStyling {
+    ios: {
+        backgroundColor: string;
+        backgroundColorDark: string;
+        sidebarFont: string;
+        sidebarImage: string;
+        sidebarImageDark: string;
+        textColor: string;
+        textColorDark: string;
+        type: string;
+    };
+    android: {
+        showAppName: boolean;
+        showLogo: boolean;
+        backgroundColor: string;
+        backgroundColorDark: string;
+        foregroundColor: string;
+        foregroundColorDark: string;
+        separatorColor: string;
+        separatorColorDark: string;
+        highlightColor: string;
+        highlightColorDark: string;
+    };
 }
 
 export interface ISideBarNavigation {
-    enable: boolean;
+    active: boolean;
     styling: ISidbarNavStyling;
+    sidebarItems: {
+        menuSelectionConfig: {
+            redirectLocations: [
+                {
+                    regex: ".*";
+                    menuName: "default";
+                    loggedIn: true;
+                }
+            ];
+        };
+        menus: [
+            {
+                active: false;
+                items: {
+                    url: string;
+                    label: string;
+                    subLinks: [];
+                }[];
+                name: string;
+            }
+        ];
+    };
 }
 
 export interface IBgColorScheme {
@@ -204,8 +293,28 @@ export interface IBgColorScheme {
     dark_mode: string;
 }
 export interface IBottomTabBar {
-    default_mode: "hidden" | "active";
-    styling: IBgColorScheme;
+    active: boolean;
+    styling: {
+        android: {
+            backgroundColor: string;
+            backgroundColorDark: string;
+            textColor: string;
+            textColorDark: string;
+            indicatorColor: string;
+            indicatorColorDark: string;
+        };
+        ios: {
+            tintColor: string;
+            tintColorDark: string;
+            inactiveColor: string;
+            inactiveColorDark: string;
+        };
+    };
+    bottomTabBarItems: {
+        active: boolean;
+        tabMenus: string[];
+        tabSelectionConfig: string[];
+    };
 }
 
 export interface IBackButtonConfig {
@@ -220,11 +329,220 @@ export interface IContextualNavToolbar {
     forward_button_configuration: boolean;
 }
 export interface INavigation {
-    top_nav_bar: ITopNavBar;
-    sidebar_navigation: ISideBarNavigation;
-    bottom_tab_bar: IBottomTabBar;
+    topNavigationBar: ITopNavBar;
+    sidebarNavigationBar: ISideBarNavigation;
+    bottomTabBar: IBottomTabBar;
     contextual_nav_toolbar: IContextualNavToolbar;
 }
+
+// {
+
+//         "sidebarNavigationBar": {
+//             "active": false,
+//             "styling": {
+//                 "ios": {
+//                     "backgroundColor": "#f8f8f8",
+//                     "backgroundColorDark": "#333333",
+//                     "sidebarFont": "Default",
+//                     "sidebarImage": "https://s3.amazonaws.com/gonativeio/images_generated/pkt29zhnu29u0_1694683672242.png",
+//                     "sidebarImageDark": "https://s3.amazonaws.com/gonativeio/images_generated/pkt29zhnu29u0_1694683672242.png",
+//                     "textColor": "#333333",
+//                     "textColorDark": "#adc5dc",
+//                     "type": "appIcon"
+//                 },
+//                 "android": {
+//                     "showAppName": true,
+//                     "showLogo": true,
+//                     "backgroundColor": "#FFFFFF",
+//                     "backgroundColorDark": "#333333",
+//                     "foregroundColor": "#1A100B",
+//                     "foregroundColorDark": "#FFFFFF",
+//                     "separatorColor": "#CCCCCC",
+//                     "separatorColorDark": "#666666",
+//                     "highlightColor": "#1A100B",
+//                     "highlightColorDark": "#FFFFFF"
+//                 }
+//             },
+//             "sidebarItems": {
+//                 "menuSelectionConfig": {
+//                     "redirectLocations": [
+//                         {
+//                             "regex": ".*",
+//                             "menuName": "default",
+//                             "loggedIn": true
+//                         }
+//                     ]
+//                 },
+//                 "menus": [
+//                     {
+//                         "active": false,
+//                         "items": [
+//                             {
+//                                 "url": "https://webhosting.5starcompany.com.ng/index.php",
+//                                 "label": "",
+//                                 "subLinks": []
+//                             },
+//                             {
+//                                 "url": "https://webhosting.5starcompany.com.ng/#",
+//                                 "label": "Store",
+//                                 "subLinks": []
+//                             },
+//                             {
+//                                 "url": "https://webhosting.5starcompany.com.ng/cart.php",
+//                                 "label": "Browse all",
+//                                 "subLinks": []
+//                             },
+//                             {
+//                                 "url": "https://webhosting.5starcompany.com.ng/cart.php?gid=4",
+//                                 "label": "Shared hosting",
+//                                 "subLinks": []
+//                             },
+//                             {
+//                                 "url": "https://webhosting.5starcompany.com.ng/cart.php?gid=1",
+//                                 "label": "Ssl certificates",
+//                                 "subLinks": []
+//                             },
+//                             {
+//                                 "url": "https://webhosting.5starcompany.com.ng/cart.php?gid=8",
+//                                 "label": "Web design",
+//                                 "subLinks": []
+//                             },
+//                             {
+//                                 "url": "https://webhosting.5starcompany.com.ng/cart.php?gid=10",
+//                                 "label": "Developer hosting",
+//                                 "subLinks": []
+//                             },
+//                             {
+//                                 "url": "https://webhosting.5starcompany.com.ng/cart.php?gid=2",
+//                                 "label": "Weebly website builder",
+//                                 "subLinks": []
+//                             },
+//                             {
+//                                 "url": "https://webhosting.5starcompany.com.ng/cart.php?gid=3",
+//                                 "label": "Email spam filtering",
+//                                 "subLinks": []
+//                             },
+//                             {
+//                                 "url": "https://webhosting.5starcompany.com.ng/cart.php?gid=9",
+//                                 "label": "Web development",
+//                                 "subLinks": []
+//                             },
+//                             {
+//                                 "url": "https://webhosting.5starcompany.com.ng/cart.php?gid=5",
+//                                 "label": "Re-seller hosting",
+//                                 "subLinks": []
+//                             },
+//                             {
+//                                 "url": "https://webhosting.5starcompany.com.ng/cart.php?gid=6",
+//                                 "label": "Vps hosting",
+//                                 "subLinks": []
+//                             },
+//                             {
+//                                 "url": "https://webhosting.5starcompany.com.ng/cart.php?gid=7",
+//                                 "label": "Dedicated server",
+//                                 "subLinks": []
+//                             },
+//                             {
+//                                 "url": "https://webhosting.5starcompany.com.ng/index.php?rp=/store/ssl-certificates",
+//                                 "label": "Ssl certificates",
+//                                 "subLinks": []
+//                             },
+//                             {
+//                                 "url": "https://webhosting.5starcompany.com.ng/index.php?rp=/store/website-builder",
+//                                 "label": "Website builder",
+//                                 "subLinks": []
+//                             },
+//                             {
+//                                 "url": "https://webhosting.5starcompany.com.ng/index.php?rp=/store/email-services",
+//                                 "label": "E-mail services",
+//                                 "subLinks": []
+//                             },
+//                             {
+//                                 "url": "https://webhosting.5starcompany.com.ng/cart.php?a=add&domain=register",
+//                                 "label": "Register a new domain",
+//                                 "subLinks": []
+//                             },
+//                             {
+//                                 "url": "https://webhosting.5starcompany.com.ng/cart.php?a=add&domain=transfer",
+//                                 "label": "Transfer domains to us",
+//                                 "subLinks": []
+//                             },
+//                             {
+//                                 "url": "https://webhosting.5starcompany.com.ng/index.php?rp=/announcements",
+//                                 "label": "Announcements",
+//                                 "subLinks": []
+//                             },
+//                             {
+//                                 "url": "https://webhosting.5starcompany.com.ng/index.php?rp=/knowledgebase",
+//                                 "label": "Knowledgebase",
+//                                 "subLinks": []
+//                             },
+//                             {
+//                                 "url": "https://webhosting.5starcompany.com.ng/serverstatus.php",
+//                                 "label": "Network status",
+//                                 "subLinks": []
+//                             },
+//                             {
+//                                 "url": "https://webhosting.5starcompany.com.ng/affiliates.php",
+//                                 "label": "Affiliates",
+//                                 "subLinks": []
+//                             },
+//                             {
+//                                 "url": "https://webhosting.5starcompany.com.ng/contact.php",
+//                                 "label": "Contact us",
+//                                 "subLinks": []
+//                             },
+//                             {
+//                                 "url": "https://webhosting.5starcompany.com.ng/clientarea.php",
+//                                 "label": "Login",
+//                                 "subLinks": []
+//                             },
+//                             {
+//                                 "url": "https://webhosting.5starcompany.com.ng/register.php",
+//                                 "label": "Register",
+//                                 "subLinks": []
+//                             },
+//                             {
+//                                 "url": "https://webhosting.5starcompany.com.ng/pwreset.php",
+//                                 "label": "Forgot password?",
+//                                 "subLinks": []
+//                             },
+//                             {
+//                                 "url": "https://tawk.to/chat/5b3a09246d961556373d53e3/default/?$_tawk_popout=true",
+//                                 "label": "Chat now",
+//                                 "subLinks": []
+//                             }
+//                         ],
+//                         "name": "default"
+//                     }
+//                 ]
+//             }
+//         },
+//         "bottomTabBar": {
+//             "active": false,
+//             "styling": {
+//                 "android": {
+//                     "backgroundColor": "#FFFFFF",
+//                     "backgroundColorDark": "#333333",
+//                     "textColor": "#949494",
+//                     "textColorDark": "#FFFFFF",
+//                     "indicatorColor": "#1A100B",
+//                     "indicatorColorDark": "#666666"
+//                 },
+//                 "ios": {
+//                     "tintColor": "#f8f8f8",
+//                     "tintColorDark": "#333333",
+//                     "inactiveColor": "#A1A1A1",
+//                     "inactiveColorDark": "#818181"
+//                 }
+//             },
+//             "bottomTabBarItems": {
+//                 "active": false,
+//                 "tabMenus": [],
+//                 "tabSelectionConfig": []
+//             }
+//         }
+// }
 
 export interface IMedia {
     camera: boolean;

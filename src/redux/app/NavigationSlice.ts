@@ -1,25 +1,57 @@
-import {
-    IBottomTabBar,
-    IColorScheme,
-    IContextualNavToolbar,
-    INavigation,
-    ISideBarNavigation,
-    ITopNavBar,
-} from "@/types/type";
+import { IContextualNavToolbar, INavigation, ITopNavBar } from "@/types/type";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: INavigation = {
-    top_nav_bar: {
-        display_mode: "auto",
-        styling: {
-            default_display: "text",
-            light_mode: {
-                background_color: "#ffffff",
-                text_color: "#000000",
+    topNavigationBar: {
+        enable: {
+            ios: {
+                active: true,
             },
-            dark_mode: {
-                background_color: "#000000",
-                text_color: "#ffffff",
+            android: {
+                active: true,
+            },
+        },
+        styling: {
+            ios: {
+                defaultDisplay: "text",
+                imageType: "appIcon",
+                newImage: "assets/defaults/app-icon-placeholder.png",
+                newImageDark: "assets/defaults/app-icon-placeholder.png",
+                textColor: "#333333",
+                textColorDark: "#adc5dc",
+                tintColor: "#f8f8f8",
+                tintColorDark: "#333333",
+            },
+            android: {
+                backgroundColor: "#FFFFFF",
+                backgroundColorDark: "#333333",
+                defaultDisplay: "text",
+                imageType: "appIcon",
+                newImage: "assets/defaults/app-icon-placeholder.png",
+                newImageDark: "assets/defaults/app-icon-placeholder.png",
+                textColor: "#1A100B",
+                textColorDark: "#FFFFFF",
+            },
+        },
+        autoNewWindows: {
+            active: true,
+            items: [[]],
+        },
+        dynamicTitles: {
+            active: true,
+            items: [],
+        },
+        customIcons: {
+            actions: [],
+            actionSelection: [],
+            active: true,
+        },
+        refreshButton: {
+            ios: {
+                active: false,
+            },
+            android: {
+                active: false,
             },
         },
         top_navigate_bar_visual_editor: {
@@ -27,26 +59,211 @@ const initialState: INavigation = {
             display_mode: "page title",
         },
     },
-    sidebar_navigation: {
-        enable: true,
+    sidebarNavigationBar: {
+        active: false,
         styling: {
-            image: "text",
-            sidebar_font: "light",
-            light_mode: {
-                background_color: "#ffffff",
-                text_color: "#000000",
+            ios: {
+                backgroundColor: "#f8f8f8",
+                backgroundColorDark: "#333333",
+                sidebarFont: "Default",
+                sidebarImage:
+                    "https://s3.amazonaws.com/gonativeio/images_generated/pkt29zhnu29u0_1694683672242.png",
+                sidebarImageDark:
+                    "https://s3.amazonaws.com/gonativeio/images_generated/pkt29zhnu29u0_1694683672242.png",
+                textColor: "#333333",
+                textColorDark: "#adc5dc",
+                type: "appIcon",
             },
-            dark_mode: {
-                background_color: "#000000",
-                text_color: "#ffffff",
+            android: {
+                showAppName: true,
+                showLogo: true,
+                backgroundColor: "#FFFFFF",
+                backgroundColorDark: "#333333",
+                foregroundColor: "#1A100B",
+                foregroundColorDark: "#FFFFFF",
+                separatorColor: "#CCCCCC",
+                separatorColorDark: "#666666",
+                highlightColor: "#1A100B",
+                highlightColorDark: "#FFFFFF",
             },
         },
+        sidebarItems: {
+            menuSelectionConfig: {
+                redirectLocations: [
+                    {
+                        regex: ".*",
+                        menuName: "default",
+                        loggedIn: true,
+                    },
+                ],
+            },
+            menus: [
+                {
+                    active: false,
+                    items: [
+                        {
+                            url: "https://webhosting.5starcompany.com.ng/index.php",
+                            label: "",
+                            subLinks: [],
+                        },
+                        {
+                            url: "https://webhosting.5starcompany.com.ng/#",
+                            label: "Store",
+                            subLinks: [],
+                        },
+                        {
+                            url: "https://webhosting.5starcompany.com.ng/cart.php",
+                            label: "Browse all",
+                            subLinks: [],
+                        },
+                        {
+                            url: "https://webhosting.5starcompany.com.ng/cart.php?gid=4",
+                            label: "Shared hosting",
+                            subLinks: [],
+                        },
+                        {
+                            url: "https://webhosting.5starcompany.com.ng/cart.php?gid=1",
+                            label: "Ssl certificates",
+                            subLinks: [],
+                        },
+                        {
+                            url: "https://webhosting.5starcompany.com.ng/cart.php?gid=8",
+                            label: "Web design",
+                            subLinks: [],
+                        },
+                        {
+                            url: "https://webhosting.5starcompany.com.ng/cart.php?gid=10",
+                            label: "Developer hosting",
+                            subLinks: [],
+                        },
+                        {
+                            url: "https://webhosting.5starcompany.com.ng/cart.php?gid=2",
+                            label: "Weebly website builder",
+                            subLinks: [],
+                        },
+                        {
+                            url: "https://webhosting.5starcompany.com.ng/cart.php?gid=3",
+                            label: "Email spam filtering",
+                            subLinks: [],
+                        },
+                        {
+                            url: "https://webhosting.5starcompany.com.ng/cart.php?gid=9",
+                            label: "Web development",
+                            subLinks: [],
+                        },
+                        {
+                            url: "https://webhosting.5starcompany.com.ng/cart.php?gid=5",
+                            label: "Re-seller hosting",
+                            subLinks: [],
+                        },
+                        {
+                            url: "https://webhosting.5starcompany.com.ng/cart.php?gid=6",
+                            label: "Vps hosting",
+                            subLinks: [],
+                        },
+                        {
+                            url: "https://webhosting.5starcompany.com.ng/cart.php?gid=7",
+                            label: "Dedicated server",
+                            subLinks: [],
+                        },
+                        {
+                            url: "https://webhosting.5starcompany.com.ng/index.php?rp=/store/ssl-certificates",
+                            label: "Ssl certificates",
+                            subLinks: [],
+                        },
+                        {
+                            url: "https://webhosting.5starcompany.com.ng/index.php?rp=/store/website-builder",
+                            label: "Website builder",
+                            subLinks: [],
+                        },
+                        {
+                            url: "https://webhosting.5starcompany.com.ng/index.php?rp=/store/email-services",
+                            label: "E-mail services",
+                            subLinks: [],
+                        },
+                        {
+                            url: "https://webhosting.5starcompany.com.ng/cart.php?a=add&domain=register",
+                            label: "Register a new domain",
+                            subLinks: [],
+                        },
+                        {
+                            url: "https://webhosting.5starcompany.com.ng/cart.php?a=add&domain=transfer",
+                            label: "Transfer domains to us",
+                            subLinks: [],
+                        },
+                        {
+                            url: "https://webhosting.5starcompany.com.ng/index.php?rp=/announcements",
+                            label: "Announcements",
+                            subLinks: [],
+                        },
+                        {
+                            url: "https://webhosting.5starcompany.com.ng/index.php?rp=/knowledgebase",
+                            label: "Knowledgebase",
+                            subLinks: [],
+                        },
+                        {
+                            url: "https://webhosting.5starcompany.com.ng/serverstatus.php",
+                            label: "Network status",
+                            subLinks: [],
+                        },
+                        {
+                            url: "https://webhosting.5starcompany.com.ng/affiliates.php",
+                            label: "Affiliates",
+                            subLinks: [],
+                        },
+                        {
+                            url: "https://webhosting.5starcompany.com.ng/contact.php",
+                            label: "Contact us",
+                            subLinks: [],
+                        },
+                        {
+                            url: "https://webhosting.5starcompany.com.ng/clientarea.php",
+                            label: "Login",
+                            subLinks: [],
+                        },
+                        {
+                            url: "https://webhosting.5starcompany.com.ng/register.php",
+                            label: "Register",
+                            subLinks: [],
+                        },
+                        {
+                            url: "https://webhosting.5starcompany.com.ng/pwreset.php",
+                            label: "Forgot password?",
+                            subLinks: [],
+                        },
+                        {
+                            url: "https://tawk.to/chat/5b3a09246d961556373d53e3/default/?$_tawk_popout=true",
+                            label: "Chat now",
+                            subLinks: [],
+                        },
+                    ],
+                    name: "default",
+                },
+            ],
+        },
     },
-    bottom_tab_bar: {
-        default_mode: "hidden",
+    bottomTabBar: {
+        active: false,
         styling: {
-            light_mode: "#ffffff",
-            dark_mode: "#000000",
+            android: {
+                backgroundColor: "#FFFFFF",
+                backgroundColorDark: "#333333",
+                textColor: "#949494",
+                textColorDark: "#FFFFFF",
+                indicatorColor: "#1A100B",
+                indicatorColorDark: "#666666",
+            },
+            ios: {
+                tintColor: "#f8f8f8",
+                tintColorDark: "#333333",
+                inactiveColor: "#A1A1A1",
+                inactiveColorDark: "#818181",
+            },
+        },
+        bottomTabBarItems: {
+            active: false,
+            tabMenus: [],
+            tabSelectionConfig: [],
         },
     },
     contextual_nav_toolbar: {
@@ -69,81 +286,84 @@ const navigation = createSlice({
             return { ...state, ...action.payload };
         },
 
-        updateTopNav: (state: INavigation, action: PayloadAction<ITopNavBar>) => {
-            const updatedTopNav = { ...state.top_nav_bar, ...action.payload };
-            state.top_nav_bar = updatedTopNav;
+        updateTopNavEnableIos: (
+            state: INavigation,
+            action: PayloadAction<INavigation["topNavigationBar"]["enable"]["ios"]>
+        ) => {
+            state.topNavigationBar.enable.ios = action.payload;
+        },
+        updateTopNavEnableAndroid: (
+            state: INavigation,
+            action: PayloadAction<INavigation["topNavigationBar"]["enable"]["android"]>
+        ) => {
+            state.topNavigationBar.enable.android = action.payload;
         },
 
-        updateDisplayMode: (state: INavigation, action: PayloadAction<"auto" | "always">) => {
-            state.top_nav_bar.display_mode = action.payload;
+        updateTopNavStylingIos: (
+            state: INavigation,
+            action: PayloadAction<ITopNavBar["styling"]["ios"]>
+        ) => {
+            state.topNavigationBar.styling.ios = action.payload;
         },
-
-        updateDefaultDisplay: (state: INavigation, action: PayloadAction<"text" | "image">) => {
-            state.top_nav_bar.styling.default_display = action.payload;
-        },
-
-        updateTopNavLightMode: (state: INavigation, action: PayloadAction<IColorScheme>) => {
-            state.top_nav_bar.styling.light_mode = action.payload;
-        },
-        updateTopNavDarkMode: (state: INavigation, action: PayloadAction<IColorScheme>) => {
-            state.top_nav_bar.styling.dark_mode = action.payload;
+        updateTopNavStylingAndroid: (
+            state: INavigation,
+            action: PayloadAction<ITopNavBar["styling"]["android"]>
+        ) => {
+            state.topNavigationBar.styling.android = action.payload;
         },
 
         updateTopNavigatePagesToDisplay: (state: INavigation, action: PayloadAction<string>) => {
-            state.top_nav_bar.top_navigate_bar_visual_editor.pages_to_display_top_nav_bar =
+            state.topNavigationBar.top_navigate_bar_visual_editor.pages_to_display_top_nav_bar =
                 action.payload;
         },
 
         updateTopNavigateDisplayMode: (state: INavigation, action: PayloadAction<string>) => {
-            state.top_nav_bar.top_navigate_bar_visual_editor.display_mode = action.payload;
+            state.topNavigationBar.top_navigate_bar_visual_editor.display_mode = action.payload;
         },
 
-        updateSideNav: (state: INavigation, action: PayloadAction<ISideBarNavigation>) => {
-            const updatedSideNav = { ...state.sidebar_navigation, ...action.payload };
-            state.sidebar_navigation = updatedSideNav;
+        updateSideNavActive: (state: INavigation, action: PayloadAction<boolean>) => {
+            state.sidebarNavigationBar.active = action.payload;
         },
 
-        updateSideNavEnable: (state: INavigation, action: PayloadAction<boolean>) => {
-            state.sidebar_navigation.enable = action.payload;
-        },
-
-        updateSideNavImage: (state: INavigation, action: PayloadAction<string>) => {
-            state.sidebar_navigation.styling.image = action.payload;
-        },
-
-        updateSideNavFont: (state: INavigation, action: PayloadAction<string>) => {
-            state.sidebar_navigation.styling.sidebar_font = action.payload;
-        },
-
-        updateSideNavLightMode: (state: INavigation, action: PayloadAction<IColorScheme>) => {
-            state.sidebar_navigation.styling.light_mode = action.payload;
-        },
-        updateSideNavDarkMode: (state: INavigation, action: PayloadAction<IColorScheme>) => {
-            state.sidebar_navigation.styling.dark_mode = action.payload;
-        },
-
-        updateBottomBar: (state: INavigation, action: PayloadAction<IBottomTabBar>) => {
-            const updatedBottomBar = { ...state.bottom_tab_bar, ...action.payload };
-            state.bottom_tab_bar = updatedBottomBar;
-        },
-
-        updateBottomBarDefaultMode: (
+        updateSideNavStylingIos: (
             state: INavigation,
-            action: PayloadAction<"hidden" | "active">
+            action: PayloadAction<INavigation["sidebarNavigationBar"]["styling"]["ios"]>
         ) => {
-            state.bottom_tab_bar.default_mode = action.payload;
+            state.sidebarNavigationBar.styling.ios = action.payload;
+        },
+        updateSideNavStylingAndroid: (
+            state: INavigation,
+            action: PayloadAction<INavigation["sidebarNavigationBar"]["styling"]["android"]>
+        ) => {
+            state.sidebarNavigationBar.styling.android = action.payload;
         },
 
-        updateBottomBarStylingLight: (state: INavigation, action: PayloadAction<string>) => {
-            state.bottom_tab_bar.styling.light_mode = action.payload;
-        },
-        updateBottomBarStylingDark: (state: INavigation, action: PayloadAction<string>) => {
-            state.bottom_tab_bar.styling.dark_mode = action.payload;
+        updateSideNavSidebarItemsMenus: (
+            state: INavigation,
+            action: PayloadAction<INavigation["sidebarNavigationBar"]["sidebarItems"]["menus"]>
+        ) => {
+            state.sidebarNavigationBar.sidebarItems.menus = action.payload;
         },
 
-        updateBottomBarStyling: (state: INavigation, action: PayloadAction<IBottomTabBar>) => {
-            const updatedBottomBarStyling = { ...state.bottom_tab_bar.styling, ...action.payload };
-            state.bottom_tab_bar.styling = updatedBottomBarStyling;
+        updateBottomBarActive: (
+            state: INavigation,
+            action: PayloadAction<INavigation["bottomTabBar"]["active"]>
+        ) => {
+            state.bottomTabBar.active = action.payload;
+        },
+
+        updateBottomBarStylingIos: (
+            state: INavigation,
+            action: PayloadAction<INavigation["bottomTabBar"]["styling"]["ios"]>
+        ) => {
+            state.bottomTabBar.styling.ios = action.payload;
+        },
+
+        updateBottomBarStylingAndroid: (
+            state: INavigation,
+            action: PayloadAction<INavigation["bottomTabBar"]["styling"]["android"]>
+        ) => {
+            state.bottomTabBar.styling.android = action.payload;
         },
 
         updateContextual: (state: INavigation, action: PayloadAction<IContextualNavToolbar>) => {
@@ -179,24 +399,8 @@ const navigation = createSlice({
 
 export const {
     updateNavigation,
-    updateSideNav,
-    updateTopNav,
-    updateDisplayMode,
-    updateDefaultDisplay,
-    updateTopNavDarkMode,
-    updateTopNavLightMode,
     updateTopNavigateDisplayMode,
     updateTopNavigatePagesToDisplay,
-    updateSideNavEnable,
-    updateSideNavFont,
-    updateSideNavImage,
-    updateSideNavDarkMode,
-    updateSideNavLightMode,
-    updateBottomBar,
-    updateBottomBarStylingLight,
-    updateBottomBarStylingDark,
-    updateBottomBarDefaultMode,
-    updateBottomBarStyling,
     updateContextual,
     updateContextualEnable,
     updateContextualToolBarVisibility,
@@ -204,6 +408,17 @@ export const {
     updateContextualBackBtnLabel,
     updateContextualPagesToActiveBtn,
     updateContextualRefreshBtn,
+    updateBottomBarActive,
+    updateBottomBarStylingAndroid,
+    updateBottomBarStylingIos,
+    updateSideNavActive,
+    updateSideNavSidebarItemsMenus,
+    updateSideNavStylingAndroid,
+    updateSideNavStylingIos,
+    updateTopNavEnableAndroid,
+    updateTopNavEnableIos,
+    updateTopNavStylingAndroid,
+    updateTopNavStylingIos,
 } = navigation.actions;
 
 export default navigation.reducer;

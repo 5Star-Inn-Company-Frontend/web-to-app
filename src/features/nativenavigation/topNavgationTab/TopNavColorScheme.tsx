@@ -1,55 +1,87 @@
 import { ColorPicker } from "@/components/ColorPicker";
-import { updateTopNavDarkMode, updateTopNavLightMode } from "@/redux/app/NavigationSlice";
+import { updateTopNavStylingAndroid, updateTopNavStylingIos } from "@/redux/app/NavigationSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { IColorScheme } from "@/types/type";
-import { useEffect, useMemo, useState } from "react";
+
 import { CiLight } from "react-icons/ci";
 
 interface ITopNavColorScheme {
     title: string;
     mode: string;
+    os: "IOS" | "Android";
 }
-export default function TopNavColorScheme({ mode, title }: ITopNavColorScheme) {
+export default function TopNavColorScheme({ mode, title, os }: ITopNavColorScheme) {
     const dispatch = useAppDispatch();
+
     const topNavStylingStore = useAppSelector(
-        (state: RootState) => state.apps.navigation.top_nav_bar.styling
+        (state: RootState) => state.apps.navigation.topNavigationBar.styling
     );
 
-    const initialvalue = useMemo(
-        () =>
-            mode === "light_mode" ? topNavStylingStore.light_mode : topNavStylingStore.dark_mode,
-        [topNavStylingStore, mode]
-    );
+    const getInitialColorScheme = () => {
+        if (os === "IOS") {
+            const osStyle = topNavStylingStore.ios;
 
-    const [colorSchemeState, setColorSchemeState] = useState<IColorScheme>(initialvalue);
-
-    useEffect(() => {
-        setColorSchemeState(initialvalue);
-    }, [initialvalue]);
-
-    const handleChangeTextColor = (color: string) => {
-        setColorSchemeState((prev) => ({ ...prev, text_color: color }));
-
-        const newColorScheme = { ...colorSchemeState, text_color: color };
-
-        if (mode === "light_mode") {
-            dispatch(updateTopNavLightMode(newColorScheme));
-        } else {
-            dispatch(updateTopNavDarkMode(newColorScheme));
+            return {
+                text_color: mode === "light" ? osStyle.textColor : osStyle.textColorDark,
+                background_color: mode === "light" ? osStyle.tintColor : osStyle.tintColorDark,
+            };
         }
+
+        const osStyle = topNavStylingStore.android;
+
+        return {
+            text_color: mode === "light" ? osStyle.textColor : osStyle.textColorDark,
+            background_color:
+                mode === "light" ? osStyle.backgroundColor : osStyle.backgroundColorDark,
+        };
     };
 
     const handleChangeBgColor = (color: string) => {
-        setColorSchemeState((prev) => ({ ...prev, background_color: color }));
-
-        const newColorScheme = { ...colorSchemeState, background_color: color };
-
-        if (mode === "light_mode") {
-            dispatch(updateTopNavLightMode(newColorScheme));
-        } else {
-            dispatch(updateTopNavDarkMode(newColorScheme));
+        if (os === "IOS") {
+            mode === "light"
+                ? dispatch(updateTopNavStylingIos({ ...topNavStylingStore.ios, tintColor: color }))
+                : dispatch(
+                      updateTopNavStylingIos({ ...topNavStylingStore.ios, tintColorDark: color })
+                  );
+            return;
         }
+        mode === "light"
+            ? dispatch(
+                  updateTopNavStylingAndroid({
+                      ...topNavStylingStore.android,
+                      backgroundColor: color,
+                  })
+              )
+            : dispatch(
+                  updateTopNavStylingAndroid({
+                      ...topNavStylingStore.android,
+                      backgroundColorDark: color,
+                  })
+              );
+    };
+
+    const handleChangeTextColor = (color: string) => {
+        if (os === "IOS") {
+            mode === "light"
+                ? dispatch(updateTopNavStylingIos({ ...topNavStylingStore.ios, textColor: color }))
+                : dispatch(
+                      updateTopNavStylingIos({ ...topNavStylingStore.ios, textColorDark: color })
+                  );
+            return;
+        }
+        mode === "light"
+            ? dispatch(
+                  updateTopNavStylingAndroid({
+                      ...topNavStylingStore.android,
+                      textColor: color,
+                  })
+              )
+            : dispatch(
+                  updateTopNavStylingAndroid({
+                      ...topNavStylingStore.android,
+                      textColorDark: color,
+                  })
+              );
     };
 
     return (
@@ -62,8 +94,8 @@ export default function TopNavColorScheme({ mode, title }: ITopNavColorScheme) {
                 <span className="text-[0.625rem] text-primary40">BACKGROUND COLOR</span>
                 <div className="w-fit flex justify-between border rounded-md px-2 py-1 items-center gap-2">
                     <ColorPicker
-                        background={colorSchemeState.background_color}
-                        setBackground={handleChangeBgColor}
+                        background={getInitialColorScheme().background_color}
+                        setBackground={(color: string) => handleChangeBgColor(color)}
                     />
                 </div>
             </div>
@@ -71,8 +103,8 @@ export default function TopNavColorScheme({ mode, title }: ITopNavColorScheme) {
                 <span className="text-[0.625rem] text-primary40">TEXT COLOR</span>
                 <div className="w-fit flex justify-between border rounded-md px-2 py-1 items-center gap-2">
                     <ColorPicker
-                        background={colorSchemeState.text_color}
-                        setBackground={handleChangeTextColor}
+                        background={getInitialColorScheme().text_color}
+                        setBackground={(color: string) => handleChangeTextColor(color)}
                     />
                 </div>
             </div>

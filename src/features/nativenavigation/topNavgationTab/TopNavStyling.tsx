@@ -1,37 +1,23 @@
-import { useCallback, useEffect, useState } from "react";
 import { TopNavigationCard } from "../TopNavigationCard";
 import TopNavigationCollapsable from "../TopNavigationCollapsable";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { updateDefaultDisplay } from "@/redux/app/NavigationSlice";
-
-type TInitialValue = "text" | "image";
+import { updateTopNavStylingAndroid, updateTopNavStylingIos } from "@/redux/app/NavigationSlice";
 
 export default function TopNavStyling() {
     const dispatch = useAppDispatch();
-    const defaultDisplay = useAppSelector(
-        (state: RootState) => state.apps.navigation.top_nav_bar.styling.default_display
+    const topNavStyling = useAppSelector(
+        (state: RootState) => state.apps.navigation.topNavigationBar.styling
     );
 
-    const initialValue = defaultDisplay || "text";
+    const iosStyling = topNavStyling.ios;
+    const androidStyling = topNavStyling.android;
 
-    const [topNavDefaultDisplay, setTopNavDefaultDisplay] = useState<TInitialValue | string>(
-        initialValue
-    );
-
-    useEffect(() => {
-        setTopNavDefaultDisplay(initialValue);
-    }, [initialValue]);
-
-    const handleChangeDefaultDisplay = useCallback(
-        (value: string) => {
-            const newValue = value as TInitialValue;
-            setTopNavDefaultDisplay(value);
-
-            dispatch(updateDefaultDisplay(newValue));
-        },
-        [dispatch, setTopNavDefaultDisplay]
-    );
+    const handleChangeDefaultDisplay = ({ type, value }: { type: string; value: string }) => {
+        type === "ios"
+            ? dispatch(updateTopNavStylingIos({ ...iosStyling, defaultDisplay: value }))
+            : dispatch(updateTopNavStylingAndroid({ ...androidStyling, defaultDisplay: value }));
+    };
 
     return (
         <TopNavigationCollapsable title="Styling">
@@ -45,8 +31,10 @@ export default function TopNavStyling() {
             <div className="grid gap-y-5">
                 <TopNavigationCard
                     os="IOS"
-                    value={topNavDefaultDisplay}
-                    onValueChange={handleChangeDefaultDisplay}
+                    value={iosStyling.defaultDisplay}
+                    onValueChange={(value: string) =>
+                        handleChangeDefaultDisplay({ type: "ios", value })
+                    }
                     radios={[
                         { title: "Text", label: "text" },
                         { title: "Image", label: "image" },
@@ -54,8 +42,10 @@ export default function TopNavStyling() {
                 />
                 <TopNavigationCard
                     os="Android"
-                    value={topNavDefaultDisplay}
-                    onValueChange={handleChangeDefaultDisplay}
+                    value={androidStyling.defaultDisplay}
+                    onValueChange={(value: string) =>
+                        handleChangeDefaultDisplay({ type: "android", value })
+                    }
                     radios={[
                         { title: "Text", label: "text" },
                         { title: "Image", label: "image" },

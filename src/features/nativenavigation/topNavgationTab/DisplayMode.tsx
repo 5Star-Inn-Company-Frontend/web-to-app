@@ -1,32 +1,28 @@
 import { OsConfigCard } from "@/components/global/os_config_card";
 import TopNavigationCollapsable from "../TopNavigationCollapsable";
-import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { updateDisplayMode } from "@/redux/app/NavigationSlice";
-
-type TDisplayMode = "auto" | "always";
+import { updateTopNavEnableAndroid, updateTopNavEnableIos } from "@/redux/app/NavigationSlice";
 
 export default function DisplayMode() {
     const dispatch = useAppDispatch();
     const displayModeStore = useAppSelector(
-        (state: RootState) => state.apps.navigation.top_nav_bar.display_mode
+        (state: RootState) => state.apps.navigation.topNavigationBar.enable
     );
 
-    const initialValue = displayModeStore || "auto";
+    const displayModeIos = displayModeStore.ios ? "always" : "auto";
+    const displayModeAndroid = displayModeStore.android ? "always" : "auto";
 
-    const [displayMode, setDisplayMode] = useState<TDisplayMode | string>(initialValue);
+    const handleChangeDisplayMode = ({ type, value }: { type: string; value: string }) => {
+        if (type === "ios") {
+            const isIosEnabled = value === "always";
+            dispatch(updateTopNavEnableIos({ active: isIosEnabled }));
+        }
 
-    useEffect(() => {
-        setDisplayMode(initialValue);
-    }, [initialValue]);
-
-    const handleChangeDisplayMode = (value: string) => {
-        const newValue = value as TDisplayMode;
-
-        setDisplayMode(value);
-
-        dispatch(updateDisplayMode(newValue));
+        if (type === "android") {
+            const isAndroidEnabled = value === "always";
+            dispatch(updateTopNavEnableAndroid({ active: isAndroidEnabled }));
+        }
     };
 
     return (
@@ -42,8 +38,10 @@ export default function DisplayMode() {
                 <div className="grid xl:grid-cols-2 gap-y-4 xl:gap-y-0 gap-x-8 mt-6">
                     <OsConfigCard
                         os="IOS"
-                        value={displayMode}
-                        onValueChange={handleChangeDisplayMode}
+                        value={displayModeIos}
+                        onValueChange={(value: string) =>
+                            handleChangeDisplayMode({ type: "ios", value: value })
+                        }
                         radios={[
                             { title: "Auto", label: "auto" },
                             { title: "Always", label: "always" },
@@ -51,8 +49,10 @@ export default function DisplayMode() {
                     />
                     <OsConfigCard
                         os="Android"
-                        value={displayMode}
-                        onValueChange={handleChangeDisplayMode}
+                        value={displayModeAndroid}
+                        onValueChange={(value: string) =>
+                            handleChangeDisplayMode({ type: "android", value: value })
+                        }
                         radios={[
                             { title: "Auto", label: "auto" },
                             { title: "Always", label: "always" },

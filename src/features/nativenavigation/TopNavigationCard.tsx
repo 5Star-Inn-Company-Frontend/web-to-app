@@ -39,8 +39,8 @@ export const TopNavigationCard = ({ os, radios, value, onValueChange }: TopNavig
                 </RadioGroup>
                 <div className="border border-primary20 rounded-lg mt-4 px-5 pb-5">
                     <div className="grid xl:grid-cols-2 gap-x-8 mb-5">
-                        <TopNavColorScheme mode="light_mode" title="LIGHT MODE" />
-                        <TopNavColorScheme mode="dark_mode" title="DARK MODE" />
+                        <TopNavColorScheme mode="light" title="LIGHT MODE" os={os} />
+                        <TopNavColorScheme mode="dark" title="DARK MODE" os={os} />
                     </div>
 
                     <div>

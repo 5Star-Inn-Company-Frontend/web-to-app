@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 export default function VisualEditorDisplayMode() {
     const dispatch = useAppDispatch();
     const topNavigate = useAppSelector(
-        (state: RootState) => state.apps.navigation.top_nav_bar.top_navigate_bar_visual_editor
+        (state: RootState) => state.apps.navigation.topNavigationBar.top_navigate_bar_visual_editor
     );
 
     const initialValue = topNavigate.display_mode || "page title";

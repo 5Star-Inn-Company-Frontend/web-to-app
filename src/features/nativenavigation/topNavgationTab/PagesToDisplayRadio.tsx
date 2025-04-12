@@ -8,7 +8,7 @@ import { useEffect, useMemo, useState } from "react";
 export default function PagesToDisplayRadio() {
     const dispatch = useAppDispatch();
     const topNavigate = useAppSelector(
-        (state: RootState) => state.apps.navigation.top_nav_bar.top_navigate_bar_visual_editor
+        (state: RootState) => state.apps.navigation.topNavigationBar.top_navigate_bar_visual_editor
     );
 
     const initialValue = useMemo(() => {
