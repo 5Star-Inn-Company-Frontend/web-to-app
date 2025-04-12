@@ -1,39 +1,30 @@
 import CollapseableWithArrow from "@/components/CollapseableWithArrow";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { updateForegroundNotification } from "@/redux/app/NotificationSlice";
+import { updateOneSignal } from "@/redux/app/NotificationSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useEffect, useState } from "react";
-
-type TInitialValue = "show" | "hide";
 
 export default function ForegroundNotification() {
     const dispatch = useAppDispatch();
-    const foregroundNotification = useAppSelector(
-        (state: RootState) => state.apps.notification.foreground_notification
-    ) as TInitialValue;
+    const oneSignal = useAppSelector((state: RootState) => state.apps.notification.oneSignal);
 
-    const initialValue = foregroundNotification || "show";
-
-    const [enableForegroundNotification, setEnableForegroundNotification] =
-        useState<TInitialValue>(initialValue);
-
-    useEffect(() => {
-        setEnableForegroundNotification(initialValue);
-    }, [initialValue]);
+    const showForegroundNotification = oneSignal.showForegroundNotifications ? "show" : "hide";
 
     const handleChangeForegroundNotification = (value: string) => {
-        const newForegroundValue = value as TInitialValue;
-
-        setEnableForegroundNotification(newForegroundValue);
-        dispatch(updateForegroundNotification(newForegroundValue));
+        const isEnableForegroundNotification = value === "show";
+        dispatch(
+            updateOneSignal({
+                ...oneSignal,
+                showForegroundNotifications: isEnableForegroundNotification,
+            })
+        );
     };
 
     return (
         <CollapseableWithArrow title="Foreground Notification">
             <RadioGroup
-                value={enableForegroundNotification}
+                value={showForegroundNotification}
                 onValueChange={handleChangeForegroundNotification}
                 className="inline-flex items-center gap-x-20 p-1 rounded-md border"
             >

@@ -46,10 +46,6 @@ const permission = createSlice({
             return { ...state, ...action.payload };
         },
 
-        updateJavascript: (state: IPermission, action: PayloadAction<string[]>) => {
-            state.javascript_bridge = action.payload;
-        },
-
         updateAppTracking: (state: IPermission, action: PayloadAction<boolean>) => {
             state.appTrackingTransparency.ios = action.payload;
         },
@@ -87,7 +83,6 @@ const permission = createSlice({
 
 export const {
     setPermission,
-    updateJavascript,
     updateAppTracking,
     updateLocationService,
     updateDownloadDirectory,

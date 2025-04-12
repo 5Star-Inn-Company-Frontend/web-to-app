@@ -1,31 +1,22 @@
 import CollapseableWithArrow from "@/components/CollapseableWithArrow";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { updateSignal } from "@/redux/app/NotificationSlice";
+import { updateOneSignal } from "@/redux/app/NotificationSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useEffect, useState } from "react";
 
 type TInitialValue = "enable" | "disable";
 
 export default function EnableOneSignal() {
     const dispatch = useAppDispatch();
-    const notificationStore = useAppSelector((state: RootState) => state.apps.notification);
+    const oneSignal = useAppSelector((state: RootState) => state.apps.notification.oneSignal);
 
-    const initialValue: TInitialValue = notificationStore.signal ? "enable" : "disable";
-
-    const [enableOneSignal, setEnableOneSignal] = useState<TInitialValue>(initialValue);
-
-    useEffect(() => {
-        setEnableOneSignal(initialValue);
-    }, [initialValue]);
+    const enableOneSignal: TInitialValue = oneSignal.active ? "enable" : "disable";
 
     const handleChangeEnableOneSignal = (value: TInitialValue) => {
-        setEnableOneSignal(value);
-
         const isEnableOneSignal = value === "enable";
 
-        dispatch(updateSignal(isEnableOneSignal));
+        dispatch(updateOneSignal({ ...oneSignal, active: isEnableOneSignal }));
     };
 
     return (

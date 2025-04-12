@@ -1,34 +1,20 @@
 import CollapseableWithArrow from "@/components/CollapseableWithArrow";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { updateAutoRegistration } from "@/redux/app/NotificationSlice";
+import { updateOneSignal } from "@/redux/app/NotificationSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useEffect, useState } from "react";
-
-type TInitialValue = "enable" | "disable";
 
 export default function AppRegistration() {
     const dispatch = useAppDispatch();
-    const automaticReg = useAppSelector(
-        (state: RootState) => state.apps.notification.automatic_registration
-    );
+    const oneSignal = useAppSelector((state: RootState) => state.apps.notification.oneSignal);
 
-    const initialValue = automaticReg ? "enable" : "disable";
-
-    const [enableAutoRegister, setEnableAutoRegister] = useState<TInitialValue>(initialValue);
-
-    useEffect(() => {
-        setEnableAutoRegister(initialValue);
-    }, [initialValue]);
+    const autoRegister = oneSignal.autoRegister ? "enable" : "disable";
 
     const handleEnableRegister = (value: string) => {
-        const enableRegValue = value as TInitialValue;
-        setEnableAutoRegister(enableRegValue);
+        const isAutoRegisterEnabled = value === "enable";
 
-        const isAutoRegistrationEnabled = value === "enable";
-
-        dispatch(updateAutoRegistration(isAutoRegistrationEnabled));
+        dispatch(updateOneSignal({ ...oneSignal, autoRegister: isAutoRegisterEnabled }));
     };
 
     return (
@@ -39,7 +25,7 @@ export default function AppRegistration() {
                 registration using the JavaScript Bridge.
             </p>
             <RadioGroup
-                value={enableAutoRegister}
+                value={autoRegister}
                 onValueChange={handleEnableRegister}
                 className="inline-flex items-center gap-x-20 p-1 rounded-md border"
             >

@@ -1,31 +1,19 @@
 import CollapseableWithArrow from "@/components/CollapseableWithArrow";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { updateAutoDataTransmission } from "@/redux/app/NotificationSlice";
+import { updateOneSignal } from "@/redux/app/NotificationSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useEffect, useState } from "react";
-
-type TInitialValue = "automatic" | "manual";
 
 export default function AutomaticDataTransmission() {
     const dispatch = useAppDispatch();
-    const autoDataTransmission = useAppSelector(
-        (state: RootState) => state.apps.notification.automatic_data_transmission as TInitialValue
-    );
+    const oneSignal = useAppSelector((state: RootState) => state.apps.notification.oneSignal);
 
-    const initialValue: TInitialValue = autoDataTransmission || "automatic";
-
-    const [enableAutoDataTrans, setEnableAutoTrans] = useState<TInitialValue>(initialValue);
-
-    useEffect(() => {
-        setEnableAutoTrans(initialValue);
-    }, [initialValue]);
+    const requireUserConsent = oneSignal.requiresUserPrivacyConsent ? "automatic" : "manual";
 
     const handleChangeAutoDataTrans = (value: string) => {
-        const newAutoDataTransmission = value as TInitialValue;
-        setEnableAutoTrans(newAutoDataTransmission);
-        dispatch(updateAutoDataTransmission(newAutoDataTransmission));
+        const isConsentRequired = value === "automatic";
+        dispatch(updateOneSignal({ ...oneSignal, requiresUserPrivacyConsent: isConsentRequired }));
     };
 
     return (
@@ -39,7 +27,7 @@ export default function AutomaticDataTransmission() {
                 has been granted and begin transmitting data.
             </p>
             <RadioGroup
-                value={enableAutoDataTrans}
+                value={requireUserConsent}
                 onValueChange={handleChangeAutoDataTrans}
                 className="inline-flex items-center gap-x-20 p-1 rounded-md border"
             >

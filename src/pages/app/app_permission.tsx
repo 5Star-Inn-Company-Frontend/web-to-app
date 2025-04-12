@@ -1,5 +1,4 @@
 import PermissionHeader from "@/features/permission/PermissionHeader";
-import JavascriptBridge from "@/features/permission/JavascriptBridge";
 import AppTracking from "@/features/permission/AppTracking";
 import LocationService from "@/features/permission/LocationService";
 import WebRTC from "@/features/permission/WebRTC";
@@ -11,7 +10,6 @@ export const AppPermission = () => {
     return (
         <>
             <PermissionHeader />
-            <JavascriptBridge />
             <AppTracking />
             <LocationService />
             <WebRTC />

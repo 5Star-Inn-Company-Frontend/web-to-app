@@ -586,14 +586,17 @@ export interface IPermission {
 }
 
 export interface INotification {
-    signal: boolean;
-    legacy_mode: boolean;
-    app_id: string;
-    automatic_registration: boolean;
-    automatic_data_transmission: string;
-    foreground_notification: string;
-    android_notifications_icon: null;
-    notification_sound: string[];
+    oneSignal: {
+        active: boolean;
+        autoRegister: boolean;
+        requiresUserPrivacyConsent: boolean;
+        showForegroundNotifications: boolean;
+        applicationId: string;
+    };
+    notification_icon: {
+        android: string;
+    };
+    notification_sound: [];
 }
 
 interface IPlugin {
