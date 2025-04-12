@@ -10,22 +10,9 @@ export default function SidebarNavStyling() {
                 Apple's Human Interface Guidelines while the Android sidebar menu follows Google
                 Material Design principles.
             </p>
-            <div className="grid gap-y-5 border border-red ">
-                <SideNavigationCard
-                    title="Image"
-                    os="IOS"
-                    radios={[
-                        { title: "Text", label: "Text" },
-                        { title: "Image", label: "Image" },
-                    ]}
-                />
-                <SideNavigationCard2
-                    os="Android"
-                    radios={[
-                        { title: "Disable", label: "Disable" },
-                        { title: "Enable", label: "Enable" },
-                    ]}
-                />
+            <div className="grid gap-y-5">
+                <SideNavigationCard />
+                <SideNavigationCard2 />
             </div>
         </TopNavigationCollapsable>
     );

@@ -6,10 +6,11 @@ export default function BottomNavStyling() {
     return (
         <TopNavigationCollapsable title="Styling">
             <p className="text-sm text-primary60 mb-6">
-                iOS and Android styling is configured independently. The iOS sidebar menu follows Apple's Human
-                Interface Guidelines while the Android sidebar menu follows Google Material Design principles.
+                iOS and Android styling is configured independently. The iOS sidebar menu follows
+                Apple's Human Interface Guidelines while the Android sidebar menu follows Google
+                Material Design principles.
             </p>
-            <BottomTopBarStylingCard os="IOS" />
+            <BottomTopBarStylingCard />
             <BottomTopBarStylingCard2 os="Android" />
         </TopNavigationCollapsable>
     );

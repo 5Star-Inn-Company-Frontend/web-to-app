@@ -3,27 +3,21 @@ import TopNavigationCollapsable from "../TopNavigationCollapsable";
 import { Label } from "@/components/ui/label";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useEffect, useState } from "react";
-import { updateBottomBarDefaultMode } from "@/redux/app/NavigationSlice";
+import { updateBottomBarActive } from "@/redux/app/NavigationSlice";
 
 type TinitialValue = "hidden" | "active";
 
 export default function DefaultMode() {
     const dispatch = useAppDispatch();
-    const bottomTab = useAppSelector((state: RootState) => state.apps.navigation.bottom_tab_bar);
+    const bottomTabActive = useAppSelector(
+        (state: RootState) => state.apps.navigation.bottomTabBar.active
+    );
 
-    const initialValue = bottomTab.default_mode || "active";
-
-    const [enableDefaultMode, setEnableDefaultMode] = useState<TinitialValue>(initialValue);
-
-    useEffect(() => {
-        setEnableDefaultMode(initialValue);
-    }, [initialValue]);
+    const bottomTabActiveValue = bottomTabActive ? "active" : "hidden";
 
     const handleChangeDefaultMode = (value: TinitialValue) => {
-        setEnableDefaultMode(value);
-
-        dispatch(updateBottomBarDefaultMode(value));
+        const isEnabledBottomTabActive = value === "active";
+        dispatch(updateBottomBarActive(isEnabledBottomTabActive));
     };
 
     return (
@@ -36,7 +30,7 @@ export default function DefaultMode() {
             </p>
             <div>
                 <RadioGroup
-                    value={enableDefaultMode}
+                    value={bottomTabActiveValue}
                     onValueChange={handleChangeDefaultMode}
                     className="inline-flex items-center gap-x-20 p-1 rounded-md border"
                 >

@@ -1,9 +1,7 @@
 import { ColorPicker } from "@/components/ColorPicker";
-import { updateSideNavDarkMode, updateSideNavLightMode } from "@/redux/app/NavigationSlice";
+import { updateSideNavStylingIos } from "@/redux/app/NavigationSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { IColorScheme } from "@/types/type";
-import { useCallback, useEffect, useMemo, useState } from "react";
 import { CiLight } from "react-icons/ci";
 import { MdDarkMode } from "react-icons/md";
 
@@ -14,56 +12,40 @@ interface ISideNavColorScheme {
 
 export default function SideNavColorScheme({ mode, img }: ISideNavColorScheme) {
     const dispatch = useAppDispatch();
-    const stylingColorScheme = useAppSelector(
-        (state: RootState) => state.apps.navigation.sidebar_navigation.styling
-    );
-    const current_mode = mode === "LIGHT" ? "light_mode" : "dark_mode";
 
-    const initialValue = useMemo(
-        () =>
-            (current_mode === "light_mode"
-                ? stylingColorScheme.light_mode
-                : stylingColorScheme.dark_mode) || "",
-        [stylingColorScheme, current_mode]
+    const sideNavStylingIos = useAppSelector(
+        (state: RootState) => state.apps.navigation.sidebarNavigationBar.styling.ios
     );
 
-    const [colorScheme, setColorScheme] = useState<IColorScheme>(initialValue);
+    const getInitialColorScheme = () => {
+        if (mode === "light") {
+            return {
+                text_color: sideNavStylingIos.textColor,
+                background_color: sideNavStylingIos.backgroundColor,
+            };
+        }
 
-    useEffect(() => {
-        setColorScheme(initialValue);
-    }, [initialValue]);
+        return {
+            text_color: sideNavStylingIos.textColorDark,
+            background_color: sideNavStylingIos.backgroundColorDark,
+        };
+    };
 
-    useCallback(() => {}, []);
+    const handleChangeBgColor = (color: string) => {
+        const updatedBgColor =
+            mode === "light"
+                ? { ...sideNavStylingIos, backgroundColor: color }
+                : { ...sideNavStylingIos, backgroundColorDark: color };
+        dispatch(updateSideNavStylingIos(updatedBgColor));
+    };
 
-    const handleChangeTextColorScheme = useCallback(
-        (color: string) => {
-            setColorScheme((prev) => ({ ...prev, text_color: color }));
-
-            const newColorScheme: IColorScheme = { ...colorScheme, text_color: color };
-
-            if (mode === "LIGHT") {
-                dispatch(updateSideNavLightMode(newColorScheme));
-            } else {
-                dispatch(updateSideNavDarkMode(newColorScheme));
-            }
-        },
-        [colorScheme, dispatch, mode]
-    );
-    const handleChangeBgColorScheme = useCallback(
-        (color: string) => {
-            setColorScheme((prev) => ({ ...prev, background_color: color }));
-
-            const newColorScheme: IColorScheme = { ...colorScheme, background_color: color };
-
-            if (mode === "LIGHT") {
-                dispatch(updateSideNavLightMode(newColorScheme));
-            } else {
-                dispatch(updateSideNavDarkMode(newColorScheme));
-            }
-        },
-        [colorScheme, mode, dispatch]
-    );
-
+    const handleChangeTextColor = (color: string) => {
+        const updatedTextColor =
+            mode === "light"
+                ? { ...sideNavStylingIos, textColor: color }
+                : { ...sideNavStylingIos, textColorDark: color };
+        dispatch(updateSideNavStylingIos(updatedTextColor));
+    };
     return (
         <div className="bg-deepgray rounded-md p-3 mt-4">
             <div className=" mb-3">
@@ -82,8 +64,8 @@ export default function SideNavColorScheme({ mode, img }: ISideNavColorScheme) {
                         <span className="text-[0.625rem] text-primary40">TEXT COLOR</span>
                         <div className="w-fit flex justify-between border rounded-md px-2 py-1 items-center gap-2">
                             <ColorPicker
-                                background={colorScheme.text_color}
-                                setBackground={handleChangeTextColorScheme}
+                                background={getInitialColorScheme().text_color}
+                                setBackground={(color: string) => handleChangeTextColor(color)}
                             />
                         </div>
                     </div>
@@ -91,8 +73,8 @@ export default function SideNavColorScheme({ mode, img }: ISideNavColorScheme) {
                         <span className="text-[0.625rem] text-primary40">BACKGROUND COLOR</span>
                         <div className="w-fit flex justify-between border rounded-md px-2 py-1 items-center gap-2">
                             <ColorPicker
-                                background={colorScheme.background_color}
-                                setBackground={handleChangeBgColorScheme}
+                                background={getInitialColorScheme().background_color}
+                                setBackground={(color: string) => handleChangeBgColor(color)}
                             />
                         </div>
                     </div>

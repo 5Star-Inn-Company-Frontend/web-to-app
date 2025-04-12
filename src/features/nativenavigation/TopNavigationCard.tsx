@@ -18,7 +18,7 @@ export const TopNavigationCard = ({ os, radios, value, onValueChange }: TopNavig
                 {os === "IOS" ? <FaApple size="1.3rem" /> : <FaAndroid size="1.3rem" />}
                 {os}
             </div>
-            <div className="px-4 py-4 border border-black">
+            <div className="px-4 py-4">
                 <Text style="text-xs mb-2" value="Default Display" />
                 <RadioGroup
                     className="flex justify-between w-[30%] border border-primary20 p-[0.3rem] rounded-md"

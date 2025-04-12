@@ -1,31 +1,23 @@
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import TopNavigationCollapsable from "../TopNavigationCollapsable";
 import { Label } from "@/components/ui/label";
-import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { updateSideNavEnable } from "@/redux/app/NavigationSlice";
+import { updateSideNavActive } from "@/redux/app/NavigationSlice";
 
 type TinitialValue = "enable" | "disable";
 
 export default function Enable() {
     const dispatch = useAppDispatch();
     const sideNavEnabled = useAppSelector(
-        (state: RootState) => state.apps.navigation.sidebar_navigation
+        (state: RootState) => state.apps.navigation.sidebarNavigationBar.active
     );
 
-    const initialValue: TinitialValue = sideNavEnabled.enable ? "enable" : "disable";
-    const [enableSideNav, setEnableSideNav] = useState<TinitialValue>(initialValue);
-
-    useEffect(() => {
-        setEnableSideNav(initialValue);
-    }, [initialValue]);
+    const sideNavActive = sideNavEnabled ? "enable" : "disable";
 
     const handleChangeEnableSideNav = (value: TinitialValue) => {
-        setEnableSideNav(value);
         const isEnableSideNav = value === "enable";
-
-        dispatch(updateSideNavEnable(isEnableSideNav));
+        dispatch(updateSideNavActive(isEnableSideNav));
     };
 
     return (
@@ -40,7 +32,7 @@ export default function Enable() {
             </p>
             <div>
                 <RadioGroup
-                    value={enableSideNav}
+                    value={sideNavActive}
                     onValueChange={handleChangeEnableSideNav}
                     className="inline-flex items-center gap-x-20 p-1 rounded-md border"
                 >
