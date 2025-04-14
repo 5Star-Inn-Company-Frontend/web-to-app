@@ -599,8 +599,20 @@ export interface INotification {
     notification_sound: [];
 }
 
-interface IPlugin {
-    social_login: boolean;
+export interface IPlugin {
+    id: string;
+    name: string;
+    amount: string;
+    isActive: boolean;
+    docLink: string;
+}
+
+export interface IPluginProps {
+    img: string;
+    name: string;
+    amount: string;
+    isActive: boolean;
+    docLink: string;
 }
 
 interface IBuildSetting {

@@ -9,6 +9,7 @@ import navigationReducer from "@/redux/app/NavigationSlice";
 import permissionReducer from "@/redux/app/permissionSlice";
 import websiteOverideReducer from "@/redux/app/websiteOverideSlice";
 import navReducer from "@/redux/nav/navslice";
+import pluginReducer from "@/redux/app/nativePluginSlice";
 
 const appReducers = combineReducers({
     appState: appStateReducer,
@@ -19,6 +20,7 @@ const appReducers = combineReducers({
     notification: notificationReducer,
     permission: permissionReducer,
     websiteOveride: websiteOverideReducer,
+    plugin: pluginReducer,
 });
 
 export const store = configureStore({
