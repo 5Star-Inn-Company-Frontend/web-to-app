@@ -11,8 +11,8 @@ export default function AppIcon() {
     const [iconAndroid, setIconAndriod] = useState(appIcon.android || "");
 
     useEffect(() => {
-        setIconAndriod(appIcon.android || "/upload.png");
-        setIosIcon(appIcon.ios || "/upload.png");
+        setIconAndriod(appIcon.android || "/android.png");
+        setIosIcon(appIcon.ios || "/apple.png");
     }, [appIcon.android, appIcon.ios]);
 
     return (

@@ -89,12 +89,25 @@ export interface IBranding {
     };
 }
 
-export interface ILinkHandling {
-    link_behaviour: boolean;
-    new_window: string;
-    universal_link: string;
-    url_scheme: string;
+export interface ILinkHandlingItem {
+    id?: number;
+    mode: string;
+    label: string;
+    pagesToTrigger?: string;
+    regex: string;
 }
+
+export interface ILinkHandling {
+    internalVsExternalLinks: {
+        active: boolean;
+        items: ILinkHandlingItem[];
+    };
+    universalLinks: string[];
+    enableAndroidApplinks: boolean;
+    androidApplinksCertHash: string;
+    urlSchemeProtocol: string;
+}
+
 export interface IInterface {
     keepScreenOn: boolean;
     fullScreen: {

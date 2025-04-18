@@ -18,7 +18,7 @@ export const AppIconCard = ({ os, img }: { os: "IOS" | "Android"; img: string })
                     </Label>
                     <input type="file" name="iconImg" className="hidden" id="iconImg" />
                 </div>
-                <div className="w-1/2 xl:w-[20%] flex items-center justify-center">
+                <div className="w-1/2 xl:w-[30%] flex items-center justify-center">
                     <img src={img} alt="object not found" className="w-13 h-auto rounded-lg" />
                 </div>
             </div>

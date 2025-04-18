@@ -3,31 +3,27 @@
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { updateNewWindow } from "@/redux/app/linkHandlingSlice";
-import { useAppDispatch } from "@/redux/hook";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 
 export default function LinkHandlingRadio() {
     const dispatch = useAppDispatch();
-    const enableNewWindow = useSelector((state: RootState) => state.apps.linkHandling.new_window);
+    const newWindow = useAppSelector(
+        (state: RootState) => state.apps.linkHandling.internalVsExternalLinks.active
+    );
 
-    const [newWindow, setNewWindow] = useState(enableNewWindow);
-
-    useEffect(() => {
-        setNewWindow(enableNewWindow);
-    }, [enableNewWindow]);
+    const enableNewWindow = newWindow ? "permitted" : "blocked";
 
     const handleUpdateLinkHandling = (status: string) => {
-        setNewWindow(status);
-        dispatch(updateNewWindow(status));
+        const newWindowIsEnabled = status === "permitted";
+        dispatch(updateNewWindow(newWindowIsEnabled));
     };
 
     return (
         <div className="px-8">
             <RadioGroup
                 className="flex justify-between border p-[0.7rem] rounded-md w-fit gap-8"
-                value={newWindow}
+                value={enableNewWindow}
                 onValueChange={handleUpdateLinkHandling}
             >
                 <div className="flex items-center space-x-2">
