@@ -12,8 +12,6 @@ export default function EditorCss() {
     const dispatch = useAppDispatch();
     const { isOpen, cssContent } = useAppSelector((state) => state.editor.ios);
 
-    console.log(cssContent);
-
     const { isPending, mutate } = useMutation({
         mutationFn: fileUpload,
         onSuccess: (data) => {
