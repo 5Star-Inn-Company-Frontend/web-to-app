@@ -8,8 +8,6 @@ import { AiOutlineCopy } from "react-icons/ai";
 export default function PrivateSharing() {
     const appState = useAppSelector((state: RootState) => state.apps.appState);
 
-    console.log(appState);
-
     const [privateLink, setPrivateLink] = useState(appState.private_link || "");
 
     useEffect(() => {

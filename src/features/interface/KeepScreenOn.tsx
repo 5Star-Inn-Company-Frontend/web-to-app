@@ -14,7 +14,7 @@ export default function KeepScreenOn() {
     );
     const spinner = useAppSelector((state: RootState) => state.apps.interface.spinner);
 
-    const keepScreenOnIsActive = keepScreenOn.active ? "Enable" : "Disable";
+    const keepScreenOnIsActive = keepScreenOn.active ? "enable" : "disable";
 
     const handleChangeEnableKeepScreenOn = (newvalue: string) => {
         const keepScreenOnEnabled = newvalue === "enable";

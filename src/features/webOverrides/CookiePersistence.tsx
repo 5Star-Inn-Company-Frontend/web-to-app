@@ -1,29 +1,8 @@
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { updateCookiePresistence } from "@/redux/app/websiteOverideSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hook";
-import { RootState } from "@/redux/store";
-import { useEffect, useState } from "react";
 
 export default function CookiePersistence() {
-    const dispatch = useAppDispatch();
-    const cookiesPresistence = useAppSelector(
-        (state: RootState) => state.apps.websiteOveride.cookie_persistence
-    );
-
-    const initialValue = cookiesPresistence || "default";
-    const [enableCookies, setEnableCookies] = useState(initialValue);
-
-    useEffect(() => {
-        setEnableCookies(initialValue);
-    }, [initialValue]);
-
-    const handleChangeCookies = (newvalue: string) => {
-        setEnableCookies(newvalue);
-        dispatch(updateCookiePresistence(newvalue));
-    };
-
     return (
         <div className="pt-2 pb-5 xl:px-6 xl:py-10 bg-white border-b border-primary20">
             <CollapsibleComponent
@@ -33,8 +12,8 @@ export default function CookiePersistence() {
                 <div className="px-8">
                     <RadioGroup
                         className="flex justify-between border p-[0.5rem] rounded-md w-fit gap-8"
-                        value={enableCookies}
-                        onValueChange={handleChangeCookies}
+                        value={"default"}
+                        onValueChange={() => {}}
                     >
                         <div className="flex items-center space-x-2">
                             <RadioGroupItem value="default" id="r1" />

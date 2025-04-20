@@ -2,10 +2,18 @@ import { IWebsiteOveride } from "@/types/type";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: IWebsiteOveride = {
-    user_agent: "enable",
-    custom_css: [],
-    cookie_persistence: "default",
-    custom_javascript: [],
+    customUserAgent: {
+        ios: "web2app",
+        android: "web2app",
+    },
+    css: {
+        android: "",
+        ios: "",
+    },
+    script: {
+        ios: "",
+        android: "",
+    },
 };
 
 const websiteOveride = createSlice({
@@ -16,30 +24,38 @@ const websiteOveride = createSlice({
             return { ...state, ...action.payload };
         },
 
-        updateUserAgent: (state: IWebsiteOveride, action: PayloadAction<string>) => {
-            state.user_agent = action.payload;
+        updateUserAgentIos: (state: IWebsiteOveride, action: PayloadAction<string>) => {
+            state.customUserAgent.ios = action.payload;
+        },
+        updateUserAgentAndroid: (state: IWebsiteOveride, action: PayloadAction<string>) => {
+            state.customUserAgent.android = action.payload;
         },
 
-        updateCustomCss: (state: IWebsiteOveride, action: PayloadAction<string[]>) => {
-            state.custom_css = action.payload;
+        updateCustomCssIos: (state: IWebsiteOveride, action: PayloadAction<string>) => {
+            state.css.ios = action.payload;
+        },
+        updateCustomCssAndroid: (state: IWebsiteOveride, action: PayloadAction<string>) => {
+            state.css.android = action.payload;
         },
 
-        updateCookiePresistence: (state: IWebsiteOveride, action: PayloadAction<string>) => {
-            state.cookie_persistence = action.payload;
+        updateCustomScriptIos: (state: IWebsiteOveride, action: PayloadAction<string>) => {
+            state.script.ios = action.payload;
         },
 
-        updateCustomJavascript: (state: IWebsiteOveride, action: PayloadAction<string[]>) => {
-            state.custom_javascript = action.payload;
+        updateCustomScriptAndroid: (state: IWebsiteOveride, action: PayloadAction<string>) => {
+            state.script.android = action.payload;
         },
     },
 });
 
 export const {
     setWebsiteOveride,
-    updateUserAgent,
-    updateCustomCss,
-    updateCookiePresistence,
-    updateCustomJavascript,
+    updateUserAgentIos,
+    updateUserAgentAndroid,
+    updateCustomCssIos,
+    updateCustomCssAndroid,
+    updateCustomScriptIos,
+    updateCustomScriptAndroid,
 } = websiteOveride.actions;
 
 export default websiteOveride.reducer;

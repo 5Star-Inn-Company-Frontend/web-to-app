@@ -32,7 +32,7 @@ export const ScreenOrientationConfigCard = ({
                     onValueChange={onValueChange}
                 >
                     <div className="flex items-center space-x-2 mb-1">
-                        <RadioGroupItem value="auto rotate" id="r1" />
+                        <RadioGroupItem value="auto" id="r1" />
                         <Label className="text-xs" htmlFor="auto">
                             Auto Rotate
                         </Label>
@@ -57,7 +57,7 @@ export const ScreenOrientationConfigCard = ({
                     onValueChange={onValueChangeTab}
                 >
                     <div className="flex items-center space-x-2 mb-1">
-                        <RadioGroupItem value="auto rotate" id="r1" />
+                        <RadioGroupItem value="auto" id="r1" />
                         <Label className="text-xs" htmlFor="auto">
                             Auto Rotate
                         </Label>

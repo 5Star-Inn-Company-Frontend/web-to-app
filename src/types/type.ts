@@ -171,10 +171,18 @@ export interface IInterface {
 }
 
 export interface IWebsiteOveride {
-    user_agent: string;
-    custom_css: string[];
-    cookie_persistence: string;
-    custom_javascript: string[];
+    customUserAgent: {
+        ios: string;
+        android: string;
+    };
+    css: {
+        android: string;
+        ios: string;
+    };
+    script: {
+        ios: string;
+        android: string;
+    };
 }
 
 export interface IColorScheme {

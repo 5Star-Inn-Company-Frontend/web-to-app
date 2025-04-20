@@ -46,7 +46,6 @@ export function ResetPasswordForm() {
             }
 
             const data = await response.json();
-            console.log("Response: ", data);
             localStorage.setItem("user-info", JSON.stringify(data));
 
             setTimeout(() => navigate("/auth/signin"), 2000);

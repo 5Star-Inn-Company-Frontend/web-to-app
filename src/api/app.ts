@@ -25,3 +25,14 @@ export const updateApp = async ({ appData, appId }: IUpdateApp) => {
     const response = await axiosInstance.put(`/app/${appId}`, appData);
     return response.data;
 };
+
+export const fileUpload = async (file: File) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    const response = await axiosInstance.post("/upload", formData, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+    });
+    return response.data;
+};

@@ -2,13 +2,18 @@ import { SearchBar } from "@/components/global/searchInput";
 
 interface MembersSearchProps {
     openModal: () => void;
-    search: () => void;
+    onSearch: (value: string) => void;
+    searchTerm: string;
 }
 
-const MembersSearch = ({ openModal, search }: MembersSearchProps) => {
+const MembersSearch = ({ openModal, onSearch, searchTerm }: MembersSearchProps) => {
     return (
-        <div className="flex flex-col gap-y-4 xl:justify-between xl:items-center">
-            <SearchBar searchTerm="Search for a member" onSearch={search} />
+        <div className="flex gap-y-4 xl:justify-between xl:items-center">
+            <SearchBar
+                placeholder="Search for a member"
+                searchTerm={searchTerm}
+                onSearch={(value) => onSearch(value)}
+            />
             <button
                 onClick={openModal}
                 className="flex items-center justify-between p-2 border border-primary100 rounded-md w-full  xl:w-[9.625rem]"

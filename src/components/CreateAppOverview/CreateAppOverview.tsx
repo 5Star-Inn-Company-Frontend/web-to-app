@@ -52,15 +52,18 @@ export function CreateAppOverview() {
         };
 
         try {
-            const response = await fetch("https://web2app.prisca.5starcompany.com.ng/api/app", requestOptions);
+            const response = await fetch(
+                "https://web2app.prisca.5starcompany.com.ng/api/app",
+                requestOptions
+            );
 
             //log response error
             if (!response.ok) {
                 throw new Error("Unprocessable content!");
             }
 
-            const result = await response.json();
-            console.log("Response: ", result);
+            // const result = await response.json();
+            // console.log("Response: ", result);
             //navigate to homepage after successful login
             navigate("/app/:action/link_handling");
         } catch (error) {
@@ -75,7 +78,9 @@ export function CreateAppOverview() {
             <form onSubmit={handleSubmit}>
                 <div className="mb-10">
                     <h2 className="text-base font-medium mb-5">Website URL</h2>
-                    <p className="text-primary60 mb-2">The webpage to display when your app loads.</p>
+                    <p className="text-primary60 mb-2">
+                        The webpage to display when your app loads.
+                    </p>
                     <input
                         type="url"
                         name="url"
@@ -87,7 +92,9 @@ export function CreateAppOverview() {
                 </div>
                 <div className="mb-10">
                     <h2 className="text-base font-medium mb-5">App Name</h2>
-                    <p className="text-primary60 mb-2">Our App Name is displayed on the device home screen.</p>
+                    <p className="text-primary60 mb-2">
+                        Our App Name is displayed on the device home screen.
+                    </p>
                     <input
                         type="text"
                         name="AppName"
@@ -99,7 +106,9 @@ export function CreateAppOverview() {
                 </div>
                 <div className="mb-20">
                     <h2 className="text-base font-medium mb-5">Organization</h2>
-                    <p className="text-primary60 mb-2">The Organization account where this new app will reside.</p>
+                    <p className="text-primary60 mb-2">
+                        The Organization account where this new app will reside.
+                    </p>
                     <Select>
                         <SelectTrigger>
                             <SelectValue placeholder="Select Team" />

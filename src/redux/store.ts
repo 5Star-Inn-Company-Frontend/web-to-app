@@ -10,6 +10,7 @@ import permissionReducer from "@/redux/app/permissionSlice";
 import websiteOverideReducer from "@/redux/app/websiteOverideSlice";
 import navReducer from "@/redux/nav/navslice";
 import pluginReducer from "@/redux/app/nativePluginSlice";
+import editorReducer from "@/redux/editor/editorSlice";
 
 const appReducers = combineReducers({
     appState: appStateReducer,
@@ -28,6 +29,7 @@ export const store = configureStore({
         apps: appReducers,
         nav: navReducer,
         auth: authReducer,
+        editor: editorReducer,
     },
 });
 

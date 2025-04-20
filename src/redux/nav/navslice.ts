@@ -17,7 +17,6 @@ const navSlice = createSlice({
             state.isMobileAppOpen = false;
         },
         openMobileSimulator: (state) => {
-            console.log("clicked");
             state.isSimulatorOpen = true;
         },
 
