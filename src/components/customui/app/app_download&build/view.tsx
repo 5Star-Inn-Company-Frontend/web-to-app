@@ -10,8 +10,15 @@ import { Label } from "@/components/ui/label";
 import { CustomConfigCard } from "../web_overides/customcard";
 import { GoDownload, GoUpload } from "react-icons/go";
 import { FaFileImport } from "react-icons/fa6";
+import { useAppSelector } from "@/redux/hook";
+import { RootState } from "@/redux/store";
 
 export const AppDownloadSection = () => {
+    // const dispatch = useAppDispatch();
+    const buildSettings = useAppSelector((state: RootState) => state.apps.buildSettings);
+
+    const appIdentifiers = buildSettings.appIdentifiers;
+
     return (
         <>
             <div className="px-6 xl:px-12 py-8 border-b border-primary20 bg-white w-full rounded">
@@ -48,7 +55,7 @@ export const AppDownloadSection = () => {
                                     <Input
                                         type="text"
                                         className="h-8 w-full border-none rounded-lg text-[0.625rem] px-2 bg-primary20 text-primary60"
-                                        value="co.5star.iso.qjijre"
+                                        value={appIdentifiers.ios.bundleId}
                                     />
                                 </div>
                             </OsConfigCard>
@@ -63,7 +70,7 @@ export const AppDownloadSection = () => {
                                     <Input
                                         type="text"
                                         className="h-8 w-full border-none rounded-lg text-[0.625rem] px-2 bg-primary20 text-primary60"
-                                        value="co.5star.iso.qjijre"
+                                        value={appIdentifiers.android.packageName}
                                     />
                                 </div>
                                 <div className="flex flex-col gap-y-2  px-3">
@@ -76,7 +83,7 @@ export const AppDownloadSection = () => {
                                     <Input
                                         type="text"
                                         className="h-8 w-full rounded-lg text-[0.625rem] px-2 border border-primary40 text-primary60"
-                                        value="1.0.0"
+                                        value={appIdentifiers.android.version}
                                     />
                                 </div>
                             </OsConfigCard>

@@ -1,4 +1,5 @@
 import React from "react";
+import { IBuildSettings } from "./build-settings";
 
 export interface AuthState {
     user: User | null;
@@ -636,12 +637,6 @@ export interface IPluginProps {
     docLink: string;
 }
 
-interface IBuildSetting {
-    google_service: string[];
-    development_tools: boolean;
-    app_config: string[];
-}
-
 export interface IAppData {
     id: number | null;
     url: string;
@@ -656,7 +651,7 @@ export interface IAppData {
     navigation: INavigation | null;
     notification: INotification | null;
     plugin: IPlugin | null;
-    build_setting: IBuildSetting | null;
+    build_setting: IBuildSettings | null;
     last_saved: string;
     member_count: number;
 }
@@ -677,7 +672,7 @@ export interface IEditApp {
     navigation: INavigation;
     notification: INotification;
     plugin: IPlugin;
-    build_setting: IBuildSetting;
+    build_setting: IBuildSettings;
     last_saved: string;
     member_count: number;
 }

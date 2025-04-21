@@ -11,6 +11,7 @@ import websiteOverideReducer from "@/redux/app/websiteOverideSlice";
 import navReducer from "@/redux/nav/navslice";
 import pluginReducer from "@/redux/app/nativePluginSlice";
 import editorReducer from "@/redux/editor/editorSlice";
+import buildSettingsReducer from "@/redux/app/buildSettingSlice";
 
 const appReducers = combineReducers({
     appState: appStateReducer,
@@ -22,6 +23,7 @@ const appReducers = combineReducers({
     permission: permissionReducer,
     websiteOveride: websiteOverideReducer,
     plugin: pluginReducer,
+    buildSettings: buildSettingsReducer,
 });
 
 export const store = configureStore({

@@ -3,7 +3,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { FaAndroid, FaApple } from "react-icons/fa6";
 
 interface IOsConfigCard {
-    os: "IOS" | "Android" | "IOS and Android";
+    os: "IOS" | "Android";
     children?: React.ReactNode;
     value?: string;
     onValueChange?: (newValue: string) => void;

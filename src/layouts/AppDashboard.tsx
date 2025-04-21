@@ -6,6 +6,7 @@ import DashboardHeader from "@/features/layout/DashboardHeader";
 import DashboardNav from "@/features/layout/DashboardNav";
 import { updateAppState } from "@/redux/app/appStateSlice";
 import { defaultBrandingState, setBranding } from "@/redux/app/brandSlice";
+import { defaultBuildSettings, setBuildSettings } from "@/redux/app/buildSettingSlice";
 import { defaultInterfaceSliceState, updateInterface } from "@/redux/app/interfaceSlice";
 import { defaultLinkHandlingState, setLinkHandling } from "@/redux/app/linkHandlingSlice";
 import { defaultNavigationState, updateNavigation } from "@/redux/app/NavigationSlice";
@@ -53,6 +54,7 @@ const AppDashboard = () => {
         dispatch(setNotification(data.data.notification ?? defaultNotificationState));
         dispatch(setPermission(data.data.permission ?? defaultPermissionState));
         dispatch(setWebsiteOveride(data.data.website_overide ?? defaultWebsiteOverideState));
+        dispatch(setBuildSettings(data.data.build_setting ?? defaultBuildSettings));
     }
 
     const handleOpenChange = (open: boolean) => {
