@@ -33,8 +33,8 @@ export default function SplashScreen() {
                 <div className="flex flex-col gap-4 mt-6 xl:px-2">
                     <SplashScreenCard
                         os="IOS"
-                        img={ios.launchImages || "/giftcard2.png"}
-                        imgDark={ios.launchImagesDark || "/giftcard2.png"}
+                        img={ios.launchImages}
+                        imgDark={ios.launchImagesDark}
                         bgColor={ios.backgroundColor}
                         bgColorDark={ios.backgroundColorDark}
                         setBackgroundDark={(color: string) => handleChangeIOSBackgroundDark(color)}
@@ -42,8 +42,8 @@ export default function SplashScreen() {
                     />
                     <SplashScreenCard
                         os="Android"
-                        img={android.launchImages || "/giftcard2.png"}
-                        imgDark={android.launchImagesDark || "/giftcard2.png"}
+                        img={android.launchImages}
+                        imgDark={android.launchImagesDark}
                         bgColor={android.backgroundColor}
                         bgColorDark={android.backgroundColorDark}
                         setBackgroundDark={(color: string) =>

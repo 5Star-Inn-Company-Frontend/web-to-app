@@ -11,8 +11,8 @@ export default function AppIcon() {
     const dispatch = useAppDispatch();
     const appIcon = useAppSelector((state: RootState) => state.apps.branding.icons);
 
-    const iosIcon = appIcon.ios || "/apple.png";
-    const androidIcon = appIcon.android || "/android.png";
+    const iosIcon = appIcon.ios;
+    const androidIcon = appIcon.android;
 
     const handleChangeIos = async (e: ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];

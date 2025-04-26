@@ -26,14 +26,8 @@ export default function DashboardHeader() {
         permission: currentStoreData.permission,
         navigation: currentStoreData.navigation,
         notification: currentStoreData.notification,
-        plugin: {
-            social_login: false,
-        },
-        build_setting: {
-            google_service: [],
-            development_tools: true,
-            app_config: [],
-        },
+        plugin: currentStoreData.plugin,
+        build_setting: currentStoreData.buildSettings,
     };
 
     const { mutate, isPending } = useMutation({

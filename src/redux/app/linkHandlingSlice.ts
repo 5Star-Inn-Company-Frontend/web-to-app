@@ -66,6 +66,68 @@ const initialState: ILinkHandling = {
                 regex: ".*",
             },
         ],
+        itemsDefault: [
+            {
+                mode: "external",
+                label: "Non-web links",
+                pagesToTrigger: "custom",
+                regex: "^(?!https?://).*",
+            },
+            {
+                mode: "appbrowser",
+                label: "Facebook",
+                pagesToTrigger: "custom",
+                regex: "https?://([-\\w]+\\.)*facebook\\.com.*",
+            },
+            {
+                mode: "appbrowser",
+                label: "Twitter/X",
+                pagesToTrigger: "custom",
+                regex: "https?://([\\-\\w]+\\.)*(twitter|x)\\.com/.*",
+            },
+            {
+                mode: "appbrowser",
+                label: "Instagram",
+                pagesToTrigger: "custom",
+                regex: "https?://([-\\w]+\\.)*instagram\\.com/.*",
+            },
+            {
+                mode: "appbrowser",
+                label: "Google Maps",
+                pagesToTrigger: "custom",
+                regex: "https?://maps\\.google\\.com.*",
+            },
+            {
+                mode: "appbrowser",
+                label: "Google Maps Search",
+                pagesToTrigger: "custom",
+                regex: "https?://([-\\w]+\\.)*google\\.com/maps/search/.*",
+            },
+            {
+                mode: "appbrowser",
+                label: "LinkedIn",
+                pagesToTrigger: "custom",
+                regex: "https?://([-\\w]+\\.)*linkedin\\.com/.*",
+            },
+            {
+                mode: "internal",
+                label: "Microsoft Login",
+                pagesToTrigger: "custom",
+                regex: "https?://login\\.microsoftonline\\.com.*",
+            },
+            {
+                mode: "internal",
+                label: "All pages on my domain",
+                pagesToTrigger: "domain",
+                regex: "https?:\\/\\/([-\\w]+\\.)*5starcompany.com.ng(\\/.*)?$",
+            },
+            {
+                mode: "appbrowser",
+                label: "All Other Links",
+                pagesToTrigger: "all",
+                regex: ".*",
+            },
+        ],
     },
     universalLinks: ["5star.com", "5starttiti.com"],
     enableAndroidApplinks: false,
@@ -82,6 +144,9 @@ const linkHandling = createSlice({
             return { ...state, ...action.payload };
         },
 
+        restoreDefaultLinkHandling: (state: ILinkHandling) => {
+            state.internalVsExternalLinks.items = state.internalVsExternalLinks.itemsDefault;
+        },
         updateUrlScheme: (state: ILinkHandling, action: PayloadAction<string>) => {
             state.urlSchemeProtocol = action.payload;
         },
@@ -106,6 +171,7 @@ export const {
     updateNewWindow,
     updateUniversalLink,
     updateUrlScheme,
+    restoreDefaultLinkHandling,
 } = linkHandling.actions;
 
 export default linkHandling.reducer;

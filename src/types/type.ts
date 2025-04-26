@@ -102,6 +102,7 @@ export interface ILinkHandling {
     internalVsExternalLinks: {
         active: boolean;
         items: ILinkHandlingItem[];
+        itemsDefault: ILinkHandlingItem[];
     };
     universalLinks: string[];
     enableAndroidApplinks: boolean;
@@ -671,7 +672,7 @@ export interface IEditApp {
     permission: IPermission;
     navigation: INavigation;
     notification: INotification;
-    plugin: IPlugin;
+    plugin: IPlugin[];
     build_setting: IBuildSettings;
     last_saved: string;
     member_count: number;

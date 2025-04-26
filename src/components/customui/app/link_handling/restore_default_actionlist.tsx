@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
     SelectContent,
@@ -9,7 +10,11 @@ import {
 import { updateLinkBehaviour } from "@/redux/app/linkHandlingSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+import { ILinkHandlingItem } from "@/types/type";
+import { debounce } from "lodash";
+import { ChangeEvent, useCallback, useMemo, useState } from "react";
+import { AiOutlineDelete } from "react-icons/ai";
+
 export const RestoreDefaultActionList = () => {
     const dispatch = useAppDispatch();
     const links = useAppSelector(
@@ -26,6 +31,31 @@ export const RestoreDefaultActionList = () => {
         dispatch(updateLinkBehaviour(updateMode));
     };
 
+    const handleDelete = (id: string) => {
+        const updatedLink = links.filter((link) => link.label !== id);
+        dispatch(updateLinkBehaviour(updatedLink));
+        console.log(updatedLink);
+    };
+
+    const debouncedUpdate = useMemo(() => {
+        return debounce((updatedLinks: ILinkHandlingItem[]) => {
+            dispatch(updateLinkBehaviour(updatedLinks));
+        }, 500);
+    }, [dispatch]);
+
+    const handleInputChange = useCallback(
+        (newValue: string, label: string) => {
+            const updatedLinks = links.map((link) => {
+                if (link.label.toLowerCase() === label.toLowerCase()) {
+                    return { ...link, label: newValue };
+                }
+                return link;
+            });
+            debouncedUpdate(updatedLinks);
+        },
+        [links, debouncedUpdate]
+    );
+
     return (
         <div className="flex flex-col gap-0">
             {links.map((link) => {
@@ -35,6 +65,10 @@ export const RestoreDefaultActionList = () => {
                         onValueChange={handleModeChange}
                         label={link.label}
                         value={link.mode}
+                        deleteLink={() => handleDelete(link.label)}
+                        id={link.label}
+                        inputValue={link.label}
+                        onChange={(newValue) => handleInputChange(newValue, link.label)}
                     />
                 );
             })}
@@ -52,9 +86,29 @@ interface ILinkhandlingCard {
     value: string;
     label: string;
     onValueChange: (value: string, label: string) => void;
+    deleteLink: (id: string) => void;
+    id: string;
+    inputValue: string;
+    onChange: (newValue: string) => void;
 }
 
-const LinkHandlingCard = ({ label, value, onValueChange }: ILinkhandlingCard) => {
+const LinkHandlingCard = ({
+    label,
+    value,
+    onValueChange,
+    deleteLink,
+    id,
+    inputValue,
+    onChange,
+}: ILinkhandlingCard) => {
+    const [inputval, setInputval] = useState(inputValue);
+
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const newValue = e.target.value;
+        setInputval(newValue);
+        onChange(newValue);
+    };
+
     return (
         <div className="p-3 first:rounded-t-lg last:rounded-b-lg border border-primary20 last:border-b  border-b-0 ">
             <div className=" rounded-md p-2 border border-primary20">
@@ -64,7 +118,8 @@ const LinkHandlingCard = ({ label, value, onValueChange }: ILinkhandlingCard) =>
                         <Input
                             type="text"
                             className="border border-primary60 bg-deepgray px-2"
-                            defaultValue={label}
+                            value={inputval}
+                            onChange={handleInputChange}
                         />
                     </div>
                     <div className="flex gap-4 items-center">
@@ -85,8 +140,13 @@ const LinkHandlingCard = ({ label, value, onValueChange }: ILinkhandlingCard) =>
                                 })}
                             </SelectContent>
                         </Select>
-                        <AiOutlineEdit size="1.4rem" />
-                        <AiOutlineDelete size="1.4rem" />
+
+                        <Button
+                            onClick={() => deleteLink(id)}
+                            className="bg-transparent text-black px-2 hover:bg-gray-200 "
+                        >
+                            <AiOutlineDelete size="1.2rem" className="cursor-pointer" />
+                        </Button>
                     </div>
                 </div>
             </div>
