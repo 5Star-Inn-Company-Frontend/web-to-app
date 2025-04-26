@@ -1,7 +1,14 @@
 import { Label } from "@/components/ui/label";
 import { AiFillAndroid, AiFillApple } from "react-icons/ai";
 
-export const AppIconCard = ({ os, img }: { os: "IOS" | "Android"; img: string }) => {
+interface IAppIconCard {
+    os: "IOS" | "Android";
+    img: string;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    inputId: string;
+}
+
+export const AppIconCard = ({ os, img, onChange, inputId }: IAppIconCard) => {
     return (
         <div className="rounded-md border border-primary20">
             <div className="flex gap-x-2 items-center border-b border-primary20 p-4 rounded-t-md">
@@ -11,12 +18,18 @@ export const AppIconCard = ({ os, img }: { os: "IOS" | "Android"; img: string })
             <div className="flex items-center py-5 px-5 xl:px-3">
                 <div className="w-1/2 xl:w-[80%] flex items-center justify-between">
                     <Label
-                        htmlFor="iconImg"
+                        htmlFor={inputId}
                         className="cursor-pointer border border-primary60 p-4 rounded-lg"
                     >
                         Change Images
                     </Label>
-                    <input type="file" name="iconImg" className="hidden" id="iconImg" />
+                    <input
+                        onChange={onChange}
+                        type="file"
+                        name="iconImg"
+                        className="hidden"
+                        id={inputId}
+                    />
                 </div>
                 <div className="w-1/2 xl:w-[30%] flex items-center justify-center">
                     <img src={img} alt="object not found" className="w-13 h-auto rounded-lg" />

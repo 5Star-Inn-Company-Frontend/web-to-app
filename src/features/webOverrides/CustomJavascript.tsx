@@ -1,64 +1,41 @@
 import { CustomConfigCard } from "@/components/customui/app/web_overides/customcard";
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { OsConfigCard } from "@/components/global/os_config_card";
-import EditorJavaScript from "./EditorJavaScript";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { useMutation } from "@tanstack/react-query";
-import { fileUpload } from "@/api/app";
-import {
-    closeEditorJSAndroid,
-    closeEditorJSIos,
-    setCssContentJSAndroid,
-    setCssContentJSIos,
-} from "@/redux/editor/editorSlice";
+import { editorOpen } from "@/redux/editor/editorSlice";
+import useFile from "@/hooks/useFile";
+import Editor from "@/components/Editor";
 import { updateCustomScriptAndroid, updateCustomScriptIos } from "@/redux/app/websiteOverideSlice";
-import { createCssFile } from "@/utils/fileHandler";
 
 export default function CustomJavascript() {
     const dispatch = useAppDispatch();
+    const webOverrides = useAppSelector((state: RootState) => state.apps.websiteOveride.script);
     const editorState = useAppSelector((state: RootState) => state.editor);
 
-    const editorStateIos = editorState.jsIos;
-    const editorStateAndroid = editorState.jsAndroid;
+    const iosScript = webOverrides.ios;
+    const androidScript = webOverrides.android;
 
-    const { isPending, mutate } = useMutation({
-        mutationFn: fileUpload,
-        onSuccess: (data) => {
-            dispatch(updateCustomScriptAndroid(data));
-        },
+    const { fetchData: fetchIosScript } = useFile({
+        queryKey: ["ios-custom-javascript"],
+        url: iosScript,
+    });
+    const { fetchData: fetchAndroidScript } = useFile({
+        queryKey: ["android-custom-javascript"],
+        url: androidScript,
     });
 
-    const { isPending: isPendingIos, mutate: mutateIos } = useMutation({
-        mutationFn: fileUpload,
-        onSuccess: (data) => {
-            dispatch(updateCustomScriptIos(data));
-        },
-    });
-
-    const handleSaveScriptIos = () => {
-        try {
-            const cssFile = createCssFile(
-                editorStateIos.jsContent,
-                "text/javascript",
-                "custom-css-ios.css"
-            );
-            mutateIos(cssFile);
-        } catch (error) {
-            console.error("Error saving CSS:", error);
+    const openCustomJavscriptIosEditor = async () => {
+        if (iosScript) {
+            await fetchIosScript();
         }
+        dispatch(editorOpen("custom-javascript-ios"));
     };
-    const handleSaveScriptAndroid = () => {
-        try {
-            const cssFile = createCssFile(
-                editorStateAndroid.jsContent,
-                "text/javascript",
-                "custom-css-ios.css"
-            );
-            mutate(cssFile);
-        } catch (error) {
-            console.error("Error saving CSS:", error);
+    const openCustomJavscriptAndroidEditor = async () => {
+        if (androidScript) {
+            await fetchAndroidScript();
         }
+        dispatch(editorOpen("custom-javascript-android"));
     };
     return (
         <div className="pt-2 pb-5 xl:p-4 bg-white">
@@ -68,29 +45,36 @@ export default function CustomJavascript() {
             >
                 <div className="grid grid-col-1 gap-8 px-8">
                     <OsConfigCard os="IOS">
-                        <CustomConfigCard title="Add Custom Javascript" />
+                        <CustomConfigCard
+                            onClick={openCustomJavscriptIosEditor}
+                            title={`${iosScript ? "View/Edit" : "Add"} Custom Javascript`}
+                        />
                     </OsConfigCard>
                     <OsConfigCard os="Android">
-                        <CustomConfigCard title="Add Custom Javascript" />
+                        <CustomConfigCard
+                            onClick={openCustomJavscriptAndroidEditor}
+                            title={`${androidScript ? "View/Edit" : "Add"} Custom Javascript`}
+                        />
                     </OsConfigCard>
                 </div>
-                <EditorJavaScript
-                    isOpen={editorStateIos.isOpen}
-                    content={editorStateIos.jsContent}
-                    handleSave={handleSaveScriptIos}
-                    onChangeContent={(e) => dispatch(setCssContentJSIos(e.target.value))}
-                    toggleEditor={() => dispatch(closeEditorJSIos())}
-                    loading={isPendingIos}
-                />
-                <EditorJavaScript
-                    isOpen={editorStateAndroid.isOpen}
-                    content={editorStateAndroid.jsContent}
-                    handleSave={handleSaveScriptAndroid}
-                    onChangeContent={(e) => dispatch(setCssContentJSAndroid(e.target.value))}
-                    toggleEditor={() => dispatch(closeEditorJSAndroid())}
-                    loading={isPending}
-                />
             </CollapsibleComponent>
+
+            {editorState.activeEditor === "custom-javascript-ios" && (
+                <Editor
+                    editorTitle="IOS Custom JavaScript"
+                    type="text/javascript"
+                    filename="ios-custom-script.js"
+                    dispatchFn={updateCustomScriptIos}
+                />
+            )}
+            {editorState.activeEditor === "custom-javascript-android" && (
+                <Editor
+                    editorTitle="Android Custom JavaScript"
+                    type="text/javascript"
+                    filename="android-custom-script.js"
+                    dispatchFn={updateCustomScriptAndroid}
+                />
+            )}
         </div>
     );
 }

@@ -1,25 +1,42 @@
 import { CustomConfigCard } from "@/components/customui/app/web_overides/customcard";
+import Editor from "@/components/Editor";
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { OsConfigCard } from "@/components/global/os_config_card";
-import { openEditor, openEditorAndroid } from "@/redux/editor/editorSlice";
+import useFile from "@/hooks/useFile";
+import { updateCustomCssAndroid, updateCustomCssIos } from "@/redux/app/websiteOverideSlice";
+import { editorOpen } from "@/redux/editor/editorSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
-import EditorCss from "./EditorCss";
-import EditorAndroid from "./EditorAndroid";
 import { RootState } from "@/redux/store";
 
 export default function CustomCss() {
     const dispatch = useAppDispatch();
     const customCss = useAppSelector((state: RootState) => state.apps.websiteOveride.css);
+    const editor = useAppSelector((state: RootState) => state.editor);
 
     const customCssAndroid = customCss.android;
     const customCssIos = customCss.ios;
 
-    const showCustomCss = () => {
-        dispatch(openEditor());
+    const { fetchData: fetchCssIos } = useFile({
+        queryKey: ["custom-css-ios"],
+        url: customCssIos,
+    });
+    const { fetchData: fetchCssAndroid } = useFile({
+        queryKey: ["custom-css-android"],
+        url: customCssAndroid,
+    });
+
+    const showCustomCss = async () => {
+        if (customCssIos) {
+            await fetchCssIos();
+        }
+        dispatch(editorOpen("customCssIos"));
     };
 
-    const showCustomCssAndroid = () => {
-        dispatch(openEditorAndroid());
+    const showCustomCssAndroid = async () => {
+        if (customCssAndroid) {
+            await fetchCssAndroid();
+        }
+        dispatch(editorOpen("customCssAndroid"));
     };
 
     return (
@@ -42,8 +59,26 @@ export default function CustomCss() {
                         />
                     </OsConfigCard>
                 </div>
-                <EditorCss />
-                <EditorAndroid />
+
+                {/* CUSTOM CSS EDITOR IOS */}
+                {editor.activeEditor === "customCssIos" && (
+                    <Editor
+                        editorTitle="Custom CSS IOS"
+                        type="text/css"
+                        filename="custom-css-ios.css"
+                        dispatchFn={updateCustomCssIos}
+                    />
+                )}
+
+                {/* CUSTOM CSS EDITOR ANDROID */}
+                {editor.activeEditor === "customCssAndroid" && (
+                    <Editor
+                        editorTitle="Custom CSS Android"
+                        type="text/css"
+                        filename="custom-css-android.css"
+                        dispatchFn={updateCustomCssAndroid}
+                    />
+                )}
             </CollapsibleComponent>
         </div>
     );

@@ -59,8 +59,12 @@ const brandingSlice = createSlice({
             return { ...state, ...action.payload };
         },
 
-        updateAppIcon: (state: IBranding, action: PayloadAction<string>) => {
-            state.app_icon = action.payload;
+        updateAppIconIos: (state: IBranding, action: PayloadAction<string>) => {
+            state.icons.ios = action.payload;
+        },
+
+        updateAppIconAndroid: (state: IBranding, action: PayloadAction<string>) => {
+            state.icons.android = action.payload;
         },
 
         updateIcon: (state: IBranding, action: PayloadAction<IBranding["icons"]>) => {
@@ -111,7 +115,6 @@ const brandingSlice = createSlice({
 
 export const {
     setBranding,
-    updateAppIcon,
     updateIcon,
     updateStatusBarIOS,
     updateStatusBarAndroid,
@@ -119,6 +122,8 @@ export const {
     updateThemeColorAndroid,
     updateThemeColorIOS,
     updateSplashScreenIOS,
+    updateAppIconAndroid,
+    updateAppIconIos,
 } = brandingSlice.actions;
 
 export default brandingSlice.reducer;
