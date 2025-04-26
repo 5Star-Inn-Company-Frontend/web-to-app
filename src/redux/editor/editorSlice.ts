@@ -20,7 +20,11 @@ interface IEditorState {
         isOpen: boolean;
         jsContent: string;
     };
+    // googleServiceInfo: {};
+    // gooleServiceJson: {};
     isOpen: boolean;
+    content: string;
+    activeEditor: string | null;
 }
 
 const initialState: IEditorState = {
@@ -45,12 +49,27 @@ const initialState: IEditorState = {
     },
 
     isOpen: false,
+    content: "",
+    activeEditor: null,
 };
 
 const editorSlice = createSlice({
     name: "editor",
     initialState,
     reducers: {
+        editorClose: (state: IEditorState) => {
+            state.isOpen = false;
+            state.content = "";
+            state.activeEditor = null;
+        },
+        setEditorContent: (state: IEditorState, action: PayloadAction<string>) => {
+            state.content = action.payload;
+        },
+        editorOpen: (state: IEditorState, action: PayloadAction<string>) => {
+            state.isOpen = true;
+            state.activeEditor = action.payload;
+        },
+
         openeditor: (state: IEditorState) => {
             state.ios.isOpen = true;
         },
@@ -119,5 +138,8 @@ export const {
     closeEditorJSIos,
     openeditor,
     closeeditor,
+    editorClose,
+    editorOpen,
+    setEditorContent,
 } = editorSlice.actions;
 export default editorSlice.reducer;

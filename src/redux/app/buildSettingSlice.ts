@@ -82,6 +82,18 @@ const buildSettingSlice = createSlice({
         ) => {
             state.iosLastBuiltDate = action.payload;
         },
+        updateGoogleServiceIos: (
+            state: IBuildSettings,
+            action: PayloadAction<IBuildSettings["google_service"]["ios"]>
+        ) => {
+            state.google_service.ios = action.payload;
+        },
+        updateGoogleServiceAndroid: (
+            state: IBuildSettings,
+            action: PayloadAction<IBuildSettings["google_service"]["android"]>
+        ) => {
+            state.google_service.android = action.payload;
+        },
     },
 });
 
@@ -92,6 +104,8 @@ export const {
     updateAppIdentifiersAndroid,
     updateDownloadLinks,
     updateIosLastBuiltDate,
+    updateGoogleServiceIos,
+    updateGoogleServiceAndroid,
 } = buildSettingSlice.actions;
 
 export default buildSettingSlice.reducer;

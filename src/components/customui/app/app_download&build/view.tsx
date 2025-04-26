@@ -10,14 +10,44 @@ import { Label } from "@/components/ui/label";
 import { CustomConfigCard } from "../web_overides/customcard";
 import { GoDownload, GoUpload } from "react-icons/go";
 import { FaFileImport } from "react-icons/fa6";
-import { useAppSelector } from "@/redux/hook";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
+import Editor from "@/components/Editor";
+import { updateGoogleServiceAndroid, updateGoogleServiceIos } from "@/redux/app/buildSettingSlice";
+import { editorOpen } from "@/redux/editor/editorSlice";
+import useFile from "@/hooks/useFile";
 
 export const AppDownloadSection = () => {
-    // const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch();
     const buildSettings = useAppSelector((state: RootState) => state.apps.buildSettings);
+    const editor = useAppSelector((state: RootState) => state.editor);
 
     const appIdentifiers = buildSettings.appIdentifiers;
+    const googleServiceIos = buildSettings.google_service.ios;
+    const googleServiceAndroid = buildSettings.google_service.android;
+
+    const { fetchData: fetchDataIos } = useFile({
+        queryKey: ["google-service-ios"],
+        url: googleServiceIos,
+    });
+    const { fetchData: fetchDataAndroid } = useFile({
+        queryKey: ["google-service-android"],
+        url: googleServiceAndroid,
+    });
+
+    const openGoogleServiceEditor = async () => {
+        if (googleServiceIos) {
+            await fetchDataIos();
+        }
+        dispatch(editorOpen("googleServiceIos"));
+    };
+
+    const openGoogleJsonEditor = async () => {
+        if (googleServiceAndroid) {
+            await fetchDataAndroid();
+        }
+        dispatch(editorOpen("googleServiceAndroid"));
+    };
 
     return (
         <>
@@ -97,13 +127,43 @@ export const AppDownloadSection = () => {
                     >
                         <div className="grid grid-col-1 gap-8 px-6 xl:px-8">
                             <OsConfigCard os="IOS">
-                                <CustomConfigCard title="GoogleService-info-plist" />
+                                <CustomConfigCard
+                                    onClick={openGoogleServiceEditor}
+                                    title={`${
+                                        googleServiceIos ? "View/Edit" : "Add"
+                                    } GoogleService-info-plist`}
+                                />
                             </OsConfigCard>
                             <OsConfigCard os="Android">
-                                <CustomConfigCard title="GoogleService-json" />
+                                <CustomConfigCard
+                                    onClick={openGoogleJsonEditor}
+                                    title={`${
+                                        googleServiceAndroid ? "View/Edit" : "Add"
+                                    } GoogleService-json`}
+                                />
                             </OsConfigCard>
                         </div>
                     </CollapsibleComponent>
+
+                    {/* Google Service info plist editor */}
+                    {editor.activeEditor === "googleServiceIos" && (
+                        <Editor
+                            editorTitle="Google Service Info Plist"
+                            filename="Google Service Info Plist"
+                            type="application/xml"
+                            dispatchFn={updateGoogleServiceIos}
+                        />
+                    )}
+
+                    {/* Google Service json editor */}
+                    {editor.activeEditor === "googleServiceAndroid" && (
+                        <Editor
+                            editorTitle="Google Service Json"
+                            filename="Google Service Json"
+                            type="application/json"
+                            dispatchFn={updateGoogleServiceAndroid}
+                        />
+                    )}
                 </div>
                 <div className="p-4 bg-white border-b border-primary20">
                     <CollapsibleComponent
