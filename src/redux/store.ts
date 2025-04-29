@@ -13,6 +13,10 @@ import pluginReducer from "@/redux/app/nativePluginSlice";
 import editorReducer from "@/redux/editor/editorSlice";
 import buildSettingsReducer from "@/redux/app/buildSettingSlice";
 
+import { FLUSH, PAUSE, PERSIST, persistReducer, PURGE, REGISTER, REHYDRATE } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import { persistStore } from "redux-persist";
+
 const appReducers = combineReducers({
     appState: appStateReducer,
     branding: brandReducer,
@@ -26,14 +30,32 @@ const appReducers = combineReducers({
     buildSettings: buildSettingsReducer,
 });
 
-export const store = configureStore({
-    reducer: {
-        apps: appReducers,
-        nav: navReducer,
-        auth: authReducer,
-        editor: editorReducer,
-    },
+const persistConfig = {
+    key: "root",
+    storage,
+    whitelist: ["apps"],
+};
+
+const rootReducer = combineReducers({
+    apps: appReducers,
+    nav: navReducer,
+    auth: authReducer,
+    editor: editorReducer,
 });
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+export const store = configureStore({
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+            },
+        }),
+});
+
+export const persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

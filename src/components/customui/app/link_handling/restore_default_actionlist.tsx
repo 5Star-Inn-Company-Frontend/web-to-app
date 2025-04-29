@@ -34,7 +34,6 @@ export const RestoreDefaultActionList = () => {
     const handleDelete = (id: string) => {
         const updatedLink = links.filter((link) => link.label !== id);
         dispatch(updateLinkBehaviour(updatedLink));
-        console.log(updatedLink);
     };
 
     const debouncedUpdate = useMemo(() => {
