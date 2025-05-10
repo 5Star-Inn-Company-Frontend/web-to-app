@@ -67,7 +67,7 @@ export const Simulation = () => {
                 </div>
             </div>
             <div className="flex gap-4 justify-between">
-                <Button  className="flex items-center gap-1 text-sm text-dark bg-white cursor-pointer justify-between border">
+                <Button className="flex items-center gap-1 text-sm text-dark bg-white cursor-pointer justify-between border">
                     <AiOutlineUpload size="1.3rem" color="black" />
                     Download
                 </Button>
@@ -76,21 +76,18 @@ export const Simulation = () => {
                     Rebuild
                 </Button>
             </div>
-            <div className="w-full">
-                <div className=" w-[70%] m-auto">
-                    <img
-                        src="/iPhone 15 Pro Portrait Mockup label.svg"
-                        alt="object not found"
-                        className="w-full"
-                    />
-                </div>
+            {/* fmqq7qzvixslp3gixcutxep3cy */}
+            <div className="mt-10 pl-5 h-[800px] w-[90%]">
+                <iframe
+                    id="appetize"
+                    src="https://appetize.io/embed/sy44wdiqdfqtxare6slrw53joy"
+                    width="378px"
+                    height="800px"
+                ></iframe>
             </div>
+
             <div className="flex items-center justify-between gap-4">
-                <SelectInput
-                    label="Iphone 14pro"
-                    placeholder="Iphone 14pro"
-                    style="4rem border"
-                >
+                <SelectInput label="Iphone 14pro" placeholder="Iphone 14pro" style="4rem border">
                     {[
                         {
                             title: "200%",
@@ -105,11 +102,7 @@ export const Simulation = () => {
                         );
                     })}
                 </SelectInput>
-                <SelectInput
-                    label="IOS 17.2"
-                    placeholder="IOS 17.2"
-                    style="4rem border"
-                >
+                <SelectInput label="IOS 17.2" placeholder="IOS 17.2" style="4rem border">
                     {[
                         {
                             title: "200%",
@@ -126,7 +119,9 @@ export const Simulation = () => {
                 </SelectInput>
             </div>
             <div className="flex items-center space-x-2 text-primary40 text-sm">
-                <Label htmlFor="airplane-mode" className="text-xs">DEMUG MODE</Label>
+                <Label htmlFor="airplane-mode" className="text-xs">
+                    DEMUG MODE
+                </Label>
                 <Switch id="airplane-mode" />
             </div>
         </div>
