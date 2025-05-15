@@ -77,13 +77,24 @@ export const Simulation = () => {
                 </Button>
             </div>
             {/* fmqq7qzvixslp3gixcutxep3cy */}
-            <div className="mt-10 pl-5 h-[800px] w-[90%]">
-                <iframe
-                    id="appetize"
-                    src="https://appetize.io/embed/sy44wdiqdfqtxare6slrw53joy"
-                    width="378px"
-                    height="800px"
-                ></iframe>
+
+            <div className="relative w-[100%] mx-auto h-[650px]">
+                {/* Device mockup image (container) */}
+                <img
+                    src="/androidF.png"
+                    className="w-full h-full object-contain"
+                    alt="Phone mockup"
+                />
+
+                {/* Iframe (positioned over the screen area) */}
+                <div className="absolute top-[29px] left-[20px] w-[calc(100%-40px)] h-[calc(100%-40px)] overflow-x-hidden">
+                    <iframe
+                        id="appetize"
+                        src="https://web2app.prisca.5starcompany.com.ng/#/preview/pl12sai5PDoIN3NpC5NQ"
+                        className="w-full h-full rounded-lg overflow-hidden" // Adjust rounded corners to match mockup
+                        allow="fullscreen"
+                    ></iframe>
+                </div>
             </div>
 
             <div className="flex items-center justify-between gap-4">
