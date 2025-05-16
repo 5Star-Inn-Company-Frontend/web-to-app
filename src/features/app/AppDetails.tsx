@@ -25,7 +25,7 @@ export const AppDetails = ({ name, id, member_count, last_saved }: IAppData) => 
             <div className="mt-3 flex items-center justify-between lg:flex-row md:flex-row sm:flex-col sm:gap-4 ">
                 <AppInfo plan="Free" ios="co.5start.ios.qlije" android="co.5start.android.qlije" />
                 <ActionButton
-                    onViewClick={() => navigate("/app/viewapp")}
+                    onViewClick={() => navigate(`/app/viewapp/${id}`)}
                     onEditClick={() => navigate(`/app/${id}/overview`)}
                     onDeleteClick={openDeleteModal}
                 />

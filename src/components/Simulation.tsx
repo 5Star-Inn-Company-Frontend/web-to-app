@@ -78,7 +78,7 @@ export const Simulation = () => {
             </div>
             {/* fmqq7qzvixslp3gixcutxep3cy */}
 
-            <div className="relative w-[100%] mx-auto h-[650px]">
+            <div className="relative w-full max-w-[320px] mx-auto h-[650px]">
                 {/* Device mockup image (container) */}
                 <img
                     src="/androidF.png"

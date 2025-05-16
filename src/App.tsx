@@ -54,7 +54,7 @@ const App: React.FC = () => {
                 </Route>
 
                 {/* App Routes */}
-                <Route path="app/viewapp" element={<ViewApp />} />
+                <Route path="app/viewapp/:id" element={<ViewApp />} />
                 <Route path="app/create" element={<CreateApp />} />
 
                 {/*Edit APP  Dynamic Action Routes */}

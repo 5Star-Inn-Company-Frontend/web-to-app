@@ -1,9 +1,25 @@
+import { fetchApp } from "@/api/app";
 import { Navbar } from "@/components/Navbar";
 import { Simulation } from "@/components/Simulation";
-import { useNavigate } from "react-router-dom";
+import { IEditAppResponse } from "@/types/type";
+import { useQuery } from "@tanstack/react-query";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ViewApp = () => {
     const navigate = useNavigate();
+    const { id } = useParams();
+    const appId = Number(id);
+
+    const { data, isLoading } = useQuery<IEditAppResponse>({
+        queryKey: ["app", appId],
+        queryFn: () => fetchApp(appId),
+        enabled: !!id,
+        staleTime: Infinity,
+    });
+
+    if (isLoading) {
+        return <div>Loading....</div>;
+    }
 
     return (
         <>
@@ -12,14 +28,21 @@ const ViewApp = () => {
                 <div className="w-[75%] mx-4 rounded-lg">
                     <div className="my-12">
                         <div className="topp flex items-center justify-center flex-col mb-7">
-                            <img src="/access-logo.png" alt="" id="accessLogo" className="rounded-sm mb-2" />
+                            <img
+                                src="/access-logo.png"
+                                alt=""
+                                id="accessLogo"
+                                className="rounded-sm mb-2"
+                            />
                             <h2 className="text-2xl font-medium leading-7 mb-1">WebhostingApp</h2>
-                            <p className="text-[0.625rem] text-primary60">Last saved 12 days ago</p>
+                            <p className="text-[0.625rem] text-primary60">
+                                {data?.data.last_saved}
+                            </p>
                         </div>
                         <div className="flex items-center justify-center gap-x-10">
                             <button
                                 className="flex items-center gap-x-5 text-xs bg-black text-white rounded-lg px-5 h-8  w-[14.1875rem]"
-                                onClick={() => navigate("/app/overview")}
+                                onClick={() => navigate(`/app/${id}/overview`)}
                             >
                                 <i className="fa-solid fa-pen-to-square"></i> Edit App
                             </button>
@@ -36,12 +59,21 @@ const ViewApp = () => {
                             <Headings title="Overview" />
                             <div className="boxes flex gap-4">
                                 <div className="flex gap-4 flex-col w-full">
-                                    <OverviewCard title="Website URL" url="https://webhosting.5starcompany.com.ng/" />
-                                    <OverviewCard title="Private Management Link" url="https://webhosting.5starcompany.com.ng/" />
+                                    <OverviewCard title="Website URL" url={data?.data.url ?? ""} />
+                                    <OverviewCard
+                                        title="Private Management Link"
+                                        url={data?.data.private_link ?? ""}
+                                    />
                                 </div>
                                 <div className="flex gap-y-4 flex-col w-full">
-                                    <OverviewCard title="Organization " url="https://webhosting.5starcompany.com.ng/" />
-                                    <OverviewCard title="Public Sharing Link" url="https://webhosting.5starcompany.com.ng/" />
+                                    <OverviewCard
+                                        title="Organization "
+                                        url="https://webhosting.5starcompany.com.ng/"
+                                    />
+                                    <OverviewCard
+                                        title="Public Sharing Link"
+                                        url={data?.data.public_link ?? ""}
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -83,11 +115,11 @@ const ViewApp = () => {
                             <div className="flex items-end gap-x-5 mt-14 text-primary60 text-[0.625rem]">
                                 <button
                                     className="flex items-center gap-x-5 text-xs bg-black text-white rounded-lg px-5 h-8  w-[14.1875rem]"
-                                    onClick={() => navigate("/app/edit/overview")}
+                                    onClick={() => navigate(`/app/${id}/overview`)}
                                 >
                                     <i className="fa-solid fa-pen-to-square"></i> Edit App
                                 </button>
-                                <p>Last saved 12 days ago</p>
+                                <p>{data?.data.last_saved}</p>
                             </div>
                         </div>
                     </div>
