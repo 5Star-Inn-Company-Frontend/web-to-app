@@ -87,11 +87,11 @@ export const Simulation = () => {
                 />
 
                 {/* Iframe (positioned over the screen area) */}
-                <div className="absolute top-[29px] left-[20px] w-[calc(100%-40px)] h-[calc(100%-40px)] overflow-x-hidden">
+                <div className="absolute top-[29px] left-[20px] w-[calc(100%-45px)] h-[calc(100%-40px)] overflow-x-hidden">
                     <iframe
                         id="appetize"
                         src="https://web2app.prisca.5starcompany.com.ng/#/preview/pl12sai5PDoIN3NpC5NQ"
-                        className="w-full h-full rounded-lg overflow-hidden" // Adjust rounded corners to match mockup
+                        className="w-full h-full rounded-lg object-center object-cover" // Adjust rounded corners to match mockup
                         allow="fullscreen"
                     ></iframe>
                 </div>
