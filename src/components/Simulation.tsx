@@ -13,8 +13,11 @@ import {
 } from "react-icons/ai";
 import { SelectItem } from "./ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+import { useAppSelector } from "@/redux/hook";
+import { RootState } from "@/redux/store";
 
 export const Simulation = () => {
+    const privateKey = useAppSelector((state: RootState) => state.apps.appState.private_link);
     return (
         <div className="bg-white flex flex-col gap-4 w-full p-4">
             <div className="flex justify-between items-center">
@@ -90,7 +93,7 @@ export const Simulation = () => {
                 <div className="absolute top-[29px] left-[20px] w-[calc(100%-45px)] h-[calc(100%-40px)] overflow-x-hidden">
                     <iframe
                         id="appetize"
-                        src="https://web2app.prisca.5starcompany.com.ng/#/preview/pl12sai5PDoIN3NpC5NQ"
+                        src={`https://web2app.prisca.5starcompany.com.ng/#/preview/${privateKey}`}
                         className="w-full h-full rounded-lg object-center object-cover" // Adjust rounded corners to match mockup
                         allow="fullscreen"
                     ></iframe>

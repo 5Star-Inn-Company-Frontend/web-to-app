@@ -26,6 +26,11 @@ export const updateApp = async ({ appData, appId }: IUpdateApp) => {
     return response.data;
 };
 
+export const buildAppAndroid = async ({ appId }: { appId: string }) => {
+    const response = await axiosInstance.put(`/build-app/${appId}/android`, appId);
+    return response.data;
+};
+
 export const fileUpload = async (file: File) => {
     const formData = new FormData();
     formData.append("file", file);

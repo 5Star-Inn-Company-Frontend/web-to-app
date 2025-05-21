@@ -14,9 +14,15 @@ import QRcode from "@/lib/qrcode";
 import { Link } from "react-router-dom";
 import { HiOutlineExternalLink } from "react-icons/hi";
 import { CopyButton } from "@/lib/copyToClipboard";
+import { useMutation } from "@tanstack/react-query";
+import { buildAppAndroid } from "@/api/app";
 
 export const AppDownloadConfig = () => {
-    const buildSettings = useAppSelector((state: RootState) => state.apps.buildSettings);
+    const app = useAppSelector((state: RootState) => state.apps);
+
+    const buildSettings = app.buildSettings;
+    const privateKey = app.appState.private_link;
+
     const [open, setOpen] = useState(false);
 
     const downloadLinks = buildSettings.downloadLinks;
@@ -25,9 +31,21 @@ export const AppDownloadConfig = () => {
     const androidLastBuildBy = buildSettings.androidLastBuiltBy;
     const iosLastBuildBy = buildSettings.iosLastBuiltBy;
 
+    const { mutate } = useMutation({
+        mutationKey: ["buildApp"],
+        mutationFn: buildAppAndroid,
+    });
+
+    const handleRebuildApp = () => {
+        mutate({ appId: privateKey });
+    };
+
     return (
         <div>
-            <Button className="flex items-center gap-2 rounded-md mb-4 h-[2.125rem] w-[9.9375rem]">
+            <Button
+                onClick={handleRebuildApp}
+                className="flex items-center gap-2 rounded-md mb-4 h-[2.125rem] w-[9.9375rem]"
+            >
                 <AiOutlineReload size="1.3rem" />
                 Rebuild
             </Button>
