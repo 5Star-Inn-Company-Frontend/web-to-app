@@ -424,3 +424,202 @@ export const {
 export default navigation.reducer;
 
 export { initialState as defaultNavigationState };
+
+// const n = {
+// "navigation": {
+//         "topNavigationBar": {
+//             "enable": {
+//                 "ios": {
+//                     "active": true
+//                 },
+//                 "android": {
+//                     "active": true
+//                 }
+//             },
+//             "styling": {
+//                 "ios": {
+//                     "defaultDisplay": "text",
+//                     "imageType": "appIcon",
+//                     "newImage": "assets/defaults/app-icon-placeholder.png",
+//                     "newImageDark": "assets/defaults/app-icon-placeholder.png",
+//                     "textColor": "#333333",
+//                     "textColorDark": "#adc5dc",
+//                     "tintColor": "#f8f8f8",
+//                     "tintColorDark": "#333333"
+//                 },
+//                 "android": {
+//                     "backgroundColor": "#FFFFFF",
+//                     "backgroundColorDark": "#333333",
+//                     "defaultDisplay": "text",
+//                     "imageType": "appIcon",
+//                     "newImage": "assets/defaults/app-icon-placeholder.png",
+//                     "newImageDark": "assets/defaults/app-icon-placeholder.png",
+//                     "textColor": "#1A100B",
+//                     "textColorDark": "#FFFFFF"
+//                 }
+//             },
+//             "customIcons": {
+//                 "actions": [
+//                     {
+//                         "id": "2",
+//                         "items": [
+//                             {
+//                                 "icon": "fas fa-rotate-right",
+//                                 "label": "Refresh",
+//                                 "system": "refresh",
+//                                 "url": ""
+//                             },
+//                             {
+//                                 "icon": "fas fa-share-square",
+//                                 "label": "Share",
+//                                 "system": "share",
+//                                 "url": ""
+//                             },
+//                             {
+//                                 "icon": "fas fa-magnifying-glass",
+//                                 "label": "GSearch",
+//                                 "system": "url",
+//                                 "url": "https://google.com"
+//                             }
+//                         ]
+//                     }
+//                 ],
+//                 "available": [
+//                     {
+//                         "icon": "fas fa-rotate-right",
+//                         "label": "",
+//                         "system": "refresh",
+//                         "url": "",
+//                         "name": "Refresh"
+//                     },
+//                     {
+//                         "icon": "fas fa-share-square",
+//                         "label": "Share",
+//                         "system": "share",
+//                         "url": "",
+//                         "name": "Share"
+//                     },
+//                     {
+//                         "icon": "fas fa-magnifying-glass",
+//                         "label": "GSearch",
+//                         "system": "url",
+//                         "url": "https://google.com",
+//                         "name": "url"
+//                     }
+//                 ],
+//                 "actionSelection": [],
+//                 "active": true
+//             }
+//         },
+//         "sidebarNavigationBar": {
+//             "active": false,
+//             "styling": {
+//                 "ios": {
+//                     "backgroundColor": "#f8f8f8",
+//                     "backgroundColorDark": "#333333",
+//                     "sidebarFont": "Default",
+//                     "sidebarImage": "https://s3.amazonaws.com/gonativeio/images_generated/pkt29zhnu29u0_1694683672242.png",
+//                     "sidebarImageDark": "https://s3.amazonaws.com/gonativeio/images_generated/pkt29zhnu29u0_1694683672242.png",
+//                     "textColor": "#333333",
+//                     "textColorDark": "#adc5dc",
+//                     "type": "appIcon"
+//                 },
+//                 "android": {
+//                     "showAppName": true,
+//                     "showLogo": true,
+//                     "backgroundColor": "#FFFFFF",
+//                     "backgroundColorDark": "#333333",
+//                     "foregroundColor": "#1A100B",
+//                     "foregroundColorDark": "#FFFFFF",
+//                     "separatorColor": "#CCCCCC",
+//                     "separatorColorDark": "#666666",
+//                     "highlightColor": "#1A100B",
+//                     "highlightColorDark": "#FFFFFF"
+//                 }
+//             },
+//             "items": [
+//                 {
+//                     "url": "https://webhosting.5starcompany.com.ng/index.php",
+//                     "label": "",
+//                     "subLinks": [],
+//                     "icon": ""
+//                 },
+//                 {
+//                     "url": "https://webhosting.5starcompany.com.ng/#",
+//                     "label": "Store",
+//                     "subLinks": [],
+//                     "icon": "fas fa-store"
+//                 },
+//                 {
+//                     "url": "https://webhosting.5starcompany.com.ng/cart.php",
+//                     "label": "Browse all",
+//                     "subLinks": [],
+//                     "icon": "fas fa-store"
+//                 }
+//             ]
+//         },
+//         "bottomTabBar": {
+//             "active": false,
+//             "styling": {
+//                 "android": {
+//                     "backgroundColor": "#FFFFFF",
+//                     "backgroundColorDark": "#333333",
+//                     "textColor": "#949494",
+//                     "textColorDark": "#FFFFFF",
+//                     "indicatorColor": "#1A100B",
+//                     "indicatorColorDark": "#666666"
+//                 },
+//                 "ios": {
+//                     "tintColor": "#f8f8f8",
+//                     "tintColorDark": "#333333",
+//                     "inactiveColor": "#A1A1A1",
+//                     "inactiveColorDark": "#818181"
+//                 }
+//             },
+//             "tabMenus": [
+//                 {
+//                     "items": [
+//                         {
+//                             "icon": "fas fa-home",
+//                             "inactiveIcon": "far fa-home",
+//                             "label": "Home",
+//                             "url": "https://webhosting.5starcompany.com.ng/"
+//                         },
+//                         {
+//                             "label": "News",
+//                             "icon": "fas fa-newspaper",
+//                             "inactiveIcon": "far fa-newspaper",
+//                             "url": "https://webhosting.5starcompany.com.ng/news"
+//                         },
+//                         {
+//                             "label": "Directory",
+//                             "icon": "fas fa-address-book",
+//                             "inactiveIcon": "far fa-address-book",
+//                             "url": "https://webhosting.5starcompany.com.ng/directory"
+//                         },
+//                         {
+//                             "icon": "fas fa-anchor-circle-check",
+//                             "label": "Sammy",
+//                             "system": "javascript",
+//                             "url": "javascript:"
+//                         }
+//                     ],
+//                     "availableIcons":[
+//                         "fas fa-align-justify",
+//                         "fas fa-align-left",
+//                         "fas fa-anchor-circle-xmark",
+//                         "fas fa-angle-right",
+//                         "fas fa-ankh",
+//                         "fas fa-arrow-up-long",
+//                         "fas fa-asterisk",
+//                         "fas fa-hourglass",
+//                         "fas fa-house-lock",
+//                         "fas fa-home",
+//                         "fas fa-newspaper"
+//                     ]
+//                 }
+//             ]
+//         }
+//     },
+
+// }

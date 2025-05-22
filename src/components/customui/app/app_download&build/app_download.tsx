@@ -31,7 +31,7 @@ export const AppDownloadConfig = () => {
     const androidLastBuildBy = buildSettings.androidLastBuiltBy;
     const iosLastBuildBy = buildSettings.iosLastBuiltBy;
 
-    const { mutate } = useMutation({
+    const { mutate, isPending } = useMutation({
         mutationKey: ["buildApp"],
         mutationFn: buildAppAndroid,
     });
@@ -46,7 +46,7 @@ export const AppDownloadConfig = () => {
                 onClick={handleRebuildApp}
                 className="flex items-center gap-2 rounded-md mb-4 h-[2.125rem] w-[9.9375rem]"
             >
-                <AiOutlineReload size="1.3rem" />
+                <AiOutlineReload size="1.3rem" className={`${isPending ? "animate-spin" : ""}`} />
                 Rebuild
             </Button>
             <div className="grid lg:grid-col-2 xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-8">
