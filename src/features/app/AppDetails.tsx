@@ -28,6 +28,7 @@ export const AppDetails = ({ name, id, member_count, last_saved }: IAppData) => 
                     onViewClick={() => navigate(`/app/viewapp/${id}`)}
                     onEditClick={() => navigate(`/app/${id}/overview`)}
                     onDeleteClick={openDeleteModal}
+                    onShareClick={() => navigate(`/app/share/${id}`)}
                 />
             </div>
             <AppMetaData user="Admin" members={member_count} lastSaved={last_saved} />

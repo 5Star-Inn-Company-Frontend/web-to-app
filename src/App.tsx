@@ -27,6 +27,7 @@ import AppAccess from "@/pages/app/AppAccess";
 import AppClone from "@/pages/app/AppClone";
 import { CreateApp } from "@/components/CreateAppOverview/CreateApp";
 import { Toaster } from "react-hot-toast";
+import Share from "./pages/app/share";
 
 const App: React.FC = () => {
     return (
@@ -55,6 +56,7 @@ const App: React.FC = () => {
 
                 {/* App Routes */}
                 <Route path="app/viewapp/:id" element={<ViewApp />} />
+                <Route path="app/share/:id" element={<Share />} />
                 <Route path="app/create" element={<CreateApp />} />
 
                 {/*Edit APP  Dynamic Action Routes */}
