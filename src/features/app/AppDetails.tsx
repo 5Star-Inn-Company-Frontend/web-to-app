@@ -5,9 +5,9 @@ import AppInfo from "./AppInfo";
 import ActionButton from "./ActionButton";
 import AppMetaData from "./AppMetaData";
 import DeleteModal from "./DeleteModal";
-import { IAppData } from "@/types/type";
+import { IAppState } from "@/types/type";
 
-export const AppDetails = ({ name, id, member_count, last_saved }: IAppData) => {
+export const AppDetails = ({ name, id, public_link, member_count, last_saved }: IAppState) => {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
 
     const navigate = useNavigate();
@@ -28,7 +28,7 @@ export const AppDetails = ({ name, id, member_count, last_saved }: IAppData) => 
                     onViewClick={() => navigate(`/app/viewapp/${id}`)}
                     onEditClick={() => navigate(`/app/${id}/overview`)}
                     onDeleteClick={openDeleteModal}
-                    onShareClick={() => navigate(`/app/share/${id}`)}
+                    onShareClick={() => navigate(`/app/share/${public_link.split("/").pop()}`)}
                 />
             </div>
             <AppMetaData user="Admin" members={member_count} lastSaved={last_saved} />

@@ -26,6 +26,11 @@ export const updateApp = async ({ appData, appId }: IUpdateApp) => {
     return response.data;
 };
 
+export const getShareAppDetails = async (id: string) => {
+    const response = await axiosInstance.get(`/app/share/${id}`);
+    return response.data;
+};
+
 export const buildAppAndroid = async ({ appId }: { appId: string }) => {
     const response = await axiosInstance.put(`/build-app/${appId}/android`, appId);
     return response.data;

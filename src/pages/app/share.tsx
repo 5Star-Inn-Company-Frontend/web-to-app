@@ -1,10 +1,10 @@
+import { getShareAppDetails } from "@/api/app";
 import { SelectInput } from "@/components/global/selectInput";
 import { Button } from "@/components/ui/button";
-
 import { SelectItem } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useAppSelector } from "@/redux/hook";
-import { RootState } from "@/redux/store";
+import { ShareSkeleton } from "@/features/share/share-skeleton";
+import { useQuery } from "@tanstack/react-query";
 import {
     AiOutlineCamera,
     AiOutlineHome,
@@ -13,9 +13,22 @@ import {
 } from "react-icons/ai";
 import { GoDownload } from "react-icons/go";
 import { MdContentCopy, MdQrCode } from "react-icons/md";
+import { useParams } from "react-router-dom";
 
 export default function Share() {
-    const publicKey = useAppSelector((state: RootState) => state.apps.appState.public_link);
+    const { id } = useParams();
+
+    const { data, isLoading, error } = useQuery({
+        queryKey: ["share", id],
+        queryFn: () => getShareAppDetails(id!),
+    });
+
+    if (isLoading) {
+        return <ShareSkeleton />;
+    }
+
+    console.log(error);
+
     return (
         <div className="bg-primary5 px-2 py-8 xl:p-8">
             <div className="flex flex-col items-center justify-center mb-4">
@@ -80,7 +93,9 @@ export default function Share() {
                     <div className="absolute top-[29px] left-[20px] w-[calc(100%-45px)] h-[calc(100%-40px)] overflow-x-hidden">
                         <iframe
                             id="appetize"
-                            src={`https://web2app.prisca.5starcompany.com.ng/#/preview/${publicKey}`}
+                            src={`https://web2app.prisca.5starcompany.com.ng/#/preview/${
+                                data.privateKey || ""
+                            }`}
                             className="w-full h-full rounded-lg object-center object-cover" // Adjust rounded corners to match mockup
                             allow="fullscreen"
                         ></iframe>

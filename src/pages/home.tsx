@@ -5,12 +5,11 @@ import SelectDropdown from "@/components/global/selectdropdown";
 import { AppDetails } from "@/features/app/AppDetails";
 import { useQuery } from "@tanstack/react-query";
 import { fetchApps } from "@/api/app";
-import { IAppData } from "@/types/type";
+import { IAppData, IAppState } from "@/types/type";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export const DashboardHome = () => {
     const [searchTerm, setSearchTerm] = useState<string>("");
-    // const navigate = useNavigate();
 
     const [licenseSelectedValue, setLicenseSelectedValue] = useState<string>("");
     const [accessSelectedValue, setAccessSelectedValue] = useState<string>("");
@@ -85,7 +84,7 @@ export const DashboardHome = () => {
                 {isSuccess && (
                     <div className="my-9 grid gap-4">
                         {filteredApps.length > 0 ? (
-                            filteredApps.map((item: IAppData) => (
+                            filteredApps.map((item: IAppState) => (
                                 <AppDetails key={item.id} {...item} />
                             ))
                         ) : (
