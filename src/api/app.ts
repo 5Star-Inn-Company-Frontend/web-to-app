@@ -27,7 +27,7 @@ export const updateApp = async ({ appData, appId }: IUpdateApp) => {
 };
 
 export const getShareAppDetails = async (id: string) => {
-    const response = await axiosInstance.get(`/app/share/${id}`);
+    const response = await axiosInstance.get(`/view-app/${id}`);
     return response.data;
 };
 
