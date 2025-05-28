@@ -15,7 +15,9 @@ export const AuthLayout = () => {
 
                     <div className="foote flex justify-between font-base font-lato text-primary50">
                         <div className="left">
-                            <p className="sm:flex-col">© 2024 5Starcompany. All rights Reserved</p>
+                            <p className="sm:flex-col">
+                                © {new Date().getFullYear()} 5Starcompany. All rights Reserved
+                            </p>
                         </div>
                     </div>
                 </div>

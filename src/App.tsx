@@ -28,6 +28,7 @@ import AppClone from "@/pages/app/AppClone";
 import { CreateApp } from "@/components/CreateAppOverview/CreateApp";
 import { Toaster } from "react-hot-toast";
 import Share from "./pages/app/share";
+import { ForgetPassword } from "./features/auth/forgetpassword";
 
 const App: React.FC = () => {
     return (
@@ -51,7 +52,8 @@ const App: React.FC = () => {
                 <Route path="auth" element={<AuthLayout />}>
                     <Route path="signin" element={<SigninPage />} />
                     <Route path="signup" element={<SignupPage />} />
-                    <Route path="password_reset" element={<ResetPage />} />
+                    <Route path="forget-password" element={<ForgetPassword />} />
+                    <Route path="password-reset/:token" element={<ResetPage />} />
                 </Route>
 
                 {/* App Routes */}

@@ -97,6 +97,14 @@ export const SigninForm = () => {
                                             field={field}
                                         />
                                     </FormControl>
+                                    <div className="flex justify-end items-center mt-1">
+                                        <button
+                                            onClick={() => navigate("/auth/forget-password")}
+                                            className="text-gray-500 cursor-pointer"
+                                        >
+                                            Forget password?
+                                        </button>
+                                    </div>
                                     <button
                                         type="button"
                                         onClick={() => setShowPassword(!showPassword)}

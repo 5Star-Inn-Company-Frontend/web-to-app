@@ -1,10 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { useState } from "react";
 import { ReloadIcon } from "@radix-ui/react-icons";
-import { useNavigate } from "react-router-dom";
-import { Bounce, toast, ToastContainer } from "react-toastify";
 import Authprompt from "./authprompt";
 import Partnership from "./partnership";
 import { ResetPasswordformSchema } from "@/lib/schema";
@@ -12,57 +9,54 @@ import { Text } from "@/components/global/text";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { IconInput } from "@/components/global/iconinput";
 import { Button } from "@/components/ui/button";
+import { useMutation } from "@tanstack/react-query";
+import { forgotPasswordApi } from "@/api/auth";
+import axios, { AxiosError } from "axios";
+import toast from "react-hot-toast";
+import { useParams, useSearchParams } from "react-router-dom";
+import { useState } from "react";
+import { FiEye, FiEyeOff } from "react-icons/fi";
+
+// "token":"750ac6eb7e8bdc5a2c175162478246bcf6a0e626eebaf78a1024ed8815a5ace0",
+// "email":"janetkehinde2000@gmail.com",
+// "password":"kenny3000",
+// "password_confirmation":"kenny3000"
 
 export function ResetPasswordForm() {
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+    const { token } = useParams();
+
+    const [searchParams] = useSearchParams();
+    const email = searchParams.get("email");
+
     const form = useForm<z.infer<typeof ResetPasswordformSchema>>({
         resolver: zodResolver(ResetPasswordformSchema),
-        defaultValues: { email: "" },
+        defaultValues: {
+            token: token || "",
+            email: email || "",
+            password: "",
+            password_confirmation: "",
+        },
     });
 
-    const navigate = useNavigate();
+    const { mutate, isPending } = useMutation({
+        mutationFn: forgotPasswordApi,
+        onSuccess: (data) => {
+            toast.success(data.status);
+            form.reset({ email: "" });
+        },
+        onError: (error: Error | AxiosError) => {
+            if (axios.isAxiosError(error)) {
+                toast.error(error?.response?.data.message);
+            }
+        },
+    });
 
     async function onSubmit(values: z.infer<typeof ResetPasswordformSchema>) {
         const { email } = values;
-        const userEmail = { email };
-
-        setIsLoading(true);
-
-        try {
-            const response = await fetch(
-                "https://web2app.prisca.5starcompany.com.ng/api/forgot-password",
-                {
-                    method: "POST",
-                    headers: {
-                        Accept: "application/json",
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(userEmail),
-                }
-            );
-
-            if (!response.ok) {
-                throw new Error("Unprocessable content!");
-            }
-
-            const data = await response.json();
-            localStorage.setItem("user-info", JSON.stringify(data));
-
-            setTimeout(() => navigate("/auth/signin"), 2000);
-
-            toast.success("Password reset link sent to your email!", {
-                position: "bottom-right",
-                draggable: true,
-            });
-        } catch (error) {
-            console.error("Error:", error);
-            toast.error("No user with that email address.", {
-                position: "bottom-right",
-                draggable: true,
-            });
-        } finally {
-            setIsLoading(false);
-        }
+        mutate(email);
     }
 
     return (
@@ -90,8 +84,74 @@ export function ResetPasswordForm() {
                             </FormItem>
                         )}
                     />
+                    <FormField
+                        control={form.control}
+                        name="password"
+                        render={({ field }) => (
+                            <FormItem>
+                                <div className="relative">
+                                    <FormControl>
+                                        <IconInput
+                                            type={showPassword ? "text" : "password"}
+                                            category="formInput"
+                                            placeHolder="Password"
+                                            field={field}
+                                        />
+                                    </FormControl>
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                                        aria-label={
+                                            showPassword ? "Hide password" : "Show password"
+                                        }
+                                    >
+                                        {showPassword ? (
+                                            <FiEye size={18} />
+                                        ) : (
+                                            <FiEyeOff size={18} />
+                                        )}
+                                    </button>
+                                </div>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="password_confirmation"
+                        render={({ field }) => (
+                            <FormItem>
+                                <div className="relative">
+                                    <FormControl>
+                                        <IconInput
+                                            type={showConfirmPassword ? "text" : "password"}
+                                            category="formInput"
+                                            placeHolder="Confirm Password"
+                                            field={field}
+                                        />
+                                    </FormControl>
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                                        aria-label={
+                                            showConfirmPassword ? "Hide password" : "Show password"
+                                        }
+                                    >
+                                        {showConfirmPassword ? (
+                                            <FiEye size={18} />
+                                        ) : (
+                                            <FiEyeOff size={18} />
+                                        )}
+                                    </button>
+                                </div>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
                     <div className="flex justify-end items-end bg-[#24243E] rounded-md mt-4">
-                        {isLoading ? (
+                        {isPending ? (
                             <Button
                                 disabled
                                 className="w-full h-12 text-white bg-[#24243E] p-[0.5rem]"
@@ -104,12 +164,11 @@ export function ResetPasswordForm() {
                                 type="submit"
                                 className="w-full text-base flex justify-center text-white font-bold h-12 bg-[#24243E] p-[0.5rem]"
                             >
-                                Forget Password
+                                Reset Password
                             </Button>
                         )}
                     </div>
                 </form>
-                <ToastContainer transition={Bounce} draggable />
                 <Authprompt action="reset" />
                 <Partnership />
             </Form>

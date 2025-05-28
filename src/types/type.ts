@@ -35,6 +35,13 @@ export interface RegisterRequest {
     password: string;
 }
 
+export interface ResetPasswordRequest {
+    token: string;
+    email: string;
+    password: string;
+    password_confirmation: string;
+}
+
 export interface CreateAppRequest {
     name: string;
     url: string;

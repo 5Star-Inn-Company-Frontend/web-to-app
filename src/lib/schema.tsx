@@ -34,9 +34,24 @@ export const SigninformSchema = z.object({
 });
 
 export const ResetPasswordformSchema = z.object({
+    token: z.string({
+        required_error: "token is required",
+    }),
     email: z
         .string({
             required_error: "email field is required.",
         })
         .min(5, { message: "Please enter a valid email address." }),
+
+    password: z
+        .string({
+            required_error: "password is required",
+        })
+        .min(8, { message: "Password must be at least 8 characters" }),
+
+    password_confirmation: z
+        .string({
+            required_error: "password is required",
+        })
+        .min(8, { message: "Password must be at least 8 characters" }),
 });

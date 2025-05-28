@@ -13,7 +13,7 @@ export function Navbar() {
 
     return (
         <div className="bg-black w-full flex justify-between items-center px-2 py-3 xl:px-[3.125rem]">
-            <div className="w-[70px] xl:w-[100px]">
+            <div className="w-[70px] xl:w-[100px] cursor-pointer">
                 <img src="/logo.png" alt="" className="logo" onClick={() => navigate("/")} />
             </div>
 
