@@ -45,6 +45,7 @@ export interface ResetPasswordRequest {
 export interface CreateAppRequest {
     name: string;
     url: string;
+    org: string;
 }
 
 export interface IBranding {

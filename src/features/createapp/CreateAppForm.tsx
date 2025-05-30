@@ -13,6 +13,7 @@ import axios, { AxiosError } from "axios";
 interface IAppInput {
     name: string;
     url: string;
+    org: string;
 }
 
 export default function CreateAppForm() {
@@ -21,7 +22,7 @@ export default function CreateAppForm() {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
 
-    const [appInput, setAppInput] = useState<IAppInput>({ name: "", url: "" });
+    const [appInput, setAppInput] = useState<IAppInput>({ name: "", url: "", org: "Emmy's Team" });
 
     function handleChange(e: ChangeEvent<HTMLInputElement>) {
         const { name, value } = e.target;
@@ -32,11 +33,12 @@ export default function CreateAppForm() {
         mutationFn: createApp,
         onSuccess: (data: IAppDataResponse) => {
             queryClient.setQueryData(["apps"], (apps: IAppResponse) => apps.data.push(data.data));
-            setAppInput({ name: "", url: "" });
+            setAppInput({ name: "", url: "", org: "" });
             toast.success("App Created Successfully", {
-                position: "top-center",
+                position: "top-right",
             });
-            navigate(`/app/${data.data.id}/overview/`);
+            console.log(data);
+            navigate(`/app/${data.data.id}/overview`);
         },
         onError: (error: Error | AxiosError) => {
             if (axios.isAxiosError(error)) {
