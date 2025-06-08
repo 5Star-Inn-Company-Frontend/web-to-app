@@ -17,11 +17,6 @@ import { useParams, useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 
-// "token":"750ac6eb7e8bdc5a2c175162478246bcf6a0e626eebaf78a1024ed8815a5ace0",
-// "email":"janetkehinde2000@gmail.com",
-// "password":"kenny3000",
-// "password_confirmation":"kenny3000"
-
 export function ResetPasswordForm() {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);

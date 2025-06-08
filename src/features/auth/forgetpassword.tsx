@@ -4,7 +4,7 @@ import * as z from "zod";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import Authprompt from "./authprompt";
 import Partnership from "./partnership";
-import { ResetPasswordformSchema } from "@/lib/schema";
+import { ForgetPasswordFormSchema } from "@/lib/schema";
 import { Text } from "@/components/global/text";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { IconInput } from "@/components/global/iconinput";
@@ -15,8 +15,8 @@ import axios, { AxiosError } from "axios";
 import toast from "react-hot-toast";
 
 export function ForgetPassword() {
-    const form = useForm<z.infer<typeof ResetPasswordformSchema>>({
-        resolver: zodResolver(ResetPasswordformSchema),
+    const form = useForm<z.infer<typeof ForgetPasswordFormSchema>>({
+        resolver: zodResolver(ForgetPasswordFormSchema),
         defaultValues: { email: "" },
     });
 
@@ -35,7 +35,7 @@ export function ForgetPassword() {
         },
     });
 
-    async function onSubmit(values: z.infer<typeof ResetPasswordformSchema>) {
+    async function onSubmit(values: z.infer<typeof ForgetPasswordFormSchema>) {
         const { email } = values;
         mutate(email);
     }
