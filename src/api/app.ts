@@ -18,7 +18,7 @@ export const fetchApps = async () => {
 
 export const fetchApp = async (id: number) => {
     const response = await axiosInstance.get(`/app/${id}`);
-    return response.data;
+    return response.data.data;
 };
 
 export const updateApp = async ({ appData, appId }: IUpdateApp) => {

@@ -1,4 +1,5 @@
 import { fetchApp } from "@/api/app";
+import Loading from "@/components/loading";
 import { Navbar } from "@/components/Navbar";
 import { Simulation } from "@/components/Simulation";
 import { Sheet, SheetContent, SheetDescription, SheetHeader } from "@/components/ui/sheet";
@@ -16,7 +17,7 @@ import { defaultWebsiteOverideState, setWebsiteOveride } from "@/redux/app/websi
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { closeMobileSimulator } from "@/redux/nav/navslice";
 import { RootState } from "@/redux/store";
-import { IEditAppResponse } from "@/types/type";
+import { IEditApp } from "@/types/type";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { Outlet, useParams } from "react-router-dom";
@@ -29,7 +30,7 @@ const AppDashboard = () => {
     const isSimulatorOpen = useAppSelector((state: RootState) => state.nav.isSimulatorOpen);
     const persistedAppState = useAppSelector((state: RootState) => state.apps.appState);
 
-    const { data, isLoading, isSuccess } = useQuery<IEditAppResponse>({
+    const { data, isLoading, isSuccess } = useQuery<IEditApp>({
         queryKey: ["app", appId],
         queryFn: () => fetchApp(appId),
         enabled: !!id && !persistedAppState.id,
@@ -40,25 +41,25 @@ const AppDashboard = () => {
         if (isSuccess && data) {
             dispatch(
                 updateAppState({
-                    id: data.data.id,
-                    name: data.data.name,
-                    description: data.data.description,
-                    url: data.data.url,
-                    plan: data.data.plan,
-                    member_count: data.data.member_count,
-                    last_saved: data.data.last_saved,
-                    private_link: data.data.private_link,
-                    public_link: data.data.public_link,
+                    id: data?.id,
+                    name: data?.name,
+                    description: data?.description,
+                    url: data?.url,
+                    plan: data?.plan,
+                    member_count: data?.member_count,
+                    last_saved: data?.last_saved,
+                    private_link: data?.private_link,
+                    public_link: data?.public_link,
                 })
             );
-            dispatch(setBranding(data.data.branding ?? defaultBrandingState));
-            dispatch(updateInterface(data.data.interface ?? defaultInterfaceSliceState));
-            dispatch(setLinkHandling(data.data.link_handling ?? defaultLinkHandlingState));
-            dispatch(updateNavigation(data.data.navigation ?? defaultNavigationState));
-            dispatch(setNotification(data.data.notification ?? defaultNotificationState));
-            dispatch(setPermission(data.data.permission ?? defaultPermissionState));
-            dispatch(setWebsiteOveride(data.data.website_overide ?? defaultWebsiteOverideState));
-            dispatch(setBuildSettings(data.data.build_setting ?? defaultBuildSettings));
+            dispatch(setBranding(data?.branding ?? defaultBrandingState));
+            dispatch(updateInterface(data?.interface ?? defaultInterfaceSliceState));
+            dispatch(setLinkHandling(data?.link_handling ?? defaultLinkHandlingState));
+            dispatch(updateNavigation(data?.navigation ?? defaultNavigationState));
+            dispatch(setNotification(data?.notification ?? defaultNotificationState));
+            dispatch(setPermission(data?.permission ?? defaultPermissionState));
+            dispatch(setWebsiteOveride(data?.website_overide ?? defaultWebsiteOverideState));
+            dispatch(setBuildSettings(data?.build_setting ?? defaultBuildSettings));
         }
     }, [isSuccess, data, dispatch]);
 
@@ -74,9 +75,7 @@ const AppDashboard = () => {
                     <DashboardHeader />
                     <div className="xl:flex rounded-t-md bg-white">
                         <DashboardNav id={appId} />
-                        <div className="xl:flex-1">
-                            {isLoading ? <div>Loading........</div> : <Outlet />}
-                        </div>
+                        <div className="xl:flex-1">{isLoading ? <Loading /> : <Outlet />}</div>
                     </div>
                 </div>
                 <div className="hidden xl:block xl:w-[28%]">
