@@ -6,10 +6,14 @@ import {
     NavigationMenuTrigger,
     NavigationMenuItem,
 } from "@/components/ui/navigation-menu";
+import { useAppSelector } from "@/redux/hook";
+import { RootState } from "@/redux/store";
+import Initials from "@/utils/initials";
 import { useNavigate } from "react-router-dom";
 
 export function Navbar() {
     const navigate = useNavigate();
+    const user = useAppSelector((state: RootState) => state.auth.user);
 
     return (
         <div className="bg-black w-full flex justify-between items-center px-2 py-3 xl:px-[3.125rem]">
@@ -24,13 +28,7 @@ export function Navbar() {
                             <NavigationMenuItem>
                                 <NavigationMenuTrigger>
                                     {/* <Avatar name="Hamzat lawal" size={"150"} round={true}/> */}
-                                    <div className=" xl:w-[1.8rem] xl:h-[1.8rem] relative">
-                                        <img
-                                            src={`/userDp.png`}
-                                            alt="object not found"
-                                            className="w-full"
-                                        />
-                                    </div>
+                                    {user?.name && <Initials name={user?.name} />}
                                 </NavigationMenuTrigger>
                                 <NavigationMenuContent>
                                     <ul className="w-[5rem]">

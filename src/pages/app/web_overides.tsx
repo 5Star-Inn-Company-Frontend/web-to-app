@@ -1,7 +1,7 @@
 import WebOverridesHeading from "@/features/webOverrides/WebOverridesHeading";
 import UserAgent from "@/features/webOverrides/UserAgent";
 import CustomCss from "@/features/webOverrides/CustomCss";
-import CookiePersistence from "@/features/webOverrides/CookiePersistence";
+// import CookiePersistence from "@/features/webOverrides/CookiePersistence";
 import CustomJavascript from "@/features/webOverrides/CustomJavascript";
 
 export const WebOverides = () => {
@@ -10,7 +10,7 @@ export const WebOverides = () => {
             <WebOverridesHeading />
             <UserAgent />
             <CustomCss />
-            <CookiePersistence />
+            {/* <CookiePersistence /> */}
             <CustomJavascript />
         </>
     );

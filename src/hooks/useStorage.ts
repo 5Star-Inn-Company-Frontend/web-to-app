@@ -1,4 +1,4 @@
-import { LoginResponse } from "@/types/type";
+import { User } from "@/types/type";
 
 const getExpiryTime = () => {
     return Date.now() + 3600 * 1000;
@@ -28,7 +28,7 @@ export const removeToken = () => {
     sessionStorage.removeItem("tokenExpiry");
 };
 
-export const setUser = (user: LoginResponse) => {
+export const setUser = (user: User) => {
     sessionStorage.setItem("user", JSON.stringify(user));
 };
 export const getUser = () => {

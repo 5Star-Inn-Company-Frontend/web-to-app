@@ -14,6 +14,7 @@ export default function WebRTC() {
 
     const handleChangeEnableCamera = (value: string) => {
         const cameraIsEnabled = value === "enable";
+        console.log({ ...webRtc.android, cameraActive: cameraIsEnabled });
         dispatch(updateWebRtc({ ...webRtc.android, cameraActive: cameraIsEnabled }));
     };
 
@@ -33,8 +34,8 @@ export default function WebRTC() {
                         <WebRtcConfigCard
                             onCamValueChange={handleChangeEnableCamera}
                             onMicValueChange={handleChangeEnableMicrophone}
-                            micValue={webRtcCamera}
-                            camValue={webRtcMicrophone}
+                            micValue={webRtcMicrophone}
+                            camValue={webRtcCamera}
                             radios={[
                                 { title: "Disable", label: "disable" },
                                 { title: "Enable", label: "enable" },

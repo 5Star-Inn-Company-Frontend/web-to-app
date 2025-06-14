@@ -3,7 +3,6 @@ import { Input } from "@/components/ui/input";
 import { updateName } from "@/redux/app/appStateSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { debounce } from "lodash";
 import { ChangeEvent, useEffect, useState } from "react";
 
 export default function AppName() {
@@ -18,14 +17,10 @@ export default function AppName() {
         setName(initialValue);
     }, [initialValue]);
 
-    const debounceUpdatedName = debounce((newvalue: string) => {
-        dispatch(updateName(newvalue));
-    }, 2000);
-
     const handleChangeAppName = (e: ChangeEvent<HTMLInputElement>) => {
         const newvalue = e.target.value;
         setName(newvalue);
-        debounceUpdatedName(newvalue);
+        dispatch(updateName(newvalue));
     };
     return (
         <div className="xl:px-8 pb-5 bg-white border-t border-primary20">

@@ -28,12 +28,11 @@ const AppDashboard = () => {
 
     const dispatch = useAppDispatch();
     const isSimulatorOpen = useAppSelector((state: RootState) => state.nav.isSimulatorOpen);
-    const persistedAppState = useAppSelector((state: RootState) => state.apps.appState);
 
     const { data, isLoading, isSuccess } = useQuery<IEditApp>({
         queryKey: ["app", appId],
         queryFn: () => fetchApp(appId),
-        enabled: !!id && !persistedAppState.id,
+        enabled: !!id,
         staleTime: Infinity,
     });
 

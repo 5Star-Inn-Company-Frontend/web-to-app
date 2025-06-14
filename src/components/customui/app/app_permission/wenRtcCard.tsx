@@ -32,8 +32,8 @@ export const WebRtcConfigCard = ({
                     const { title, label } = rad;
                     return (
                         <div className="flex items-center space-x-2" key={index}>
-                            <RadioGroupItem value={label} id="r1" />
-                            <Label className="text-xs" htmlFor={label}>
+                            <RadioGroupItem value={label} id="mic" />
+                            <Label className="text-xs" htmlFor="mic">
                                 {title}
                             </Label>
                         </div>
@@ -50,8 +50,8 @@ export const WebRtcConfigCard = ({
                     const { title, label } = rad;
                     return (
                         <div className="flex items-center space-x-2" key={index}>
-                            <RadioGroupItem value={label} id="r1" />
-                            <Label className="text-xs" htmlFor={label}>
+                            <RadioGroupItem value={label} id="camera" />
+                            <Label className="text-xs" htmlFor="camera">
                                 {title}
                             </Label>
                         </div>

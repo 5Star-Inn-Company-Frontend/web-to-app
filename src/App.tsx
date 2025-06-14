@@ -29,6 +29,7 @@ import { CreateApp } from "@/components/CreateAppOverview/CreateApp";
 import { Toaster } from "react-hot-toast";
 import Share from "./pages/app/share";
 import { ForgetPassword } from "./features/auth/forgetpassword";
+import ProtectedRoute from "./components/protected-route";
 
 const App: React.FC = () => {
     return (
@@ -36,16 +37,20 @@ const App: React.FC = () => {
             <Toaster />
             <Routes>
                 {/* Home Route */}
-                <Route path="/" element={<HomeDashboard />}>
-                    <Route path="/" element={<DashboardHome />} />
-                    <Route path="app" element={<DashboardHome />} />
-                    <Route path="members" element={<Members />} />
-                    <Route path="settings" element={<Settings />} />
+                <Route element={<ProtectedRoute />}>
+                    <Route path="/" element={<HomeDashboard />}>
+                        <Route path="/" element={<DashboardHome />} />
+                        <Route path="app" element={<DashboardHome />} />
+                        <Route path="members" element={<Members />} />
+                        <Route path="settings" element={<Settings />} />
+                    </Route>
                 </Route>
 
                 {/* Members Route */}
-                <Route path="members">
-                    <Route path="account/:id" element={<MemberAccount />} />
+                <Route element={<ProtectedRoute />}>
+                    <Route path="members">
+                        <Route path="account/:id" element={<MemberAccount />} />
+                    </Route>
                 </Route>
 
                 {/* Auth Routes */}
@@ -57,27 +62,31 @@ const App: React.FC = () => {
                 </Route>
 
                 {/* App Routes */}
-                <Route path="app/viewapp/:id" element={<ViewApp />} />
-                <Route path="app/share/:id" element={<Share />} />
-                <Route path="app/create" element={<CreateApp />} />
+                <Route element={<ProtectedRoute />}>
+                    <Route path="app/viewapp/:id" element={<ViewApp />} />
+                    <Route path="app/share/:id" element={<Share />} />
+                    <Route path="app/create" element={<CreateApp />} />
+                </Route>
 
                 {/*Edit APP  Dynamic Action Routes */}
-                <Route path="app/:id/*" element={<AppDashboard />}>
-                    <Route path="overview" element={<Overview />} />
-                    <Route path="branding" element={<Branding />} />
-                    <Route path="link_handling" element={<LinkHandling />} />
-                    <Route path="interface" element={<Interface />} />
-                    <Route path="web_overrides" element={<WebOverides />} />
-                    <Route path="app_permission" element={<AppPermission />} />
-                    <Route path="native_plugins" element={<NativePluginPage />} />
-                    <Route path="app_download" element={<AppDownloadPage />} />
-                    <Route path="native_navigation" element={<NativeNavigation />} />
-                    <Route path="push_notification" element={<PushNotification />} />
-                    <Route path="app_service" element={<AppServicePage />} />
-                    <Route path="app_support" element={<SupportPage />} />
-                    <Route path="app_plan" element={<Plan />} />
-                    <Route path="app_access" element={<AppAccess />} />
-                    <Route path="app_clone" element={<AppClone />} />
+                <Route element={<ProtectedRoute />}>
+                    <Route path="app/:id/*" element={<AppDashboard />}>
+                        <Route path="overview" element={<Overview />} />
+                        <Route path="branding" element={<Branding />} />
+                        <Route path="link_handling" element={<LinkHandling />} />
+                        <Route path="interface" element={<Interface />} />
+                        <Route path="web_overrides" element={<WebOverides />} />
+                        <Route path="app_permission" element={<AppPermission />} />
+                        <Route path="native_plugins" element={<NativePluginPage />} />
+                        <Route path="app_download" element={<AppDownloadPage />} />
+                        <Route path="native_navigation" element={<NativeNavigation />} />
+                        <Route path="push_notification" element={<PushNotification />} />
+                        <Route path="app_service" element={<AppServicePage />} />
+                        <Route path="app_support" element={<SupportPage />} />
+                        <Route path="app_plan" element={<Plan />} />
+                        <Route path="app_access" element={<AppAccess />} />
+                        <Route path="app_clone" element={<AppClone />} />
+                    </Route>
                 </Route>
             </Routes>
         </Router>

@@ -53,13 +53,21 @@ export const SplashScreenCard = ({ os, img }: ISplashScreenCard) => {
                             className={`py-8 px-4 rounded-md h-full flex flex-col justify-center items-center`}
                         >
                             <div className=" w-[1.4rem] h-[1.4rem] relative">
-                                <img src={img} alt="object not found" className="w-[1.5rem] h-[1.5rem] rounded-md" />
+                                <img
+                                    src={img}
+                                    alt="object not found"
+                                    className="w-[1.5rem] h-[1.5rem] rounded-md"
+                                />
                             </div>
                         </div>
                         <div>
                             <div className="flex gap-2 items-center text-[grey] text-xs mb-4">
                                 <div className=" w-[0.8rem] h-[0.8rem] relative">
-                                    <img src="/whitescreen.svg" alt="object not found" className="w-full" />
+                                    <img
+                                        src="/whitescreen.svg"
+                                        alt="object not found"
+                                        className="w-full"
+                                    />
                                 </div>
                                 Light mode
                             </div>
@@ -84,7 +92,11 @@ export const SplashScreenCard = ({ os, img }: ISplashScreenCard) => {
                         <div>
                             <div className="flex gap-2 items-center text-[grey] text-xs mb-4">
                                 <div className=" w-[0.8rem] h-[0.8rem] relative">
-                                    <img src="/darkscreen.svg" alt="object not found" className="w-full" />
+                                    <img
+                                        src="/darkscreen.svg"
+                                        alt="object not found"
+                                        className="w-full"
+                                    />
                                 </div>
                                 Dark mode
                             </div>

@@ -35,7 +35,7 @@ export default function UniversalLink() {
     const debouncNewDomain = debounce((domains: IDomain[]) => {
         const domainWithoutID = domains.map((domain: IDomain) => domain.link);
         dispatch(updateUniversalLink(domainWithoutID));
-    }, 2000);
+    }, 1000);
 
     const handleUpdateDomain = (value: string, id: number) => {
         const updatedDomain = domains.map((domain) => {

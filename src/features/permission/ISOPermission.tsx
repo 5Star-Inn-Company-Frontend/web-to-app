@@ -3,7 +3,6 @@ import { OsConfigCard } from "@/components/global/os_config_card";
 import { Input } from "@/components/ui/input";
 import { updatePermissionCamera, updatePermissionLocation } from "@/redux/app/permissionSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
-import { debounce } from "lodash";
 
 export default function ISOPermission() {
     const dispatch = useAppDispatch();
@@ -13,9 +12,10 @@ export default function ISOPermission() {
     const isoPermissionsMic = isoPermissions.microphone.ios.description;
     const isoPermissionsLocation = isoPermissions.location.ios.description;
 
-    const debounceUpdatedPermission = debounce((value: string, fn) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const debounceUpdatedPermission = (value: string, fn: (value: string) => any) => {
         dispatch(fn(value));
-    }, 1000);
+    };
 
     return (
         <div className="pt-2 pb-5 xl:px-6 xl:py-4 bg-white mb-10">
@@ -24,7 +24,7 @@ export default function ISOPermission() {
                 subTitle="Apple requires permission descriptions that accurately represent how your app uses device functionality. Update the defaults when necessary to reflect your specific use case."
             >
                 <div className="grid gap-y-5 px-8">
-                    <OsConfigCard os="IOS">
+                    <OsConfigCard os="IOS" desc="Location">
                         <div className="px-2 pt-2">
                             <Input
                                 type="text"
@@ -39,7 +39,7 @@ export default function ISOPermission() {
                             />
                         </div>
                     </OsConfigCard>
-                    <OsConfigCard os="IOS">
+                    <OsConfigCard os="IOS" desc="Camera">
                         <div className="px-2 pt-2">
                             <Input
                                 type="text"
@@ -54,7 +54,7 @@ export default function ISOPermission() {
                             />
                         </div>
                     </OsConfigCard>
-                    <OsConfigCard os="IOS">
+                    <OsConfigCard os="IOS" desc="Microphone">
                         <div className="px-2 pt-2">
                             <Input
                                 type="text"

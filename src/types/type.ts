@@ -136,7 +136,7 @@ export interface IInterface {
     };
     nativePageTransitions: {
         active: boolean;
-        alpha: 0.5;
+        alpha: number;
     };
     spinner: {
         android: {

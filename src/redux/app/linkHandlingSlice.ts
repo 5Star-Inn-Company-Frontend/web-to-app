@@ -133,7 +133,7 @@ const initialState: ILinkHandling = {
     enableAndroidApplinks: false,
     androidApplinksCertHash:
         "6A:BE:8D:D0:DB:37:2B:66:CC:EC:A6:1F:8E:75:4C:71:DE:D5:86:5E:CF:FE:8F:F4:70:C3:82:D9:95:5E:FF:63",
-    urlSchemeProtocol: "lamidiapp",
+    urlSchemeProtocol: "",
 };
 
 const linkHandling = createSlice({
@@ -162,6 +162,12 @@ const linkHandling = createSlice({
         updateLinkBehaviour: (state: ILinkHandling, action: PayloadAction<ILinkHandlingItem[]>) => {
             state.internalVsExternalLinks.items = action.payload;
         },
+
+        addLinkBehaviour: (state: ILinkHandling, action: PayloadAction<ILinkHandlingItem>) => {
+            const item = state.internalVsExternalLinks.items;
+            const insertIndex = Math.max(item.length - 2, 0);
+            item.splice(insertIndex, 0, action.payload);
+        },
     },
 });
 
@@ -172,6 +178,7 @@ export const {
     updateUniversalLink,
     updateUrlScheme,
     restoreDefaultLinkHandling,
+    addLinkBehaviour,
 } = linkHandling.actions;
 
 export default linkHandling.reducer;

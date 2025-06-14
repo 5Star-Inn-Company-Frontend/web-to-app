@@ -11,9 +11,17 @@ interface IOsConfigCard {
         title: string;
         label: string;
     }[];
+    desc?: string;
 }
 
-export const OsConfigCard = ({ os, radios, value, onValueChange, children }: IOsConfigCard) => {
+export const OsConfigCard = ({
+    os,
+    radios,
+    value,
+    onValueChange,
+    children,
+    desc,
+}: IOsConfigCard) => {
     return (
         <div className="border border-primary20 rounded-lg">
             <div className="flex gap-2 px-6 py-2 border-b border-primary20 items-center rounded-t-md text-sm">
@@ -27,7 +35,7 @@ export const OsConfigCard = ({ os, radios, value, onValueChange, children }: IOs
                         <FaAndroid size="1.3rem" />
                     </div>
                 )}
-                {os}
+                {os} {desc}
             </div>
             <div className="pb-4">
                 {radios && (

@@ -1,12 +1,15 @@
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { Input } from "@/components/ui/input";
-import { useAppSelector } from "@/redux/hook";
+import { updateUrlScheme } from "@/redux/app/linkHandlingSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
 
 export default function UniversalLinkUrl() {
+    const dispatch = useAppDispatch();
     const urlProtocol = useAppSelector(
         (state: RootState) => state.apps.linkHandling.urlSchemeProtocol
     );
+
     return (
         <div className="py-4 xl:px-4 xl:py-16 mb-10 bg-white border-b border-primary20">
             <CollapsibleComponent
@@ -19,6 +22,7 @@ export default function UniversalLinkUrl() {
                         className="p-2 mt-6 rounded border border-primary20"
                         placeholder="e.g youruniquestring"
                         value={urlProtocol}
+                        onChange={(e) => dispatch(updateUrlScheme(e.target.value))}
                     />
                 </div>
             </CollapsibleComponent>

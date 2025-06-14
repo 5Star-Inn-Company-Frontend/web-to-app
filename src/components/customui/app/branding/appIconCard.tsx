@@ -1,3 +1,4 @@
+import ImagePlaceholder from "@/components/image-placeholder";
 import { Label } from "@/components/ui/label";
 import { AiFillAndroid, AiFillApple } from "react-icons/ai";
 
@@ -32,7 +33,11 @@ export const AppIconCard = ({ os, img, onChange, inputId }: IAppIconCard) => {
                     />
                 </div>
                 <div className="w-1/2 xl:w-[30%] flex items-center justify-center">
-                    <img src={img} alt="object not found" className="w-13 h-auto rounded-lg" />
+                    {img ? (
+                        <img src={img} alt="object not found" className="w-13 h-auto rounded-lg" />
+                    ) : (
+                        <ImagePlaceholder />
+                    )}
                 </div>
             </div>
         </div>

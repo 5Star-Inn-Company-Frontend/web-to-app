@@ -6,12 +6,16 @@ import { Slider } from "@/components/ui/slider";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
 import { updateNativePageTransition, updateSpinnerIos } from "@/redux/app/interfaceSlice";
+import { useState } from "react";
 
 export default function KeepScreenOn() {
     const dispatch = useAppDispatch();
     const keepScreenOn = useAppSelector(
         (state: RootState) => state.apps.interface.nativePageTransitions
     );
+
+    const [alpha, setAlpha] = useState<number>(keepScreenOn.alpha || 0.5);
+
     const spinner = useAppSelector((state: RootState) => state.apps.interface.spinner);
 
     const keepScreenOnIsActive = keepScreenOn.active ? "enable" : "disable";
@@ -61,12 +65,19 @@ export default function KeepScreenOn() {
                     </RadioGroup>
                     <div className="flex flex-col gap-2 my-8">
                         <Label className="text-xs" htmlFor="overlay">
-                            Alpha transparency level:0.5
+                            Alpha transparency level:{alpha.toFixed(2)}
                         </Label>
                         <Slider
-                            defaultValue={[50]}
-                            max={100}
-                            step={1}
+                            value={[alpha]}
+                            min={0.1}
+                            max={1}
+                            step={0.01}
+                            onValueChange={(val) => {
+                                setAlpha(val[0]);
+                                dispatch(
+                                    updateNativePageTransition({ ...keepScreenOn, alpha: val[0] })
+                                );
+                            }}
                             className="lg:w-[30%] xl:w-[50%] md:w-30%] sm:w-full"
                             style={{ height: "1px" }}
                         />

@@ -5,8 +5,8 @@ import { Simulation } from "@/components/Simulation";
 import { IEditApp } from "@/types/type";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
-import { BsImageAlt } from "react-icons/bs";
 import CopyToClipboard from "@/components/copy-to-clipboard";
+import ImagePlaceholder from "@/components/image-placeholder";
 
 const ViewApp = () => {
     const navigate = useNavigate();
@@ -39,7 +39,7 @@ const ViewApp = () => {
                                     />
                                 ) : (
                                     <div className="my-4">
-                                        <BsImageAlt size={40} />
+                                        <ImagePlaceholder />
                                     </div>
                                 )}
 

@@ -1,9 +1,9 @@
+import CopyToClipboard from "@/components/copy-to-clipboard";
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { Text } from "@/components/global/text";
 import { useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
 import { useEffect, useState } from "react";
-import { AiOutlineCopy } from "react-icons/ai";
 
 export default function PrivateSharing() {
     const appState = useAppSelector((state: RootState) => state.apps.appState);
@@ -19,7 +19,7 @@ export default function PrivateSharing() {
             <CollapsibleComponent title="Private Management Link">
                 <div className="flex items-center gap-4 px-8">
                     <Text style="text-sm" value={privateLink} />
-                    <AiOutlineCopy />
+                    <CopyToClipboard text={privateLink} />
                 </div>
             </CollapsibleComponent>
         </div>

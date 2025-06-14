@@ -10,9 +10,7 @@ import {
 import { updateLinkBehaviour } from "@/redux/app/linkHandlingSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { ILinkHandlingItem } from "@/types/type";
-import { debounce } from "lodash";
-import { ChangeEvent, useCallback, useMemo, useState } from "react";
+import { ChangeEvent, useCallback, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 
 export const RestoreDefaultActionList = () => {
@@ -36,12 +34,6 @@ export const RestoreDefaultActionList = () => {
         dispatch(updateLinkBehaviour(updatedLink));
     };
 
-    const debouncedUpdate = useMemo(() => {
-        return debounce((updatedLinks: ILinkHandlingItem[]) => {
-            dispatch(updateLinkBehaviour(updatedLinks));
-        }, 500);
-    }, [dispatch]);
-
     const handleInputChange = useCallback(
         (newValue: string, label: string) => {
             const updatedLinks = links.map((link) => {
@@ -50,9 +42,10 @@ export const RestoreDefaultActionList = () => {
                 }
                 return link;
             });
-            debouncedUpdate(updatedLinks);
+            dispatch(updateLinkBehaviour(updatedLinks));
         },
-        [links, debouncedUpdate]
+
+        [links, dispatch]
     );
 
     return (

@@ -1,7 +1,3 @@
-import Localization from "@/features/interface/Localization";
-import ViewPort from "@/features/interface/ViewPort";
-import MaximumWindows from "@/features/interface/MaximumWindows";
-import FrontScalling from "@/features/interface/FrontScalling";
 import Accessibility from "@/features/interface/Accessibility";
 import PitchToZoom from "@/features/interface/PitchToZoom";
 import SwipeGestures from "@/features/interface/SwipeGestures";
@@ -26,10 +22,6 @@ export const Interface = () => {
             <SwipeGestures />
             <PitchToZoom />
             <Accessibility />
-            <FrontScalling />
-            <MaximumWindows />
-            <ViewPort />
-            <Localization />
         </>
     );
 };

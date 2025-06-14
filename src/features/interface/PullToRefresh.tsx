@@ -10,11 +10,14 @@ export default function PullToRefresh() {
     const dispatch = useAppDispatch();
     const pullToRefresh = useSelector((state: RootState) => state.apps.interface.pullToRefresh);
 
-    const enablePullToRefresh = pullToRefresh.ios.active ? "on" : "Off";
-    const enablePullToRefreshAndroid = pullToRefresh.android.active ? "on" : "Off";
+    console.log(pullToRefresh);
+
+    const enablePullToRefresh = pullToRefresh.ios.active ? "on" : "off";
+    const enablePullToRefreshAndroid = pullToRefresh.android.active ? "on" : "off";
 
     const handlePullToRefreshIos = (newvalue: string) => {
         const pullToRefreshIsEnabled = newvalue === "on";
+        console.log(pullToRefreshIsEnabled, "pull");
         dispatch(updatePullToRefreshIos({ ...pullToRefresh.ios, active: pullToRefreshIsEnabled }));
     };
 

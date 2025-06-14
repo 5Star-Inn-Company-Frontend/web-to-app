@@ -3,7 +3,6 @@ import { Input } from "@/components/ui/input";
 import { updateUrl } from "@/redux/app/appStateSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
-import { debounce } from "lodash";
 import { ChangeEvent, useEffect, useState } from "react";
 
 export default function WebsiteUrl() {
@@ -18,14 +17,10 @@ export default function WebsiteUrl() {
         setUrl(initialValue);
     }, [initialValue]);
 
-    const debounceUpdatedUrl = debounce((newvalue: string) => {
-        dispatch(updateUrl(newvalue));
-    }, 1000);
-
     const handleChangeAppUrl = (e: ChangeEvent<HTMLInputElement>) => {
         const newvalue = e.target.value;
         setUrl(newvalue);
-        debounceUpdatedUrl(newvalue);
+        dispatch(updateUrl(newvalue));
     };
 
     return (

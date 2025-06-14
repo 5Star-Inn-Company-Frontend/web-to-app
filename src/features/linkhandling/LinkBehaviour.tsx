@@ -1,15 +1,17 @@
 import { RestoreDefaultActionList } from "@/components/customui/app/link_handling/restore_default_actionlist";
 import { CollapsibleComponent } from "@/components/global/collapsibleComponent";
 import { Button } from "@/components/ui/button";
+
 import { restoreDefaultLinkHandling } from "@/redux/app/linkHandlingSlice";
 import { useAppDispatch } from "@/redux/hook";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { AiOutlinePlus, AiOutlineReload } from "react-icons/ai";
+import AddLinkBehaviour from "./add-linkbehaviour";
 
 export default function LinkBehaviour() {
     const dispatch = useAppDispatch();
-
+    const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const resetLink = () => {
@@ -45,9 +47,15 @@ export default function LinkBehaviour() {
 
                 <RestoreDefaultActionList />
 
+                {/* */}
+                <AddLinkBehaviour open={open} setOpen={() => setOpen(!open)} />
+
                 {/*  */}
                 <div className="w-fit m-auto my-4">
-                    <Button className="flex items-center gap-2 bg-white  text-black hover:border hover:bg-white hover:text-black">
+                    <Button
+                        onClick={() => setOpen(true)}
+                        className="flex items-center gap-2 bg-white  text-black hover:border hover:bg-white hover:text-black"
+                    >
                         <AiOutlinePlus size="1.4rem" />
                         Add Rules
                     </Button>

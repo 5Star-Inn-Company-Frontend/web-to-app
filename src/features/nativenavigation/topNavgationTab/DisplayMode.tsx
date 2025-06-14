@@ -10,8 +10,8 @@ export default function DisplayMode() {
         (state: RootState) => state.apps.navigation.topNavigationBar.enable
     );
 
-    const displayModeIos = displayModeStore.ios ? "always" : "auto";
-    const displayModeAndroid = displayModeStore.android ? "always" : "auto";
+    const displayModeIos = displayModeStore.ios.active ? "always" : "auto";
+    const displayModeAndroid = displayModeStore.android.active ? "always" : "auto";
 
     const handleChangeDisplayMode = ({ type, value }: { type: string; value: string }) => {
         if (type === "ios") {
